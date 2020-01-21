@@ -1,0 +1,21 @@
+<settings>
+<resistance>3.769911184308</resistance>
+<spring-stiffness>50</spring-stiffness>
+<torsion-stiffness>0.00226259342068</torsion-stiffness>
+<persistance-length>0.00107403350299</persistance-length>
+<absolute-temperature>300.0</absolute-temperature>
+<contour-length-multiplier>2.35124360698728</contour-length-multiplier>
+<use-extra-nodes>true</use-extra-nodes>    
+<units-per-extra-node>0.3</units-per-extra-node>
+<extra-nodes-per-edge>9</extra-nodes-per-edge>
+<constant-extra-nodes>false</constant-extra-nodes>
+<mass>1.0</mass>
+<node-diameter>0.1</node-diameter>
+<link-diameter>0.1</link-diameter>
+	<use-linking>true</use-linking>
+	<dpd-particles>false</dpd-particles>
+<worm-like>true</worm-like>
+	<boundary-condition>true</boundary-condition>
+	<axis>0</axis>
+
+</settings>

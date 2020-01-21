@@ -1,0 +1,2852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<settings>
+<resistance>3.769911184308</resistance>
+<spring-stiffness>50</spring-stiffness>
+<torsion-stiffness>0.00226259342068</torsion-stiffness>
+<persistance-length>0.00107403350299</persistance-length>
+<absolute-temperature>300.0</absolute-temperature>
+<contour-length-multiplier>2.35124360698728</contour-length-multiplier>
+<use-extra-nodes>true</use-extra-nodes>    
+<units-per-extra-node>0.3</units-per-extra-node>
+<extra-nodes-per-edge>9</extra-nodes-per-edge>
+<constant-extra-nodes>false</constant-extra-nodes>
+<mass>1.0</mass>
+<node-diameter>0.1</node-diameter>
+<link-diameter>0.1</link-diameter>
+	<use-linking>true</use-linking>
+	<dpd-particles>false</dpd-particles>
+<worm-like>true</worm-like>
+	<boundary-condition>true</boundary-condition>
+	<axis>0</axis>
+</settings>
+    <nodes>
+        <node_collagen>4.5297 4.1257 7.5956</node_collagen>
+        <node_collagen>9.6691 0.15108 2.2801</node_collagen>
+        <node_collagen>6.8409 0.69693 8.6958</node_collagen>
+        <node_collagen>0.011733 6.1842 0.52482</node_collagen>
+        <node_collagen>6.3989 7.2964 4.4949</node_collagen>
+        <node_collagen>1.8295 7.8138 4.3471</node_collagen>
+        <node_collagen>6.5712 7.3007 8.5632</node_collagen>
+        <node_collagen>6.3565 0.33569 2.7091</node_collagen>
+        <node_collagen>7.2369 3.8508 1.9511</node_collagen>
+        <node_collagen>1.0008 3.1777 0.75373</node_collagen>
+        <node_collagen>2.3802 6.8567 6.2867</node_collagen>
+        <node_collagen>5.4251 0.63168 6.2626</node_collagen>
+        <node_collagen>3.5466 6.7055 8.7463</node_collagen>
+        <node_collagen>3.104 5.9185 1.4725</node_collagen>
+        <node_collagen>6.826 2.9695 7.1077</node_collagen>
+        <node_collagen>9.6474 6.2696 3.8969</node_collagen>
+        <node_collagen>2.1033 4.1734 4.4454</node_collagen>
+        <node_collagen>1.8373 7.7341 5.6981</node_collagen>
+        <node_collagen>3.0325 1.077 8.5177</node_collagen>
+        <node_collagen>1.6203 0.37415 4.5501</node_collagen>
+        <node_collagen>7.176 9.3161 8.5658</node_collagen>
+        <node_collagen>2.297 7.8198 9.5524</node_collagen>
+        <node_collagen>2.0001 4.3996 5.6678</node_collagen>
+        <node_collagen>0.81259 4.2228 8.8534</node_collagen>
+        <node_collagen>8.6835 8.8647 5.2758</node_collagen>
+        <node_collagen>0.53415 3.7451 7.6193</node_collagen>
+        <node_collagen>3.3401 2.6516 8.3702</node_collagen>
+        <node_collagen>8.1835 2.9971 8.2039</node_collagen>
+        <node_collagen>4.3678 4.0192 9.3635</node_collagen>
+        <node_collagen>9.8137 4.2576 0.41416</node_collagen>
+        <node_collagen>6.0596 5.2977 4.6437</node_collagen>
+        <node_collagen>0.47314 2.6066 4.9699</node_collagen>
+        <node_collagen>7.2736 5.8524 3.9875</node_collagen>
+        <node_collagen>4.0434 5.2996 0.87632</node_collagen>
+        <node_collagen>4.2998 0.51859 1.359</node_collagen>
+        <node_collagen>5.1563 7.6509 2.0091</node_collagen>
+        <node_collagen>8.9787 2.0857 6.511</node_collagen>
+        <node_collagen>7.3477 1.1274 4.1975</node_collagen>
+        <node_collagen>8.3224 6.7645 3.0709</node_collagen>
+        <node_collagen>5.0442 3.2352 9.1982</node_collagen>
+        <node_collagen>6.1602 7.1518 4.3053</node_collagen>
+        <node_collagen>9.7167 8.3925 2.6036</node_collagen>
+        <node_collagen>9.8206 3.0957 3.8824</node_collagen>
+        <node_collagen>1.5003 4.211 2.1214</node_collagen>
+        <node_collagen>4.1433 5.1451 8.0804</node_collagen>
+        <node_collagen>4.4822 2.3112 2.8378</node_collagen>
+        <node_collagen>9.3497 9.4975 7.5257</node_collagen>
+        <node_collagen>4.3315 4.9936 9.3522</node_collagen>
+        <node_collagen>3.6303 3.7196 7.8918</node_collagen>
+        <node_collagen>3.5908 6.6792 6.6818</node_collagen>
+        <node_collagen>3.1579 1.0311 8.1827</node_collagen>
+        <node_collagen>7.3187 1.326 2.8725</node_collagen>
+        <node_collagen>7.5611 7.7113 5.3564</node_collagen>
+        <node_collagen>9.4667 6.5106 6.1001</node_collagen>
+        <node_collagen>4.307 8.0033 4.6803</node_collagen>
+        <node_collagen>2.6278 3.2216 9.5159</node_collagen>
+        <node_collagen>8.2476 4.8741 0.77941</node_collagen>
+        <node_collagen>1.4103 2.5472 7.2314</node_collagen>
+        <node_collagen>8.7764 7.9411 8.9795</node_collagen>
+        <node_collagen>2.0108 7.121 4.0041</node_collagen>
+        <node_collagen>6.6264 5.1925 5.8209</node_collagen>
+        <node_collagen>6.595 2.9985 5.1647</node_collagen>
+        <node_collagen>1.3336 1.8897 9.0234</node_collagen>
+        <node_collagen>9.189 7.7451 2.1623</node_collagen>
+        <node_collagen>1.3511 7.5288 8.6096</node_collagen>
+        <node_collagen>2.906 8.3251 4.9762</node_collagen>
+        <node_collagen>5.2159 9.4692 0.48152</node_collagen>
+        <node_collagen>3.9161 8.1412 5.4836</node_collagen>
+        <node_collagen>6.0961 3.2011 8.2082</node_collagen>
+        <node_collagen>1.4659 7.0999 0.095878</node_collagen>
+        <node_collagen>5.8641 7.1158 2.1543</node_collagen>
+        <node_collagen>7.9333 1.9912 9.1778</node_collagen>
+        <node_collagen>1.5415 1.5322 9.2962</node_collagen>
+        <node_collagen>0.53324 3.5455 8.2842</node_collagen>
+        <node_collagen>8.7815 5.7601 5.5712</node_collagen>
+        <node_collagen>3.4052 4.5636 1.6271</node_collagen>
+        <node_collagen>6.1406 2.1237 2.3052</node_collagen>
+        <node_collagen>1.6409 1.8071 9.5557</node_collagen>
+        <node_collagen>1.7254 6.9417 0.85978</node_collagen>
+        <node_collagen>6.0844 9.9536 0.39358</node_collagen>
+        <node_collagen>1.5294 8.612 9.518</node_collagen>
+        <node_collagen>7.6415 4.9534 6.6102</node_collagen>
+        <node_collagen>0.19894 4.7024 0.28917</node_collagen>
+        <node_collagen>2.8823 2.8346 6.4052</node_collagen>
+        <node_collagen>8.5266 4.5083 7.4093</node_collagen>
+        <node_collagen>9.9466 1.9175 7.3454</node_collagen>
+        <node_collagen>0.33593 5.8255 9.9355</node_collagen>
+        <node_collagen>7.7195 0.02968 9.8082</node_collagen>
+        <node_collagen>0.89624 0.3994 2.1298</node_collagen>
+        <node_collagen>6.913 7.9503 4.7016</node_collagen>
+        <node_collagen>2.0292 9.7542 3.3566</node_collagen>
+        <node_collagen>6.3437 6.5244 9.2837</node_collagen>
+        <node_collagen>4.4711 8.5546 8.798</node_collagen>
+        <node_collagen>8.4547 4.8951 0.077052</node_collagen>
+        <node_collagen>1.8216 7.4596 7.1743</node_collagen>
+        <node_collagen>0.68295 5.9489 2.0801</node_collagen>
+        <node_collagen>4.1673 9.4025 6.9452</node_collagen>
+        <node_collagen>4.1485 5.4879 0.43192</node_collagen>
+        <node_collagen>2.7499 9.019 2.5275</node_collagen>
+        <node_collagen>3.8519 9.7409 0.63176</node_collagen>
+        <node_collagen>3.8744 3.3568 0.62635</node_collagen>
+        <node_collagen>6.9704 5.8094 5.7031</node_collagen>
+        <node_collagen>7.0978 1.1306 6.6479</node_collagen>
+        <node_collagen>7.9881 0.45501 3.2033</node_collagen>
+        <node_collagen>1.57 7.9948 9.6765</node_collagen>
+        <node_collagen>9.7698 9.491 1.7355</node_collagen>
+        <node_collagen>7.9373 2.3625 2.2922</node_collagen>
+        <node_collagen>4.8287 7.6247 8.5796</node_collagen>
+        <node_collagen>2.1134 9.6097 1.396</node_collagen>
+        <node_collagen>4.56 2.4784 6.8335</node_collagen>
+        <node_collagen>0.58879 0.98212 8.5569</node_collagen>
+        <node_collagen>6.157 1.681 9.9946</node_collagen>
+        <node_collagen>1.9212 9.4362 0.10812</node_collagen>
+        <node_collagen>8.1596 0.74225 0.069955</node_collagen>
+        <node_collagen>8.7254 8.2575 9.6644</node_collagen>
+        <node_collagen>0.98529 8.1377 6.0409</node_collagen>
+        <node_collagen>8.7909 4.866 0.40793</node_collagen>
+        <node_collagen>9.1297 4.0253 6.7239</node_collagen>
+        <node_collagen>7.7542 1.2176 5.3437</node_collagen>
+        <node_collagen>3.479 0.94639 1.7186</node_collagen>
+        <node_collagen>3.9337 7.5611 2.6627</node_collagen>
+        <node_collagen>9.0177 1.8646 8.3277</node_collagen>
+        <node_collagen>7.4253 0.35645 5.978</node_collagen>
+        <node_collagen>7.1475 0.41363 9.5557</node_collagen>
+        <node_collagen>5.9429 4.0702 4.7719</node_collagen>
+        <node_collagen>2.3403 2.3501 2.0622</node_collagen>
+        <node_collagen>4.6115 1.7467 8.4314</node_collagen>
+        <node_collagen>0.73374 8.7204 6.7073</node_collagen>
+        <node_collagen>8.6991 3.1455 0.4381</node_collagen>
+        <node_collagen>6.0919 9.7886 9.8771</node_collagen>
+        <node_collagen>7.5511 4.3848 5.2104</node_collagen>
+        <node_collagen>2.9181 8.3171 5.3147</node_collagen>
+        <node_collagen>6.7217 6.7485 8.9241</node_collagen>
+        <node_collagen>1.5061 8.6302 6.5957</node_collagen>
+        <node_collagen>9.6624 2.3299 2.643</node_collagen>
+        <node_collagen>1.1932 0.49466 0.87141</node_collagen>
+        <node_collagen>3.6309 9.3209 6.12</node_collagen>
+        <node_collagen>8.8176 4.9463 8.6506</node_collagen>
+        <node_collagen>7.4648 5.3886 6.2392</node_collagen>
+        <node_collagen>6.4946 9.8351 0.71956</node_collagen>
+        <node_collagen>9.1091 9.6296 0.87399</node_collagen>
+        <node_collagen>8.9711 1.1977 1.697</node_collagen>
+        <node_collagen>3.3866 7.6991 1.7357</node_collagen>
+        <node_collagen>4.6236 6.7744 1.4137</node_collagen>
+        <node_collagen>6.4746 0.79876 6.3515</node_collagen>
+        <node_collagen>5.3145 5.7687 3.1703</node_collagen>
+        <node_collagen>1.3781 3.4268 3.1387</node_collagen>
+        <node_collagen>5.0469 2.3313 1.6496</node_collagen>
+        <node_collagen>9.359 1.5863 8.2219</node_collagen>
+        <node_collagen>4.8267 7.4671 0.20623</node_collagen>
+        <node_collagen>0.55879 6.3341 1.8255</node_collagen>
+        <node_collagen>8.2545 5.6435 0.61906</node_collagen>
+        <node_collagen>8.5232 4.8449 0.74651</node_collagen>
+        <node_collagen>3.268 6.2753 0.41461</node_collagen>
+        <node_collagen>7.8671 9.0398 8.4851</node_collagen>
+        <node_collagen>4.2793 8.8809 0.30838</node_collagen>
+        <node_collagen>4.1452 0.44357 6.446</node_collagen>
+        <node_collagen>8.4223 5.2728 0.95193</node_collagen>
+        <node_collagen>1.462 2.1983 9.8191</node_collagen>
+        <node_collagen>2.0214 5.7603 5.8599</node_collagen>
+        <node_collagen>9.1525 4.1641 1.1816</node_collagen>
+        <node_collagen>7.8718 8.4515 5.7691</node_collagen>
+        <node_collagen>6.0491 7.5525 7.9326</node_collagen>
+        <node_collagen>4.9565 2.8398 0.21327</node_collagen>
+        <node_collagen>4.2757 5.1894 1.6258</node_collagen>
+        <node_collagen>1.2907 1.2288 8.8858</node_collagen>
+        <node_collagen>2.4685 3.0375 6.0912</node_collagen>
+        <node_collagen>2.8623 8.6467 9.4736</node_collagen>
+        <node_elastin>9.5034 3.4846 9.4095</node_elastin>
+        <node_elastin>3.3743 7.3718 2.431</node_elastin>
+        <node_elastin>6.4769 2.1932 6.4507</node_elastin>
+        <node_elastin>3.7448 7.3403 8.6935</node_elastin>
+        <node_elastin>5.7236 3.0563 3.0699</node_elastin>
+        <node_elastin>7.5492 3.8364 5.3263</node_elastin>
+        <node_elastin>1.716 3.9066 3.0979</node_elastin>
+        <node_elastin>9.1835 3.8619 1.9528</node_elastin>
+        <node_elastin>3.3354 1.3954 6.9679</node_elastin>
+        <node_elastin>3.7185 1.9372 5.6592</node_elastin>
+        <node_elastin>6.9707 5.8709 6.7971</node_elastin>
+        <node_elastin>8.9236 3.9431 6.151</node_elastin>
+        <node_elastin>6.7838 5.2594 0.79255</node_elastin>
+        <node_elastin>9.8902 2.4264 8.3749</node_elastin>
+        <node_elastin>6.8692 3.4326 0.5341</node_elastin>
+        <node_elastin>1.192 4.2713 2.134</node_elastin>
+        <node_elastin>3.6859 5.2391 1.4759</node_elastin>
+        <node_elastin>9.0432 9.9601 1.2995</node_elastin>
+        <node_elastin>0.0010231 3.8598 0.83798</node_elastin>
+        <node_elastin>5.9865 3.7094 3.8591</node_elastin>
+        <node_elastin>4.4314 8.1103 5.6419</node_elastin>
+        <node_elastin>3.4973 1.8852 2.5578</node_elastin>
+        <node_elastin>9.1363 4.856 3.4782</node_elastin>
+        <node_elastin>6.8537 1.5481 9.7915</node_elastin>
+        <node_elastin>4.0366 5.9237 8.5682</node_elastin>
+        <node_elastin>9.3265 7.5262 4.2856</node_elastin>
+        <node_elastin>8.3929 5.3119 0.89921</node_elastin>
+        <node_elastin>6.8713 3.0347 5.5176</node_elastin>
+        <node_elastin>0.13216 5.3094 8.896</node_elastin>
+        <node_elastin>3.9199 9.5856 0.17396</node_elastin>
+        <node_elastin>1.3572 0.93378 6.941</node_elastin>
+        <node_elastin>9.1117 2.4464 3.9034</node_elastin>
+        <node_elastin>8.0414 3.1479 8.5973</node_elastin>
+        <node_elastin>6.5303 5.8516 4.1118</node_elastin>
+        <node_elastin>2.2838 5.848 5.259</node_elastin>
+        <node_elastin>9.2992 6.4231 7.3341</node_elastin>
+        <node_elastin>4.1162 8.4873 4.6361</node_elastin>
+        <node_elastin>8.0235 9.4842 0.48529</node_elastin>
+        <node_elastin>2.8719 4.9229 4.2587</node_elastin>
+        <node_elastin>9.1644 4.7052 8.7541</node_elastin>
+        <node_elastin>9.7781 1.9912 0.40291</node_elastin>
+        <node_elastin>0.73978 6.2598 3.8857</node_elastin>
+        <node_elastin>1.8552 9.2593 2.7738</node_elastin>
+        <node_elastin>4.6519 5.8024 1.2127</node_elastin>
+        <node_elastin>7.8104 3.7077 1.266</node_elastin>
+        <node_elastin>8.4884 7.5634 8.1094</node_elastin>
+        <node_elastin>6.8203 6.5284 5.1955</node_elastin>
+        <node_elastin>4.596 6.0566 5.2641</node_elastin>
+        <node_elastin>2.6633 5.1053 7.8</node_elastin>
+        <node_elastin>7.4264 9.134 6.9735</node_elastin>
+        <node_elastin>7.057 7.2714 7.155</node_elastin>
+        <node_elastin>0.8907 8.4423 9.4958</node_elastin>
+        <node_elastin>9.3387 0.241 4.645</node_elastin>
+        <node_elastin>7.9777 0.7198 3.7255</node_elastin>
+        <node_elastin>3.324 5.0083 5.1687</node_elastin>
+        <node_elastin>1.9604 6.0872 7.9043</node_elastin>
+        <node_elastin>3.25 7.8124 0.25265</node_elastin>
+        <node_elastin>3.276 3.1109 5.7545</node_elastin>
+        <node_elastin>3.7824 5.7039 2.6414</node_elastin>
+        <node_elastin>1.9374 8.862 1.2183</node_elastin>
+        <node_elastin>0.94409 1.8824 6.0581</node_elastin>
+        <node_elastin>5.2164 6.5965 2.0324</node_elastin>
+        <node_elastin>3.9948 9.3121 8.278</node_elastin>
+        <node_elastin>7.7043 2.9717 9.9562</node_elastin>
+        <node_elastin>0.89135 6.4133 9.6154</node_elastin>
+        <node_elastin>4.9357 4.546 6.9987</node_elastin>
+        <node_elastin>1.4881 7.2261 6.7298</node_elastin>
+        <node_elastin>9.707 8.0379 3.0062</node_elastin>
+        <node_elastin>1.525 1.7669 4.8717</node_elastin>
+        <node_elastin>4.3765 5.6352 4.0053</node_elastin>
+        <node_elastin>1.3696 5.2668 9.0482</node_elastin>
+        <node_elastin>9.3076 3.7649 5.6196</node_elastin>
+        <node_elastin>1.6706 3.2789 0.87024</node_elastin>
+        <node_elastin>4.5997 6.4869 4.0407</node_elastin>
+        <node_elastin>4.9601 6.2674 5.744</node_elastin>
+        <node_elastin>1.8321 6.216 0.38509</node_elastin>
+        <node_elastin>5.5986 4.321 7.4269</node_elastin>
+        <node_elastin>4.116 6.1102 8.6934</node_elastin>
+        <node_elastin>7.0457 3.0575 5.3883</node_elastin>
+        <node_elastin>0.077861 8.2709 7.8898</node_elastin>
+        <node_elastin>4.6931 8.9494 1.0706</node_elastin>
+        <node_elastin>2.0049 5.0567 4.2223</node_elastin>
+        <node_elastin>2.8078 9.1489 3.3725</node_elastin>
+        <node_elastin>6.8278 4.3692 3.7112</node_elastin>
+        <node_elastin>3.5027 6.7901 5.0528</node_elastin>
+        <node_elastin>2.4034 5.1244 7.7712</node_elastin>
+        <node_elastin>5.7436 7.2374 0.71708</node_elastin>
+        <node_elastin>1.4366 1.2523 5.5558</node_elastin>
+        <node_elastin>1.0101 4.0482 8.9651</node_elastin>
+        <node_elastin>1.7982 1.3949 1.6931</node_elastin>
+        <node_elastin>8.2475 2.6789 3.2624</node_elastin>
+        <node_elastin>6.751 4.62 4.2265</node_elastin>
+        <node_elastin>6.9275 3.3709 4.4913</node_elastin>
+        <node_elastin>9.2814 0.98235 4.6899</node_elastin>
+        <node_elastin>6.512 5.3041 4.1863</node_elastin>
+        <node_elastin>5.5757 8.7393 8.2162</node_elastin>
+        <node_elastin>3.7017 9.256 8.0009</node_elastin>
+        <node_elastin>3.8507 5.6095 6.8622</node_elastin>
+        <node_elastin>4.906 7.1977 6.0453</node_elastin>
+        <node_elastin>1.7779 9.8505 7.6089</node_elastin>
+        <node_elastin>2.2396 0.85325 3.3936</node_elastin>
+        <node_elastin>5.6021 5.8876 6.5965</node_elastin>
+        <node_elastin>6.7193 9.8483 0.48487</node_elastin>
+        <node_elastin>0.79272 1.7296 8.9926</node_elastin>
+        <node_elastin>1.2422 0.70715 4.189</node_elastin>
+        <node_elastin>8.1261 8.5941 7.595</node_elastin>
+        <node_elastin>9.4172 5.482 7.3277</node_elastin>
+        <node_elastin>3.1007 6.4453 7.8616</node_elastin>
+        <node_elastin>5.9694 4.6556 1.1121</node_elastin>
+        <node_elastin>2.5285 5.6574 5.8771</node_elastin>
+        <node_elastin>6.0001 5.88 4.4568</node_elastin>
+        <node_elastin>5.0945 5.2385 3.0888</node_elastin>
+        <node_elastin>2.6539 9.1282 5.5844</node_elastin>
+        <node_elastin>2.3314 3.5825 7.3063</node_elastin>
+        <node_elastin>8.1909 5.0602 6.2231</node_elastin>
+        <node_elastin>8.2827 0.56176 6.888</node_elastin>
+        <node_elastin>1.9171 7.4474 4.7362</node_elastin>
+        <node_elastin>8.3466 5.2049 5.4464</node_elastin>
+        <node_elastin>4.939 8.6872 3.2357</node_elastin>
+        <node_elastin>1.6753 7.5891 6.61</node_elastin>
+        <node_elastin>5.1094 9.4725 9.1657</node_elastin>
+        <node_elastin>9.1244 8.2557 6.5404</node_elastin>
+        <node_elastin>2.7602 0.52114 6.1343</node_elastin>
+        <node_elastin>1.6524 4.8582 2.1892</node_elastin>
+        <node_elastin>4.835 7.4937 7.6504</node_elastin>
+        <node_elastin>1.2428 4.4139 7.9473</node_elastin>
+        <node_elastin>1.67 9.7251 2.1482</node_elastin>
+        <node_elastin>7.0306 2.4443 4.7472</node_elastin>
+        <node_elastin>9.0824 3.5676 2.8898</node_elastin>
+        <node_elastin>8.2045 0.65616 8.1171</node_elastin>
+        <node_elastin>6.2321 1.4463 3.2472</node_elastin>
+        <node_elastin>5.1792 2.4585 0.27275</node_elastin>
+        <node_elastin>3.5661 4.2549 3.4909</node_elastin>
+        <node_elastin>2.2767 1.2197 8.0384</node_elastin>
+        <node_elastin>5.9315 1.4208 5.4355</node_elastin>
+        <node_elastin>6.0808 2.3405 2.1959</node_elastin>
+        <node_elastin>0.74896 9.3621 9.8622</node_elastin>
+        <node_elastin>5.9108 1.264 5.923</node_elastin>
+        <node_elastin>6.7864 8.683 9.2427</node_elastin>
+        <node_elastin>9.4643 3.8924 2.2431</node_elastin>
+        <node_elastin>7.5807 4.6609 4.6979</node_elastin>
+        <node_elastin>8.1805 6.3919 3.1901</node_elastin>
+        <node_elastin>9.3801 2.8532 1.8774</node_elastin>
+        <node_elastin>8.8957 2.8578 1.7581</node_elastin>
+        <node_elastin>1.0999 8.4038 3.9869</node_elastin>
+        <node_elastin>6.8554 2.9911 4.1154</node_elastin>
+        <node_elastin>4.328 4.0114 4.2327</node_elastin>
+        <node_elastin>6.5701 0.99968 7.0776</node_elastin>
+        <node_elastin>6.3347 6.6271 2.7732</node_elastin>
+        <node_elastin>2.0648 6.5808 1.7688</node_elastin>
+        <node_elastin>4.3285 3.0895 8.5312</node_elastin>
+        <node_elastin>6.422 3.8242 0.23417</node_elastin>
+        <node_elastin>7.1754 5.3782 5.0794</node_elastin>
+        <node_elastin>1.134 8.4231 4.9114</node_elastin>
+        <node_elastin>5.6429 3.0291 6.8933</node_elastin>
+        <node_elastin>3.7112 5.6546 6.6051</node_elastin>
+        <node_elastin>6.7764 0.86463 5.8952</node_elastin>
+        <node_elastin>2.1649 9.5259 8.0742</node_elastin>
+        <node_elastin>5.78 8.2888 7.2294</node_elastin>
+        <node_elastin>0.83136 7.2115 5.0307</node_elastin>
+        <node_elastin>2.6501 6.076 9.2362</node_elastin>
+        <node_elastin>1.1765 6.1543 6.1754</node_elastin>
+        <node_elastin>4.7013 7.5452 3.8</node_elastin>
+        <node_elastin>4.5801 4.9575 4.7768</node_elastin>
+        <node_elastin>1.4079 5.1307 7.1961</node_elastin>
+        <node_elastin>9.7808 8.2169 6.9986</node_elastin>
+        <node_elastin>4.4231 0.25313 6.6736</node_elastin>
+        <node_elastin>5.4673 8.4145 0.86874</node_elastin>
+        <node_elastin>6.7111 4.2846 2.7649</node_elastin>
+        <node_elastin>7.7046 0.68191 9.6762</node_elastin>
+        <node_elastin>6.9621 4.7168 1.2081</node_elastin>
+        <node_elastin>7.1443 3.4827 7.2452</node_elastin>
+        <node_elastin>3.8475 0.17251 7.5667</node_elastin>
+        <node_elastin>6.6806 7.9996 5.8983</node_elastin>
+        <node_elastin>8.4114 2.3429 5.6945</node_elastin>
+        <node_elastin>7.1131 7.261 9.7887</node_elastin>
+        <node_elastin>0.64724 9.458 1.4525</node_elastin>
+        <node_elastin>6.4303 8.8221 7.1003</node_elastin>
+        <node_elastin>6.3378 6.2644 0.86348</node_elastin>
+        <node_elastin>6.5044 6.0466 3.634</node_elastin>
+        <node_elastin>8.6585 3.1126 1.1839</node_elastin>
+        <node_elastin>2.1198 9.5112 3.9259</node_elastin>
+        <node_elastin>7.0239 4.7005 8.3638</node_elastin>
+        <node_elastin>7.2456 3.2624 7.2283</node_elastin>
+        <node_elastin>3.0478 8.1684 5.7684</node_elastin>
+        <node_elastin>2.3453 3.5934 3.602</node_elastin>
+        <node_elastin>7.4366 4.1108 6.9412</node_elastin>
+        <node_elastin>5.0473 8.723 5.8839</node_elastin>
+        <node_elastin>8.2259 2.5762 6.8957</node_elastin>
+        <node_elastin>7.2024 7.1879 0.45205</node_elastin>
+        <node_elastin>5.7694 3.8953 9.4171</node_elastin>
+        <node_elastin>9.1809 4.5306 4.4678</node_elastin>
+        <node_elastin>1.476 2.5719 6.414</node_elastin>
+        <node_elastin>7.6135 8.2724 4.1733</node_elastin>
+        <node_elastin>9.3574 1.5407 9.649</node_elastin>
+        <node_elastin>6.0589 4.1928 5.4424</node_elastin>
+        <node_elastin>0.22281 4.5707 6.1345</node_elastin>
+        <node_elastin>6.7019 4.7063 5.1633</node_elastin>
+        <node_elastin>1.0441 2.4755 7.7548</node_elastin>
+        <node_elastin>5.3632 3.4955 2.1021</node_elastin>
+        <node_elastin>2.1128 4.258 2.8002</node_elastin>
+        <node_elastin>3.584 8.9499 8.6041</node_elastin>
+        <node_elastin>9.7004 4.4001 5.1095</node_elastin>
+        <node_elastin>8.1243 0.31415 0.71978</node_elastin>
+        <node_elastin>6.4319 1.037 8.7259</node_elastin>
+        <node_elastin>5.8536 3.1332 5.6344</node_elastin>
+        <node_elastin>9.6249 3.9926 1.675</node_elastin>
+        <node_elastin>7.7798 6.8184 5.1058</node_elastin>
+        <node_elastin>2.4395 7.1705 9.4984</node_elastin>
+        <node_elastin>0.32918 6.5794 3.9626</node_elastin>
+        <node_elastin>7.3612 2.0593 1.7459</node_elastin>
+        <node_elastin>0.53801 5.0029 7.4497</node_elastin>
+        <node_elastin>0.14006 5.07 7.3369</node_elastin>
+        <node_elastin>8.4532 6.8803 1.4654</node_elastin>
+        <node_elastin>0.53309 7.1299 1.6472</node_elastin>
+        <node_elastin>2.8752 4.5651 6.8682</node_elastin>
+        <node_elastin>3.6505 9.4855 3.221</node_elastin>
+        <node_elastin>7.1942 2.6766 2.6151</node_elastin>
+        <node_elastin>0.46814 9.8096 7.0489</node_elastin>
+        <node_elastin>4.3903 7.683 3.8091</node_elastin>
+        <node_elastin>6.7978 1.7901 9.7054</node_elastin>
+        <node_elastin>6.1926 4.7448 0.8801</node_elastin>
+        <node_elastin>0.59979 1.3494 2.4843</node_elastin>
+        <node_elastin>0.74773 5.5494 8.741</node_elastin>
+        <node_elastin>2.0075 3.2386 0.98737</node_elastin>
+        <node_elastin>9.1839 0.031789 0.104</node_elastin>
+        <node_elastin>1.3073 4.1952 7.4627</node_elastin>
+        <node_elastin>1.7247 7.4842 0.22605</node_elastin>
+        <node_elastin>4.1045 4.3469 8.8946</node_elastin>
+        <node_elastin>9.3899 4.5405 9.3044</node_elastin>
+        <node_elastin>2.5558 2.7424 0.42792</node_elastin>
+        <node_elastin>0.14318 8.0355 2.2201</node_elastin>
+        <node_elastin>9.9425 8.6307 7.5512</node_elastin>
+        <node_elastin>8.3223 4.3406 5.0361</node_elastin>
+        <node_elastin>6.2804 5.2363 4.3107</node_elastin>
+        <node_elastin>3.8178 3.8257 5.5867</node_elastin>
+        <node_elastin>1.4348 3.221 5.0219</node_elastin>
+        <node_elastin>7.7578 1.373 7.7837</node_elastin>
+        <node_elastin>1.4375 0.18543 4.5916</node_elastin>
+        <node_elastin>3.4678 4.4137 6.2598</node_elastin>
+        <node_elastin>0.50493 3.8428 0.76922</node_elastin>
+        <node_elastin>9.6656 8.0031 9.0333</node_elastin>
+        <node_elastin>6.1189 1.865 7.0172</node_elastin>
+        <node_elastin>9.2761 4.5407 1.7456</node_elastin>
+        <node_elastin>1.8858 8.0861 7.0115</node_elastin>
+        <node_elastin>0.029707 9.0799 5.2217</node_elastin>
+        <node_elastin>5.0681 6.3202 5.5106</node_elastin>
+        <node_elastin>3.8071 4.7655 3.7743</node_elastin>
+        <node_elastin>5.9265 9.5443 9.2491</node_elastin>
+        <node_elastin>1.4405 4.3609 8.4887</node_elastin>
+        <node_elastin>5.0389 6.5429 5.3255</node_elastin>
+        <node_elastin>6.3098 0.48085 4.6472</node_elastin>
+        <node_elastin>2.0174 0.97597 6.9421</node_elastin>
+        <node_elastin>9.4599 5.5203 8.8358</node_elastin>
+        <node_elastin>9.4309 5.5078 3.4619</node_elastin>
+        <node_elastin>2.7227 1.9533 7.5572</node_elastin>
+        <node_elastin>0.7131 3.7079 6.9051</node_elastin>
+        <node_elastin>6.4556 5.2916 4.837</node_elastin>
+        <node_elastin>1.3669 1.4112 3.3757</node_elastin>
+        <node_elastin>0.81888 4.2735 6.4408</node_elastin>
+        <node_elastin>2.2489 4.6556 7.1053</node_elastin>
+        <node_elastin>4.2571 0.82794 4.8412</node_elastin>
+        <node_elastin>5.408 8.4556 7.9258</node_elastin>
+        <node_elastin>0.75593 2.4829 1.4862</node_elastin>
+        <node_elastin>0.4696 7.7276 5.5898</node_elastin>
+        <node_elastin>3.5989 9.3833 8.0049</node_elastin>
+        <node_elastin>8.1865 4.5453 5.7921</node_elastin>
+        <node_elastin>5.0708 6.225 1.3131</node_elastin>
+        <node_elastin>7.8604 1.4862 1.6794</node_elastin>
+        <node_elastin>8.8189 5.537 4.7016</node_elastin>
+        <node_elastin>3.3272 4.3302 8.1816</node_elastin>
+        <node_elastin>6.6432 8.3561 5.1862</node_elastin>
+        <node_elastin>8.0507 2.3753 3.027</node_elastin>
+        <node_elastin>2.9376 3.9232 5.9905</node_elastin>
+        <node_elastin>5.9151 8.1852 8.7359</node_elastin>
+        <node_elastin>7.3704 0.89333 6.87</node_elastin>
+        <node_elastin>2.6275 4.7355 1.2402</node_elastin>
+        <node_elastin>4.4884 7.1089 1.5169</node_elastin>
+        <node_elastin>6.7517 3.4282 2.8946</node_elastin>
+        <node_elastin>1.8903 6.0532 4.2618</node_elastin>
+        <node_elastin>5.0697 8.0439 4.4329</node_elastin>
+        <node_elastin>4.1896 7.5932 1.6097</node_elastin>
+        <node_elastin>4.6709 0.91357 3.8342</node_elastin>
+        <node_elastin>9.6969 9.6032 5.5618</node_elastin>
+        <node_elastin>8.457 3.0059 5.4993</node_elastin>
+        <node_elastin>5.0539 5.4639 3.3435</node_elastin>
+        <node_elastin>0.65742 1.4471 6.1935</node_elastin>
+        <node_elastin>1.8813 4.1146 3.5352</node_elastin>
+        <node_elastin>2.7201 5.4413 6.9735</node_elastin>
+        <node_elastin>3.3722 8.7697 9.5115</node_elastin>
+        <node_elastin>4.1195 5.1481 7.3114</node_elastin>
+        <node_elastin>6.8207 9.203 2.2462</node_elastin>
+        <node_elastin>0.97779 5.9737 5.8442</node_elastin>
+        <node_elastin>6.5983 0.55363 5.8234</node_elastin>
+        <node_elastin>4.2254 8.2162 6.6714</node_elastin>
+        <node_elastin>7.7871 2.299 4.0595</node_elastin>
+        <node_elastin>6.1747 7.4137 2.3487</node_elastin>
+        <node_elastin>3.7265 4.3657 2.5809</node_elastin>
+        <node_elastin>4.0832 6.6403 1.0271</node_elastin>
+        <node_elastin>4.2737 2.6808 1.8268</node_elastin>
+        <node_elastin>3.7958 7.1452 7.3937</node_elastin>
+        <node_elastin>5.7385 3.1931 3.1383</node_elastin>
+        <node_elastin>1.0651 3.3977 3.5674</node_elastin>
+        <node_elastin>6.5745 5.5701 2.3803</node_elastin>
+        <node_elastin>3.0223 4.1582 8.0008</node_elastin>
+        <node_elastin>0.9207 8.2614 5.6383</node_elastin>
+        <node_elastin>7.6726 8.4539 4.0642</node_elastin>
+        <node_elastin>2.0084 1.1337 6.0924</node_elastin>
+        <node_elastin>5.1311 6.4521 7.1514</node_elastin>
+        <node_elastin>9.1738 2.1758 7.7852</node_elastin>
+        <node_elastin>2.39 6.9437 2.9366</node_elastin>
+        <node_elastin>2.9259 6.714 6.9776</node_elastin>
+        <node_elastin>5.4776 6.9175 5.9401</node_elastin>
+        <node_elastin>0.50297 7.7498 7.3265</node_elastin>
+        <node_elastin>5.2237 2.133 3.6351</node_elastin>
+        <node_elastin>9.0349 7.0129 6.9457</node_elastin>
+        <node_elastin>7.3162 5.2616 1.6067</node_elastin>
+        <node_elastin>3.7312 3.5622 3.8161</node_elastin>
+        <node_elastin>5.4682 5.3213 5.2428</node_elastin>
+        <node_elastin>7.9642 8.7091 1.955</node_elastin>
+        <node_elastin>6.861 5.8595 6.0172</node_elastin>
+        <node_elastin>7.7579 6.4876 8.2277</node_elastin>
+        <node_elastin>1.3202 2.1366 7.6345</node_elastin>
+        <node_elastin>3.9243 2.3072 4.1247</node_elastin>
+        <node_elastin>7.1459 4.1612 4.1046</node_elastin>
+        <node_elastin>2.081 0.77198 9.1094</node_elastin>
+        <node_elastin>3.0214 4.0076 0.60565</node_elastin>
+        <node_elastin>4.1963 5.3966 2.9802</node_elastin>
+        <node_elastin>8.9987 9.0939 7.9348</node_elastin>
+        <node_elastin>6.4669 2.5921 6.9471</node_elastin>
+        <node_elastin>6.5613 5.0029 4.2253</node_elastin>
+        <node_elastin>2.4994 6.8751 6.6188</node_elastin>
+        <node_elastin>7.2267 5.1323 8.4727</node_elastin>
+        <node_elastin>4.0303 9.0801 4.3795</node_elastin>
+        <node_elastin>6.675 7.6171 3.5729</node_elastin>
+        <node_elastin>3.0364 2.1396 3.3047</node_elastin>
+        <node_elastin>9.9249 3.0295 4.5537</node_elastin>
+        <node_elastin>4.4353 5.4924 6.6578</node_elastin>
+        <node_elastin>9.5595 9.3724 5.4317</node_elastin>
+        <node_elastin>7.5736 8.708 6.6066</node_elastin>
+        <node_elastin>5.3916 1.512 8.9613</node_elastin>
+        <node_elastin>5.1587 4.408 6.4105</node_elastin>
+        <node_elastin>7.6765 4.2122 3.4566</node_elastin>
+        <node_elastin>5.0431 5.8794 2.8919</node_elastin>
+        <node_elastin>0.4286 7.1181 7.8335</node_elastin>
+        <node_elastin>5.6149 8.3973 6.5309</node_elastin>
+        <node_elastin>3.8617 5.4086 7.8566</node_elastin>
+        <node_elastin>0.94094 1.6099 7.9172</node_elastin>
+        <node_elastin>8.6905 2.3694 9.5609</node_elastin>
+        <node_elastin>2.4306 0.77059 3.9434</node_elastin>
+        <node_elastin>8.256 8.8105 5.4258</node_elastin>
+        <node_elastin>6.2896 2.2206 7.5904</node_elastin>
+        <node_elastin>2.2624 0.67045 9.2722</node_elastin>
+        <node_elastin>8.3733 0.05499 7.7659</node_elastin>
+        <node_elastin>9.6026 8.0513 1.2027</node_elastin>
+        <node_elastin>1.9676 0.80055 3.4101</node_elastin>
+        <node_elastin>2.0892 9.0115 5.6356</node_elastin>
+        <node_elastin>0.62862 7.6463 1.9376</node_elastin>
+        <node_elastin>1.9973 0.82382 2.1616</node_elastin>
+        <node_elastin>5.6838 5.2193 2.2381</node_elastin>
+        <node_elastin>4.3102 2.3787 1.1679</node_elastin>
+        <node_elastin>4.9064 2.5266 9.9255</node_elastin>
+        <node_elastin>5.9418 6.2741 7.8788</node_elastin>
+        <node_elastin>5.9743 6.317 8.378</node_elastin>
+        <node_elastin>9.6073 4.5019 7.7631</node_elastin>
+        <node_elastin>4.2285 5.2388 7.257</node_elastin>
+        <node_elastin>1.7396 7.4728 6.0849</node_elastin>
+        <node_elastin>2.3896 9.1898 0.020337</node_elastin>
+        <node_elastin>7.8933 1.1968 8.3163</node_elastin>
+        <node_elastin>4.288 0.51826 4.449</node_elastin>
+        <node_elastin>6.9257 3.1994 0.6922</node_elastin>
+        <node_elastin>2.6309 8.275 8.5025</node_elastin>
+        <node_elastin>2.2122 4.9142 9.6377</node_elastin>
+        <node_elastin>4.1481 0.22143 2.9653</node_elastin>
+        <node_elastin>1.2761 3.2449 0.0071644</node_elastin>
+        <node_elastin>5.1216 8.5606 9.4311</node_elastin>
+        <node_elastin>6.3037 9.1224 3.1322</node_elastin>
+        <node_elastin>6.7476 9.5384 7.7536</node_elastin>
+        <node_elastin>2.3656 6.9769 4.1175</node_elastin>
+        <node_elastin>5.5571 2.2358 6.9264</node_elastin>
+        <node_elastin>7.939 2.12 4.7976</node_elastin>
+        <node_elastin>5.67 7.3839 5.0773</node_elastin>
+        <node_elastin>1.5097 7.5329 5.4121</node_elastin>
+        <node_elastin>7.2343 4.4534 9.9338</node_elastin>
+        <node_elastin>8.4312 6.4474 3.7714</node_elastin>
+        <node_elastin>0.69264 6.5014 2.7175</node_elastin>
+        <node_elastin>8.7323 6.91 4.625</node_elastin>
+        <node_elastin>5.8503 8.76 5.688</node_elastin>
+        <node_elastin>1.9523 0.18914 6.9486</node_elastin>
+        <node_elastin>3.0866 4.0771 5.4185</node_elastin>
+        <node_elastin>1.6706 7.1243 6.7154</node_elastin>
+        <node_elastin>0.087947 1.4677 5.9107</node_elastin>
+        <node_elastin>1.2728 2.0745 3.6869</node_elastin>
+        <node_elastin>8.0747 4.4048 4.1544</node_elastin>
+        <node_elastin>1.7824 6.5318 5.1405</node_elastin>
+        <node_elastin>2.5911 6.0881 3.2998</node_elastin>
+        <node_elastin>3.2256 7.5613 2.7276</node_elastin>
+        <node_elastin>8.9362 0.82939 4.9246</node_elastin>
+        <node_elastin>5.7897 2.8188 0.00070492</node_elastin>
+        <node_elastin>7.085 1.6172 7.5208</node_elastin>
+        <node_elastin>2.9044 6.116 2.1231</node_elastin>
+        <node_elastin>4.8454 8.9287 5.0525</node_elastin>
+        <node_elastin>7.3564 7.7954 7.978</node_elastin>
+        <node_elastin>6.3606 8.1049 0.049879</node_elastin>
+        <node_elastin>8.9193 4.8597 2.1669</node_elastin>
+        <node_elastin>2.1362 7.5868 9.8506</node_elastin>
+        <node_elastin>1.1632 7.4875 5.3981</node_elastin>
+        <node_elastin>0.79541 2.6914 3.9614</node_elastin>
+        <node_elastin>2.3853 6.8117 3.4969</node_elastin>
+        <node_elastin>1.2186 7.4411 8.1812</node_elastin>
+        <node_elastin>3.1604 9.9358 0.46266</node_elastin>
+        <node_elastin>2.7157 4.677 9.4168</node_elastin>
+        <node_elastin>3.3284 2.593 2.758</node_elastin>
+        <node_elastin>6.3791 5.7583 8.866</node_elastin>
+        <node_elastin>8.328 8.3072 3.89</node_elastin>
+        <node_elastin>5.3466 7.111 8.6947</node_elastin>
+        <node_elastin>9.5447 4.5201 5.6436</node_elastin>
+        <node_elastin>0.25111 1.7919 8.9622</node_elastin>
+        <node_elastin>2.9882 6.0257 2.4618</node_elastin>
+        <node_elastin>7.6809 3.0837 1.3511</node_elastin>
+        <node_elastin>7.8044 9.4802 3.9598</node_elastin>
+        <node_elastin>8.5191 8.6209 1.8344</node_elastin>
+        <node_elastin>5.309 1.3443 3.6186</node_elastin>
+        <node_elastin>9.4463 5.5181 5.8751</node_elastin>
+        <node_elastin>5.5901 9.2373 7.0985</node_elastin>
+        <node_elastin>6.7279 4.253 2.556</node_elastin>
+        <node_elastin>6.9719 4.8602 2.7497</node_elastin>
+        <node_elastin>3.2683 3.8872 9.0626</node_elastin>
+        <node_elastin>3.4756 4.4294 1.1633</node_elastin>
+        <node_elastin>8.6334 5.4548 5.7118</node_elastin>
+        <node_elastin>9.6047 9.4103 2.3025</node_elastin>
+        <node_elastin>5.7034 7.9473 5.3386</node_elastin>
+        <node_elastin>8.6177 2.6131 5.0095</node_elastin>
+        <node_elastin>4.9369 6.0575 3.3558</node_elastin>
+        <node_elastin>2.7816 4.7269 5.7377</node_elastin>
+        <node_elastin>2.8902 5.5445 3.9147</node_elastin>
+        <node_elastin>8.5116 5.8457 6.7315</node_elastin>
+        <node_elastin>2.4129 8.8452 4.0573</node_elastin>
+        <node_elastin>2.7603 2.3066 2.7351</node_elastin>
+        <node_elastin>2.3133 6.3377 5.553</node_elastin>
+        <node_elastin>2.6009 2.1912 9.8682</node_elastin>
+        <node_elastin>4.0163 8.6905 6.5346</node_elastin>
+        <node_elastin>6.2973 8.4393 3.6387</node_elastin>
+        <node_elastin>6.6849 9.4969 9.2708</node_elastin>
+        <node_elastin>2.3121 7.0366 4.391</node_elastin>
+        <node_elastin>5.0764 3.0655 4.2325</node_elastin>
+        <node_elastin>5.9313 5.28 3.6575</node_elastin>
+        <node_elastin>7.1974 8.3793 8.3393</node_elastin>
+        <node_elastin>3.7674 0.26413 6.8051</node_elastin>
+        <node_elastin>7.5119 4.3105 6.6047</node_elastin>
+        <node_elastin>4.0094 2.4734 5.2595</node_elastin>
+        <node_elastin>5.9519 7.6686 3.7637</node_elastin>
+        <node_elastin>3.0887 2.5045 7.4175</node_elastin>
+        <node_elastin>8.5851 8.0458 9.9229</node_elastin>
+        <node_elastin>8.5357 8.6334 5.8238</node_elastin>
+        <node_elastin>2.4865 0.36951 3.868</node_elastin>
+        <node_elastin>8.7685 5.714 1.9095</node_elastin>
+        <node_elastin>9.0332 5.3416 2.0925</node_elastin>
+        <node_elastin>6.9332 2.6947 3.9867</node_elastin>
+        <node_elastin>4.1103 2.7944 0.16102</node_elastin>
+        <node_elastin>4.8243 1.3288 6.2863</node_elastin>
+        <node_elastin>3.4112 5.8004 3.9207</node_elastin>
+        <node_elastin>8.8723 2.8088 3.7361</node_elastin>
+        <node_elastin>4.2455 0.30569 1.2256</node_elastin>
+        <node_elastin>3.5992 9.6349 3.028</node_elastin>
+        <node_elastin>5.6685 3.4639 1.9087</node_elastin>
+        <node_elastin>4.6328 7.2678 3.2235</node_elastin>
+        <node_elastin>0.96432 1.9087 5.6841</node_elastin>
+        <node_elastin>8.4122 3.7502 8.156</node_elastin>
+        <node_elastin>6.0461 6.3595 3.1555</node_elastin>
+        <node_elastin>1.1251 9.5528 0.15551</node_elastin>
+        <node_elastin>7.9249 2.2763 8.7486</node_elastin>
+        <node_elastin>5.0821 3.2005 0.84284</node_elastin>
+        <node_elastin>8.7102 8.8651 4.3642</node_elastin>
+        <node_elastin>0.21621 5.0838 5.6957</node_elastin>
+        <node_elastin>4.8543 8.9543 5.3185</node_elastin>
+        <node_elastin>2.2536 7.044 6.0025</node_elastin>
+        <node_elastin>5.1057 9.0491 8.6481</node_elastin>
+        <node_elastin>2.3329 0.25605 4.6266</node_elastin>
+        <node_elastin>4.3762 3.9154 1.7416</node_elastin>
+        <node_elastin>2.3941 7.9711 2.2249</node_elastin>
+        <node_elastin>2.972 6.9605 1.0487</node_elastin>
+        <node_elastin>8.0943 9.5525 0.2681</node_elastin>
+        <node_elastin>0.63429 1.1862 7.6026</node_elastin>
+        <node_elastin>6.2482 4.0593 7.6536</node_elastin>
+        <node_elastin>2.1831 6.9384 0.81975</node_elastin>
+        <node_elastin>3.1566 4.9624 4.8601</node_elastin>
+        <node_elastin>4.553 8.0659 2.1998</node_elastin>
+        <node_elastin>0.99196 0.84182 8.4693</node_elastin>
+        <node_elastin>7.5215 7.2108 7.9345</node_elastin>
+        <node_elastin>6.837 8.1489 4.77</node_elastin>
+        <node_elastin>2.2371 7.8 6.318</node_elastin>
+        <node_elastin>4.9336 9.2182 7.6572</node_elastin>
+        <node_elastin>2.6148 6.2447 1.2128</node_elastin>
+        <node_elastin>1.8354 3.6034 7.105</node_elastin>
+        <node_elastin>2.3357 6.8409 9.2497</node_elastin>
+        <node_elastin>2.6232 5.9684 4.2887</node_elastin>
+        <node_elastin>5.4226 4.6097 7.4466</node_elastin>
+        <node_elastin>5.7577 4.3611 6.0178</node_elastin>
+        <node_elastin>4.9079 4.2294 2.1878</node_elastin>
+        <node_elastin>2.1354 4.0862 5.761</node_elastin>
+        <node_elastin>5.3717 2.4297 1.0793</node_elastin>
+        <node_elastin>2.9384 2.5389 5.3101</node_elastin>
+        <node_elastin>0.73505 6.817 3.8604</node_elastin>
+        <node_elastin>3.8185 2.2773 4.0233</node_elastin>
+        <node_elastin>8.9074 1.7731 6.105</node_elastin>
+        <node_elastin>3.0952 7.8592 4.8964</node_elastin>
+        <node_elastin>7.5936 3.7831 3.752</node_elastin>
+        <node_elastin>6.1298 9.3882 7.0517</node_elastin>
+        <node_elastin>7.9843 1.1173 3.5955</node_elastin>
+        <node_elastin>4.1413 3.0366 9.3911</node_elastin>
+        <node_elastin>9.0505 6.0688 9.2128</node_elastin>
+        <node_elastin>6.6313 2.6646 8.6374</node_elastin>
+        <node_elastin>1.6731 7.4586 7.4825</node_elastin>
+        <node_elastin>5.9114 7.9638 0.36955</node_elastin>
+        <node_elastin>8.6057 6.8273 4.8583</node_elastin>
+        <node_elastin>1.404 4.5929 4.4209</node_elastin>
+        <node_elastin>6.0833 5.773 5.621</node_elastin>
+        <node_elastin>8.1264 4.1331 3.2723</node_elastin>
+        <node_elastin>4.1086 6.0738 7.4534</node_elastin>
+        <node_elastin>9.057 8.226 6.0629</node_elastin>
+        <node_elastin>6.1151 3.398 7.3608</node_elastin>
+        <node_elastin>5.4428 3.573 6.6009</node_elastin>
+        <node_elastin>2.0945 8.8513 4.4074</node_elastin>
+        <node_elastin>1.8732 8.2169 4.1344</node_elastin>
+        <node_elastin>9.7275 7.4216 4.7278</node_elastin>
+        <node_elastin>3.5686 1.734 4.3727</node_elastin>
+        <node_elastin>6.8292 1.2244 3.5593</node_elastin>
+        <node_elastin>5.0403 7.3892 2.5077</node_elastin>
+        <node_elastin>1.0641 6.6928 7.0088</node_elastin>
+        <node_elastin>0.82437 8.0304 0.60254</node_elastin>
+        <node_elastin>4.8728 7.7752 6.2036</node_elastin>
+        <node_elastin>5.9521 1.9554 4.1804</node_elastin>
+        <node_elastin>5.3121 8.2201 6.3497</node_elastin>
+        <node_elastin>4.2297 1.8712 3.527</node_elastin>
+        <node_elastin>8.2675 3.9316 2.431</node_elastin>
+        <node_elastin>4.079 6.0308 7.6566</node_elastin>
+        <node_elastin>6.7627 0.081456 1.7033</node_elastin>
+        <node_elastin>3.8286 5.8649 3.3968</node_elastin>
+        <node_elastin>2.5521 2.0654 7.2442</node_elastin>
+        <node_elastin>6.1109 6.8136 7.1799</node_elastin>
+        <node_elastin>6.5859 8.5899 3.8382</node_elastin>
+        <node_elastin>6.0346 4.2607 2.2769</node_elastin>
+        <node_elastin>6.8485 2.5078 7.0376</node_elastin>
+        <node_elastin>9.6152 1.5063 5.2465</node_elastin>
+        <node_elastin>4.0079 2.9097 5.9577</node_elastin>
+        <node_elastin>9.364 3.6966 0.77635</node_elastin>
+        <node_elastin>1.6469 5.3151 0.053198</node_elastin>
+        <node_elastin>5.6358 0.3708 6.6986</node_elastin>
+        <node_elastin>8.8987 7.264 6.9812</node_elastin>
+        <node_elastin>9.1593 1.8543 6.8862</node_elastin>
+        <node_elastin>7.0766 1.2491 6.2562</node_elastin>
+        <node_elastin>7.4529 1.9106 4.3936</node_elastin>
+        <node_elastin>6.5411 1.0953 3.75</node_elastin>
+        <node_elastin>7.9046 7.8549 3.4507</node_elastin>
+        <node_elastin>6.1129 2.6131 7.1551</node_elastin>
+        <node_elastin>4.2758 0.17232 3.7195</node_elastin>
+        <node_elastin>5.4784 8.9598 3.3664</node_elastin>
+        <node_elastin>1.7374 1.7242 1.1319</node_elastin>
+        <node_elastin>6.908 3.7977 8.7227</node_elastin>
+        <node_elastin>4.4431 9.1332 2.8326</node_elastin>
+        <node_elastin>5.7718 8.1188 1.8295</node_elastin>
+        <node_elastin>7.7593 6.0681 9.4254</node_elastin>
+        <node_elastin>2.5203 4.9783 1.3632</node_elastin>
+        <node_elastin>8.5535 1.4294 3.6157</node_elastin>
+        <node_elastin>5.9911 4.9792 3.2239</node_elastin>
+        <node_elastin>8.0171 0.96698 4.6513</node_elastin>
+        <node_elastin>0.70919 4.089 6.3438</node_elastin>
+        <node_elastin>7.6784 2.9794 8.0674</node_elastin>
+        <node_elastin>4.6937 5.3103 0.8987</node_elastin>
+        <node_elastin>6.8229 2.0136 0.70289</node_elastin>
+        <node_elastin>2.4904 0.32438 0.40719</node_elastin>
+        <node_elastin>8.423 9.1165 4.6574</node_elastin>
+        <node_elastin>6.8377 3.8687 7.7415</node_elastin>
+        <node_elastin>7.809 1.6489 4.7152</node_elastin>
+        <node_elastin>6.8036 1.4773 5.1402</node_elastin>
+        <node_elastin>1.6036 3.4384 2.6721</node_elastin>
+        <node_elastin>8.7112 4.8772 9.1159</node_elastin>
+        <node_elastin>6.1961 1.408 7.7613</node_elastin>
+        <node_elastin>4.0182 7.3098 4.7511</node_elastin>
+        <node_elastin>6.5256 8.1966 2.7183</node_elastin>
+        <node_elastin>1.6633 8.8866 1.0667</node_elastin>
+        <node_elastin>0.16971 4.5904 9.955</node_elastin>
+        <node_elastin>3.9086 0.37916 7.025</node_elastin>
+        <node_elastin>6.8436 8.4052 1.2265</node_elastin>
+        <node_elastin>7.4835 2.4022 6.1004</node_elastin>
+        <node_elastin>5.3622 4.4336 7.3329</node_elastin>
+        <node_elastin>1.4676 7.2816 2.1167</node_elastin>
+        <node_elastin>6.0829 3.0648 8.0221</node_elastin>
+        <node_elastin>4.6271 2.2507 4.4839</node_elastin>
+        <node_elastin>9.6015 2.7977 6.9507</node_elastin>
+        <node_elastin>8.9174 6.9353 9.9692</node_elastin>
+        <node_elastin>2.9857 7.711 8.7078</node_elastin>
+        <node_elastin>7.4386 7.0078 8.044</node_elastin>
+        <node_elastin>4.8317 1.8721 4.0936</node_elastin>
+        <node_elastin>2.5601 1.8209 5.564</node_elastin>
+        <node_elastin>0.46221 7.3522 0.60807</node_elastin>
+        <node_elastin>5.475 7.416 2.7236</node_elastin>
+        <node_elastin>6.9725 2.8314 7.9314</node_elastin>
+        <node_elastin>1.2335 0.069515 3.93</node_elastin>
+        <node_elastin>2.782 1.6252 0.47948</node_elastin>
+        <node_elastin>1.0024 3.6409 2.646</node_elastin>
+        <node_elastin>8.8575 4.0007 1.0817</node_elastin>
+        <node_elastin>6.5144 0.12568 5.2007</node_elastin>
+        <node_elastin>8.3458 4.8013 8.4733</node_elastin>
+        <node_elastin>3.7226 3.8367 6.9661</node_elastin>
+        <node_elastin>6.5446 4.3564 0.25469</node_elastin>
+        <node_elastin>9.137 3.3203 1.48</node_elastin>
+        <node_elastin>8.2398 1.4125 7.3072</node_elastin>
+        <node_elastin>4.8605 7.9173 7.0126</node_elastin>
+        <node_elastin>0.008063 9.1032 3.6346</node_elastin>
+        <node_elastin>4.0813 2.039 5.1516</node_elastin>
+        <node_elastin>0.78385 8.2686 7.4591</node_elastin>
+        <node_elastin>8.2343 8.9233 1.7025</node_elastin>
+        <node_elastin>8.4314 3.9968 7.6116</node_elastin>
+        <node_elastin>8.1066 9.8039 7.5322</node_elastin>
+        <node_elastin>3.5874 7.3666 6.5341</node_elastin>
+        <node_elastin>8.1389 3.4032 6.0732</node_elastin>
+        <node_elastin>4.4758 1.5368 3.7157</node_elastin>
+        <node_elastin>4.221 8.1122 7.9741</node_elastin>
+        <node_elastin>1.7826 8.593 1.511</node_elastin>
+        <node_elastin>9.3848 9.3208 6.4681</node_elastin>
+        <node_elastin>6.0286 9.1135 4.8454</node_elastin>
+        <node_elastin>6.184 4.228 3.7278</node_elastin>
+        <node_elastin>9.0485 3.9928 4.0467</node_elastin>
+        <node_elastin>2.4108 4.9041 8.6409</node_elastin>
+        <node_elastin>5.6689 5.2871 4.4746</node_elastin>
+        <node_elastin>3.5203 3.5826 7.7697</node_elastin>
+        <node_elastin>4.346 6.4774 9.6168</node_elastin>
+        <node_elastin>5.3887 6.041 5.3065</node_elastin>
+        <node_elastin>5.4208 0.13789 5.2837</node_elastin>
+        <node_elastin>1.9491 2.9363 0.061089</node_elastin>
+        <node_elastin>3.9573 1.1591 6.3245</node_elastin>
+        <node_elastin>4.6942 7.2675 3.2969</node_elastin>
+        <node_elastin>4.9498 2.8241 0.28713</node_elastin>
+        <node_elastin>2.5099 3.6839 5.9072</node_elastin>
+        <node_elastin>6.7846 7.3134 7.6064</node_elastin>
+        <node_elastin>5.2359 1.8433 4.4026</node_elastin>
+        <node_elastin>2.4124 1.3561 3.5503</node_elastin>
+        <node_elastin>8.7114 1.7828 6.2221</node_elastin>
+        <node_elastin>8.187 6.351 3.9757</node_elastin>
+        <node_elastin>8.7828 4.6234 1.666</node_elastin>
+        <node_elastin>9.4819 6.0592 0.15151</node_elastin>
+        <node_elastin>4.4748 1.5124 4.5372</node_elastin>
+        <node_elastin>1.9738 0.49488 1.4221</node_elastin>
+        <node_elastin>8.9888 8.544 4.5652</node_elastin>
+        <node_elastin>6.6214 5.4166 2.8829</node_elastin>
+        <node_elastin>5.1058 2.7691 1.8205</node_elastin>
+        <node_elastin>3.146 1.378 4.2706</node_elastin>
+        <node_elastin>0.7277 0.548 5.2509</node_elastin>
+        <node_elastin>7.7856 9.533 3.9657</node_elastin>
+        <node_elastin>7.1825 7.1444 6.6675</node_elastin>
+        <node_elastin>2.658 7.5645 8.5709</node_elastin>
+        <node_elastin>8.5805 8.2914 6.375</node_elastin>
+        <node_elastin>1.638 7.9042 8.7086</node_elastin>
+        <node_elastin>4.2958 0.53309 9.6638</node_elastin>
+        <node_elastin>8.497 2.5303 6.6082</node_elastin>
+        <node_elastin>4.1553 9.1712 5.3365</node_elastin>
+        <node_elastin>6.8596 0.65005 8.1303</node_elastin>
+        <node_elastin>7.2446 2.9304 2.3803</node_elastin>
+        <node_elastin>2.7006 3.5834 3.4794</node_elastin>
+        <node_elastin>4.85 6.3558 5.1406</node_elastin>
+        <node_elastin>6.4305 5.6992 7.9042</node_elastin>
+        <node_elastin>8.2477 4.3611 4.0753</node_elastin>
+        <node_elastin>3.9555 0.91072 4.4126</node_elastin>
+        <node_elastin>0.98874 8.2928 5.3056</node_elastin>
+        <node_elastin>8.5084 9.2541 6.0528</node_elastin>
+        <node_elastin>2.4279 1.5941 7.5132</node_elastin>
+        <node_elastin>5.9742 4.38 4.1895</node_elastin>
+        <node_elastin>5.7163 2.5432 4.4259</node_elastin>
+        <node_elastin>7.1019 4.6577 8.4534</node_elastin>
+        <node_elastin>1.5378 3.6695 1.6476</node_elastin>
+        <node_elastin>5.1721 3.8229 5.7065</node_elastin>
+        <node_elastin>0.26549 1.0839 6.1676</node_elastin>
+        <node_elastin>6.0597 2.5498 3.673</node_elastin>
+        <node_elastin>0.64487 4.2377 6.3979</node_elastin>
+        <node_elastin>4.8037 9.0254 8.2036</node_elastin>
+        <node_elastin>9.3056 8.1948 5.7475</node_elastin>
+        <node_elastin>4.3184 0.47352 2.8546</node_elastin>
+        <node_elastin>0.43498 4.461 1.3607</node_elastin>
+        <node_elastin>5.6962 4.2363 9.5095</node_elastin>
+        <node_elastin>7.5147 8.5836 4.6672</node_elastin>
+        <node_elastin>7.1419 3.4405 5.604</node_elastin>
+        <node_elastin>0.32419 0.058287 6.5574</node_elastin>
+        <node_elastin>3.7176 6.4808 8.3451</node_elastin>
+        <node_elastin>4.1246 8.4637 7.159</node_elastin>
+        <node_elastin>1.6286 0.46206 0.7057</node_elastin>
+        <node_elastin>1.1361 5.7529 3.6738</node_elastin>
+        <node_elastin>5.662 1.0796 0.64072</node_elastin>
+        <node_elastin>4.4141 8.306 2.8495</node_elastin>
+        <node_elastin>0.37504 7.5763 8.1725</node_elastin>
+        <node_elastin>2.4062 7.952 5.1637</node_elastin>
+        <node_elastin>9.2973 1.5628 5.3918</node_elastin>
+        <node_elastin>1.7818 3.3821 4.2406</node_elastin>
+        <node_elastin>6.5552 9.3501 1.0843</node_elastin>
+        <node_elastin>0.63906 3.5673 4.9936</node_elastin>
+        <node_elastin>4.2751 4.5177 7.7917</node_elastin>
+        <node_elastin>2.1133 1.3332 0.024912</node_elastin>
+        <node_elastin>7.5267 5.0034 8.182</node_elastin>
+        <node_elastin>4.2133 5.4654 0.7519</node_elastin>
+        <node_elastin>4.128 9.707 3.4431</node_elastin>
+        <node_elastin>4.425 2.1541 3.6233</node_elastin>
+        <node_elastin>3.1292 1.9208 0.84287</node_elastin>
+        <node_elastin>6.8833 6.1257 1.6559</node_elastin>
+        <node_elastin>6.4302 8.4291 2.7408</node_elastin>
+        <node_elastin>2.055 4.8894 3.9044</node_elastin>
+        <node_elastin>7.9232 6.4675 0.69648</node_elastin>
+        <node_elastin>1.1937 9.4236 6.0124</node_elastin>
+        <node_elastin>7.8575 9.3113 1.6049</node_elastin>
+        <node_elastin>4.8755 7.9165 4.7004</node_elastin>
+        <node_elastin>8.8193 9.0042 5.5052</node_elastin>
+        <node_elastin>3.3923 7.4535 1.5937</node_elastin>
+        <node_elastin>1.3272 4.3816 5.6579</node_elastin>
+        <node_elastin>3.398 6.882 6.3393</node_elastin>
+        <node_elastin>3.5721 7.7471 8.2378</node_elastin>
+        <node_elastin>6.8374 5.543 7.2444</node_elastin>
+        <node_elastin>8.597 2.1501 1.742</node_elastin>
+        <node_elastin>6.0094 1.9611 4.5807</node_elastin>
+        <node_elastin>5.9552 7.4761 5.9599</node_elastin>
+        <node_elastin>6.7029 6.956 1.7794</node_elastin>
+        <node_elastin>2.4817 5.2553 3.5994</node_elastin>
+        <node_elastin>2.3104 5.0564 5.8333</node_elastin>
+        <node_elastin>6.3548 8.3549 7.1591</node_elastin>
+        <node_elastin>8.2146 3.7714 5.6861</node_elastin>
+        <node_elastin>4.6077 3.4038 5.1117</node_elastin>
+        <node_elastin>8.118 2.3539 0.42283</node_elastin>
+        <node_elastin>4.2998 9.1793 7.0562</node_elastin>
+        <node_elastin>3.1213 9.5022 4.2777</node_elastin>
+        <node_elastin>2.1419 8.7628 5.3951</node_elastin>
+        <node_elastin>8.089 4.6816 7.4234</node_elastin>
+        <node_elastin>1.806 5.5097 3.116</node_elastin>
+        <node_elastin>0.33006 9.4835 4.3236</node_elastin>
+        <node_elastin>7.9081 3.9758 6.024</node_elastin>
+        <node_elastin>8.5633 9.366 3.2762</node_elastin>
+        <node_elastin>8.5094 8.8848 6.753</node_elastin>
+        <node_elastin>6.6324 7.2017 2.7002</node_elastin>
+        <node_elastin>1.583 3.734 3.0183</node_elastin>
+        <node_elastin>7.1859 7.7037 5.8049</node_elastin>
+        <node_elastin>5.1505 1.7361 8.3634</node_elastin>
+        <node_elastin>3.541 4.4809 1.6926</node_elastin>
+        <node_elastin>1.8165 3.4399 7.3047</node_elastin>
+        <node_elastin>4.8812 8.2544 3.9207</node_elastin>
+        <node_elastin>0.54503 4.7243 3.7002</node_elastin>
+        <node_elastin>3.2591 5.1066 8.468</node_elastin>
+        <node_elastin>2.6583 3.9804 3.7802</node_elastin>
+        <node_elastin>3.3828 3.2042 0.26631</node_elastin>
+        <node_elastin>7.1917 7.2794 3.4016</node_elastin>
+        <node_elastin>1.1837 3.1344 0.4806</node_elastin>
+        <node_elastin>2.4662 8.8967 9.3823</node_elastin>
+        <node_elastin>3.2749 5.1012 7.4163</node_elastin>
+        <node_elastin>9.611 8.9733 8.2076</node_elastin>
+        <node_elastin>8.0304 2.2755 3.3148</node_elastin>
+        <node_elastin>4.8375 0.47645 0.90964</node_elastin>
+        <node_elastin>8.0207 0.81512 1.9972</node_elastin>
+        <node_elastin>2.7456 9.2205 2.9415</node_elastin>
+        <node_elastin>9.3702 3.0525 2.5909</node_elastin>
+        <node_elastin>8.9612 7.8683 4.9165</node_elastin>
+        <node_elastin>4.8338 9.1758 4.7925</node_elastin>
+        <node_elastin>8.3891 4.2225 2.2737</node_elastin>
+        <node_elastin>1.5043 7.5252 6.7993</node_elastin>
+        <node_elastin>6.8768 7.1267 3.1879</node_elastin>
+        <node_elastin>6.5367 8.7091 6.3158</node_elastin>
+        <node_elastin>9.3212 8.5538 1.3846</node_elastin>
+        <node_elastin>5.6842 9.0418 1.4915</node_elastin>
+        <node_elastin>2.21 6.692 4.8867</node_elastin>
+        <node_elastin>3.3518 7.3219 8.2083</node_elastin>
+        <node_elastin>3.6158 4.2352 2.6418</node_elastin>
+        <node_elastin>5.923 0.65719 9.0748</node_elastin>
+        <node_elastin>6.3001 7.9128 7.6261</node_elastin>
+        <node_elastin>9.1026 3.8971 0.51843</node_elastin>
+        <node_elastin>2.9435 3.9362 3.6078</node_elastin>
+        <node_elastin>6.6766 4.5008 7.513</node_elastin>
+        <node_elastin>5.8339 6.5678 7.2823</node_elastin>
+        <node_elastin>0.036153 6.5742 1.8095</node_elastin>
+        <node_elastin>4.6277 4.2565 3.9768</node_elastin>
+        <node_elastin>3.1621 8.6244 5.0695</node_elastin>
+        <node_elastin>4.9026 9.0272 5.7607</node_elastin>
+        <node_elastin>8.7927 6.1198 5.4914</node_elastin>
+        <node_elastin>6.5838 5.6105 0.75848</node_elastin>
+        <node_elastin>3.6667 8.1221 1.0308</node_elastin>
+        <node_elastin>1.4682 6.632 2.5539</node_elastin>
+        <node_elastin>7.4596 6.9949 5.1893</node_elastin>
+        <node_elastin>2.117 4.6658 7.3047</node_elastin>
+        <node_elastin>6.6739 3.9635 6.3302</node_elastin>
+        <node_elastin>9.2483 8.5077 3.9149</node_elastin>
+        <node_elastin>0.75233 3.3489 1.5596</node_elastin>
+        <node_elastin>6.2219 0.49512 5.1938</node_elastin>
+        <node_elastin>7.2341 2.916 1.1089</node_elastin>
+        <node_elastin>4.0647 7.4489 5.8998</node_elastin>
+        <node_elastin>4.7633 0.45935 0.25986</node_elastin>
+        <node_elastin>4.6623 1.0029 0.82461</node_elastin>
+        <node_elastin>8.5857 1.2049 7.7795</node_elastin>
+        <node_elastin>0.23301 2.5251 8.47</node_elastin>
+        <node_elastin>4.0346 4.2007 9.1399</node_elastin>
+        <node_elastin>3.3174 8.6259 7.5821</node_elastin>
+        <node_elastin>3.4903 6.8085 0.037945</node_elastin>
+        <node_elastin>2.9447 5.4986 4.3165</node_elastin>
+        <node_elastin>1.8993 2.8653 5.7107</node_elastin>
+        <node_elastin>9.25 4.9281 8.1104</node_elastin>
+        <node_elastin>2.6911 1.8249 4.6169</node_elastin>
+        <node_elastin>1.5446 3.469 9.8639</node_elastin>
+        <node_elastin>5.3922 8.3695 4.8777</node_elastin>
+        <node_elastin>3.7222 5.5037 7.5497</node_elastin>
+        <node_elastin>3.6322 2.9611 6.7039</node_elastin>
+        <node_elastin>6.7523 3.9206 7.8133</node_elastin>
+        <node_elastin>4.43 3.7223 5.9715</node_elastin>
+        <node_elastin>6.4133 0.3652 5.2187</node_elastin>
+        <node_elastin>8.2183 2.4326 2.4569</node_elastin>
+        <node_elastin>5.9405 4.6354 5.2899</node_elastin>
+        <node_elastin>5.3466 2.3132 5.3518</node_elastin>
+        <node_elastin>0.89796 1.0974 1.3586</node_elastin>
+        <node_elastin>7.723 7.4954 6.4701</node_elastin>
+        <node_elastin>2.1276 5.5577 3.644</node_elastin>
+        <node_elastin>9.2037 1.88 5.7584</node_elastin>
+        <node_elastin>4.8989 1.1254 9.5506</node_elastin>
+        <node_elastin>6.425 3.9893 1.0389</node_elastin>
+        <node_elastin>1.5574 6.3512 1.2281</node_elastin>
+        <node_elastin>1.0326 1.9153 2.605</node_elastin>
+        <node_elastin>5.2421 4.6311 5.4577</node_elastin>
+        <node_elastin>2.7043 3.1681 3.0641</node_elastin>
+        <node_elastin>6.6866 6.3609 2.3153</node_elastin>
+        <node_elastin>5.3584 1.3371 4.1838</node_elastin>
+        <node_elastin>6.0778 2.725 2.6115</node_elastin>
+        <node_elastin>6.9975 0.43781 9.0469</node_elastin>
+        <node_elastin>5.5096 4.4207 4.9674</node_elastin>
+        <node_elastin>3.2128 3.8103 2.22</node_elastin>
+        <node_elastin>5.5131 2.5379 4.4913</node_elastin>
+        <node_elastin>1.5523 0.24582 2.8545</node_elastin>
+        <node_elastin>3.2986 1.0714 7.8194</node_elastin>
+        <node_elastin>7.3503 5.7802 5.8183</node_elastin>
+        <node_elastin>1.5139 3.0727 7.4586</node_elastin>
+        <node_elastin>1.1753 8.1765 5.9792</node_elastin>
+        <node_elastin>7.3648 5.9914 2.9519</node_elastin>
+        <node_elastin>6.4455 0.54647 7.4301</node_elastin>
+        <node_elastin>3.2053 5.9797 4.131</node_elastin>
+        <node_elastin>0.87948 6.4924 7.435</node_elastin>
+        <node_elastin>9.4609 4.6002 9.4375</node_elastin>
+        <node_elastin>7.5335 2.1755 8.173</node_elastin>
+        <node_elastin>1.579 1.3055 8.5042</node_elastin>
+        <node_elastin>8.9194 6.49 4.1278</node_elastin>
+        <node_elastin>8.5825 1.2554 5.4735</node_elastin>
+        <node_elastin>4.7517 7.6655 5.3047</node_elastin>
+        <node_elastin>1.715 6.7982 5.2445</node_elastin>
+        <node_elastin>7.7351 5.0777 6.1151</node_elastin>
+        <node_elastin>7.6721 8.7461 3.625</node_elastin>
+        <node_elastin>8.1678 6.1043 2.8938</node_elastin>
+        <node_elastin>8.6431 9.5407 6.4519</node_elastin>
+        <node_elastin>3.0874 9.8549 2.0757</node_elastin>
+        <node_elastin>6.672 6.6938 6.5091</node_elastin>
+        <node_elastin>5.4159 8.295 0.91316</node_elastin>
+        <node_elastin>8.1703 9.0764 1.5711</node_elastin>
+        <node_elastin>1.1553 1.0407 9.6713</node_elastin>
+        <node_elastin>0.4747 2.4118 0.3003</node_elastin>
+        <node_elastin>1.9163 4.0508 1.5548</node_elastin>
+        <node_elastin>3.2793 8.8973 5.7504</node_elastin>
+        <node_elastin>4.615 5.295 6.6499</node_elastin>
+        <node_elastin>2.7277 2.3413 3.4933</node_elastin>
+        <node_elastin>5.5568 6.6678 1.3266</node_elastin>
+        <node_elastin>5.6955 7.1196 9.3074</node_elastin>
+        <node_elastin>7.6794 7.2243 9.8635</node_elastin>
+        <node_elastin>2.1785 0.40828 7.7037</node_elastin>
+        <node_elastin>7.4539 0.26322 9.6609</node_elastin>
+        <node_elastin>3.1629 7.7668 6.3726</node_elastin>
+        <node_elastin>1.3757 0.74742 2.9903</node_elastin>
+        <node_elastin>4.9171 5.4143 2.1006</node_elastin>
+        <node_elastin>7.8613 4.724 6.0851</node_elastin>
+        <node_elastin>7.7643 5.8669 3.5199</node_elastin>
+        <node_elastin>3.1384 3.0441 4.7981</node_elastin>
+        <node_elastin>1.1744 8.265 5.2589</node_elastin>
+        <node_elastin>9.3472 5.5388 2.3485</node_elastin>
+        <node_elastin>8.3256 5.1943 2.7112</node_elastin>
+        <node_elastin>3.378 1.0286 5.645</node_elastin>
+        <node_elastin>3.3429 5.4445 1.1086</node_elastin>
+        <node_elastin>9.1141 4.8978 1.6451</node_elastin>
+        <node_elastin>2.5565 1.1466 6.6458</node_elastin>
+        <node_elastin>6.6377 2.8789 9.4293</node_elastin>
+        <node_elastin>3.47 0.59399 2.1805</node_elastin>
+        <node_elastin>6.069 2.1628 5.2456</node_elastin>
+        <node_elastin>0.63747 7.1671 5.8155</node_elastin>
+        <node_elastin>5.5652 3.4637 3.3864</node_elastin>
+        <node_elastin>0.16175 7.2617 0.84492</node_elastin>
+        <node_elastin>8.7952 8.862 1.5386</node_elastin>
+        <node_elastin>2.3632 2.6322 6.6554</node_elastin>
+        <node_elastin>0.92822 9.2616 4.2768</node_elastin>
+        <node_elastin>2.3852 3.0497 8.5243</node_elastin>
+        <node_elastin>8.4876 8.9409 7.6693</node_elastin>
+        <node_elastin>6.0559 6.5687 2.4512</node_elastin>
+        <node_elastin>7.1328 3.8902 2.7492</node_elastin>
+        <node_elastin>2.9002 5.1815 0.17586</node_elastin>
+        <node_elastin>0.21613 7.8963 8.4714</node_elastin>
+        <node_elastin>2.549 2.6443 6.2911</node_elastin>
+        <node_elastin>6.5878 5.5132 6.7465</node_elastin>
+        <node_elastin>8.3613 4.1235 6.6781</node_elastin>
+        <node_elastin>7.2931 7.5011 6.9862</node_elastin>
+        <node_elastin>8.9677 9.289 5.4517</node_elastin>
+        <node_elastin>2.0367 4.8457 8.2689</node_elastin>
+        <node_elastin>5.9393 9.2102 1.569</node_elastin>
+        <node_elastin>2.5639 7.462 4.4345</node_elastin>
+        <node_elastin>5.5491 2.8577 4.2727</node_elastin>
+        <node_elastin>5.685 2.2005 5.1719</node_elastin>
+        <node_elastin>7.3567 5.0868 0.67754</node_elastin>
+        <node_elastin>4.4466 6.7722 4.7591</node_elastin>
+        <node_elastin>7.8723 5.1388 5.3841</node_elastin>
+        <node_elastin>4.6866 6.0071 6.3352</node_elastin>
+        <node_elastin>9.4059 8.1259 2.3727</node_elastin>
+        <node_elastin>1.2872 3.2532 2.56</node_elastin>
+        <node_elastin>6.3868 4.4585 3.4147</node_elastin>
+        <node_elastin>0.54191 5.4545 4.9991</node_elastin>
+        <node_elastin>3.1567 3.1771 6.7746</node_elastin>
+        <node_elastin>0.6533 7.4488 9.5638</node_elastin>
+        <node_elastin>5.9338 6.5476 5.4921</node_elastin>
+        <node_elastin>3.7564 2.9687 5.1066</node_elastin>
+        <node_elastin>7.0337 4.7613 0.56925</node_elastin>
+        <node_elastin>3.2984 8.9393 8.0501</node_elastin>
+        <node_elastin>8.5216 1.3006 0.38582</node_elastin>
+        <node_elastin>2.7972 1.2712 8.0278</node_elastin>
+        <node_elastin>4.6833 6.9395 5.8215</node_elastin>
+        <node_elastin>0.45969 8.2429 5.2695</node_elastin>
+        <node_elastin>7.6846 4.43 6.9655</node_elastin>
+        <node_elastin>3.9379 1.3086 4.5395</node_elastin>
+        <node_elastin>7.6645 5.7136 9.1812</node_elastin>
+        <node_elastin>3.5276 6.8723 0.9273</node_elastin>
+        <node_elastin>9.3709 2.9859 4.4158</node_elastin>
+        <node_elastin>5.9218 5.5382 4.9338</node_elastin>
+        <node_elastin>4.2202 3.4032 4.0623</node_elastin>
+        <node_elastin>6.607 1.7682 6.6738</node_elastin>
+        <node_elastin>6.4746 6.9555 3.0629</node_elastin>
+        <node_elastin>4.2561 3.1482 8.5561</node_elastin>
+        <node_elastin>1.6092 1.862 6.569</node_elastin>
+        <node_elastin>9.1086 3.4022 1.1408</node_elastin>
+        <node_elastin>3.3584 1.3479 9.7694</node_elastin>
+        <node_elastin>5.0542 5.236 3.1266</node_elastin>
+        <node_elastin>3.53 2.8427 7.5103</node_elastin>
+        <node_elastin>6.8257 4.1483 0.72969</node_elastin>
+        <node_elastin>3.3043 5.2003 4.754</node_elastin>
+        <node_elastin>5.7928 2.2157 4.1222</node_elastin>
+        <node_elastin>8.556 5.1078 5.565</node_elastin>
+        <node_elastin>3.424 0.99215 9.4822</node_elastin>
+        <node_elastin>6.6072 9.5398 8.2629</node_elastin>
+        <node_elastin>2.0343 5.0737 6.3143</node_elastin>
+        <node_elastin>8.4394 2.1623 2.9679</node_elastin>
+        <node_elastin>4.4071 1.8818 2.1666</node_elastin>
+        <node_elastin>9.8821 9.2493 8.5915</node_elastin>
+        <node_elastin>5.6979 9.6372 4.67</node_elastin>
+        <node_elastin>8.2789 2.0955 4.4252</node_elastin>
+        <node_elastin>4.2712 6.2571 3.2686</node_elastin>
+        <node_elastin>9.4642 0.74734 9.9824</node_elastin>
+        <node_elastin>9.6133 1.4232 4.7444</node_elastin>
+        <node_elastin>8.4637 6.6074 8.058</node_elastin>
+        <node_elastin>3.0405 5.4112 0.04805</node_elastin>
+        <node_elastin>2.7578 1.5591 4.6774</node_elastin>
+        <node_elastin>3.0927 5.726 7.5059</node_elastin>
+        <node_elastin>3.9212 4.2657 4.0381</node_elastin>
+        <node_elastin>4.8857 7.257 5.7696</node_elastin>
+        <node_elastin>8.3309 4.7589 4.6492</node_elastin>
+        <node_elastin>3.6011 1.9287 8.923</node_elastin>
+        <node_elastin>7.0601 5.6001 1.7451</node_elastin>
+        <node_elastin>8.6577 1.1571 5.4569</node_elastin>
+        <node_elastin>5.0803 1.1292 6.1105</node_elastin>
+        <node_elastin>2.4831 6.6083 7.0747</node_elastin>
+        <node_elastin>8.6287 0.22805 5.6253</node_elastin>
+        <node_elastin>3.7357 4.5262 2.3787</node_elastin>
+        <node_elastin>6.7525 0.36302 0.15664</node_elastin>
+        <node_elastin>3.4112 8.792 3.7368</node_elastin>
+        <node_elastin>8.1852 6.0323 9.2436</node_elastin>
+        <node_elastin>4.1332 3.5478 6.0258</node_elastin>
+        <node_elastin>7.247 4.4608 4.1794</node_elastin>
+        <node_elastin>2.2418 6.2113 7.6061</node_elastin>
+        <node_elastin>4.1879 0.90991 7.7891</node_elastin>
+        <node_elastin>2.9584 3.5432 8.5162</node_elastin>
+        <node_elastin>9.1654 2.587 0.92852</node_elastin>
+        <node_elastin>0.62658 5.7714 3.4972</node_elastin>
+        <node_elastin>8.3903 8.2003 3.2853</node_elastin>
+        <node_elastin>1.6956 6.4482 2.5432</node_elastin>
+        <node_elastin>2.7194 9.1599 4.516</node_elastin>
+        <node_elastin>4.3393 3.6199 0.79851</node_elastin>
+        <node_elastin>6.231 5.1317 9.3363</node_elastin>
+        <node_elastin>3.5886 6.9555 6.6306</node_elastin>
+        <node_elastin>1.0004 2.2406 6.2453</node_elastin>
+        <node_elastin>0.03743 8.5809 8.2632</node_elastin>
+        <node_elastin>6.4472 4.457 6.6575</node_elastin>
+        <node_elastin>8.238 3.6113 6.4738</node_elastin>
+        <node_elastin>7.0003 5.154 8.4352</node_elastin>
+        <node_elastin>9.6792 7.634 4.6186</node_elastin>
+        <node_elastin>9.9371 1.7611 6.182</node_elastin>
+        <node_elastin>3.0007 8.0627 5.2685</node_elastin>
+        <node_elastin>0.70699 5.0936 5.0786</node_elastin>
+        <node_elastin>7.9821 3.9799 3.7624</node_elastin>
+        <node_elastin>5.8013 5.4864 5.9735</node_elastin>
+        <node_elastin>4.641 9.6481 5.5689</node_elastin>
+        <node_elastin>5.8671 6.0977 7.137</node_elastin>
+        <node_elastin>1.2961 5.6377 3.9194</node_elastin>
+        <node_elastin>2.4289 4.2467 9.6211</node_elastin>
+        <node_elastin>4.9195 4.8482 6.8391</node_elastin>
+        <node_elastin>5.1587 2.9816 1.2733</node_elastin>
+        <node_elastin>7.1054 2.4077 2.7182</node_elastin>
+        <node_elastin>2.6627 5.4019 7.5941</node_elastin>
+        <node_elastin>0.15058 7.6501 8.8553</node_elastin>
+        <node_elastin>8.1973 5.1326 7.2372</node_elastin>
+        <node_elastin>8.5409 3.6958 5.1258</node_elastin>
+        <node_elastin>4.0136 2.0206 1.6384</node_elastin>
+        <node_elastin>1.3368 5.2399 4.9639</node_elastin>
+        <node_elastin>2.4903 5.2885 3.0804</node_elastin>
+        <node_elastin>3.0739 7.6937 4.751</node_elastin>
+        <node_elastin>5.5273 2.96 1.9411</node_elastin>
+        <node_elastin>5.238 8.8462 5.8684</node_elastin>
+        <node_elastin>8.9156 1.7186 3.3042</node_elastin>
+        <node_elastin>6.1636 6.8944 7.4245</node_elastin>
+        <node_elastin>0.73719 1.7185 3.0629</node_elastin>
+        <node_elastin>2.5246 2.1684 3.7297</node_elastin>
+        <node_elastin>5.8474 2.7921 3.1578</node_elastin>
+        <node_elastin>7.641 5.1304 3.1671</node_elastin>
+        <node_elastin>7.4753 5.5388 6.1817</node_elastin>
+        <node_elastin>8.2688 8.232 8.9798</node_elastin>
+        <node_elastin>9.0601 7.5677 3.8649</node_elastin>
+        <node_elastin>1.9891 4.7925 5.0402</node_elastin>
+        <node_elastin>0.75524 3.8587 1.0675</node_elastin>
+        <node_elastin>3.755 4.7546 3.4023</node_elastin>
+        <node_elastin>9.9373 1.7788 9.4919</node_elastin>
+        <node_elastin>6.6267 5.3398 9.5397</node_elastin>
+        <node_elastin>6.7735 4.3929 2.0338</node_elastin>
+        <node_elastin>8.1421 8.4328 9.3247</node_elastin>
+        <node_elastin>1.0779 5.1368 9.5397</node_elastin>
+        <node_elastin>3.7766 4.9815 9.3191</node_elastin>
+        <node_elastin>0.61954 2.9533 8.4003</node_elastin>
+        <node_elastin>6.4801 7.4854 2.935</node_elastin>
+        <node_elastin>1.5623 1.6797 4.8573</node_elastin>
+        <node_elastin>5.7389 3.5578 8.4512</node_elastin>
+        <node_elastin>3.3626 9.2531 4.7712</node_elastin>
+        <node_elastin>0.70237 1.2318 1.0431</node_elastin>
+        <node_elastin>5.7425 7.6043 0.19207</node_elastin>
+        <node_elastin>0.14598 3.6617 8.6153</node_elastin>
+        <node_elastin>4.1375 0.87853 1.3988</node_elastin>
+        <node_elastin>5.1106 3.74 4.9555</node_elastin>
+        <node_elastin>3.8613 2.9847 6.7697</node_elastin>
+        <node_elastin>6.6045 4.1683 8.8952</node_elastin>
+        <node_elastin>6.905 3.7397 1.4312</node_elastin>
+        <node_elastin>3.2175 1.308 2.6054</node_elastin>
+        <node_elastin>2.7495 3.6772 6.1685</node_elastin>
+        <node_elastin>7.0646 1.8963 9.0691</node_elastin>
+        <node_elastin>3.3688 2.4066 1.2951</node_elastin>
+        <node_elastin>3.1866 3.0934 4.2975</node_elastin>
+        <node_elastin>1.0048 7.9499 7.7092</node_elastin>
+        <node_elastin>2.8139 1.7999 1.698</node_elastin>
+        <node_elastin>1.3472 0.61041 1.8601</node_elastin>
+        <node_elastin>9.7188 1.0428 2.8558</node_elastin>
+        <node_elastin>0.80978 2.5752 3.3868</node_elastin>
+        <node_elastin>5.7599 6.207 5.8536</node_elastin>
+        <node_elastin>2.9889 5.8272 4.5721</node_elastin>
+        <node_elastin>2.8057 7.5542 4.9619</node_elastin>
+        <node_elastin>4.5321 3.2048 4.8468</node_elastin>
+        <node_elastin>7.8674 4.7999 8.4461</node_elastin>
+        <node_elastin>0.59202 0.51443 5.6757</node_elastin>
+        <node_elastin>6.7498 2.909 9.7661</node_elastin>
+        <node_elastin>0.081781 8.7866 7.9221</node_elastin>
+        <node_elastin>6.743 1.7791 7.8343</node_elastin>
+        <node_elastin>6.4076 8.3435 5.7046</node_elastin>
+        <node_elastin>4.879 4.8844 6.0753</node_elastin>
+        <node_elastin>6.0819 1.7175 8.6101</node_elastin>
+        <node_elastin>0.10392 5.7212 4.8703</node_elastin>
+        <node_elastin>0.99622 4.4378 1.1368</node_elastin>
+        <node_elastin>1.148 0.27721 6.8964</node_elastin>
+        <node_elastin>7.195 7.4075 5.7265</node_elastin>
+        <node_elastin>0.032949 4.2373 4.784</node_elastin>
+        <node_elastin>6.2323 6.7759 7.0602</node_elastin>
+        <node_elastin>5.9023 3.3623 4.5392</node_elastin>
+        <node_elastin>8.0874 6.5196 9.2173</node_elastin>
+        <node_elastin>3.4147 8.9213 3.9407</node_elastin>
+        <node_elastin>1.7606 9.052 6.1952</node_elastin>
+        <node_elastin>9.3083 9.0201 7.1263</node_elastin>
+        <node_elastin>9.8806 3.6578 2.8108</node_elastin>
+        <node_elastin>2.6855 1.5514 1.6151</node_elastin>
+        <node_elastin>5.5539 6.095 2.1037</node_elastin>
+        <node_elastin>1.4196 6.2483 6.0573</node_elastin>
+        <node_elastin>8.6461 4.9239 9.2715</node_elastin>
+        <node_elastin>3.6135 8.9099 6.5174</node_elastin>
+        <node_elastin>5.5248 4.6665 3.916</node_elastin>
+        <node_elastin>3.7776 7.6883 2.3776</node_elastin>
+        <node_elastin>7.1464 4.1599 2.7462</node_elastin>
+        <node_elastin>8.7509 9.8384 0.81712</node_elastin>
+        <node_elastin>2.5384 6.6502 3.2948</node_elastin>
+        <node_elastin>6.0215 9.5835 7.8285</node_elastin>
+        <node_elastin>4.281 8.5709 9.4576</node_elastin>
+        <node_elastin>6.2376 7.5416 5.7009</node_elastin>
+        <node_elastin>0.98253 2.5248 0.54155</node_elastin>
+        <node_elastin>9.9276 7.8842 7.7962</node_elastin>
+        <node_elastin>9.4162 9.2627 4.0314</node_elastin>
+        <node_elastin>4.9418 2.2784 3.0206</node_elastin>
+        <node_elastin>1.2638 9.6972 3.5906</node_elastin>
+        <node_elastin>2.2121 9.0488 1.3449</node_elastin>
+        <node_elastin>2.4884 4.5276 2.9476</node_elastin>
+        <node_elastin>9.0892 4.014 9.6205</node_elastin>
+        <node_elastin>6.7537 1.3552 5.9126</node_elastin>
+        <node_elastin>8.2741 9.0169 6.6776</node_elastin>
+        <node_elastin>3.9605 3.7626 0.1778</node_elastin>
+        <node_elastin>1.7754 8.1839 2.0706</node_elastin>
+        <node_elastin>3.1528 5.9551 9.8524</node_elastin>
+        <node_elastin>5.1448 1.7553 2.7269</node_elastin>
+        <node_elastin>5.5418 3.0131 9.1912</node_elastin>
+        <node_elastin>0.5348 6.0875 4.2371</node_elastin>
+        <node_elastin>7.5208 3.7493 7.706</node_elastin>
+        <node_elastin>3.6021 6.7599 5.1588</node_elastin>
+        <node_elastin>9.3892 0.078854 0.29579</node_elastin>
+        <node_elastin>1.5252 5.3834 1.4791</node_elastin>
+        <node_elastin>3.0309 8.3571 7.8746</node_elastin>
+        <node_elastin>9.8605 6.6325 4.9084</node_elastin>
+        <node_elastin>3.5717 1.2542 7.8309</node_elastin>
+        <node_elastin>6.1888 4.658 5.5124</node_elastin>
+        <node_elastin>0.965 9.649 8.0453</node_elastin>
+        <node_elastin>2.8376 5.6866 1.715</node_elastin>
+        <node_elastin>7.4806 9.02 5.5355</node_elastin>
+        <node_elastin>8.9836 7.1964 2.0541</node_elastin>
+    </nodes>
+    <edges>
+        <edge_collagen>31 122</edge_collagen>
+        <edge_collagen>98 18</edge_collagen>
+        <edge_collagen>86 69</edge_collagen>
+        <edge_collagen>134 166</edge_collagen>
+        <edge_collagen>166 14</edge_collagen>
+        <edge_collagen>118 22</edge_collagen>
+        <edge_collagen>60 30</edge_collagen>
+        <edge_collagen>71 163</edge_collagen>
+        <edge_collagen>146 119</edge_collagen>
+        <edge_collagen>167 112</edge_collagen>
+        <edge_collagen>59 100</edge_collagen>
+        <edge_collagen>161 101</edge_collagen>
+        <edge_collagen>70 8</edge_collagen>
+        <edge_collagen>161 13</edge_collagen>
+        <edge_collagen>167 9</edge_collagen>
+        <edge_collagen>151 60</edge_collagen>
+        <edge_collagen>85 149</edge_collagen>
+        <edge_collagen>107 92</edge_collagen>
+        <edge_collagen>55 128</edge_collagen>
+        <edge_collagen>125 21</edge_collagen>
+        <edge_collagen>80 100</edge_collagen>
+        <edge_collagen>75 58</edge_collagen>
+        <edge_collagen>149 115</edge_collagen>
+        <edge_collagen>93 1</edge_collagen>
+        <edge_collagen>136 81</edge_collagen>
+        <edge_collagen>87 71</edge_collagen>
+        <edge_collagen>139 107</edge_collagen>
+        <edge_collagen>131 159</edge_collagen>
+        <edge_collagen>155 162</edge_collagen>
+        <edge_collagen>148 138</edge_collagen>
+        <edge_collagen>109 75</edge_collagen>
+        <edge_collagen>103 2</edge_collagen>
+        <edge_collagen>124 130</edge_collagen>
+        <edge_collagen>91 69</edge_collagen>
+        <edge_collagen>56 60</edge_collagen>
+        <edge_collagen>162 154</edge_collagen>
+        <edge_collagen>126 111</edge_collagen>
+        <edge_collagen>76 51</edge_collagen>
+        <edge_collagen>148 106</edge_collagen>
+        <edge_collagen>142 164</edge_collagen>
+        <edge_collagen>68 108</edge_collagen>
+        <edge_collagen>151 136</edge_collagen>
+        <edge_collagen>162 138</edge_collagen>
+        <edge_collagen>124 101</edge_collagen>
+        <edge_collagen>128 28</edge_collagen>
+        <edge_collagen>105 20</edge_collagen>
+        <edge_collagen>76 156</edge_collagen>
+        <edge_collagen>151 114</edge_collagen>
+        <edge_collagen>155 129</edge_collagen>
+        <edge_collagen>154 155</edge_collagen>
+        <edge_collagen>113 152</edge_collagen>
+        <edge_collagen>109 147</edge_collagen>
+        <edge_collagen>94 164</edge_collagen>
+        <edge_collagen>117 27</edge_collagen>
+        <edge_collagen>106 38</edge_collagen>
+        <edge_collagen>140 74</edge_collagen>
+        <edge_collagen>86 48</edge_collagen>
+        <edge_collagen>111 157</edge_collagen>
+        <edge_collagen>165 62</edge_collagen>
+        <edge_collagen>62 150</edge_collagen>
+        <edge_collagen>79 12</edge_collagen>
+        <edge_collagen>117 163</edge_collagen>
+        <edge_collagen>63 6</edge_collagen>
+        <edge_collagen>115 96</edge_collagen>
+        <edge_collagen>89 44</edge_collagen>
+        <edge_collagen>144 33</edge_collagen>
+        <edge_collagen>144 3</edge_collagen>
+        <edge_collagen>134 128</edge_collagen>
+        <edge_collagen>122 152</edge_collagen>
+        <edge_collagen>99 95</edge_collagen>
+        <edge_collagen>165 100</edge_collagen>
+        <edge_collagen>137 7</edge_collagen>
+        <edge_collagen>99 47</edge_collagen>
+        <edge_collagen>68 49</edge_collagen>
+        <edge_collagen>113 123</edge_collagen>
+        <edge_collagen>154 70</edge_collagen>
+        <edge_collagen>83 166</edge_collagen>
+        <edge_collagen>119 61</edge_collagen>
+        <edge_collagen>160 139</edge_collagen>
+        <edge_collagen>159 101</edge_collagen>
+        <edge_collagen>85 87</edge_collagen>
+        <edge_collagen>157 25</edge_collagen>
+        <edge_collagen>153 50</edge_collagen>
+        <edge_collagen>161 68</edge_collagen>
+        <edge_collagen>110 147</edge_collagen>
+        <edge_collagen>153 138</edge_collagen>
+        <edge_collagen>131 136</edge_collagen>
+        <edge_collagen>98 82</edge_collagen>
+        <edge_collagen>64 153</edge_collagen>
+        <edge_collagen>94 54</edge_collagen>
+        <edge_collagen>120 59</edge_collagen>
+        <edge_collagen>132 15</edge_collagen>
+        <edge_collagen>152 74</edge_collagen>
+        <edge_collagen>82 165</edge_collagen>
+        <edge_collagen>145 74</edge_collagen>
+        <edge_collagen>96 139</edge_collagen>
+        <edge_collagen>81 118</edge_collagen>
+        <edge_collagen>121 52</edge_collagen>
+        <edge_collagen>80 75</edge_collagen>
+        <edge_collagen>67 140</edge_collagen>
+        <edge_collagen>66 65</edge_collagen>
+        <edge_collagen>91 56</edge_collagen>
+        <edge_collagen>142 97</edge_collagen>
+        <edge_collagen>129 120</edge_collagen>
+        <edge_collagen>79 143</edge_collagen>
+        <edge_collagen>73 158</edge_collagen>
+        <edge_collagen>90 150</edge_collagen>
+        <edge_collagen>141 85</edge_collagen>
+        <edge_collagen>77 156</edge_collagen>
+        <edge_collagen>77 69</edge_collagen>
+        <edge_collagen>145 78</edge_collagen>
+        <edge_collagen>160 36</edge_collagen>
+        <edge_collagen>149 140</edge_collagen>
+        <edge_collagen>121 163</edge_collagen>
+        <edge_collagen>90 107</edge_collagen>
+        <edge_collagen>83 77</edge_collagen>
+        <edge_collagen>103 137</edge_collagen>
+        <edge_collagen>167 10</edge_collagen>
+        <edge_collagen>105 40</edge_collagen>
+        <edge_collagen>65 59</edge_collagen>
+        <edge_collagen>164 143</edge_collagen>
+        <edge_collagen>92 67</edge_collagen>
+        <edge_collagen>127 65</edge_collagen>
+        <edge_collagen>157 29</edge_collagen>
+        <edge_collagen>160 61</edge_collagen>
+        <edge_collagen>104 153</edge_collagen>
+        <edge_collagen>121 87</edge_collagen>
+        <edge_collagen>150 143</edge_collagen>
+        <edge_collagen>95 16</edge_collagen>
+        <edge_collagen>125 109</edge_collagen>
+        <edge_collagen>80 66</edge_collagen>
+        <edge_collagen>53 4</edge_collagen>
+        <edge_collagen>88 34</edge_collagen>
+        <edge_collagen>120 155</edge_collagen>
+        <edge_collagen>55 57</edge_collagen>
+        <edge_collagen>112 146</edge_collagen>
+        <edge_collagen>0 108</edge_collagen>
+        <edge_collagen>133 131</edge_collagen>
+        <edge_collagen>115 127</edge_collagen>
+        <edge_collagen>114 129</edge_collagen>
+        <edge_collagen>118 156</edge_collagen>
+        <edge_collagen>61 132</edge_collagen>
+        <edge_collagen>167 145</edge_collagen>
+        <edge_collagen>110 82</edge_collagen>
+        <edge_collagen>134 102</edge_collagen>
+        <edge_collagen>63 132</edge_collagen>
+        <edge_collagen>24 73</edge_collagen>
+        <edge_collagen>162 96</edge_collagen>
+        <edge_collagen>119 144</edge_collagen>
+        <edge_collagen>164 152</edge_collagen>
+        <edge_collagen>17 95</edge_collagen>
+        <edge_collagen>126 123</edge_collagen>
+        <edge_collagen>156 158</edge_collagen>
+        <edge_collagen>64 97</edge_collagen>
+        <edge_collagen>93 123</edge_collagen>
+        <edge_collagen>122 55</edge_collagen>
+        <edge_collagen>117 84</edge_collagen>
+        <edge_collagen>111 124</edge_collagen>
+        <edge_collagen>70 78</edge_collagen>
+        <edge_collagen>158 163</edge_collagen>
+        <edge_collagen>160 102</edge_collagen>
+        <edge_collagen>130 97</edge_collagen>
+        <edge_collagen>37 39</edge_collagen>
+        <edge_collagen>146 43</edge_collagen>
+        <edge_collagen>66 23</edge_collagen>
+        <edge_collagen>108 83</edge_collagen>
+        <edge_collagen>105 89</edge_collagen>
+        <edge_collagen>89 84</edge_collagen>
+        <edge_collagen>147 102</edge_collagen>
+        <edge_collagen>42 130</edge_collagen>
+        <edge_collagen>73 92</edge_collagen>
+        <edge_collagen>5 67</edge_collagen>
+        <edge_collagen>135 57</edge_collagen>
+        <edge_collagen>90 159</edge_collagen>
+        <edge_collagen>94 112</edge_collagen>
+        <edge_collagen>71 93</edge_collagen>
+        <edge_collagen>104 150</edge_collagen>
+        <edge_collagen>86 78</edge_collagen>
+        <edge_collagen>159 56</edge_collagen>
+        <edge_collagen>41 84</edge_collagen>
+        <edge_collagen>79 58</edge_collagen>
+        <edge_collagen>158 165</edge_collagen>
+        <edge_collagen>148 116</edge_collagen>
+        <edge_collagen>62 88</edge_collagen>
+        <edge_collagen>135 110</edge_collagen>
+        <edge_collagen>113 26</edge_collagen>
+        <edge_collagen>46 99</edge_collagen>
+        <edge_collagen>35 11</edge_collagen>
+        <edge_collagen>151 148</edge_collagen>
+        <edge_collagen>133 161</edge_collagen>
+        <edge_collagen>76 45</edge_collagen>
+        <edge_collagen>116 114</edge_collagen>
+        <edge_collagen>106 63</edge_collagen>
+        <edge_collagen>149 57</edge_collagen>
+        <edge_collagen>125 88</edge_collagen>
+        <edge_collagen>116 58</edge_collagen>
+        <edge_collagen>133 127</edge_collagen>
+        <edge_collagen>167 64</edge_collagen>
+        <edge_collagen>98 126</edge_collagen>
+        <edge_collagen>32 81</edge_collagen>
+        <edge_collagen>135 19</edge_collagen>
+        <edge_collagen>142 157</edge_collagen>
+        <edge_collagen>154 137</edge_collagen>
+        <edge_elastin>408 513</edge_elastin>
+        <edge_elastin>904 757</edge_elastin>
+        <edge_elastin>585 945</edge_elastin>
+        <edge_elastin>573 70</edge_elastin>
+        <edge_elastin>713 839</edge_elastin>
+        <edge_elastin>590 158</edge_elastin>
+        <edge_elastin>660 326</edge_elastin>
+        <edge_elastin>1006 71</edge_elastin>
+        <edge_elastin>940 799</edge_elastin>
+        <edge_elastin>658 156</edge_elastin>
+        <edge_elastin>1107 398</edge_elastin>
+        <edge_elastin>531 431</edge_elastin>
+        <edge_elastin>581 61</edge_elastin>
+        <edge_elastin>976 63</edge_elastin>
+        <edge_elastin>1074 89</edge_elastin>
+        <edge_elastin>966 977</edge_elastin>
+        <edge_elastin>817 631</edge_elastin>
+        <edge_elastin>525 170</edge_elastin>
+        <edge_elastin>427 393</edge_elastin>
+        <edge_elastin>833 1095</edge_elastin>
+        <edge_elastin>905 350</edge_elastin>
+        <edge_elastin>951 599</edge_elastin>
+        <edge_elastin>1049 434</edge_elastin>
+        <edge_elastin>457 1014</edge_elastin>
+        <edge_elastin>655 184</edge_elastin>
+        <edge_elastin>766 1100</edge_elastin>
+        <edge_elastin>540 217</edge_elastin>
+        <edge_elastin>385 296</edge_elastin>
+        <edge_elastin>391 174</edge_elastin>
+        <edge_elastin>451 739</edge_elastin>
+        <edge_elastin>931 268</edge_elastin>
+        <edge_elastin>1098 646</edge_elastin>
+        <edge_elastin>556 968</edge_elastin>
+        <edge_elastin>690 678</edge_elastin>
+        <edge_elastin>939 84</edge_elastin>
+        <edge_elastin>508 78</edge_elastin>
+        <edge_elastin>534 378</edge_elastin>
+        <edge_elastin>780 329</edge_elastin>
+        <edge_elastin>906 281</edge_elastin>
+        <edge_elastin>730 783</edge_elastin>
+        <edge_elastin>942 1038</edge_elastin>
+        <edge_elastin>1090 926</edge_elastin>
+        <edge_elastin>498 952</edge_elastin>
+        <edge_elastin>623 109</edge_elastin>
+        <edge_elastin>856 671</edge_elastin>
+        <edge_elastin>504 947</edge_elastin>
+        <edge_elastin>877 923</edge_elastin>
+        <edge_elastin>882 190</edge_elastin>
+        <edge_elastin>415 832</edge_elastin>
+        <edge_elastin>705 610</edge_elastin>
+        <edge_elastin>907 506</edge_elastin>
+        <edge_elastin>491 1091</edge_elastin>
+        <edge_elastin>449 957</edge_elastin>
+        <edge_elastin>471 490</edge_elastin>
+        <edge_elastin>936 664</edge_elastin>
+        <edge_elastin>1067 147</edge_elastin>
+        <edge_elastin>493 994</edge_elastin>
+        <edge_elastin>997 149</edge_elastin>
+        <edge_elastin>786 564</edge_elastin>
+        <edge_elastin>462 933</edge_elastin>
+        <edge_elastin>1054 267</edge_elastin>
+        <edge_elastin>697 963</edge_elastin>
+        <edge_elastin>1052 909</edge_elastin>
+        <edge_elastin>661 560</edge_elastin>
+        <edge_elastin>1008 478</edge_elastin>
+        <edge_elastin>695 933</edge_elastin>
+        <edge_elastin>812 568</edge_elastin>
+        <edge_elastin>716 790</edge_elastin>
+        <edge_elastin>708 1067</edge_elastin>
+        <edge_elastin>586 426</edge_elastin>
+        <edge_elastin>1107 510</edge_elastin>
+        <edge_elastin>984 1019</edge_elastin>
+        <edge_elastin>475 1063</edge_elastin>
+        <edge_elastin>955 558</edge_elastin>
+        <edge_elastin>1058 35</edge_elastin>
+        <edge_elastin>1002 77</edge_elastin>
+        <edge_elastin>618 1099</edge_elastin>
+        <edge_elastin>969 771</edge_elastin>
+        <edge_elastin>439 253</edge_elastin>
+        <edge_elastin>710 375</edge_elastin>
+        <edge_elastin>1075 18</edge_elastin>
+        <edge_elastin>818 8</edge_elastin>
+        <edge_elastin>834 1018</edge_elastin>
+        <edge_elastin>469 189</edge_elastin>
+        <edge_elastin>444 1017</edge_elastin>
+        <edge_elastin>738 96</edge_elastin>
+        <edge_elastin>511 219</edge_elastin>
+        <edge_elastin>1035 817</edge_elastin>
+        <edge_elastin>520 647</edge_elastin>
+        <edge_elastin>770 823</edge_elastin>
+        <edge_elastin>477 573</edge_elastin>
+        <edge_elastin>642 764</edge_elastin>
+        <edge_elastin>1051 590</edge_elastin>
+        <edge_elastin>1016 64</edge_elastin>
+        <edge_elastin>725 42</edge_elastin>
+        <edge_elastin>464 1096</edge_elastin>
+        <edge_elastin>982 736</edge_elastin>
+        <edge_elastin>509 512</edge_elastin>
+        <edge_elastin>1018 9</edge_elastin>
+        <edge_elastin>1015 601</edge_elastin>
+        <edge_elastin>794 528</edge_elastin>
+        <edge_elastin>701 1032</edge_elastin>
+        <edge_elastin>774 616</edge_elastin>
+        <edge_elastin>733 1019</edge_elastin>
+        <edge_elastin>565 309</edge_elastin>
+        <edge_elastin>1041 1002</edge_elastin>
+        <edge_elastin>672 884</edge_elastin>
+        <edge_elastin>437 285</edge_elastin>
+        <edge_elastin>986 527</edge_elastin>
+        <edge_elastin>423 769</edge_elastin>
+        <edge_elastin>855 48</edge_elastin>
+        <edge_elastin>746 647</edge_elastin>
+        <edge_elastin>737 998</edge_elastin>
+        <edge_elastin>517 306</edge_elastin>
+        <edge_elastin>667 51</edge_elastin>
+        <edge_elastin>653 746</edge_elastin>
+        <edge_elastin>629 798</edge_elastin>
+        <edge_elastin>806 767</edge_elastin>
+        <edge_elastin>459 275</edge_elastin>
+        <edge_elastin>974 1012</edge_elastin>
+        <edge_elastin>1026 686</edge_elastin>
+        <edge_elastin>893 113</edge_elastin>
+        <edge_elastin>1045 977</edge_elastin>
+        <edge_elastin>899 34</edge_elastin>
+        <edge_elastin>550 391</edge_elastin>
+        <edge_elastin>396 799</edge_elastin>
+        <edge_elastin>487 1015</edge_elastin>
+        <edge_elastin>804 454</edge_elastin>
+        <edge_elastin>1005 132</edge_elastin>
+        <edge_elastin>668 797</edge_elastin>
+        <edge_elastin>612 1072</edge_elastin>
+        <edge_elastin>1095 402</edge_elastin>
+        <edge_elastin>532 144</edge_elastin>
+        <edge_elastin>535 724</edge_elastin>
+        <edge_elastin>703 682</edge_elastin>
+        <edge_elastin>1093 998</edge_elastin>
+        <edge_elastin>789 620</edge_elastin>
+        <edge_elastin>453 791</edge_elastin>
+        <edge_elastin>1061 742</edge_elastin>
+        <edge_elastin>669 564</edge_elastin>
+        <edge_elastin>943 983</edge_elastin>
+        <edge_elastin>885 990</edge_elastin>
+        <edge_elastin>483 311</edge_elastin>
+        <edge_elastin>662 142</edge_elastin>
+        <edge_elastin>1052 359</edge_elastin>
+        <edge_elastin>917 441</edge_elastin>
+        <edge_elastin>583 467</edge_elastin>
+        <edge_elastin>979 486</edge_elastin>
+        <edge_elastin>820 561</edge_elastin>
+        <edge_elastin>677 839</edge_elastin>
+        <edge_elastin>842 15</edge_elastin>
+        <edge_elastin>813 340</edge_elastin>
+        <edge_elastin>992 889</edge_elastin>
+        <edge_elastin>1010 1080</edge_elastin>
+        <edge_elastin>1034 986</edge_elastin>
+        <edge_elastin>1094 21</edge_elastin>
+        <edge_elastin>458 830</edge_elastin>
+        <edge_elastin>674 172</edge_elastin>
+        <edge_elastin>571 286</edge_elastin>
+        <edge_elastin>1041 325</edge_elastin>
+        <edge_elastin>972 507</edge_elastin>
+        <edge_elastin>901 774</edge_elastin>
+        <edge_elastin>853 93</edge_elastin>
+        <edge_elastin>1029 223</edge_elastin>
+        <edge_elastin>866 865</edge_elastin>
+        <edge_elastin>1049 951</edge_elastin>
+        <edge_elastin>425 464</edge_elastin>
+        <edge_elastin>824 862</edge_elastin>
+        <edge_elastin>1068 259</edge_elastin>
+        <edge_elastin>729 529</edge_elastin>
+        <edge_elastin>761 515</edge_elastin>
+        <edge_elastin>367 387</edge_elastin>
+        <edge_elastin>546 140</edge_elastin>
+        <edge_elastin>1093 102</edge_elastin>
+        <edge_elastin>684 1000</edge_elastin>
+        <edge_elastin>587 864</edge_elastin>
+        <edge_elastin>981 187</edge_elastin>
+        <edge_elastin>692 659</edge_elastin>
+        <edge_elastin>747 1017</edge_elastin>
+        <edge_elastin>499 970</edge_elastin>
+        <edge_elastin>962 251</edge_elastin>
+        <edge_elastin>726 522</edge_elastin>
+        <edge_elastin>781 647</edge_elastin>
+        <edge_elastin>397 849</edge_elastin>
+        <edge_elastin>1056 883</edge_elastin>
+        <edge_elastin>501 1050</edge_elastin>
+        <edge_elastin>403 959</edge_elastin>
+        <edge_elastin>445 32</edge_elastin>
+        <edge_elastin>1057 709</edge_elastin>
+        <edge_elastin>638 1092</edge_elastin>
+        <edge_elastin>788 963</edge_elastin>
+        <edge_elastin>869 763</edge_elastin>
+        <edge_elastin>608 867</edge_elastin>
+        <edge_elastin>1044 787</edge_elastin>
+        <edge_elastin>681 875</edge_elastin>
+        <edge_elastin>1099 797</edge_elastin>
+        <edge_elastin>465 422</edge_elastin>
+        <edge_elastin>897 543</edge_elastin>
+        <edge_elastin>693 372</edge_elastin>
+        <edge_elastin>1092 412</edge_elastin>
+        <edge_elastin>595 942</edge_elastin>
+        <edge_elastin>474 575</edge_elastin>
+        <edge_elastin>1043 60</edge_elastin>
+        <edge_elastin>455 900</edge_elastin>
+        <edge_elastin>553 734</edge_elastin>
+        <edge_elastin>1060 161</edge_elastin>
+        <edge_elastin>1053 139</edge_elastin>
+        <edge_elastin>888 210</edge_elastin>
+        <edge_elastin>567 950</edge_elastin>
+        <edge_elastin>411 911</edge_elastin>
+        <edge_elastin>576 479</edge_elastin>
+        <edge_elastin>1005 814</edge_elastin>
+        <edge_elastin>463 483</edge_elastin>
+        <edge_elastin>793 716</edge_elastin>
+        <edge_elastin>958 537</edge_elastin>
+        <edge_elastin>370 299</edge_elastin>
+        <edge_elastin>719 420</edge_elastin>
+        <edge_elastin>538 122</edge_elastin>
+        <edge_elastin>496 1091</edge_elastin>
+        <edge_elastin>796 674</edge_elastin>
+        <edge_elastin>679 250</edge_elastin>
+        <edge_elastin>605 717</edge_elastin>
+        <edge_elastin>466 624</edge_elastin>
+        <edge_elastin>858 482</edge_elastin>
+        <edge_elastin>417 636</edge_elastin>
+        <edge_elastin>1063 238</edge_elastin>
+        <edge_elastin>554 186</edge_elastin>
+        <edge_elastin>622 946</edge_elastin>
+        <edge_elastin>570 33</edge_elastin>
+        <edge_elastin>990 587</edge_elastin>
+        <edge_elastin>609 687</edge_elastin>
+        <edge_elastin>857 1069</edge_elastin>
+        <edge_elastin>649 884</edge_elastin>
+        <edge_elastin>450 1085</edge_elastin>
+        <edge_elastin>750 885</edge_elastin>
+        <edge_elastin>1105 384</edge_elastin>
+        <edge_elastin>718 431</edge_elastin>
+        <edge_elastin>1029 209</edge_elastin>
+        <edge_elastin>886 1075</edge_elastin>
+        <edge_elastin>756 415</edge_elastin>
+        <edge_elastin>1039 664</edge_elastin>
+        <edge_elastin>965 390</edge_elastin>
+        <edge_elastin>1040 1000</edge_elastin>
+        <edge_elastin>835 539</edge_elastin>
+        <edge_elastin>828 1039</edge_elastin>
+        <edge_elastin>912 941</edge_elastin>
+        <edge_elastin>394 780</edge_elastin>
+        <edge_elastin>795 1017</edge_elastin>
+        <edge_elastin>937 622</edge_elastin>
+        <edge_elastin>1105 713</edge_elastin>
+        <edge_elastin>751 860</edge_elastin>
+        <edge_elastin>562 578</edge_elastin>
+        <edge_elastin>927 280</edge_elastin>
+        <edge_elastin>847 738</edge_elastin>
+        <edge_elastin>722 645</edge_elastin>
+        <edge_elastin>399 896</edge_elastin>
+        <edge_elastin>637 100</edge_elastin>
+        <edge_elastin>961 138</edge_elastin>
+        <edge_elastin>1024 532</edge_elastin>
+        <edge_elastin>652 534</edge_elastin>
+        <edge_elastin>389 947</edge_elastin>
+        <edge_elastin>845 846</edge_elastin>
+        <edge_elastin>702 644</edge_elastin>
+        <edge_elastin>868 685</edge_elastin>
+        <edge_elastin>736 119</edge_elastin>
+        <edge_elastin>724 1018</edge_elastin>
+        <edge_elastin>994 252</edge_elastin>
+        <edge_elastin>754 807</edge_elastin>
+        <edge_elastin>676 292</edge_elastin>
+        <edge_elastin>541 729</edge_elastin>
+        <edge_elastin>778 82</edge_elastin>
+        <edge_elastin>553 1057</edge_elastin>
+        <edge_elastin>650 90</edge_elastin>
+        <edge_elastin>459 837</edge_elastin>
+        <edge_elastin>612 151</edge_elastin>
+        <edge_elastin>966 330</edge_elastin>
+        <edge_elastin>753 535</edge_elastin>
+        <edge_elastin>1100 130</edge_elastin>
+        <edge_elastin>652 887</edge_elastin>
+        <edge_elastin>782 909</edge_elastin>
+        <edge_elastin>628 1014</edge_elastin>
+        <edge_elastin>525 750</edge_elastin>
+        <edge_elastin>549 942</edge_elastin>
+        <edge_elastin>571 29</edge_elastin>
+        <edge_elastin>634 970</edge_elastin>
+        <edge_elastin>1096 889</edge_elastin>
+        <edge_elastin>798 1058</edge_elastin>
+        <edge_elastin>466 1004</edge_elastin>
+        <edge_elastin>1070 804</edge_elastin>
+        <edge_elastin>596 14</edge_elastin>
+        <edge_elastin>751 166</edge_elastin>
+        <edge_elastin>577 569</edge_elastin>
+        <edge_elastin>779 492</edge_elastin>
+        <edge_elastin>419 243</edge_elastin>
+        <edge_elastin>580 844</edge_elastin>
+        <edge_elastin>618 579</edge_elastin>
+        <edge_elastin>542 846</edge_elastin>
+        <edge_elastin>820 1085</edge_elastin>
+        <edge_elastin>722 816</edge_elastin>
+        <edge_elastin>488 662</edge_elastin>
+        <edge_elastin>1020 129</edge_elastin>
+        <edge_elastin>929 948</edge_elastin>
+        <edge_elastin>726 540</edge_elastin>
+        <edge_elastin>968 287</edge_elastin>
+        <edge_elastin>486 294</edge_elastin>
+        <edge_elastin>493 791</edge_elastin>
+        <edge_elastin>778 697</edge_elastin>
+        <edge_elastin>672 874</edge_elastin>
+        <edge_elastin>1025 996</edge_elastin>
+        <edge_elastin>1000 554</edge_elastin>
+        <edge_elastin>850 274</edge_elastin>
+        <edge_elastin>526 22</edge_elastin>
+        <edge_elastin>426 890</edge_elastin>
+        <edge_elastin>999 163</edge_elastin>
+        <edge_elastin>404 1062</edge_elastin>
+        <edge_elastin>1001 410</edge_elastin>
+        <edge_elastin>599 822</edge_elastin>
+        <edge_elastin>1040 830</edge_elastin>
+        <edge_elastin>863 779</edge_elastin>
+        <edge_elastin>642 1111</edge_elastin>
+        <edge_elastin>759 153</edge_elastin>
+        <edge_elastin>915 914</edge_elastin>
+        <edge_elastin>640 117</edge_elastin>
+        <edge_elastin>926 825</edge_elastin>
+        <edge_elastin>718 1018</edge_elastin>
+        <edge_elastin>1021 903</edge_elastin>
+        <edge_elastin>985 583</edge_elastin>
+        <edge_elastin>451 755</edge_elastin>
+        <edge_elastin>911 641</edge_elastin>
+        <edge_elastin>387 308</edge_elastin>
+        <edge_elastin>994 429</edge_elastin>
+        <edge_elastin>371 929</edge_elastin>
+        <edge_elastin>979 1067</edge_elastin>
+        <edge_elastin>690 1061</edge_elastin>
+        <edge_elastin>608 483</edge_elastin>
+        <edge_elastin>572 405</edge_elastin>
+        <edge_elastin>1088 413</edge_elastin>
+        <edge_elastin>1064 811</edge_elastin>
+        <edge_elastin>458 554</edge_elastin>
+        <edge_elastin>781 520</edge_elastin>
+        <edge_elastin>542 328</edge_elastin>
+        <edge_elastin>894 202</edge_elastin>
+        <edge_elastin>598 935</edge_elastin>
+        <edge_elastin>446 893</edge_elastin>
+        <edge_elastin>491 896</edge_elastin>
+        <edge_elastin>687 849</edge_elastin>
+        <edge_elastin>547 421</edge_elastin>
+        <edge_elastin>1052 851</edge_elastin>
+        <edge_elastin>1064 495</edge_elastin>
+        <edge_elastin>585 247</edge_elastin>
+        <edge_elastin>620 663</edge_elastin>
+        <edge_elastin>853 177</edge_elastin>
+        <edge_elastin>1093 766</edge_elastin>
+        <edge_elastin>380 543</edge_elastin>
+        <edge_elastin>890 563</edge_elastin>
+        <edge_elastin>419 1066</edge_elastin>
+        <edge_elastin>898 179</edge_elastin>
+        <edge_elastin>897 960</edge_elastin>
+        <edge_elastin>1058 430</edge_elastin>
+        <edge_elastin>808 790</edge_elastin>
+        <edge_elastin>714 336</edge_elastin>
+        <edge_elastin>1011 929</edge_elastin>
+        <edge_elastin>640 977</edge_elastin>
+        <edge_elastin>403 1025</edge_elastin>
+        <edge_elastin>1056 657</edge_elastin>
+        <edge_elastin>442 1079</edge_elastin>
+        <edge_elastin>661 131</edge_elastin>
+        <edge_elastin>656 255</edge_elastin>
+        <edge_elastin>955 318</edge_elastin>
+        <edge_elastin>450 569</edge_elastin>
+        <edge_elastin>446 670</edge_elastin>
+        <edge_elastin>641 611</edge_elastin>
+        <edge_elastin>1105 615</edge_elastin>
+        <edge_elastin>460 312</edge_elastin>
+        <edge_elastin>530 351</edge_elastin>
+        <edge_elastin>901 1082</edge_elastin>
+        <edge_elastin>1056 421</edge_elastin>
+        <edge_elastin>873 127</edge_elastin>
+        <edge_elastin>915 522</edge_elastin>
+        <edge_elastin>537 735</edge_elastin>
+        <edge_elastin>1006 297</edge_elastin>
+        <edge_elastin>439 943</edge_elastin>
+        <edge_elastin>925 566</edge_elastin>
+        <edge_elastin>841 97</edge_elastin>
+        <edge_elastin>529 541</edge_elastin>
+        <edge_elastin>654 576</edge_elastin>
+        <edge_elastin>420 107</edge_elastin>
+        <edge_elastin>547 118</edge_elastin>
+        <edge_elastin>615 920</edge_elastin>
+        <edge_elastin>1075 475</edge_elastin>
+        <edge_elastin>1090 800</edge_elastin>
+        <edge_elastin>975 959</edge_elastin>
+        <edge_elastin>692 43</edge_elastin>
+        <edge_elastin>430 507</edge_elastin>
+        <edge_elastin>653 244</edge_elastin>
+        <edge_elastin>440 416</edge_elastin>
+        <edge_elastin>398 510</edge_elastin>
+        <edge_elastin>829 594</edge_elastin>
+        <edge_elastin>867 787</edge_elastin>
+        <edge_elastin>443 322</edge_elastin>
+        <edge_elastin>417 922</edge_elastin>
+        <edge_elastin>960 302</edge_elastin>
+        <edge_elastin>606 830</edge_elastin>
+        <edge_elastin>834 724</edge_elastin>
+        <edge_elastin>371 105</edge_elastin>
+        <edge_elastin>953 571</edge_elastin>
+        <edge_elastin>1047 670</edge_elastin>
+        <edge_elastin>555 258</edge_elastin>
+        <edge_elastin>699 837</edge_elastin>
+        <edge_elastin>873 954</edge_elastin>
+        <edge_elastin>800 1001</edge_elastin>
+        <edge_elastin>517 346</edge_elastin>
+        <edge_elastin>801 59</edge_elastin>
+        <edge_elastin>777 23</edge_elastin>
+        <edge_elastin>714 459</edge_elastin>
+        <edge_elastin>805 967</edge_elastin>
+        <edge_elastin>707 657</edge_elastin>
+        <edge_elastin>480 854</edge_elastin>
+        <edge_elastin>932 546</edge_elastin>
+        <edge_elastin>580 74</edge_elastin>
+        <edge_elastin>452 796</edge_elastin>
+        <edge_elastin>632 858</edge_elastin>
+        <edge_elastin>630 899</edge_elastin>
+        <edge_elastin>1100 37</edge_elastin>
+        <edge_elastin>411 220</edge_elastin>
+        <edge_elastin>999 94</edge_elastin>
+        <edge_elastin>614 793</edge_elastin>
+        <edge_elastin>973 1063</edge_elastin>
+        <edge_elastin>868 1013</edge_elastin>
+        <edge_elastin>940 548</edge_elastin>
+        <edge_elastin>429 758</edge_elastin>
+        <edge_elastin>838 631</edge_elastin>
+        <edge_elastin>515 476</edge_elastin>
+        <edge_elastin>923 354</edge_elastin>
+        <edge_elastin>821 628</edge_elastin>
+        <edge_elastin>952 242</edge_elastin>
+        <edge_elastin>1074 659</edge_elastin>
+        <edge_elastin>425 181</edge_elastin>
+        <edge_elastin>655 775</edge_elastin>
+        <edge_elastin>981 1020</edge_elastin>
+        <edge_elastin>374 603</edge_elastin>
+        <edge_elastin>991 701</edge_elastin>
+        <edge_elastin>1037 619</edge_elastin>
+        <edge_elastin>586 246</edge_elastin>
+        <edge_elastin>881 197</edge_elastin>
+        <edge_elastin>383 611</edge_elastin>
+        <edge_elastin>579 911</edge_elastin>
+        <edge_elastin>461 1056</edge_elastin>
+        <edge_elastin>448 239</edge_elastin>
+        <edge_elastin>905 472</edge_elastin>
+        <edge_elastin>857 106</edge_elastin>
+        <edge_elastin>937 741</edge_elastin>
+        <edge_elastin>894 178</edge_elastin>
+        <edge_elastin>1019 975</edge_elastin>
+        <edge_elastin>527 20</edge_elastin>
+        <edge_elastin>467 985</edge_elastin>
+        <edge_elastin>776 804</edge_elastin>
+        <edge_elastin>845 420</edge_elastin>
+        <edge_elastin>996 781</edge_elastin>
+        <edge_elastin>969 1030</edge_elastin>
+        <edge_elastin>691 688</edge_elastin>
+        <edge_elastin>854 193</edge_elastin>
+        <edge_elastin>728 321</edge_elastin>
+        <edge_elastin>967 262</edge_elastin>
+        <edge_elastin>1105 764</edge_elastin>
+        <edge_elastin>932 456</edge_elastin>
+        <edge_elastin>1035 1074</edge_elastin>
+        <edge_elastin>961 765</edge_elastin>
+        <edge_elastin>1002 825</edge_elastin>
+        <edge_elastin>560 510</edge_elastin>
+        <edge_elastin>438 506</edge_elastin>
+        <edge_elastin>1091 201</edge_elastin>
+        <edge_elastin>556 365</edge_elastin>
+        <edge_elastin>695 462</edge_elastin>
+        <edge_elastin>870 809</edge_elastin>
+        <edge_elastin>651 284</edge_elastin>
+        <edge_elastin>373 623</edge_elastin>
+        <edge_elastin>753 619</edge_elastin>
+        <edge_elastin>545 1030</edge_elastin>
+        <edge_elastin>920 401</edge_elastin>
+        <edge_elastin>414 229</edge_elastin>
+        <edge_elastin>855 687</edge_elastin>
+        <edge_elastin>376 902</edge_elastin>
+        <edge_elastin>566 55</edge_elastin>
+        <edge_elastin>944 976</edge_elastin>
+        <edge_elastin>914 561</edge_elastin>
+        <edge_elastin>705 1012</edge_elastin>
+        <edge_elastin>444 1101</edge_elastin>
+        <edge_elastin>902 632</edge_elastin>
+        <edge_elastin>645 816</edge_elastin>
+        <edge_elastin>826 534</edge_elastin>
+        <edge_elastin>374 676</edge_elastin>
+        <edge_elastin>996 783</edge_elastin>
+        <edge_elastin>1048 390</edge_elastin>
+        <edge_elastin>1020 1083</edge_elastin>
+        <edge_elastin>907 414</edge_elastin>
+        <edge_elastin>944 52</edge_elastin>
+        <edge_elastin>1077 5</edge_elastin>
+        <edge_elastin>589 594</edge_elastin>
+        <edge_elastin>708 825</edge_elastin>
+        <edge_elastin>1102 924</edge_elastin>
+        <edge_elastin>648 518</edge_elastin>
+        <edge_elastin>844 401</edge_elastin>
+        <edge_elastin>433 582</edge_elastin>
+        <edge_elastin>732 869</edge_elastin>
+        <edge_elastin>438 54</edge_elastin>
+        <edge_elastin>650 145</edge_elastin>
+        <edge_elastin>829 429</edge_elastin>
+        <edge_elastin>404 709</edge_elastin>
+        <edge_elastin>624 882</edge_elastin>
+        <edge_elastin>575 669</edge_elastin>
+        <edge_elastin>727 227</edge_elastin>
+        <edge_elastin>422 99</edge_elastin>
+        <edge_elastin>552 631</edge_elastin>
+        <edge_elastin>1100 749</edge_elastin>
+        <edge_elastin>739 916</edge_elastin>
+        <edge_elastin>699 448</edge_elastin>
+        <edge_elastin>660 541</edge_elastin>
+        <edge_elastin>998 943</edge_elastin>
+        <edge_elastin>490 908</edge_elastin>
+        <edge_elastin>892 593</edge_elastin>
+        <edge_elastin>1005 779</edge_elastin>
+        <edge_elastin>407 146</edge_elastin>
+        <edge_elastin>1045 469</edge_elastin>
+        <edge_elastin>954 447</edge_elastin>
+        <edge_elastin>375 512</edge_elastin>
+        <edge_elastin>377 646</edge_elastin>
+        <edge_elastin>497 101</edge_elastin>
+        <edge_elastin>524 410</edge_elastin>
+        <edge_elastin>368 348</edge_elastin>
+        <edge_elastin>803 610</edge_elastin>
+        <edge_elastin>668 960</edge_elastin>
+        <edge_elastin>1089 839</edge_elastin>
+        <edge_elastin>1013 1022</edge_elastin>
+        <edge_elastin>786 355</edge_elastin>
+        <edge_elastin>368 661</edge_elastin>
+        <edge_elastin>572 447</edge_elastin>
+        <edge_elastin>630 1106</edge_elastin>
+        <edge_elastin>979 708</edge_elastin>
+        <edge_elastin>616 582</edge_elastin>
+        <edge_elastin>617 6</edge_elastin>
+        <edge_elastin>638 67</edge_elastin>
+        <edge_elastin>818 361</edge_elastin>
+        <edge_elastin>656 352</edge_elastin>
+        <edge_elastin>389 1094</edge_elastin>
+        <edge_elastin>878 829</edge_elastin>
+        <edge_elastin>741 191</edge_elastin>
+        <edge_elastin>432 40</edge_elastin>
+        <edge_elastin>814 539</edge_elastin>
+        <edge_elastin>1023 759</edge_elastin>
+        <edge_elastin>654 738</edge_elastin>
+        <edge_elastin>637 123</edge_elastin>
+        <edge_elastin>1082 736</edge_elastin>
+        <edge_elastin>1028 705</edge_elastin>
+        <edge_elastin>706 339</edge_elastin>
+        <edge_elastin>1059 212</edge_elastin>
+        <edge_elastin>1060 908</edge_elastin>
+        <edge_elastin>717 814</edge_elastin>
+        <edge_elastin>681 551</edge_elastin>
+        <edge_elastin>1047 578</edge_elastin>
+        <edge_elastin>593 1085</edge_elastin>
+        <edge_elastin>828 1074</edge_elastin>
+        <edge_elastin>1031 744</edge_elastin>
+        <edge_elastin>927 1032</edge_elastin>
+        <edge_elastin>549 931</edge_elastin>
+        <edge_elastin>1031 215</edge_elastin>
+        <edge_elastin>644 827</edge_elastin>
+        <edge_elastin>1077 28</edge_elastin>
+        <edge_elastin>1109 1038</edge_elastin>
+        <edge_elastin>591 967</edge_elastin>
+        <edge_elastin>597 601</edge_elastin>
+        <edge_elastin>752 770</edge_elastin>
+        <edge_elastin>509 375</edge_elastin>
+        <edge_elastin>442 525</edge_elastin>
+        <edge_elastin>801 39</edge_elastin>
+        <edge_elastin>581 552</edge_elastin>
+        <edge_elastin>984 537</edge_elastin>
+        <edge_elastin>733 653</edge_elastin>
+        <edge_elastin>1099 198</edge_elastin>
+        <edge_elastin>768 241</edge_elastin>
+        <edge_elastin>665 357</edge_elastin>
+        <edge_elastin>743 842</edge_elastin>
+        <edge_elastin>744 192</edge_elastin>
+        <edge_elastin>513 46</edge_elastin>
+        <edge_elastin>768 364</edge_elastin>
+        <edge_elastin>1028 803</edge_elastin>
+        <edge_elastin>598 1042</edge_elastin>
+        <edge_elastin>621 211</edge_elastin>
+        <edge_elastin>441 300</edge_elastin>
+        <edge_elastin>743 683</edge_elastin>
+        <edge_elastin>383 951</edge_elastin>
+        <edge_elastin>596 157</edge_elastin>
+        <edge_elastin>956 474</edge_elastin>
+        <edge_elastin>1108 1044</edge_elastin>
+        <edge_elastin>665 345</edge_elastin>
+        <edge_elastin>378 1002</edge_elastin>
+        <edge_elastin>1025 864</edge_elastin>
+        <edge_elastin>519 1016</edge_elastin>
+        <edge_elastin>1059 568</edge_elastin>
+        <edge_elastin>503 273</edge_elastin>
+        <edge_elastin>917 720</edge_elastin>
+        <edge_elastin>1023 1013</edge_elastin>
+        <edge_elastin>776 276</edge_elastin>
+        <edge_elastin>559 989</edge_elastin>
+        <edge_elastin>496 445</edge_elastin>
+        <edge_elastin>384 694</edge_elastin>
+        <edge_elastin>771 87</edge_elastin>
+        <edge_elastin>763 660</edge_elastin>
+        <edge_elastin>648 991</edge_elastin>
+        <edge_elastin>836 898</edge_elastin>
+        <edge_elastin>1028 176</edge_elastin>
+        <edge_elastin>1021 124</edge_elastin>
+        <edge_elastin>1088 992</edge_elastin>
+        <edge_elastin>603 133</edge_elastin>
+        <edge_elastin>1008 256</edge_elastin>
+        <edge_elastin>710 1051</edge_elastin>
+        <edge_elastin>400 499</edge_elastin>
+        <edge_elastin>1010 206</edge_elastin>
+        <edge_elastin>472 487</edge_elastin>
+        <edge_elastin>731 277</edge_elastin>
+        <edge_elastin>696 316</edge_elastin>
+        <edge_elastin>761 604</edge_elastin>
+        <edge_elastin>453 169</edge_elastin>
+        <edge_elastin>891 1016</edge_elastin>
+        <edge_elastin>1037 522</edge_elastin>
+        <edge_elastin>754 718</edge_elastin>
+        <edge_elastin>682 891</edge_elastin>
+        <edge_elastin>824 742</edge_elastin>
+        <edge_elastin>930 591</edge_elastin>
+        <edge_elastin>958 572</edge_elastin>
+        <edge_elastin>613 849</edge_elastin>
+        <edge_elastin>574 233</edge_elastin>
+        <edge_elastin>388 922</edge_elastin>
+        <edge_elastin>592 148</edge_elastin>
+        <edge_elastin>732 570</edge_elastin>
+        <edge_elastin>1084 795</edge_elastin>
+        <edge_elastin>685 811</edge_elastin>
+        <edge_elastin>863 24</edge_elastin>
+        <edge_elastin>1045 331</edge_elastin>
+        <edge_elastin>1012 610</edge_elastin>
+        <edge_elastin>715 633</edge_elastin>
+        <edge_elastin>559 641</edge_elastin>
+        <edge_elastin>813 853</edge_elastin>
+        <edge_elastin>673 874</edge_elastin>
+        <edge_elastin>758 569</edge_elastin>
+        <edge_elastin>686 205</edge_elastin>
+        <edge_elastin>500 937</edge_elastin>
+        <edge_elastin>990 343</edge_elastin>
+        <edge_elastin>945 1020</edge_elastin>
+        <edge_elastin>412 25</edge_elastin>
+        <edge_elastin>399 397</edge_elastin>
+        <edge_elastin>565 538</edge_elastin>
+        <edge_elastin>730 531</edge_elastin>
+        <edge_elastin>1048 313</edge_elastin>
+        <edge_elastin>500 715</edge_elastin>
+        <edge_elastin>900 933</edge_elastin>
+        <edge_elastin>470 335</edge_elastin>
+        <edge_elastin>883 395</edge_elastin>
+        <edge_elastin>494 53</edge_elastin>
+        <edge_elastin>455 358</edge_elastin>
+        <edge_elastin>1088 283</edge_elastin>
+        <edge_elastin>903 775</edge_elastin>
+        <edge_elastin>1095 1087</edge_elastin>
+        <edge_elastin>1014 57</edge_elastin>
+        <edge_elastin>843 973</edge_elastin>
+        <edge_elastin>495 675</edge_elastin>
+        <edge_elastin>862 625</edge_elastin>
+        <edge_elastin>752 762</edge_elastin>
+        <edge_elastin>481 953</edge_elastin>
+        <edge_elastin>518 672</edge_elastin>
+        <edge_elastin>843 963</edge_elastin>
+        <edge_elastin>821 213</edge_elastin>
+        <edge_elastin>600 993</edge_elastin>
+        <edge_elastin>707 200</edge_elastin>
+        <edge_elastin>437 953</edge_elastin>
+        <edge_elastin>1099 1004</edge_elastin>
+        <edge_elastin>789 50</edge_elastin>
+        <edge_elastin>407 545</edge_elastin>
+        <edge_elastin>723 411</edge_elastin>
+        <edge_elastin>1015 905</edge_elastin>
+        <edge_elastin>1079 732</edge_elastin>
+        <edge_elastin>995 507</edge_elastin>
+        <edge_elastin>1001 524</edge_elastin>
+        <edge_elastin>468 562</edge_elastin>
+        <edge_elastin>1035 815</edge_elastin>
+        <edge_elastin>1004 949</edge_elastin>
+        <edge_elastin>962 436</edge_elastin>
+        <edge_elastin>1087 162</edge_elastin>
+        <edge_elastin>991 111</edge_elastin>
+        <edge_elastin>649 470</edge_elastin>
+        <edge_elastin>379 506</edge_elastin>
+        <edge_elastin>482 1091</edge_elastin>
+        <edge_elastin>1031 927</edge_elastin>
+        <edge_elastin>602 924</edge_elastin>
+        <edge_elastin>393 475</edge_elastin>
+        <edge_elastin>782 780</edge_elastin>
+        <edge_elastin>788 36</edge_elastin>
+        <edge_elastin>400 970</edge_elastin>
+        <edge_elastin>805 969</edge_elastin>
+        <edge_elastin>823 912</edge_elastin>
+        <edge_elastin>866 581</edge_elastin>
+        <edge_elastin>658 45</edge_elastin>
+        <edge_elastin>504 1094</edge_elastin>
+        <edge_elastin>711 1024</edge_elastin>
+        <edge_elastin>1022 913</edge_elastin>
+        <edge_elastin>965 410</edge_elastin>
+        <edge_elastin>636 922</edge_elastin>
+        <edge_elastin>574 272</edge_elastin>
+        <edge_elastin>702 236</edge_elastin>
+        <edge_elastin>720 536</edge_elastin>
+        <edge_elastin>809 416</edge_elastin>
+        <edge_elastin>982 901</edge_elastin>
+        <edge_elastin>530 1003</edge_elastin>
+        <edge_elastin>633 938</edge_elastin>
+        <edge_elastin>728 408</edge_elastin>
+        <edge_elastin>1087 551</edge_elastin>
+        <edge_elastin>409 270</edge_elastin>
+        <edge_elastin>1047 446</edge_elastin>
+        <edge_elastin>1082 982</edge_elastin>
+        <edge_elastin>1096 128</edge_elastin>
+        <edge_elastin>806 27</edge_elastin>
+        <edge_elastin>725 632</edge_elastin>
+        <edge_elastin>749 254</edge_elastin>
+        <edge_elastin>989 392</edge_elastin>
+        <edge_elastin>376 848</edge_elastin>
+        <edge_elastin>523 185</edge_elastin>
+        <edge_elastin>1043 470</edge_elastin>
+        <edge_elastin>1092 41</edge_elastin>
+        <edge_elastin>1079 570</edge_elastin>
+        <edge_elastin>1022 685</edge_elastin>
+        <edge_elastin>1062 713</edge_elastin>
+        <edge_elastin>683 856</edge_elastin>
+        <edge_elastin>1003 230</edge_elastin>
+        <edge_elastin>550 688</edge_elastin>
+        <edge_elastin>1027 694</edge_elastin>
+        <edge_elastin>712 714</edge_elastin>
+        <edge_elastin>457 628</edge_elastin>
+        <edge_elastin>930 717</edge_elastin>
+        <edge_elastin>906 401</edge_elastin>
+        <edge_elastin>1061 678</edge_elastin>
+        <edge_elastin>563 135</edge_elastin>
+        <edge_elastin>684 952</edge_elastin>
+        <edge_elastin>875 877</edge_elastin>
+        <edge_elastin>735 116</edge_elastin>
+        <edge_elastin>879 110</edge_elastin>
+        <edge_elastin>1089 7</edge_elastin>
+        <edge_elastin>592 910</edge_elastin>
+        <edge_elastin>519 1042</edge_elastin>
+        <edge_elastin>819 706</edge_elastin>
+        <edge_elastin>760 648</edge_elastin>
+        <edge_elastin>643 194</edge_elastin>
+        <edge_elastin>840 700</edge_elastin>
+        <edge_elastin>1030 806</edge_elastin>
+        <edge_elastin>861 456</edge_elastin>
+        <edge_elastin>748 249</edge_elastin>
+        <edge_elastin>1037 666</edge_elastin>
+        <edge_elastin>772 367</edge_elastin>
+        <edge_elastin>433 65</edge_elastin>
+        <edge_elastin>895 103</edge_elastin>
+        <edge_elastin>986 562</edge_elastin>
+        <edge_elastin>888 378</edge_elastin>
+        <edge_elastin>773 455</edge_elastin>
+        <edge_elastin>463 874</edge_elastin>
+        <edge_elastin>609 121</edge_elastin>
+        <edge_elastin>1090 264</edge_elastin>
+        <edge_elastin>1059 301</edge_elastin>
+        <edge_elastin>548 396</edge_elastin>
+        <edge_elastin>847 426</edge_elastin>
+        <edge_elastin>745 551</edge_elastin>
+        <edge_elastin>978 941</edge_elastin>
+        <edge_elastin>675 413</edge_elastin>
+        <edge_elastin>802 1012</edge_elastin>
+        <edge_elastin>588 654</edge_elastin>
+        <edge_elastin>938 622</edge_elastin>
+        <edge_elastin>461 1073</edge_elastin>
+        <edge_elastin>555 721</edge_elastin>
+        <edge_elastin>409 831</edge_elastin>
+        <edge_elastin>567 608</edge_elastin>
+        <edge_elastin>881 711</edge_elastin>
+        <edge_elastin>663 789</edge_elastin>
+        <edge_elastin>807 403</edge_elastin>
+        <edge_elastin>983 439</edge_elastin>
+        <edge_elastin>1044 743</edge_elastin>
+        <edge_elastin>1086 182</edge_elastin>
+        <edge_elastin>454 1070</edge_elastin>
+        <edge_elastin>703 891</edge_elastin>
+        <edge_elastin>388 601</edge_elastin>
+        <edge_elastin>921 12</edge_elastin>
+        <edge_elastin>1033 1070</edge_elastin>
+        <edge_elastin>948 69</edge_elastin>
+        <edge_elastin>607 820</edge_elastin>
+        <edge_elastin>1102 137</edge_elastin>
+        <edge_elastin>392 559</edge_elastin>
+        <edge_elastin>916 225</edge_elastin>
+        <edge_elastin>1064 413</edge_elastin>
+        <edge_elastin>1098 539</edge_elastin>
+        <edge_elastin>505 155</edge_elastin>
+        <edge_elastin>861 912</edge_elastin>
+        <edge_elastin>621 257</edge_elastin>
+        <edge_elastin>1077 141</edge_elastin>
+        <edge_elastin>386 414</edge_elastin>
+        <edge_elastin>859 981</edge_elastin>
+        <edge_elastin>737 923</edge_elastin>
+        <edge_elastin>978 879</edge_elastin>
+        <edge_elastin>1086 998</edge_elastin>
+        <edge_elastin>523 56</edge_elastin>
+        <edge_elastin>440 870</edge_elastin>
+        <edge_elastin>372 4</edge_elastin>
+        <edge_elastin>406 658</edge_elastin>
+        <edge_elastin>588 939</edge_elastin>
+        <edge_elastin>613 765</edge_elastin>
+        <edge_elastin>434 693</edge_elastin>
+        <edge_elastin>558 1008</edge_elastin>
+        <edge_elastin>465 752</edge_elastin>
+        <edge_elastin>385 584</edge_elastin>
+        <edge_elastin>1033 454</edge_elastin>
+        <edge_elastin>760 1032</edge_elastin>
+        <edge_elastin>872 655</edge_elastin>
+        <edge_elastin>1026 769</edge_elastin>
+        <edge_elastin>1076 266</edge_elastin>
+        <edge_elastin>954 972</edge_elastin>
+        <edge_elastin>436 372</edge_elastin>
+        <edge_elastin>702 650</edge_elastin>
+        <edge_elastin>260 1060</edge_elastin>
+        <edge_elastin>800 387</edge_elastin>
+        <edge_elastin>587 216</edge_elastin>
+        <edge_elastin>794 582</edge_elastin>
+        <edge_elastin>1026 623</edge_elastin>
+        <edge_elastin>474 134</edge_elastin>
+        <edge_elastin>441 651</edge_elastin>
+        <edge_elastin>972 447</edge_elastin>
+        <edge_elastin>556 859</edge_elastin>
+        <edge_elastin>1005 492</edge_elastin>
+        <edge_elastin>492 909</edge_elastin>
+        <edge_elastin>504 919</edge_elastin>
+        <edge_elastin>1104 1057</edge_elastin>
+        <edge_elastin>850 382</edge_elastin>
+        <edge_elastin>680 586</edge_elastin>
+        <edge_elastin>1041 514</edge_elastin>
+        <edge_elastin>11 1055</edge_elastin>
+        <edge_elastin>593 790</edge_elastin>
+        <edge_elastin>944 1055</edge_elastin>
+        <edge_elastin>1078 462</edge_elastin>
+        <edge_elastin>488 298</edge_elastin>
+        <edge_elastin>1111 749</edge_elastin>
+        <edge_elastin>269 686</edge_elastin>
+        <edge_elastin>795 444</edge_elastin>
+        <edge_elastin>1080 744</edge_elastin>
+        <edge_elastin>480 801</edge_elastin>
+        <edge_elastin>585 968</edge_elastin>
+        <edge_elastin>1009 400</edge_elastin>
+        <edge_elastin>992 1023</edge_elastin>
+        <edge_elastin>697 418</edge_elastin>
+        <edge_elastin>487 126</edge_elastin>
+        <edge_elastin>683 183</edge_elastin>
+        <edge_elastin>218 1073</edge_elastin>
+        <edge_elastin>463 887</edge_elastin>
+        <edge_elastin>1014 843</edge_elastin>
+        <edge_elastin>914 1085</edge_elastin>
+        <edge_elastin>1038 1046</edge_elastin>
+        <edge_elastin>786 417</edge_elastin>
+        <edge_elastin>892 577</edge_elastin>
+        <edge_elastin>473 987</edge_elastin>
+        <edge_elastin>324 533</edge_elastin>
+        <edge_elastin>390 788</edge_elastin>
+        <edge_elastin>1104 404</edge_elastin>
+        <edge_elastin>589 936</edge_elastin>
+        <edge_elastin>393 821</edge_elastin>
+        <edge_elastin>175 363</edge_elastin>
+        <edge_elastin>721 691</edge_elastin>
+        <edge_elastin>263 637</edge_elastin>
+        <edge_elastin>314 876</edge_elastin>
+        <edge_elastin>720 886</edge_elastin>
+        <edge_elastin>527 485</edge_elastin>
+        <edge_elastin>1092 337</edge_elastin>
+        <edge_elastin>1000 458</edge_elastin>
+        <edge_elastin>480 489</edge_elastin>
+        <edge_elastin>497 167</edge_elastin>
+        <edge_elastin>880 1101</edge_elastin>
+        <edge_elastin>696 412</edge_elastin>
+        <edge_elastin>1022 47</edge_elastin>
+        <edge_elastin>754 726</edge_elastin>
+        <edge_elastin>797 949</edge_elastin>
+        <edge_elastin>1109 1046</edge_elastin>
+        <edge_elastin>396 397</edge_elastin>
+        <edge_elastin>73 1041</edge_elastin>
+        <edge_elastin>772 704</edge_elastin>
+        <edge_elastin>625 518</edge_elastin>
+        <edge_elastin>740 971</edge_elastin>
+        <edge_elastin>203 349</edge_elastin>
+        <edge_elastin>72 777</edge_elastin>
+        <edge_elastin>941 879</edge_elastin>
+        <edge_elastin>1066 152</edge_elastin>
+        <edge_elastin>1010 530</edge_elastin>
+        <edge_elastin>377 626</edge_elastin>
+        <edge_elastin>774 399</edge_elastin>
+        <edge_elastin>1034 692</edge_elastin>
+        <edge_elastin>903 143</edge_elastin>
+        <edge_elastin>1037 915</edge_elastin>
+        <edge_elastin>590 362</edge_elastin>
+        <edge_elastin>382 319</edge_elastin>
+        <edge_elastin>627 603</edge_elastin>
+        <edge_elastin>684 957</edge_elastin>
+        <edge_elastin>477 707</edge_elastin>
+        <edge_elastin>108 1066</edge_elastin>
+        <edge_elastin>835 646</edge_elastin>
+        <edge_elastin>765 344</edge_elastin>
+        <edge_elastin>817 865</edge_elastin>
+        <edge_elastin>575 827</edge_elastin>
+        <edge_elastin>1054 332</edge_elastin>
+        <edge_elastin>568 597</edge_elastin>
+        <edge_elastin>723 611</edge_elastin>
+        <edge_elastin>957 700</edge_elastin>
+        <edge_elastin>515 604</edge_elastin>
+        <edge_elastin>884 852</edge_elastin>
+        <edge_elastin>1080 991</edge_elastin>
+        <edge_elastin>1006 950</edge_elastin>
+        <edge_elastin>887 826</edge_elastin>
+        <edge_elastin>612 83</edge_elastin>
+        <edge_elastin>395 547</edge_elastin>
+        <edge_elastin>793 566</edge_elastin>
+        <edge_elastin>384 920</edge_elastin>
+        <edge_elastin>719 542</edge_elastin>
+        <edge_elastin>931 1053</edge_elastin>
+        <edge_elastin>1013 759</edge_elastin>
+        <edge_elastin>785 538</edge_elastin>
+        <edge_elastin>1110 973</edge_elastin>
+        <edge_elastin>775 1075</edge_elastin>
+        <edge_elastin>164 188</edge_elastin>
+        <edge_elastin>861 265</edge_elastin>
+        <edge_elastin>785 755</edge_elastin>
+        <edge_elastin>871 1049</edge_elastin>
+        <edge_elastin>1042 1016</edge_elastin>
+        <edge_elastin>1095 26</edge_elastin>
+        <edge_elastin>836 430</edge_elastin>
+        <edge_elastin>442 557</edge_elastin>
+        <edge_elastin>640 1045</edge_elastin>
+        <edge_elastin>436 777</edge_elastin>
+        <edge_elastin>616 633</edge_elastin>
+        <edge_elastin>453 594</edge_elastin>
+        <edge_elastin>1101 367</edge_elastin>
+        <edge_elastin>291 389</edge_elastin>
+        <edge_elastin>642 694</edge_elastin>
+        <edge_elastin>796 307</edge_elastin>
+        <edge_elastin>347 1108</edge_elastin>
+        <edge_elastin>408 120</edge_elastin>
+        <edge_elastin>278 756</edge_elastin>
+        <edge_elastin>813 815</edge_elastin>
+        <edge_elastin>1110 985</edge_elastin>
+        <edge_elastin>520 864</edge_elastin>
+        <edge_elastin>635 598</edge_elastin>
+        <edge_elastin>693 1039</edge_elastin>
+        <edge_elastin>721 405</edge_elastin>
+        <edge_elastin>994 808</edge_elastin>
+        <edge_elastin>924 723</edge_elastin>
+        <edge_elastin>940 794</edge_elastin>
+        <edge_elastin>908 543</edge_elastin>
+        <edge_elastin>1076 770</edge_elastin>
+        <edge_elastin>625 824</edge_elastin>
+        <edge_elastin>975 381</edge_elastin>
+        <edge_elastin>971 237</edge_elastin>
+        <edge_elastin>1008 563</edge_elastin>
+        <edge_elastin>857 673</edge_elastin>
+        <edge_elastin>1111 910</edge_elastin>
+        <edge_elastin>621 868</edge_elastin>
+        <edge_elastin>369 866</edge_elastin>
+        <edge_elastin>1103 533</edge_elastin>
+        <edge_elastin>899 472</edge_elastin>
+        <edge_elastin>742 678</edge_elastin>
+        <edge_elastin>709 19</edge_elastin>
+        <edge_elastin>856 921</edge_elastin>
+        <edge_elastin>670 696</edge_elastin>
+        <edge_elastin>1032 1080</edge_elastin>
+        <edge_elastin>704 418</edge_elastin>
+        <edge_elastin>1089 844</edge_elastin>
+        <edge_elastin>388 597</edge_elastin>
+        <edge_elastin>465 1076</edge_elastin>
+        <edge_elastin>898 762</edge_elastin>
+        <edge_elastin>873 981</edge_elastin>
+        <edge_elastin>939 930</edge_elastin>
+        <edge_elastin>92 860</edge_elastin>
+        <edge_elastin>16 545</edge_elastin>
+        <edge_elastin>1025 959</edge_elastin>
+        <edge_elastin>505 838</edge_elastin>
+        <edge_elastin>558 919</edge_elastin>
+        <edge_elastin>1102 579</edge_elastin>
+        <edge_elastin>627 1009</edge_elastin>
+        <edge_elastin>1106 574</edge_elastin>
+        <edge_elastin>31 1059</edge_elastin>
+        <edge_elastin>858 725</edge_elastin>
+        <edge_elastin>609 341</edge_elastin>
+        <edge_elastin>370 758</edge_elastin>
+        <edge_elastin>986 468</edge_elastin>
+        <edge_elastin>374 514</edge_elastin>
+        <edge_elastin>196 867</edge_elastin>
+        <edge_elastin>0 501</edge_elastin>
+        <edge_elastin>1110 208</edge_elastin>
+        <edge_elastin>150 805</edge_elastin>
+        <edge_elastin>1105 906</edge_elastin>
+        <edge_elastin>524 1048</edge_elastin>
+        <edge_elastin>3 473</edge_elastin>
+        <edge_elastin>1044 842</edge_elastin>
+        <edge_elastin>495 985</edge_elastin>
+        <edge_elastin>489 1033</edge_elastin>
+        <edge_elastin>662 753</edge_elastin>
+        <edge_elastin>846 763</edge_elastin>
+        <edge_elastin>214 636</edge_elastin>
+        <edge_elastin>791 320</edge_elastin>
+        <edge_elastin>776 489</edge_elastin>
+        <edge_elastin>81 773</edge_elastin>
+        <edge_elastin>855 1101</edge_elastin>
+        <edge_elastin>457 947</edge_elastin>
+        <edge_elastin>49 173</edge_elastin>
+        <edge_elastin>577 353</edge_elastin>
+        <edge_elastin>235 295</edge_elastin>
+        <edge_elastin>382 706</edge_elastin>
+        <edge_elastin>419 85</edge_elastin>
+        <edge_elastin>560 13</edge_elastin>
+        <edge_elastin>667 822</edge_elastin>
+        <edge_elastin>1068 851</edge_elastin>
+        <edge_elastin>596 452</edge_elastin>
+        <edge_elastin>490 373</edge_elastin>
+        <edge_elastin>476 977</edge_elastin>
+        <edge_elastin>627 519</edge_elastin>
+        <edge_elastin>1053 816</edge_elastin>
+        <edge_elastin>1003 760</edge_elastin>
+        <edge_elastin>2 391</edge_elastin>
+        <edge_elastin>565 643</edge_elastin>
+        <edge_elastin>711 573</edge_elastin>
+        <edge_elastin>540 865</edge_elastin>
+        <edge_elastin>983 719</edge_elastin>
+        <edge_elastin>160 740</edge_elastin>
+        <edge_elastin>1010 673</edge_elastin>
+        <edge_elastin>999 932</edge_elastin>
+        <edge_elastin>703 741</edge_elastin>
+        <edge_elastin>392 1107</edge_elastin>
+        <edge_elastin>674 435</edge_elastin>
+        <edge_elastin>895 240</edge_elastin>
+        <edge_elastin>1070 988</edge_elastin>
+        <edge_elastin>409 698</edge_elastin>
+        <edge_elastin>552 369</edge_elastin>
+        <edge_elastin>171 549</edge_elastin>
+        <edge_elastin>748 680</edge_elastin>
+        <edge_elastin>802 1098</edge_elastin>
+        <edge_elastin>467 464</edge_elastin>
+        <edge_elastin>290 528</edge_elastin>
+        <edge_elastin>993 513</edge_elastin>
+        <edge_elastin>1078 125</edge_elastin>
+        <edge_elastin>964 432</edge_elastin>
+        <edge_elastin>371 1021</edge_elastin>
+        <edge_elastin>80 421</edge_elastin>
+        <edge_elastin>904 484</edge_elastin>
+        <edge_elastin>677 756</edge_elastin>
+        <edge_elastin>1093 86</edge_elastin>
+        <edge_elastin>431 689</edge_elastin>
+        <edge_elastin>1046 438</edge_elastin>
+        <edge_elastin>305 704</edge_elastin>
+        <edge_elastin>288 88</edge_elastin>
+        <edge_elastin>734 996</edge_elastin>
+        <edge_elastin>112 66</edge_elastin>
+        <edge_elastin>360 634</edge_elastin>
+        <edge_elastin>652 787</edge_elastin>
+        <edge_elastin>1081 783</edge_elastin>
+        <edge_elastin>544 792</edge_elastin>
+        <edge_elastin>356 1038</edge_elastin>
+        <edge_elastin>617 895</edge_elastin>
+        <edge_elastin>897 380</edge_elastin>
+        <edge_elastin>690 928</edge_elastin>
+        <edge_elastin>493 168</edge_elastin>
+        <edge_elastin>1040 606</edge_elastin>
+        <edge_elastin>734 833</edge_elastin>
+        <edge_elastin>533 638</edge_elastin>
+        <edge_elastin>1096 1064</edge_elastin>
+        <edge_elastin>180 376</edge_elastin>
+        <edge_elastin>546 840</edge_elastin>
+        <edge_elastin>716 104</edge_elastin>
+        <edge_elastin>424 536</edge_elastin>
+        <edge_elastin>1049 398</edge_elastin>
+        <edge_elastin>386 599</edge_elastin>
+        <edge_elastin>279 532</edge_elastin>
+        <edge_elastin>938 248</edge_elastin>
+        <edge_elastin>1001 1048</edge_elastin>
+        <edge_elastin>1087 221</edge_elastin>
+        <edge_elastin>728 761</edge_elastin>
+        <edge_elastin>1050 432</edge_elastin>
+        <edge_elastin>1097 605</edge_elastin>
+        <edge_elastin>639 833</edge_elastin>
+        <edge_elastin>509 114</edge_elastin>
+        <edge_elastin>567 1006</edge_elastin>
+        <edge_elastin>984 381</edge_elastin>
+        <edge_elastin>921 634</edge_elastin>
+        <edge_elastin>871 808</edge_elastin>
+        <edge_elastin>499 757</edge_elastin>
+        <edge_elastin>555 925</edge_elastin>
+        <edge_elastin>228 737</edge_elastin>
+        <edge_elastin>875 1062</edge_elastin>
+        <edge_elastin>485 1034</edge_elastin>
+        <edge_elastin>834 531</edge_elastin>
+        <edge_elastin>958 405</edge_elastin>
+        <edge_elastin>645 1053</edge_elastin>
+        <edge_elastin>334 964</edge_elastin>
+        <edge_elastin>385 784</edge_elastin>
+        <edge_elastin>1039 1050</edge_elastin>
+        <edge_elastin>1100 988</edge_elastin>
+        <edge_elastin>271 199</edge_elastin>
+        <edge_elastin>1003 950</edge_elastin>
+        <edge_elastin>503 471</edge_elastin>
+        <edge_elastin>261 589</edge_elastin>
+        <edge_elastin>785 700</edge_elastin>
+        <edge_elastin>327 886</edge_elastin>
+        <edge_elastin>342 907</edge_elastin>
+        <edge_elastin>1058 629</edge_elastin>
+        <edge_elastin>691 550</edge_elastin>
+        <edge_elastin>729 948</edge_elastin>
+        <edge_elastin>643 76</edge_elastin>
+        <edge_elastin>478 767</edge_elastin>
+        <edge_elastin>862 526</edge_elastin>
+        <edge_elastin>234 1076</edge_elastin>
+        <edge_elastin>881 289</edge_elastin>
+        <edge_elastin>1101 1017</edge_elastin>
+        <edge_elastin>769 1106</edge_elastin>
+        <edge_elastin>919 1094</edge_elastin>
+        <edge_elastin>491 433</edge_elastin>
+        <edge_elastin>521 1036</edge_elastin>
+        <edge_elastin>451 757</edge_elastin>
+        <edge_elastin>913 966</edge_elastin>
+        <edge_elastin>75 731</edge_elastin>
+        <edge_elastin>1078 828</edge_elastin>
+        <edge_elastin>232 512</edge_elastin>
+        <edge_elastin>762 456</edge_elastin>
+        <edge_elastin>782 863</edge_elastin>
+        <edge_elastin>1088 811</edge_elastin>
+        <edge_elastin>936 656</edge_elastin>
+        <edge_elastin>514 676</edge_elastin>
+        <edge_elastin>698 731</edge_elastin>
+        <edge_elastin>315 698</edge_elastin>
+        <edge_elastin>618 380</edge_elastin>
+        <edge_elastin>989 1107</edge_elastin>
+        <edge_elastin>712 840</edge_elastin>
+        <edge_elastin>682 946</edge_elastin>
+        <edge_elastin>159 79</edge_elastin>
+        <edge_elastin>995 1083</edge_elastin>
+        <edge_elastin>1104 639</edge_elastin>
+        <edge_elastin>1034 317</edge_elastin>
+        <edge_elastin>971 423</edge_elastin>
+        <edge_elastin>1072 746</edge_elastin>
+        <edge_elastin>580 1089</edge_elastin>
+        <edge_elastin>1099 466</edge_elastin>
+        <edge_elastin>792 1071</edge_elastin>
+        <edge_elastin>479 680</edge_elastin>
+        <edge_elastin>771 1097</edge_elastin>
+        <edge_elastin>1052 1068</edge_elastin>
+        <edge_elastin>876 154</edge_elastin>
+        <edge_elastin>424 850</edge_elastin>
+        <edge_elastin>701 668</edge_elastin>
+        <edge_elastin>497 195</edge_elastin>
+        <edge_elastin>44 415</edge_elastin>
+        <edge_elastin>473 1047</edge_elastin>
+        <edge_elastin>1021 516</edge_elastin>
+        <edge_elastin>449 712</edge_elastin>
+        <edge_elastin>516 1063</edge_elastin>
+        <edge_elastin>461 1024</edge_elastin>
+        <edge_elastin>664 1050</edge_elastin>
+        <edge_elastin>882 478</edge_elastin>
+        <edge_elastin>845 1065</edge_elastin>
+        <edge_elastin>722 666</edge_elastin>
+        <edge_elastin>607 1104</edge_elastin>
+        <edge_elastin>630 644</edge_elastin>
+        <edge_elastin>1083 1066</edge_elastin>
+        <edge_elastin>282 407</edge_elastin>
+        <edge_elastin>773 740</edge_elastin>
+        <edge_elastin>498 1040</edge_elastin>
+        <edge_elastin>588 136</edge_elastin>
+        <edge_elastin>992 502</edge_elastin>
+        <edge_elastin>689 730</edge_elastin>
+        <edge_elastin>424 1077</edge_elastin>
+        <edge_elastin>1073 1024</edge_elastin>
+        <edge_elastin>245 802</edge_elastin>
+        <edge_elastin>918 224</edge_elastin>
+        <edge_elastin>548 799</edge_elastin>
+        <edge_elastin>535 505</edge_elastin>
+        <edge_elastin>1023 831</edge_elastin>
+        <edge_elastin>482 445</edge_elastin>
+        <edge_elastin>890 934</edge_elastin>
+        <edge_elastin>620 406</edge_elastin>
+        <edge_elastin>604 993</edge_elastin>
+        <edge_elastin>1062 639</edge_elastin>
+        <edge_elastin>511 95</edge_elastin>
+        <edge_elastin>928 503</edge_elastin>
+        <edge_elastin>617 500</edge_elastin>
+        <edge_elastin>748 428</edge_elastin>
+        <edge_elastin>733 990</edge_elastin>
+        <edge_elastin>894 406</edge_elastin>
+        <edge_elastin>386 379</edge_elastin>
+        <edge_elastin>689 751</edge_elastin>
+        <edge_elastin>226 595</edge_elastin>
+        <edge_elastin>764 615</edge_elastin>
+        <edge_elastin>1019 381</edge_elastin>
+        <edge_elastin>934 1015</edge_elastin>
+        <edge_elastin>1073 395</edge_elastin>
+        <edge_elastin>792 876</edge_elastin>
+        <edge_elastin>917 675</edge_elastin>
+        <edge_elastin>735 688</edge_elastin>
+        <edge_elastin>859 38</edge_elastin>
+        <edge_elastin>695 369</edge_elastin>
+        <edge_elastin>333 10</edge_elastin>
+        <edge_elastin>918 883</edge_elastin>
+        <edge_elastin>496 896</edge_elastin>
+        <edge_elastin>435 965</edge_elastin>
+        <edge_elastin>511 1109</edge_elastin>
+        <edge_elastin>964 962</edge_elastin>
+        <edge_elastin>115 841</edge_elastin>
+        <edge_elastin>468 323</edge_elastin>
+        <edge_elastin>665 366</edge_elastin>
+        <edge_elastin>889 502</edge_elastin>
+        <edge_elastin>945 995</edge_elastin>
+        <edge_elastin>727 1068</edge_elastin>
+        <edge_elastin>422 303</edge_elastin>
+        <edge_elastin>772 418</edge_elastin>
+        <edge_elastin>841 1036</edge_elastin>
+        <edge_elastin>1007 974</edge_elastin>
+        <edge_elastin>880 747</edge_elastin>
+        <edge_elastin>526 997</edge_elastin>
+        <edge_elastin>1060 373</edge_elastin>
+        <edge_elastin>768 508</edge_elastin>
+        <edge_elastin>1098 428</edge_elastin>
+        <edge_elastin>784 819</edge_elastin>
+        <edge_elastin>822 1109</edge_elastin>
+        <edge_elastin>900 1102</edge_elastin>
+        <edge_elastin>1007 591</edge_elastin>
+        <edge_elastin>671 1009</edge_elastin>
+        <edge_elastin>1046 605</edge_elastin>
+        <edge_elastin>877 677</edge_elastin>
+        <edge_elastin>304 626</edge_elastin>
+        <edge_elastin>452 58</edge_elastin>
+        <edge_elastin>657 1054</edge_elastin>
+        <edge_elastin>425 613</edge_elastin>
+        <edge_elastin>536 784</edge_elastin>
+        <edge_elastin>983 869</edge_elastin>
+        <edge_elastin>207 663</edge_elastin>
+        <edge_elastin>885 557</edge_elastin>
+        <edge_elastin>902 62</edge_elastin>
+        <edge_elastin>1009 739</edge_elastin>
+        <edge_elastin>477 1054</edge_elastin>
+        <edge_elastin>1035 659</edge_elastin>
+        <edge_elastin>995 980</edge_elastin>
+        <edge_elastin>1028 1007</edge_elastin>
+        <edge_elastin>750 557</edge_elastin>
+        <edge_elastin>607 1057</edge_elastin>
+        <edge_elastin>1 892</edge_elastin>
+        <edge_elastin>544 1031</edge_elastin>
+        <edge_elastin>602 501</edge_elastin>
+        <edge_elastin>583 523</edge_elastin>
+        <edge_elastin>925 838</edge_elastin>
+        <edge_elastin>443 293</edge_elastin>
+        <edge_elastin>460 1108</edge_elastin>
+        <edge_elastin>1110 778</edge_elastin>
+        <edge_elastin>450 871</edge_elastin>
+        <edge_elastin>449 755</edge_elastin>
+        <edge_elastin>949 204</edge_elastin>
+        <edge_elastin>338 1103</edge_elastin>
+        <edge_elastin>481 851</edge_elastin>
+        <edge_elastin>1086 1079</edge_elastin>
+        <edge_elastin>443 880</edge_elastin>
+        <edge_elastin>818 564</edge_elastin>
+        <edge_elastin>946 715</edge_elastin>
+        <edge_elastin>651 710</edge_elastin>
+        <edge_elastin>978 629</edge_elastin>
+        <edge_elastin>394 727</edge_elastin>
+        <edge_elastin>448 669</edge_elastin>
+        <edge_elastin>1109 860</edge_elastin>
+        <edge_elastin>1027 1111</edge_elastin>
+        <edge_elastin>516 872</edge_elastin>
+        <edge_elastin>982 1042</edge_elastin>
+        <edge_elastin>423 1026</edge_elastin>
+        <edge_elastin>1065 165</edge_elastin>
+        <edge_elastin>812 935</edge_elastin>
+        <edge_elastin>370 878</edge_elastin>
+        <edge_elastin>999 416</edge_elastin>
+        <edge_elastin>984 810</edge_elastin>
+        <edge_elastin>584 428</edge_elastin>
+        <edge_elastin>592 626</edge_elastin>
+        <edge_elastin>926 1067</edge_elastin>
+        <edge_elastin>667 815</edge_elastin>
+        <edge_elastin>916 1036</edge_elastin>
+        <edge_elastin>852 1043</edge_elastin>
+        <edge_elastin>812 956</edge_elastin>
+        <edge_elastin>1090 979</edge_elastin>
+        <edge_elastin>747 1084</edge_elastin>
+        <edge_elastin>1111 988</edge_elastin>
+        <edge_elastin>98 394</edge_elastin>
+        <edge_elastin>1110 427</edge_elastin>
+        <edge_elastin>1072 1011</edge_elastin>
+        <edge_elastin>1051 1065</edge_elastin>
+        <edge_elastin>377 310</edge_elastin>
+        <edge_elastin>837 222</edge_elastin>
+        <edge_elastin>502 831</edge_elastin>
+        <edge_elastin>1033 854</edge_elastin>
+        <edge_elastin>819 481</edge_elastin>
+        <edge_elastin>1036 484</edge_elastin>
+        <edge_elastin>576 1061</edge_elastin>
+        <edge_elastin>1029 699</edge_elastin>
+        <edge_elastin>1086 508</edge_elastin>
+        <edge_elastin>681 402</edge_elastin>
+        <edge_elastin>893 961</edge_elastin>
+        <edge_elastin>928 471</edge_elastin>
+        <edge_elastin>997 649</edge_elastin>
+        <edge_elastin>1011 872</edge_elastin>
+        <edge_elastin>476 993</edge_elastin>
+        <edge_elastin>1107 368</edge_elastin>
+        <edge_elastin>848 913</edge_elastin>
+        <edge_elastin>1078 1055</edge_elastin>
+        <edge_elastin>488 745</edge_elastin>
+        <edge_elastin>980 1083</edge_elastin>
+        <edge_elastin>1097 1030</edge_elastin>
+        <edge_elastin>602 434</edge_elastin>
+        <edge_elastin>606 498</edge_elastin>
+        <edge_elastin>1055 976</edge_elastin>
+        <edge_elastin>479 847</edge_elastin>
+        <edge_elastin>1104 553</edge_elastin>
+        <edge_elastin>1027 91</edge_elastin>
+        <edge_elastin>934 997</edge_elastin>
+        <edge_elastin>517 469</edge_elastin>
+        <edge_elastin>1071 767</edge_elastin>
+        <edge_elastin>485 578</edge_elastin>
+        <edge_elastin>766 832</edge_elastin>
+        <edge_elastin>827 1029</edge_elastin>
+        <edge_elastin>529 1065</edge_elastin>
+        <edge_elastin>1069 826</edge_elastin>
+        <edge_elastin>978 823</edge_elastin>
+        <edge_elastin>988 832</edge_elastin>
+        <edge_elastin>68 1102</edge_elastin>
+        <edge_elastin>624 955</edge_elastin>
+        <edge_elastin>1011 1051</edge_elastin>
+        <edge_elastin>494 888</edge_elastin>
+        <edge_elastin>494 935</edge_elastin>
+        <edge_elastin>803 974</edge_elastin>
+        <edge_elastin>1072 980</edge_elastin>
+        <edge_elastin>848 980</edge_elastin>
+        <edge_elastin>666 619</edge_elastin>
+        <edge_elastin>679 486</edge_elastin>
+    </edges>
+    <fixed>
+    </fixed></data>
