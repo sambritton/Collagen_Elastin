@@ -7,7 +7,7 @@ struct PltInfoVecs;
 struct DomainParams;
 struct GeneralParams;
 
-void Params_Calc(
+void params_calc(
     EdgeInfoVecs& edgeInfoVecs,
     NodeInfoVecs& nodeInfoVecs,
     GeneralParams& generalParams,

@@ -5,13 +5,13 @@
 #include <memory>
 #include <iomanip>
 
-class system;
-class system_builder;
+class System;
+class System_Builder;
 
 class Storage {
 
-	std::weak_ptr<system> system;
-	std::weak_ptr<system_builder> builder;
+	std::weak_ptr<System> system;
+	std::weak_ptr<System_Builder> builder;
 	//std::shared_ptr<ExternalForce> grip;
 	std::ofstream output;
 	std::ofstream statesOutput;
@@ -29,13 +29,12 @@ class Storage {
 	unsigned iteration = 0;
 
 public:
-	Storage(std::weak_ptr<system> a_system,
-		std::weak_ptr<system_builder> b_system, const std::string& a_filename);
+	Storage(std::weak_ptr<System> a_system,
+		std::weak_ptr<System_Builder> b_system, const std::string& a_filename);
 
 	void updateStrain(void);
 	void updateTotalStrain(void);
 
-	void updateStorage(void);
 	void print_VTK_File(void);
 };
 

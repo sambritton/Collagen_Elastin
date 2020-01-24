@@ -1,8 +1,9 @@
 #include "system_structures.h"
+#include "system.h"
 #include "external_force.h"
 #include "functor_strain.h"
 #include "functor_external_force.h"
-#include "system.h"
+
 
 void external_force(
 	NodeInfoVecs& nodeInfoVecs,
@@ -23,8 +24,8 @@ void external_force(
 				thrust::make_tuple(
 					index_begin_upper,
 					nodeInfoVecs.node_upper_selection_pull.begin(),
-					nodeInfoVecs.node_loc_z.begin())) + generalParams.maxNodeCount,
-			functor_strain(generalParams.maxNodeCount, extensionParams.originalNetworkLength),
+					nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
+			functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
 				0.0,
 			thrust::plus<double>())) / generalParams.numUpperStrainNodes;
 
@@ -38,8 +39,8 @@ void external_force(
 					thrust::make_tuple(
 						index_begin_lower,
 						nodeInfoVecs.node_lower_selection_pull.begin(),
-						nodeInfoVecs.node_loc_z.begin())) + generalParams.maxNodeCount,
-				functor_strain(generalParams.maxNodeCount, extensionParams.originalNetworkLength),
+						nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
+				functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
 					0.0,
 				thrust::plus<double>())) / generalParams.numLowerStrainNodes;
 
@@ -49,7 +50,7 @@ void external_force(
 	}
 
 
-
+ 
 	//Apply External Force
 	thrust::counting_iterator<unsigned> indexBeginA(0);
 
@@ -67,8 +68,8 @@ void external_force(
 				nodeInfoVecs.node_loc_z.begin(),
 				nodeInfoVecs.is_node_fixed.begin(),
 				nodeInfoVecs.node_upper_selection_pull.begin(),
-				nodeInfoVecs.node_lower_selection_pull.begin())) + generalParams.maxNodeCount,
-		IncrementFunctor(
+				nodeInfoVecs.node_lower_selection_pull.begin())) + generalParams.max_node_count,
+		functor_external_force(
 			thrust::raw_pointer_cast(nodeInfoVecs.is_node_fixed.data()),
 			thrust::raw_pointer_cast(nodeInfoVecs.node_force_x.data()),
 			thrust::raw_pointer_cast(nodeInfoVecs.node_force_y.data()),
@@ -76,7 +77,7 @@ void external_force(
 
 			generalParams.magnitudeForce,
 			extensionParams.originalNetworkLength,
-			extensionParams.strainProportion,
+			extensionParams.strain_proportion_end_sim,
 			extensionParams.averageLowerStrain,
 			extensionParams.averageUpperStrain));
 

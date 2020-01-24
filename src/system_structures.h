@@ -46,6 +46,7 @@ typedef thrust::tuple<bool, double> Tbd;
 
 typedef thrust::tuple<unsigned, unsigned, double> Tuud;
 
+typedef thrust::tuple<unsigned, double, bool, bool, bool> Tudbbb;
 typedef thrust::tuple<unsigned, unsigned, unsigned, unsigned, double> Tuuuud;
 typedef thrust::tuple<unsigned, unsigned, unsigned,unsigned> Tuuuu;
 typedef thrust::tuple<unsigned, unsigned, unsigned> Tuuu;

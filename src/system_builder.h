@@ -3,7 +3,7 @@
 
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
-#include "glm/glm.hpp"
+#include "glm.hpp"
 #include <list>
 #include <algorithm>
 #include <stdio.h>
@@ -29,12 +29,12 @@ struct HostNodeInfoVecs {
 	thrust::host_vector<bool> host_is_node_fixed;
 };
 
-class SystemDevice;
+class System;
 
-class SystemBuilder {
+class System_Builder {
 public:
-	SystemBuilder(double _epsilon, double _dt, double _df, double _targetStrain);
-	~SystemBuilder();
+	System_Builder(double _epsilon, double _dt, double _df, double _targetStrain);
+	~System_Builder();
 
 
 	//the reason we need to have each buildNode contain previous and next node id's is
@@ -64,6 +64,7 @@ public:
 	double default_temperature = 300.0; // 300' kelvin ~ 27' celsius
 	double default_CLM = 1.0;
 	double default_kB = 1.3806488e-8;//converted from nN microns
+	double default_num_mon_elastin_area=1100;
 	double default_viscosity_collagen=1;
 	double default_viscosity_elastin=1;
 
@@ -81,25 +82,24 @@ public:
 	unsigned axis = 0; //x-axis default. Used for BoundaryForce set in input file. and used in ESOD.h
 
 
-	//std::shared_ptr<SystemDevice> system_ptr;
 	std::vector<std::shared_ptr<BuildNode>> buildNodes;
 
 	std::vector<glm::dvec3> nodePositions;
 
-	unsigned addNode(double , glm::dvec3 , glm::dvec3, unsigned );
+	unsigned add_elastin_node(glm::dvec3 );
+	unsigned add_collagen_node(glm::dvec3);
 
 
-	void putLinearSpring(unsigned, unsigned);
-	void putWormLikeSpring(unsigned, unsigned);
-	void putSpring(unsigned, unsigned);
-	void putSubSpring(unsigned, unsigned);//updates edges if using subnodes
-	void putTorsionSpring(unsigned, unsigned, unsigned);
-	void addSubnodes(void);
-	std::list<glm::dvec3> fillSpace(glm::dvec3, glm::dvec3, unsigned);
-	void generateBuildNodesTriplets(void);
-	void fixNode(unsigned);
+	void put_spring(unsigned, unsigned);
+	void put_collagen_spring(unsigned, unsigned);
+	void put_elastin_spring(unsigned, unsigned);
+	void put_bending_spring(unsigned, unsigned, unsigned);
+	void add_sub_nodes(void);
+	std::list<glm::dvec3> fill_space(glm::dvec3, glm::dvec3, unsigned);
+	void generate_build_node_triplets(void);
+	void fix_node(unsigned);
 	//void setSystemForParallelComputation();
-	std::shared_ptr<SystemDevice> create();
+	std::shared_ptr<System> create();
 
 
 };

@@ -48,20 +48,20 @@ void init_net_inct_bucket(
 
 	//on the first iteration, we allocate more, we don't plan on using it.
 	//always set bucket count. Update total if different.
-	domainParams.bucket_count_x = padding * ceil((domainParams.max_x - domainParams.min_x) / domainParams.gridSpacing_net_intc) + 1;
-	domainParams.bucket_count_x = padding * ceil((domainParams.max_y - domainParams.min_y) / domainParams.gridSpacing_net_intc) + 1;
-	domainParams.bucket_count_z = padding * ceil((domainParams.max_z - domainParams.min_z) / domainParams.gridSpacing_net_intc) + 1;
+	domainParams.bucket_count_x = padding * ceil((domainParams.max_x - domainParams.min_x) / domainParams.grid_spacing_net_intc) + 1;
+	domainParams.bucket_count_x = padding * ceil((domainParams.max_y - domainParams.min_y) / domainParams.grid_spacing_net_intc) + 1;
+	domainParams.bucket_count_z = padding * ceil((domainParams.max_z - domainParams.min_z) / domainParams.grid_spacing_net_intc) + 1;
 
-	if ( (domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z) > domainParams.totalBucketCount_net_intc	) {
+	if ( (domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z) > domainParams.total_bucket_count_net_intc	) {
 		std::cout<<"resetting grid for network interact" << std::endl;
 		std::cout<<"x-bucket: "<< domainParams.bucket_count_x<<std::endl;
 		std::cout<<"y-bucket: "<< domainParams.bucket_count_x<<std::endl;
 		std::cout<<"z-bucket: "<< domainParams.bucket_count_z<<std::endl;
 
 		//double amount of buckets in case of resizing networks
-		domainParams.totalBucketCount_net_intc = domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z;
-		std::cout<<"grid: "<< domainParams.gridSpacing_net_intc << std::endl;
-		std::cout<<"total bucket count: "<< domainParams.totalBucketCount_net_intc<<std::endl;
+		domainParams.total_bucket_count_net_intc = domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z;
+		std::cout<<"grid: "<< domainParams.grid_spacing_net_intc << std::endl;
+		std::cout<<"total bucket count: "<< domainParams.total_bucket_count_net_intc<<std::endl;
 
 		std::cout<<"min_x: " << domainParams.min_x << std::endl;
 		std::cout<<"max_x: " << domainParams.max_x << std::endl;
@@ -70,8 +70,8 @@ void init_net_inct_bucket(
 		std::cout<<"min_z: " << domainParams.min_z << std::endl;
 		std::cout<<"max_z: " << domainParams.max_z << std::endl;
 
-		auxVecs.key_begin_net_intc.resize(domainParams.totalBucketCount_net_intc);
-		auxVecs.key_end_net_intc.resize(domainParams.totalBucketCount_net_intc);
+		auxVecs.key_begin_net_intc.resize(domainParams.total_bucket_count_net_intc);
+		auxVecs.key_end_net_intc.resize(domainParams.total_bucket_count_net_intc);
 
 	}
 
@@ -146,12 +146,12 @@ void extend_net_inct_bucket(
 
 	thrust::lower_bound(auxVecs.id_bucket_expanded_net_intc.begin(),
 		auxVecs.id_bucket_expanded_net_intc.end(), search_begin,
-		search_begin + domainParams.totalBucketCount_net_intc,
+		search_begin + domainParams.total_bucket_count_net_intc,
 		auxVecs.key_begin_net_intc.begin());
 
 	thrust::upper_bound(auxVecs.id_bucket_expanded_net_intc.begin(),
 		auxVecs.id_bucket_expanded_net_intc.end(),search_begin,
-		search_begin + domainParams.totalBucketCount_net_intc,
+		search_begin + domainParams.total_bucket_count_net_intc,
 		auxVecs.key_end_net_intc.begin());
 
 }
@@ -193,7 +193,7 @@ void build_net_inct_bucket(
 			domainParams.bucket_count_x,
 			domainParams.bucket_count_x,
 			domainParams.bucket_count_z,
-			domainParams.gridSpacing_net_intc));
+			domainParams.grid_spacing_net_intc));
 
 //test sorting by node instaed of bucket index
 thrust::sort_by_key(auxVecs.id_value_net_intc.begin(),

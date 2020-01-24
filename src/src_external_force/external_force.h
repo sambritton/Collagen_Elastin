@@ -1,5 +1,5 @@
-#ifndef BUCKET_SCHEME_H_
-#define BUCKET_SCHEME_H_
+#ifndef EXTERNAL_FORCE_H_
+#define EXTERNAL_FORCE_H_
 
 
 struct NodeInfoVecs;

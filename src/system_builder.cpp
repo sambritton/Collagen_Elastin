@@ -1,5 +1,5 @@
 /*
- * SystemBuilder.cpp
+ * System_Builder.cpp
  *
  *  Created on: 25 авг. 2014 г.
  *      Author: yan & SRB
@@ -9,13 +9,13 @@
 #include <list>
 #include <vector>
 #include <memory>
-#include "SystemBuilder.h"
+#include "system_builder.h"
 #include "system.h"
 # define M_PI 3.14159265358979323846  /* pi */
 
 
 
-SystemBuilder::SystemBuilder(
+System_Builder::System_Builder(
 	double _epsilon,
 	double _dt,
 	double _df,
@@ -23,13 +23,13 @@ SystemBuilder::SystemBuilder(
 	epsilon(_epsilon),
 	dt(_dt),
 	df(_df),
-	defaultTargetStrain(_targetStrain) {}
+	default_target_strain(_targetStrain) {}
 
-SystemBuilder::~SystemBuilder() {
+System_Builder::~System_Builder() {
 }
 
 //currently unused
-void SystemBuilder::put_elastin_spring(unsigned n1, unsigned n2) {
+void System_Builder::put_elastin_spring(unsigned n1, unsigned n2) {
 	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
 
 	//store for parallel solving.
@@ -40,7 +40,7 @@ void SystemBuilder::put_elastin_spring(unsigned n1, unsigned n2) {
 	//hostNodeInfoVecs.host_sub_edge_is_elastin.push_back(true)
 }
 
-void SystemBuilder::put_collagen_spring(unsigned n1, unsigned n2) {
+void System_Builder::put_collagen_spring(unsigned n1, unsigned n2) {
 
 
 	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
@@ -51,9 +51,9 @@ void SystemBuilder::put_collagen_spring(unsigned n1, unsigned n2) {
 	hostNodeInfoVecs.host_spring_edge_right.push_back(n2);
 	//hostNodeInfoVecs.host_sub_edge_is_collagen.push_back(true)
 	//hostNodeInfoVecs.host_sub_edge_is_elastin.push_back(false)
-}
+};
 
-void SystemBuilder::putSpring(unsigned n1, unsigned n2) {
+void System_Builder::put_spring(unsigned n1, unsigned n2) {
 
 	//possibly remove section since node type determines spring.
 	bool is_n1_collagen = hostNodeInfoVecs.host_node_is_collagen[n1];
@@ -70,14 +70,14 @@ void SystemBuilder::putSpring(unsigned n1, unsigned n2) {
 	}
 
 	if (is_spring_collagen){
-		put_collagen_spring(unsigned n1, unsigned n2)
+		put_collagen_spring(n1, n2);
 	}
 	else if (is_spring_elastin){
-		put_elastin_spring(unsigned n1, unsigned n2)
+		put_elastin_spring(n1, n2);
 	}
-}
+};
 /*
-void SystemBuilder::putSubSpring(unsigned n1, unsigned n2) {
+void System_Builder::putSubSpring(unsigned n1, unsigned n2) {
 	bool is_n1_collagen = hostNodeInfoVecs.host_node_is_collagen[n1];
 	bool is_n1_elastin = hostNodeInfoVecs.host_node_is_elastin[n1];
 	bool is_n2_collagen = hostNodeInfoVecs.host_node_is_collagen[n2];
@@ -99,7 +99,7 @@ void SystemBuilder::putSubSpring(unsigned n1, unsigned n2) {
 
 }*/
 
-void SystemBuilder::putTorsionSpring(unsigned n1, unsigned n2, unsigned n3) {
+void System_Builder::put_bending_spring(unsigned n1, unsigned n2, unsigned n3) {
 
 	glm::dvec3 p1 = nodePositions[n1] - nodePositions[n2];
 	glm::dvec3 p2 = nodePositions[n3] - nodePositions[n2];
@@ -125,7 +125,7 @@ void SystemBuilder::putTorsionSpring(unsigned n1, unsigned n2, unsigned n3) {
 
 
 //all node pointers made here. We take this opportunity to
-unsigned SystemBuilder::add_collagen_node(glm::dvec3 pos) {
+unsigned System_Builder::add_collagen_node(glm::dvec3 pos) {
 
 	unsigned newId = buildNodes.size();
 	//notice the node and buildnode have the same corresponding id's.
@@ -143,12 +143,12 @@ unsigned SystemBuilder::add_collagen_node(glm::dvec3 pos) {
 	hostNodeInfoVecs.host_node_is_collagen.push_back(true);
 	hostNodeInfoVecs.host_node_is_elastin.push_back(false);
 
-	hostNodeInfoVecs.hostNodeInfoVecs.host_is_node_fixed.push_back(false);
+	hostNodeInfoVecs.host_is_node_fixed.push_back(false);
 	return newId;
 
 }
 
-unsigned SystemBuilder::add_elastin_node(glm::dvec3 pos) {
+unsigned System_Builder::add_elastin_node(glm::dvec3 pos) {
 
 	unsigned newId = buildNodes.size();
 	//notice the node and buildnode have the same corresponding id's.
@@ -166,7 +166,7 @@ unsigned SystemBuilder::add_elastin_node(glm::dvec3 pos) {
 	hostNodeInfoVecs.host_node_is_collagen.push_back(false);
 	hostNodeInfoVecs.host_node_is_elastin.push_back(true);
 
-	hostNodeInfoVecs.hostNodeInfoVecs.host_is_node_fixed.push_back(false);
+	hostNodeInfoVecs.host_is_node_fixed.push_back(false);
 	return newId;
 
 }
@@ -174,7 +174,7 @@ unsigned SystemBuilder::add_elastin_node(glm::dvec3 pos) {
 
 
 //list holds positions of subnodes
-std::list<glm::dvec3> SystemBuilder::fillSpace(glm::dvec3 from, glm::dvec3 to, unsigned subNodes) {
+std::list<glm::dvec3> System_Builder::fill_space(glm::dvec3 from, glm::dvec3 to, unsigned subNodes) {
 
 	std::list<glm::dvec3> list;
 	glm::dvec3 segment = (to - from) / (subNodes + 1.0);
@@ -189,7 +189,7 @@ std::list<glm::dvec3> SystemBuilder::fillSpace(glm::dvec3 from, glm::dvec3 to, u
 //Each node's neighbors are scanned, and depending on how many there are, a different number of springs
 //is added.
 //notice that we sort the neighbors so torsion springs will be placed in a specific ordering. This is used when preferred angles are stored in a matrix.
-void SystemBuilder::generateBuildNodesTriplets() {
+void System_Builder::generate_build_node_triplets() {
 	for (unsigned i = 0; i < nodePositions.size(); i++) {
 		auto ptrBN = buildNodes[i];
 		unsigned center = ptrBN->id;
@@ -235,11 +235,11 @@ void SystemBuilder::generateBuildNodesTriplets() {
 	}
 }
 
-void SystemBuilder::fixNode(unsigned id) {
-	hostNodeInfoVecs.hostNodeInfoVecs.host_is_node_fixed[id] = true;
+void System_Builder::fix_node(unsigned id) {
+	hostNodeInfoVecs.host_is_node_fixed[id] = true;
 }
 
-void SystemBuilder::addSubnodes() {
+void System_Builder::add_sub_nodes() {
 	std::cout << "setting subnodes. Total edges: "<< hostNodeInfoVecs.host_spring_edge_left.size() << std::endl;
 	//if use Extra nodes is true, we complete this section
 	if (use_extra_nodes) {
@@ -282,14 +282,14 @@ void SystemBuilder::addSubnodes() {
 
 			// fill space between two nodes by adding a number of extra nodes
 			// you can choose these or they will be rounded.
-			auto points = fillSpace(nodePositions[idLeft], nodePositions[idRight], sub_node_count);
+			auto points = fill_space(nodePositions[idLeft], nodePositions[idRight], sub_node_count);
 			std::vector<unsigned> subNodeIds;
 
 			//notice that each subnode is added to the vector of no des
 			for (glm::dvec3& point : points) {
 
 				//this addnode method assures that if subnodes are used, then the id and pos are still in hostposX,Y,Z.
-				//this must be done before using putSpring method
+				//this must be done before using put_spring method
 				//number of edges made by adding n nodes is n+1.
 				if (sub_nodes_are_collagen){
 					subNodeIds.push_back(add_collagen_node(point));
@@ -301,20 +301,20 @@ void SystemBuilder::addSubnodes() {
 
 			if (sub_node_count == 0)
 			{
-				std::cout << "subnodesCount = 0 after fillSpace" << "\n";
+				std::cout << "subnodesCount = 0 after fill_space" << "\n";
 				continue;
 			}
 
 			//Now that extra nodes are placed, place extra springs along each divided edge.
 			//link head
-			putSpring(idLeft, subNodeIds.front());
+			put_spring(idLeft, subNodeIds.front());
 			// link all nodes to make a chain
 			for (unsigned i = 0; i < subNodeIds.size() - 1; ++i) {
-				putSpring(subNodeIds[i], subNodeIds[i + 1]);
+				put_spring(subNodeIds[i], subNodeIds[i + 1]);
 			}
 			// link main nodes with and tail of list of sub-nodes
 
-			putSpring(subNodeIds.back(), idRight);
+			put_spring(subNodeIds.back(), idRight);
 
 
 		}
@@ -327,24 +327,24 @@ void SystemBuilder::addSubnodes() {
 
 
 //adds all constraints to the nodesystem model so that it can use the constraints.
-std::shared_ptr<system> SystemBuilder::create() {
+std::shared_ptr<System> System_Builder::create() {
 	//before adding subnodes generate original numbers of nodes and links
 	unsigned origin_edge_count = hostNodeInfoVecs.host_spring_edge_left.size();
 	unsigned origin_node_count = hostNodeInfoVecs.host_pos_x.size();
 
 	//first add all subnodes
-	addSubnodes();
+	add_sub_nodes();
 
 	std::cout << "edge count: " << hostNodeInfoVecs.host_spring_length_zero.size() << std::endl;
 
-	numNodes = hostNodeInfoVecs.host_pos_x.size();
-	numEdges = hostNodeInfoVecs.host_spring_edge_left.size();
+	unsigned numNodes = hostNodeInfoVecs.host_pos_x.size();
+	unsigned numEdges = hostNodeInfoVecs.host_spring_edge_left.size();
 	std::cout << "node count after adding: " << numNodes << std::endl;
 
 
 	//preferred edge angle is always taken into account.
 	std::cout << "Torsion springs mounting" << std::endl;
-	generateBuildNodesTriplets(); //sets all nodes in buildNodes neighbors for linking in next 10 lines
+	generate_build_node_triplets(); //sets all nodes in buildNodes neighbors for linking in next 10 lines
 	for (auto& center : buildNodes) {
 		//if (center->id >= originNodeCount) {
 			//only use bending springs along fibers
@@ -352,7 +352,7 @@ std::shared_ptr<system> SystemBuilder::create() {
 			for (unsigned i = 0; i < (center->next).size(); ++i) {
 				unsigned left = center->prev[i];
 				unsigned right = center->next[i];
-				putTorsionSpring(left, center->id, right);//set theta value here
+				put_bending_spring(left, center->id, right);//set theta value here
 
 			}
 	}
@@ -360,22 +360,22 @@ std::shared_ptr<system> SystemBuilder::create() {
 
 	//now all the edges and variables are set.
 	//so set the system and return a pointer to main.
-	std::shared_ptr<system> system_ptr = std::make_shared<system>();
+	std::shared_ptr<System> system_ptr = std::make_shared<System>();
 
 	system_ptr->generalParams.max_node_count = hostNodeInfoVecs.host_pos_x.size();
 	system_ptr->bendInfoVecs.total_bend_count = hostNodeInfoVecs.host_torsion_angle_zero.size();
-	system_prt->bendInfoVecs.bend_stiffness_collagen = default_bend_stiffness_collagen;
-	system_prt->bendInfoVecs.bend_stiffness_elastin = default_bend_stiffness_elastin;
+	system_ptr->bendInfoVecs.bend_stiffness_collagen = default_bend_stiffness_collagen;
+	system_ptr->bendInfoVecs.bend_stiffness_elastin = default_bend_stiffness_elastin;
 
 	system_ptr->generalParams.origin_node_count = origin_node_count;
 	system_ptr->generalParams.origin_edge_count = origin_edge_count;
 
-	system_ptr->generalParams.sub_node_count = defaultExtraNodesPerEdge;
+	system_ptr->generalParams.sub_node_count = default_extra_nodes_per_edge;
 	system_ptr->generalParams.epsilon = epsilon;
 	system_ptr->generalParams.dt = dt;
 	system_ptr->generalParams.df = df;
 
-	system_ptr->edgeInfoVecs.collagen_spring_constant = default_collagen_spring_constant
+	system_ptr->edgeInfoVecs.collagen_spring_constant = default_collagen_spring_constant;
 	system_ptr->edgeInfoVecs.kB = default_kB;
 	system_ptr->edgeInfoVecs.CLM = default_CLM;
 	system_ptr->edgeInfoVecs.viscosity_collagen = default_viscosity_collagen;
@@ -383,7 +383,8 @@ std::shared_ptr<system> SystemBuilder::create() {
 	system_ptr->edgeInfoVecs.collagen_diameter = default_collagen_diameter;
 	system_ptr->edgeInfoVecs.elastin_diameter = default_elastin_diameter;
 	system_ptr->edgeInfoVecs.temperature = default_temperature;
-	system_ptr->generalParams.persistence_len_monomer = default_persistence_len_monomer;
+	system_ptr->edgeInfoVecs.persistence_len_monomer = default_persistence_len_monomer;
+	system_ptr->edgeInfoVecs.num_mon_elastin_area=default_num_mon_elastin_area;
 
 	system_ptr->generalParams.linking = default_linking;
 	system_ptr->generalParams.strain_sim = default_strain_sim;
@@ -393,7 +394,7 @@ std::shared_ptr<system> SystemBuilder::create() {
 
 	system_ptr->generalParams.pull_percent = default_pull_percent;
 
-	system_ptr->initializeSystem();
+	system_ptr->initialize_system(hostNodeInfoVecs);
 
 	return system_ptr;
 

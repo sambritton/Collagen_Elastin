@@ -8,8 +8,8 @@ struct functor_link_nodes {
 	double* nodeLocXAddr;
 	double* nodeLocYAddr;
 	double* nodeLocZAddr;
-	bool* node_is_collagen;
-	bool* node_is_elastin;
+	bool* node_is_collagen_addr;
+	bool* node_is_elastin_addr;
 
 	unsigned* currentEdgeCountVec;
 	unsigned* global_neighbors;
@@ -36,8 +36,8 @@ struct functor_link_nodes {
 			double* _nodeLocXAddr,
 			double* _nodeLocYAddr,
 			double* _nodeLocZAddr,
-			bool* _node_is_collagen,
-			bool* _node_is_elastin,
+			bool* _node_is_collagen_addr,
+			bool* _node_is_elastin_addr,
 
 			unsigned* _currentEdgeCountVec,
 			unsigned* _global_neighbors,
@@ -61,8 +61,8 @@ struct functor_link_nodes {
 		nodeLocXAddr(_nodeLocXAddr),
 		nodeLocYAddr(_nodeLocYAddr),
 		nodeLocZAddr(_nodeLocZAddr),
-		node_is_collagen(_node_is_collagen),
-		node_is_elastin(_node_is_elastin),
+		node_is_collagen_addr(_node_is_collagen_addr),
+		node_is_elastin_addr(_node_is_elastin_addr),
 
 		currentEdgeCountVec(_currentEdgeCountVec),
 		global_neighbors(_global_neighbors),
@@ -87,8 +87,8 @@ struct functor_link_nodes {
 
 	unsigned operator() (const Tuu& u2) {
 		unsigned nodeId = thrust::get<0>(u2);//node to attempt link from.
-		bool node_is_collagen = node_is_collagen[nodeId];
-		bool node_is_elastin = node_is_elastin[nodeId];
+		bool node_is_collagen = node_is_collagen_addr[nodeId];
+		bool node_is_elastin = node_is_elastin_addr[nodeId];
 		unsigned bucketId = thrust::get<1>(u2);//bucket containing nodeId
 
 		unsigned final_id_left = 0;
@@ -112,11 +112,11 @@ struct functor_link_nodes {
 				unsigned candidateId = id_value_expanded[iter];//test id
 
 				//after candidate is chosen, determine link type
-				bool candidate_is_collagen = node_is_collagen[candidateId];
-				bool candidate_is_elastin = node_is_elastin[candidateId];
+				bool candidate_is_collagen = node_is_collagen_addr[candidateId];
+				bool candidate_is_elastin = node_is_elastin_addr[candidateId];
 				bool connection_is_collagen = false;
 				bool connection_is_elastin = false;
-				double fiberDiameter = 0.0;//fiber diameter changes depending
+				double fiber_diameter = 0.0;//fiber diameter changes depending
 
 				if (node_is_elastin && candidate_is_elastin){
 					connection_is_elastin = true;
@@ -144,7 +144,7 @@ struct functor_link_nodes {
 							((nodeLocZAddr[nodeId] - nodeLocZAddr[candidateId]) * (nodeLocZAddr[nodeId] - nodeLocZAddr[candidateId])));
 
 
-						if ((dist < fiberDiameter)) {
+						if ((dist < fiber_diameter)) {
 							//then we have a possible link if no previous link was placed.
 
 							//make sure placement is possible for nodeID

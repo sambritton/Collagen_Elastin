@@ -52,11 +52,11 @@ struct functor_advance_pos : public thrust::binary_function<UCVec3, CVec4, CVec4
 		double viscosity = viscosity_collagen;
 		if (id < max_node_count) {
 			isFixed = isNodeFixedAddr[id];
-			isCollagen = isNodeCollagenAddr[id];
+			//isCollagen = isNodeCollagenAddr[id];
 			isElastin = isNodeElastinAddr[id];
 		}
 		if (isElastin){
-			viscosity = viscosity_elastin
+			viscosity = viscosity_elastin;
 		}
 
 		if (!isFixed) {
@@ -90,8 +90,8 @@ struct functor_advance_pos : public thrust::binary_function<UCVec3, CVec4, CVec4
 		}
 		else {
 			//do not move position.
-			return thrust::make_tuple(thrust::get<1>(p3),
-			thrust::get<2>(p3), thrust::get<3>(p3),0.0);
+			return thrust::make_tuple(thrust::get<1>(id1p3),
+			thrust::get<2>(id1p3), thrust::get<3>(id1p3),0.0);
 		}
 	}
 

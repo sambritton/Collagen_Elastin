@@ -1,5 +1,5 @@
-#ifndef FUNCTOR_EXTERNAL_FORCE_H_
-#define FUNCTOR_EXTERNAL_FORCE_H_
+#ifndef FUNCTOR_STRAIN_H_
+#define FUNCTOR_STRAIN_H_
 
 #include "system_structures.h"
 

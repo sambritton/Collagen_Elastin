@@ -3,15 +3,14 @@
 #include "bending_spring.h"
 
 #include "functor_misc.h"
-#include "functor_torsion.h"
-
+#include "functor_bending.h"
 
 void calc_bending_spring_force(
 	NodeInfoVecs& nodeInfoVecs,
 	BendInfoVecs& bendInfoVecs,
 	GeneralParams& generalParams)  {
 
-const double PI = 3.14159265358979323846;
+//const double PI = 3.14159265358979323846;
 if (bendInfoVecs.total_bend_count>0) {
 
 		thrust::counting_iterator<unsigned> startTorsionIter(0);
@@ -33,7 +32,7 @@ if (bendInfoVecs.total_bend_count>0) {
 					bendInfoVecs.centerIndex.end(),
 					bendInfoVecs.rightIndex.end(),
 					bendInfoVecs.angleZero.end())),
-			functor_torsion(
+			functor_bending(
 				thrust::raw_pointer_cast(nodeInfoVecs.node_loc_x.data()),
 				thrust::raw_pointer_cast(nodeInfoVecs.node_loc_y.data()),
 				thrust::raw_pointer_cast(nodeInfoVecs.node_loc_z.data()),
@@ -48,8 +47,7 @@ if (bendInfoVecs.total_bend_count>0) {
 				bendInfoVecs.bend_stiffness_collagen,
 				bendInfoVecs.bend_stiffness_elastin,
 				generalParams.max_node_count,
-				bendInfoVecs.total_bend_count,
-				PI));
+				bendInfoVecs.total_bend_count));
 
 		//reduce by key to get forces.Notice leftIndex is 1/3rd the length of torsion.forceX
 		//this vector will be sorted each iteration, so it needs to be recopied.

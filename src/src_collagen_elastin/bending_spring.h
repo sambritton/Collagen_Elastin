@@ -1,5 +1,5 @@
-#ifndef TORSION_FORCE_H_
-#define TORSION_FORCE_H_
+#ifndef BENDING_SPRING_H_
+#define BENDING_SPRING_H_
 
 struct NodeInfoVecs;
 struct BendInfoVecs;

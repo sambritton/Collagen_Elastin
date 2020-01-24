@@ -72,7 +72,7 @@ include_directories(${GLM_LOCATION})
 
 #To include libraries in another folder (src_dg) add them
 add_subdirectory(${src_bucket_scheme})
-add_subdirectory(${src_fibrin})
+add_subdirectory(${src_collagen_elastin})
 add_subdirectory(${src_external_force})
 
 add_library(storageLib STATIC

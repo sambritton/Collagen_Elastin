@@ -7,27 +7,27 @@
 #include "storage.h"
 #include <numeric>
 
-Storage::Storage(std::weak_ptr<system> a_system,
-	std::weak_ptr<system_builder> b_system , const std::string& a_fileName) {
-	//std::cout << "FDM constructor" << std::endl;
+Storage::Storage(std::weak_ptr<System> a_system,
+	std::weak_ptr<System_Builder> b_system , const std::string& a_fileName) {
+	
 	system = a_system;
 	builder = b_system;
 	bn = a_fileName; //this will be used later to open files
 	std::ofstream statesOutput(a_fileName + ".sta");
 	std::ofstream statesOutputStrain(a_fileName + "_Strain.sta");
 
-	std::shared_ptr<system> sysA = system.lock();
-	std::shared_ptr<system_builder> sysB = builder.lock();
+	std::shared_ptr<System> sysA = system.lock();
+	std::shared_ptr<System_Builder> sysB = builder.lock();
 
 	if ((sysA) && (sysB) ){
 		unsigned max_node_count = sysA->generalParams.max_node_count;
 		unsigned max_nbr_count = sysA->generalParams.max_nbr_count;
 
 		statesOutput << "node_count " << max_node_count << '\n';
-		statesOutput << "origin_node_count " << sysA->generalParams.originNodeCount << '\n';
-		statesOutput << "origin_link_count " << sysA->generalParams.originLinkCount << '\n';
+		statesOutput << "origin_node_count " << sysA->generalParams.origin_node_count << '\n';
+		statesOutput << "origin_link_count " << sysA->generalParams.origin_edge_count << '\n';
 		statesOutput << "sub_node_count " << sysA->generalParams.sub_node_count << std::endl;//system->getSubNodesSize() << '\n';
-		statesOutput << "link_count " << sysA->generalParams.originEdgeCount << '\n';
+		statesOutput << "link_count " << sysA->generalParams.current_edge_count << '\n';
 
 		for (unsigned edge = 0; edge < sysB->hostNodeInfoVecs.host_spring_edge_left.size(); edge++) {
 			unsigned idLeft = sysB->hostNodeInfoVecs.host_spring_edge_left[edge];
@@ -111,7 +111,7 @@ void Storage::updateStrain() {
 };
 
 void Storage::updateTotalStrain(void) {
-	std::shared_ptr<system> sys = system.lock();
+	std::shared_ptr<System> sys = system.lock();
 	if (sys) {
 
 		double currentStrain = (sys->extensionParams.averageUpperStrain - sys->extensionParams.averageLowerStrain) /
@@ -129,9 +129,9 @@ void Storage::updateTotalStrain(void) {
 
 		unsigned max_nbr_count = sys->generalParams.max_nbr_count;
 		unsigned max_node_count = sys->generalParams.max_node_count;
-		unsigned originalNodeCount = sys->generalParams.originNodeCount;
-		unsigned originalEdgeCount = sys->generalParams.originLinkCount;
-		unsigned edgeCountDiscretize = sys->generalParams.originEdgeCount;
+		unsigned originalNodeCount = sys->generalParams.origin_node_count;
+		unsigned originalEdgeCount = sys->generalParams.origin_edge_count;
+		unsigned edgeCountDiscretize = sys->generalParams.current_edge_count;
 		//Now first place strain
 		ofs << std::setprecision(5) <<std::fixed<< "time " << sys->generalParams.currentTime<<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "network_strain " << currentStrain<<std::endl;
@@ -143,7 +143,7 @@ void Storage::updateTotalStrain(void) {
 		ofs << std::setprecision(5) <<std::fixed<< "max_z " << sys->domainParams.max_x<<std::endl;
 
 
-		ofs << std::setprecision(5) <<std::fixed<< "total_applied_force " << sys->extensionParams.totalAppliedForce<<std::endl;
+		//ofs << std::setprecision(5) <<std::fixed<< "total_applied_force " << sys->extensionParams.totalAppliedForce<<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "original_node_count " << originalNodeCount <<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "node_count_discretize " << max_node_count <<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "original_edge_count " << originalEdgeCount <<std::endl;
@@ -164,36 +164,36 @@ void Storage::updateTotalStrain(void) {
 		}
 
 		//place original edges
-		for (unsigned edge = 0; edge < sys->generalParams.originEdgeCount; edge++) {
-			unsigned idL = sys->nodeInfoVecs.device_edge_left[edge];
-			unsigned idR = sys->nodeInfoVecs.device_edge_right[edge];
+		for (unsigned edge = 0; edge < sys->generalParams.origin_edge_count; edge++) {
+			unsigned idL = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idR = sys->nodeInfoVecs.host_edge_right[edge];
 			ofs <<"original_edge_discretized " <<idL <<" "<< idR <<std::endl;
 
 		}
 
 		//place added edges
-		for (unsigned edge = sys->generalParams.originEdgeCount; edge < sys->generalParams.currentEdgeCount; edge++) {
-			unsigned idL = sys->nodeInfoVecs.device_edge_left[edge];
-			unsigned idR = sys->nodeInfoVecs.device_edge_right[edge];
+		for (unsigned edge = sys->generalParams.origin_edge_count; edge < sys->generalParams.current_edge_count; edge++) {
+			unsigned idL = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idR = sys->nodeInfoVecs.host_edge_right[edge];
 			ofs <<"added_edge " <<idL <<" "<< idR <<std::endl;
 
 		}
 
 		//original edge strain
-		for (unsigned i = 0; i < sys->generalParams.originEdgeCount; i++ ){
+		for (unsigned i = 0; i < sys->generalParams.origin_edge_count; i++ ){
 			double val = sys->nodeInfoVecs.discretized_edges_strain[i];
 
 			ofs << std::setprecision(5)<< std::fixed<<"original_edge_strain " << val <<std::endl;
 		}
 
 		//original edge alignment
-		for (unsigned i = 0; i < sys->generalParams.originEdgeCount; i++ ){
+		for (unsigned i = 0; i < sys->generalParams.origin_edge_count; i++ ){
 			double val = sys->nodeInfoVecs.discretized_edges_alignment[i];
 			ofs << std::setprecision(5)<< std::fixed<<"original_edge_alignment " << val <<std::endl;
 		}
 
 		//added edge strain
-		for (unsigned i = sys->generalParams.originEdgeCount; i < sys->generalParams.currentEdgeCount; i++ ){
+		for (unsigned i = sys->generalParams.origin_edge_count; i < sys->generalParams.current_edge_count; i++ ){
 			double val = sys->nodeInfoVecs.discretized_edges_strain[i];
 			ofs << std::setprecision(5)<< std::fixed<<"added_edge_strain " << val <<std::endl;
 		}
@@ -213,7 +213,7 @@ void Storage::updateTotalStrain(void) {
 
 void Storage::print_VTK_File() {
 
-	std::shared_ptr<system> sys = system.lock();
+	std::shared_ptr<System> sys = system.lock();
 	if (sys) {
 		iteration+=1;
 		unsigned digits = ceil(log10(iteration + 1));
@@ -241,7 +241,7 @@ void Storage::print_VTK_File() {
 
 		unsigned max_node_count = sys->generalParams.max_node_count;
 		unsigned max_nbr_count = sys->generalParams.max_nbr_count;
-		unsigned numEdges = sys->generalParams.currentEdgeCount;
+		unsigned numEdges = sys->generalParams.current_edge_count;
 
 		ofs << "# vtk DataFile Version 3.0" << std::endl;
 		ofs << "Point representing Sub_cellular elem model" << std::endl;
@@ -287,8 +287,8 @@ void Storage::print_VTK_File() {
 		ofs << "SCALARS Fiber_Strain double " << std::endl;
 		ofs << "LOOKUP_TABLE default "  << std::endl;
 		for (unsigned edge = 0; edge < numEdges; edge++) {
-			unsigned idA = sys->nodeInfoVecs.device_edge_left[edge];
-			unsigned idB = sys->nodeInfoVecs.device_edge_right[edge];
+			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
 
 			unsigned begin = idA * sys->generalParams.max_nbr_count;
 			unsigned end = begin + sys->generalParams.max_nbr_count;
@@ -315,67 +315,4 @@ void Storage::print_VTK_File() {
 		ofs.close();
 
 	}
-}
-
-void Storage::updateStorage() {
-
-	std::shared_ptr<system> sys = system.lock();
-	if (sys) {
-		statesOutput.open(bn + ".sta", std::ofstream::out | std::ofstream::app);
-		//output.open(bn + ".grm", std::ofstream::out | std::ofstream::app);
-		statesOutput << "\nextended percent " << sys->edgeInfoVecs.percentOriginalEdgesExtended;
-		statesOutput << "\nforce " << sys->extensionParams.totalAppliedForce;
-		statesOutput << "\ntime " << sys->generalParams.currentTime;
-		statesOutput << "\nadded edges " << ((sys->nodeInfoVecs.id_edges_made_host).size());
-
-		unsigned max_node_count = sys->generalParams.max_node_count;
-
-		//print new added edges	for current time step recording
-
-		for (unsigned i = 0; i < (sys->nodeInfoVecs.id_edges_made_host.size()); i++) {
-			unsigned idUpper = sys->nodeInfoVecs.id_edges_made_host[i];
-			if (idUpper != 0) {
-				unsigned first = idUpper - max_node_count*(idUpper / max_node_count); //represents column
-				unsigned second = (idUpper / max_node_count); //represents row
-
-					statesOutput << '\n' << first << ' ' << second;
-			}
-
-		}
-
-
-
-
-		for (unsigned i = 0; i < max_node_count; ++i) {
-
-
-			double xPos = sys->nodeInfoVecs.node_loc_x[i];
-			double yPos = sys->nodeInfoVecs.node_loc_y[i];
-			double zPos = sys->nodeInfoVecs.node_loc_z[i];
-			double xForce = sys->nodeInfoVecs.node_vel_x[i];
-			double yForce = sys->nodeInfoVecs.node_vel_y[i];
-			double zForce = sys->nodeInfoVecs.node_vel_z[i];
-			double sumOfForces = sys->nodeInfoVecs.sum_forces_on_node[i];
-			statesOutput << '\n' << i;
-
-			//auto pos = node->getPosition();
-			//auto vel = node->getVelocity();
-
-			//for (int k = 0; k < 3; ++k)
-			statesOutput << ' ' << xPos << ' ' << yPos << ' ' << zPos;
-
-			//for (int k = 0; k < 3; ++k)
-			statesOutput << ' ' << xForce << ' ' << yForce << ' ' << zForce << ' ' << sumOfForces;
-
-		}
-	}
-
-	output << magnitudeForce << ' ' << std::endl;
-	statesOutput.flush();
-	output.flush();
-	statesOutput.close();
-	output.close();
-
-	std::cout << "*** one step completed ***\n\n";
-
-}
+};

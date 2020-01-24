@@ -25,6 +25,11 @@
 #include <thrust/pair.h>
 #include <stdint.h>
 
+struct RandVecs {
+
+  thrust::device_vector<double> gaussianData;
+
+};
 
 
 //Data Structure for node location. velocity and force
@@ -35,6 +40,12 @@ struct NodeInfoVecs {
 	thrust::device_vector<unsigned> spring_division_count;
 	//holds sum of forces for node on given time_step
 	thrust::host_vector<unsigned> id_edges_made_host;
+	thrust::host_vector<unsigned> host_id_left;//left id linked
+	thrust::host_vector<unsigned> host_id_right;//right id linked
+	
+
+	thrust::host_vector<unsigned> host_edge_left;
+	thrust::host_vector<unsigned> host_edge_right;
 
 	thrust::device_vector<unsigned> device_edge_left;
 	thrust::device_vector<unsigned> device_edge_right;
@@ -43,11 +54,14 @@ struct NodeInfoVecs {
 	thrust::device_vector<unsigned> origin_edge_right;
 
 	thrust::device_vector<unsigned> id_edges_made_temp;
+	thrust::device_vector<unsigned> links_made_individual_thread;
+	thrust::device_vector<unsigned> id_temp_linked_left;
+	thrust::device_vector<unsigned> id_temp_linked_right;
 
 	thrust::device_vector<double> sum_forces_on_node;
 
 	thrust::device_vector<double> discretized_edges_strain; //counts strain of edge
-	//thrust::device_vector<double> addedEdgeStrain;
+	
 	thrust::device_vector<double> discretized_edges_alignment;
 
 //true if fixed, false if movable. Default false.
@@ -85,8 +99,8 @@ struct AuxVecs {
 
   //entry key_begin_net_intc[bucketKey] returns start of node indices to search for interaction
   //entry key_end_net_intc[bucketKey] returns end of node indices to search for interaction
-  thrust::device_vector<unsigned> keyBegin_net_intc;
-  thrust::device_vector<unsigned> keyEnd_net_intc;
+  thrust::device_vector<unsigned> key_begin_net_intc;
+  thrust::device_vector<unsigned> key_end_net_intc;
 
 	unsigned end_index_bucket_keys_net_intc;
 };
@@ -104,32 +118,32 @@ struct DomainParams {
 	double origin_max_y;
 	double origin_min_z;
 	double origin_max_z;
-	double grid_spacing = 0.5;
+	double grid_spacing_net_intc = 1.0;
 	unsigned bucket_count_x;
 	unsigned bucket_count_y;
 	unsigned bucket_count_z;
-	unsigned total_bucket_count;
+	unsigned total_bucket_count_net_intc;
 };
 
 //Data for edge node id's
 struct EdgeInfoVecs {
-  double collagen_spring_constant = 10.0; //linear spring for collagen
+	double collagen_spring_constant = 10.0; //linear spring for collagen
 
-  //wlc spring for elastin
-	double kB, CLM, temperature
-  double viscosity_collagen, viscosity_elastin;
+  	//wlc spring for elastin
+	double kB, CLM, temperature;
+  	double viscosity_collagen, viscosity_elastin;
 	double node_mass = 1;
 	double persistence_len_monomer;
-
-  double collagen_diameter = 0.5;
+  	double num_mon_elastin_area;
+  	double collagen_diameter = 0.5;
 	double elastin_diameter = 0.1;
 
-  thrust::device_vector<unsigned> num_origin_nbr_per_node_vec;//holds how many original edges a node was connected to.
+	thrust::device_vector<unsigned> num_origin_nbr_per_node_vec;//holds how many original edges a node was connected to.
 
-  //note: flattened matrix formatting
-  thrust::device_vector<unsigned> global_neighbors;
-  thrust::device_vector<bool> global_isedge_collagen;
-  thrust::device_vector<bool> global_isedge_elastin;
+	//note: flattened matrix formatting
+	thrust::device_vector<unsigned> global_neighbors;
+	thrust::device_vector<bool> global_isedge_collagen;
+	thrust::device_vector<bool> global_isedge_elastin;
 
 	thrust::device_vector<unsigned> current_node_edge_count_vec;
 	//thrust::device_vector<unsigned> currentBindCountPerOriginalEdgeVector;
@@ -156,18 +170,19 @@ struct BendInfoVecs {
 	thrust::device_vector<unsigned> tempTorIndices;
 	thrust::device_vector<unsigned> reducedIds;
 
-  unsigned bend_factor = 3;
-  unsigned total_bend_count;//total bending springs
-  double bend_stiffness_collagen;
-  double bend_stiffness_elastin;
+	unsigned bend_factor = 3;
+	unsigned total_bend_count;//total bending springs
+	double bend_stiffness_collagen;
+	double bend_stiffness_elastin;
 };
 
 struct ExtensionParams {
 	//reset and used to calculate current equilibrium state.
+	double totalAppliedForce=0;
 	unsigned currentNumberPulled = 0;
 	unsigned nextNumberPulled = 0;
-	double targetStrain = 0.1;
-	double currentStrain = 1;
+	double target_strain = 0.1;
+	double current_strain = 1;
 
 	unsigned axis = 0; //default axis for boundary condition is zero.
 	double currentNetworkLength;
@@ -182,14 +197,14 @@ struct ExtensionParams {
 	double originAverageLowerStrain = 0.0;
 	double originAverageUpperStrain = 0.0;
 
-  double percentOriginalEdgesUnderStrain1 = 0.0;
-  double percentOriginalEdgesExtended = 0.0;
-  double percentOriginalEdgesCompressed = 0.0;
-  double percentAddedEdgesUnderStrain1 = 0.0;
-  double percentAddedEdgesExtended = 0.0;
-  double percentAddedEdgesCompressed = 0.0;
-  double averageStrainAddedEdges = 0.0;
-  double averageStrainOriginalEdges = 0.0;
+	double percentOriginalEdgesUnderStrain1 = 0.0;
+	double percentOriginalEdgesExtended = 0.0;
+	double percentOriginalEdgesCompressed = 0.0;
+	double percentAddedEdgesUnderStrain1 = 0.0;
+	double percentAddedEdgesExtended = 0.0;
+	double percentAddedEdgesCompressed = 0.0;
+	double averageStrainAddedEdges = 0.0;
+	double averageStrainOriginalEdges = 0.0;
 
 };
 
@@ -198,7 +213,7 @@ struct GeneralParams{
 	bool run_sim = true; //default true to begin sim. Sim ends when runSim == false
 	bool strain_sim = false;
 
-	double pull_percent = 10.0; // set in main.cpp
+	double pull_percent = 0.1; // set in main.cpp
 
 	unsigned max_nbr_count = 50;
 	unsigned max_node_count;//after discretize
@@ -228,10 +243,10 @@ struct GeneralParams{
 	unsigned max_links_per_iteration = 5;
 };
 
-
+class HostNodeInfoVecs;
 class Storage;
 
-class system {
+class System {
 public:
 	DomainParams domainParams;
 	NodeInfoVecs nodeInfoVecs;
@@ -240,12 +255,13 @@ public:
 	BendInfoVecs bendInfoVecs;
 	ExtensionParams extensionParams;
 	GeneralParams generalParams;
+	RandVecs randVecs;
 
 	std::shared_ptr<Storage> storage;
 
 public:
 
-	system();
+	System();
 
   //use from cpu side to begin solving system.
 	void solve_system();
@@ -256,7 +272,7 @@ public:
 
 	void initialize_system(HostNodeInfoVecs& hostNodeInfoVecs);
 
-	void determine_bounds(HostNodeInfoVecs& hostNodeInfoVecs);//used for strain.
+	void determine_bounds();//used for strain.
 
 	void set_node_vecs(HostNodeInfoVecs& hostNodeInfoVecs);
 

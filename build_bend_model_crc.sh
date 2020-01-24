@@ -8,7 +8,7 @@ BUILD_NAME=$1
 module purge
 module load cmake
 module load cuda/10.0
-module load gcc/7.1.0
+
 
 
 rm -rf $BUILD_NAME

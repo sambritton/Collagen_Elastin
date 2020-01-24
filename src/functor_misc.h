@@ -16,7 +16,65 @@ inline double dot_product(CVec3 v1, CVec3 v2) {
 		thrust::get<1>(v1)*thrust::get<1>(v2) +
 		thrust::get<2>(v1)*thrust::get<2>(v2));
 }
+//returns true if is greater than level
+struct IsGreaterThanLevel {
+	double limit;
 
+	__host__ __device__ 
+		IsGreaterThanLevel(
+			double& _limit) : 
+			limit(_limit) {}
+		
+	__device__
+		bool operator() (double val) {
+
+			return (val > limit);
+		}
+}; 
+
+//returns true if is greater than level
+struct IsGreaterOrLessThanLevel {
+	double upperLimit;
+	double lowerLimit;
+
+	__host__ __device__ 
+		IsGreaterOrLessThanLevel(
+			double& _upperLimit,
+			double& _lowerLimit) : 
+			upperLimit(_upperLimit),
+			lowerLimit(_lowerLimit) {}
+		
+	__device__
+	//replaces value with 1 if returns true 
+		bool operator() (double val) {
+			if (val > upperLimit) {
+				return true;
+			}
+			else if (val < lowerLimit) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+		}
+}; 
+
+//returns true if less than llevel.
+struct IsLessThanLevel {
+		double limit;
+ 
+	__host__ __device__ 
+		IsLessThanLevel(
+			double& _limit) : 
+			limit(_limit) {}
+		
+	__device__
+	//replaces value with 1 if returns true 
+	bool operator() (double val) {
+		return (val <  abs( limit) );//((1-percentPull) * networkLength));
+	}
+};
 
 struct functor_add_UCVec3_CVec3 {//same as torsion
 	unsigned max_node_count;

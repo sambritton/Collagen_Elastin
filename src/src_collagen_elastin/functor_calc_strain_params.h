@@ -3,8 +3,6 @@
 
 #include "system_structures.h"
 struct functor_calc_strain_params : public thrust::unary_function<Tuu, Tdd> {
-	unsigned originLinkCount;
-	unsigned originEdgeCount;
 	unsigned originNodeCount;
 	unsigned max_node_count;
 	unsigned max_nbr_count;
@@ -20,8 +18,6 @@ struct functor_calc_strain_params : public thrust::unary_function<Tuu, Tdd> {
 
 	__host__ __device__
 	functor_calc_strain_params(
-		unsigned& _originLinkCount,
-		unsigned& _originEdgeCount,
 		unsigned& _originNodeCount,
 		unsigned& _max_node_count,
 		unsigned& _max_nbr_count,	
@@ -34,8 +30,6 @@ struct functor_calc_strain_params : public thrust::unary_function<Tuu, Tdd> {
 		unsigned* _currentNbrVec,
 		unsigned* _global_neighbors,
 		double* _lenZero) :
-		originLinkCount(_originLinkCount),
-		originEdgeCount(_originEdgeCount),
 		originNodeCount(_originNodeCount),
 		max_node_count(_max_node_count),
 		max_nbr_count(_max_nbr_count),

@@ -18,11 +18,9 @@ struct functor_bending {
 	double bend_stiffness_elastin;
 	unsigned max_node_count;
 	unsigned total_bending_spring_count;
-	const double PI;
 
 	__host__ __device__
-		//
-		functor_torsion(
+		functor_bending(
 			double* _locXAddr,
 			double* _locYAddr,
 			double* _locZAddr,
@@ -37,8 +35,7 @@ struct functor_bending {
 			double& _bend_stiffness_collagen,
 			double& _bend_stiffness_elastin,
 			unsigned& _max_node_count,
-			unsigned& _total_bending_spring_count,
-			const double& _PI) :
+			unsigned& _total_bending_spring_count) :
 
 		locXAddr(_locXAddr),
 		locYAddr(_locYAddr),
@@ -54,8 +51,7 @@ struct functor_bending {
 		bend_stiffness_collagen(_bend_stiffness_collagen),
 		bend_stiffness_elastin(_bend_stiffness_elastin),
 		max_node_count(_max_node_count),
-		total_bending_spring_count(_total_bending_spring_count),
-		PI(_PI) {}
+		total_bending_spring_count(_total_bending_spring_count) {}
 
 	__device__
 		//maybe hand in id and vector of neighbors???
@@ -66,6 +62,7 @@ struct functor_bending {
 		unsigned indexRight = thrust::get<3>(u4d1);
 		double angleZero = thrust::get<4>(u4d1);
 
+		const double PI = 3.14159265358979323846;
 
 		bool is_left_collagen = node_is_collagen[indexLeft];
 		bool is_center_collagen = node_is_collagen[indexCenter];
@@ -78,8 +75,8 @@ struct functor_bending {
 		bool is_spring_collagen = false;
 		bool is_spring_elastin = false;
 
-		int collagen_count = is_left_collagen + is_center_collagen + is_right_collagen;
-		int elastin_count = is_left_elastin + is_center_elastin + is_right_elastin;
+		unsigned collagen_count = is_left_collagen + is_center_collagen + is_right_collagen;
+		unsigned elastin_count = is_left_elastin + is_center_elastin + is_right_elastin;
 
 		//depending on the count of nodes, we need to use a different bending constant.
 		double bending_stiffness = 0.0;

@@ -14,17 +14,19 @@
 #include <math.h>
 
 #include "storage.h"
-
+#include "system_builder.h"
 #include "collagen_elastin_spring.h"
 #include "bending_spring.h"
-#include "advance_position.h"
+#include "advance_positions.h"
 #include "bucket_scheme.h"
+#include "link_nodes.h"
+#include "external_force.h"
 #include "system.h"
-#include "functors_misc.h"
+#include "functor_misc.h"
 
 using namespace thrust::placeholders;
 
-system::solve_forces() {
+void System::solve_forces() {
 
 	thrust::fill(nodeInfoVecs.node_force_x.begin(),nodeInfoVecs.node_force_x.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_y.begin(),nodeInfoVecs.node_force_y.end(),0);
@@ -36,14 +38,15 @@ system::solve_forces() {
 
 	extend_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
 
-	double addedLinks = generalParams.currentEdgeCount - generalParams.originEdgeCount;
+	double addedLinks = generalParams.current_edge_count - generalParams.origin_edge_count;
 
 	if (generalParams.linking == true) {
 			link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
 
 	//apply external force.
-	increment_external_force(nodeInfoVecs,
+	external_force(
+		nodeInfoVecs,
 		generalParams,
 		extensionParams,
 		domainParams);
@@ -67,30 +70,26 @@ system::solve_forces() {
 };
 
 
-void system::solve_system() {
+void System::solve_system() {
 
 	double lastTime = 0.0;
-	storage->update_storage();//initial position storage
 	bool runIters = true;
-
-	//set initial epsilon
-	//generalParams.epsilon = (1.0) *
-	//	sqrt(6.0*edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dtTemp / edgeInfoVecs.viscosity_collagen);
 
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
-		generalParams.currentTime += generalParams.dtTemp;
+		generalParams.currentTime += generalParams.dt;
 		//std::cout << "current time: " << std::endl;
 
 		advance_positions(
 			nodeInfoVecs,
-		 	generalParams,
-      randVecs);
+			generalParams,
+			edgeInfoVecs,
+      		randVecs);
 
 
 		if ((generalParams.iterationCounter % 20000) == 0) {
-			storage->print_VTK_file();
+			//storage->print_VTK_file();
 		}
 
 		solve_forces(); //resets and solves forces for next time step
@@ -115,35 +114,11 @@ void system::solve_system() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 
-			GetStrainParameters(nodeInfoVecs,
-				edgeInfoVecs,
-				generalParams,
-				domainParams);
 			storage->updateTotalStrain();
 		}
 
 
 		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
-		//std::cout<<"maxvelocity: "<< maxVel<< std::endl;
-
-		//difference in time
- 		if (abs(generalParams.currentTime - lastTime) > (generalParams.lagTime)) {
-			 //move epsilon. It will be reset
-
-			generalParams.epsilon += 0.01;
-			lastTime = generalParams.currentTime;
-
-			std::cout<<"updating epsilon: "<< generalParams.epsilon<<std::endl;
-
-			double addedEdges = generalParams.currentEdgeCount - generalParams.originEdgeCount;
-			std::cout<<"added edges: "<< addedEdges <<std::endl;
-			std::cout<<"Minz: "<< domainParams.min_z<<std::endl;
-			std::cout<<"Maxz: "<< domainParams.max_z<<std::endl;
-			std::cout<<"Miny: "<< domainParams.min_y<<std::endl;
-			std::cout<<"Maxy: "<< domainParams.max_y<<std::endl;
-			std::cout<<"Minx: "<< domainParams.min_x<<std::endl;
-			std::cout<<"Maxx: "<< domainParams.max_x<<std::endl;
-		}
 
 		if (maxVel < generalParams.epsilon) {
 			//store sum of all forces on each node. Used in stress calculations
@@ -161,14 +136,9 @@ void system::solve_system() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 
-			storage->updateStorage();
-
-			generalParams.totalNumberOfEdges += nodeInfoVecs.id_edges_made_host.size();
-			nodeInfoVecs.id_edges_made_host.resize(0);
-
 
 			generalParams.epsilon = (1.0) *
-				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dtTemp / edgeInfoVecs.viscosity_collagen);
+				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_collagen);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
 			std::cout<<"updating epsilon back to original: "<< generalParams.epsilon<<std::endl;
@@ -184,15 +154,15 @@ void system::solve_system() {
 
 };
 
-system::system()  {};
+System::System()  {};
 
-void system::assign_storage(std::shared_ptr<Storage> _storage) {
+void System::assign_storage(std::shared_ptr<Storage> _storage) {
 	storage = _storage;
 }
 
-void system::initialize_system(HostNodeInfoVecs& hostNodeInfoVecs) {
+void System::initialize_system(HostNodeInfoVecs& hostNodeInfoVecs) {
 
-	std::cout<< "total Edge Count: "<< generalParams.originEdgeCount << std::endl;
+	std::cout<< "total Edge Count: "<< generalParams.origin_edge_count << std::endl;
 	std::cout << "max num nodes: " << generalParams.max_node_count << std::endl;
 
 	nodeInfoVecs.origin_edge_left = hostNodeInfoVecs.host_spring_edge_left;
@@ -209,13 +179,10 @@ void system::initialize_system(HostNodeInfoVecs& hostNodeInfoVecs) {
 };
 
 
-void system::set_node_vecs(
-	thrust::host_vector<bool>& hostNodeInfoVecs.hostNodeInfoVecs.host_is_node_fixed,
-	thrust::host_vector<double>& hostNodeInfoVecs.host_pos_x,
-	thrust::host_vector<double>& hostNodeInfoVecs.host_pos_y,
-	thrust::host_vector<double>& hostNodeInfoVecs.host_pos_z,
-	thrust::host_vector<unsigned>& hostSpringDivisionCount) {
+void System::set_node_vecs(
+	HostNodeInfoVecs& hostNodeInfoVecs) {
 
+	randVecs.gaussianData.resize(generalParams.max_node_count);
 
 	nodeInfoVecs.id_edges_made_temp.resize(generalParams.max_node_count * generalParams.max_links_per_iteration);//corresponds to upperAdj vector size plus a single value to hold number of added nodes
 	thrust::fill(nodeInfoVecs.id_edges_made_temp.begin(), nodeInfoVecs.id_edges_made_temp.end(), 0);
@@ -227,8 +194,8 @@ void system::set_node_vecs(
 
 	nodeInfoVecs.node_vel.resize(generalParams.max_node_count);
 
-  nodeInfoVecs.node_is_collagen.resize(generalParams.max_node_count);
-  nodeInfoVecs.node_is_elastin.resize(generalParams.max_node_count);
+  	nodeInfoVecs.node_is_collagen.resize(generalParams.max_node_count);
+  	nodeInfoVecs.node_is_elastin.resize(generalParams.max_node_count);
 
 	nodeInfoVecs.node_loc_x.resize(generalParams.max_node_count);
 	nodeInfoVecs.node_loc_y.resize(generalParams.max_node_count);
@@ -246,13 +213,17 @@ void system::set_node_vecs(
 	nodeInfoVecs.discretized_edges_alignment.resize(generalParams.max_node_count * generalParams.max_nbr_count);
 
 	//sized larger for input later
+	
 	nodeInfoVecs.device_edge_left.resize(generalParams.max_node_count * generalParams.max_nbr_count);
 	nodeInfoVecs.device_edge_right.resize(generalParams.max_node_count * generalParams.max_nbr_count);
 
+	nodeInfoVecs.host_edge_left.resize(generalParams.max_node_count * generalParams.max_nbr_count);
+	nodeInfoVecs.host_edge_right.resize(generalParams.max_node_count * generalParams.max_nbr_count);
+
 
 	thrust::fill(nodeInfoVecs.discretized_edges_strain.begin(), nodeInfoVecs.discretized_edges_strain.end(),0.0);
-	thrust::fill(nodeInfoVecs.device_edge_right.begin(), nodeInfoVecs.device_edge_right.end(), 0);	//fill force and velocity with zeros for computation.
-	thrust::fill(nodeInfoVecs.device_edge_left.begin(), nodeInfoVecs.device_edge_left.end(), 0);	//fill force and velocity with zeros for computation.
+	thrust::fill(nodeInfoVecs.host_edge_right.begin(), nodeInfoVecs.host_edge_right.end(), 0);	//fill force and velocity with zeros for computation.
+	thrust::fill(nodeInfoVecs.host_edge_left.begin(), nodeInfoVecs.host_edge_left.end(), 0);	//fill force and velocity with zeros for computation.
 	thrust::fill(nodeInfoVecs.id_edges_made_temp.begin(), nodeInfoVecs.id_edges_made_temp.end(), 0);
 
 	thrust::fill(nodeInfoVecs.sum_forces_on_node.begin(), nodeInfoVecs.sum_forces_on_node.end(), 0);
@@ -269,8 +240,14 @@ void system::set_node_vecs(
 	thrust::copy(hostNodeInfoVecs.host_pos_y.begin(), hostNodeInfoVecs.host_pos_y.end(), nodeInfoVecs.node_loc_y.begin());
 	thrust::copy(hostNodeInfoVecs.host_pos_z.begin(), hostNodeInfoVecs.host_pos_z.end(), nodeInfoVecs.node_loc_z.begin());
 
+	nodeInfoVecs.links_made_individual_thread.resize(generalParams.max_node_count);
 
+	nodeInfoVecs.id_temp_linked_left.resize(generalParams.max_node_count * generalParams.max_links_per_iteration);
+	nodeInfoVecs.id_temp_linked_right.resize(generalParams.max_node_count * generalParams.max_links_per_iteration);
 	//copy fixed positions
+	nodeInfoVecs.host_id_left.resize(generalParams.max_node_count * generalParams.max_links_per_iteration);
+	nodeInfoVecs.host_id_right.resize(generalParams.max_node_count * generalParams.max_links_per_iteration);
+
 	nodeInfoVecs.is_node_fixed.resize(generalParams.max_node_count);
 	thrust::fill(nodeInfoVecs.is_node_fixed.begin(), nodeInfoVecs.is_node_fixed.end(), false);
 
@@ -283,8 +260,7 @@ void system::set_node_vecs(
 		nodeInfoVecs,
 		domainParams,
 		auxVecs,
-		generalParams,
-		extensionParams);
+		generalParams);
 
 	//set original parameters for domain. others will be reset as simulation takes place.
 	domainParams.origin_min_x = domainParams.min_x;
@@ -296,14 +272,14 @@ void system::set_node_vecs(
 	std::cout<< "node count : " <<nodeInfoVecs.node_loc_y.size()<< std::endl;
 
 
-	auxVecs.id_bucket_net_intc.resize(generalParams.max_node_count + dpdParticleVariables.particleCount);
-	auxVecs.id_value_net_intc.resize(generalParams.max_node_count + dpdParticleVariables.particleCount);
-	auxVecs.id_value_expanded_net_intc.resize(27 * (generalParams.max_node_count + dpdParticleVariables.particleCount));
-	auxVecs.id_bucket_expanded_net_intc.resize(27 *( generalParams.max_node_count + dpdParticleVariables.particleCount));
+	auxVecs.id_bucket_net_intc.resize(generalParams.max_node_count);
+	auxVecs.id_value_net_intc.resize(generalParams.max_node_count);
+	auxVecs.id_value_expanded_net_intc.resize(27 * (generalParams.max_node_count));
+	auxVecs.id_bucket_expanded_net_intc.resize(27 *( generalParams.max_node_count));
 
 };
 
-void system::determine_bounds() {
+void System::determine_bounds() {
 	//determin z positions of nodes to be pulled and fixed.
 
 	thrust::device_vector<double> zPosTemp;
@@ -312,7 +288,7 @@ void system::determine_bounds() {
 
 	//not used
 	//pull at least 10% of nodes.
-	unsigned tempNodeAmmount = static_cast<unsigned>( 0.25 * generalParams.max_node_count ); //pull 10% of top nodes
+	//unsigned tempNodeAmmount = static_cast<unsigned>( 0.25 * generalParams.max_node_count ); //pull 10% of top nodes
 
 	//sort in increasing order
 	thrust::sort(zPosTemp.begin(), zPosTemp.end(), thrust::less<double>());
@@ -320,10 +296,10 @@ void system::determine_bounds() {
 	std::cout<<"start end ZposTemp: "<< zPosTemp[0] << " "<< zPosTemp[zPosTemp.size()-1]<<std::endl;
 
 	//upperLevelAlt pulls 10% default. Set in main.cpp using input
-	if (generalParams.pullPercent >= 1.0) {
+	if (generalParams.pull_percent >= 1.0) {
 		std::cout<<"ERROR PULL PERCENT MUST BE LESS THAN ONE"<<std::endl;;
 	}
-	double upperLevelAlt = (1.0 - generalParams.pullPercent) * length;
+	double upperLevelAlt = (1.0 - generalParams.pull_percent) * length;
 
 
 	double lowerLevel = abs (upperLevelAlt - (zPosTemp[zPosTemp.size()-1]));
@@ -334,11 +310,11 @@ void system::determine_bounds() {
 
 	//apply strain only to original nodes and not added edge subdivision nodes. Set top and bottom
 
-	thrust::replace_if(nodeInfoVecs.node_upper_selection_pull.begin(), nodeInfoVecs.node_upper_selection_pull.begin() + generalParams.originNodeCount,
+	thrust::replace_if(nodeInfoVecs.node_upper_selection_pull.begin(), nodeInfoVecs.node_upper_selection_pull.begin() + generalParams.origin_node_count,
 						nodeInfoVecs.node_loc_z.begin(),
 						IsGreaterThanLevel( upperLevelAlt ), true);
 
-	thrust::replace_if(nodeInfoVecs.node_lower_selection_pull.begin(), nodeInfoVecs.node_lower_selection_pull.begin() + generalParams.originNodeCount,
+	thrust::replace_if(nodeInfoVecs.node_lower_selection_pull.begin(), nodeInfoVecs.node_lower_selection_pull.begin() + generalParams.origin_node_count,
 						nodeInfoVecs.node_loc_z.begin(),
 						IsLessThanLevel( lowerLevel ), true);
 
@@ -353,7 +329,7 @@ void system::determine_bounds() {
 
 }
 
-void system::set_bend_vecs(
+void System::set_bend_vecs(
 	HostNodeInfoVecs& hostNodeInfoVecs) {
 
 	bendInfoVecs.leftIndex.resize(bendInfoVecs.bend_factor * bendInfoVecs.total_bend_count);
@@ -414,12 +390,12 @@ void system::set_bend_vecs(
 
 };
 
-void system::set_edge_vecs(
+void System::set_edge_vecs(
 	HostNodeInfoVecs& hostNodeInfoVecs ) {
 
 	edgeInfoVecs.global_neighbors.resize(generalParams.max_node_count * generalParams.max_nbr_count);
-  edgeInfoVecs.global_isedge_collagen.resize(generalParams.max_node_count * generalParams.max_nbr_count);
-  edgeInfoVecs.global_isedge_elastin.resize(generalParams.max_node_count * generalParams.max_nbr_count);
+  	edgeInfoVecs.global_isedge_collagen.resize(generalParams.max_node_count * generalParams.max_nbr_count);
+  	edgeInfoVecs.global_isedge_elastin.resize(generalParams.max_node_count * generalParams.max_nbr_count);
 
 	edgeInfoVecs.current_node_edge_count_vec.resize(generalParams.max_node_count);
 
@@ -427,30 +403,37 @@ void system::set_edge_vecs(
 	edgeInfoVecs.num_origin_nbr_per_node_vec.resize(generalParams.max_node_count);
 
 
-  thrust::fill(edgeInfoVecs.global_neighbors.begin(), edgeInfoVecs.global_neighbors.end(), ULONG_MAX);
-  thrust::fill(edgeInfoVecs.global_isedge_collagen.begin(), edgeInfoVecs.global_isedge_collagen.end(), false);
-  thrust::fill(edgeInfoVecs.global_isedge_elastin.begin(), edgeInfoVecs.global_isedge_elastin.end(), false);
+  	thrust::fill(edgeInfoVecs.global_neighbors.begin(), edgeInfoVecs.global_neighbors.end(), ULONG_MAX);
+  	thrust::fill(edgeInfoVecs.global_isedge_collagen.begin(), edgeInfoVecs.global_isedge_collagen.end(), false);
+  	thrust::fill(edgeInfoVecs.global_isedge_elastin.begin(), edgeInfoVecs.global_isedge_elastin.end(), false);
 
-  thrust::fill(edgeInfoVecs.current_node_edge_count_vec.begin(), edgeInfoVecs.current_node_edge_count_vec.end(),0);
+  	thrust::fill(edgeInfoVecs.current_node_edge_count_vec.begin(), edgeInfoVecs.current_node_edge_count_vec.end(),0);
 	thrust::fill(edgeInfoVecs.global_length_zero.begin(), edgeInfoVecs.global_length_zero.end(), 0.0);
 
 
 
-	nodeInfoVecs.device_edge_left = host_sub_edge_left;
-	nodeInfoVecs.device_edge_right = host_sub_edge_right;
+	nodeInfoVecs.host_edge_left = hostNodeInfoVecs.host_spring_edge_left;
+	nodeInfoVecs.host_edge_right = hostNodeInfoVecs.host_spring_edge_right;
 	//scan through hostAdj and put in device.
-	for (unsigned id = 0; id < host_sub_len_zero.size(); id++) {
+	for (unsigned id = 0; id < hostNodeInfoVecs.host_spring_length_zero.size(); id++) {
 		generalParams.totalNumberOfEdges++;
-		 unsigned idL = host_sub_edge_left[id];
-		 unsigned idR = host_sub_edge_right[id];
-     bool is_edge_collagen = host_sub_edge_is_collagen[id];
-     bool is_edge_elastin = host_sub_edge_is_elastin[id];
+		unsigned idL = hostNodeInfoVecs.host_spring_edge_left[id];
+		unsigned idR = hostNodeInfoVecs.host_spring_edge_right[id];
+
+     	bool is_idL_collagen = hostNodeInfoVecs.host_node_is_collagen[idL];
+		bool is_idR_collagen = hostNodeInfoVecs.host_node_is_collagen[idR];
+		bool is_edge_collagen = false;
+		bool is_edge_elastin = false;
+		if (is_idL_collagen && is_idR_collagen) {
+			is_edge_collagen=true;
+		}
+		else { is_edge_elastin = true;}
 		//std::cout<< "linking " << idL << " to " <<idR << std::endl;
 
-		 double edgeLen = host_sub_len_zero[id];
+		 double edgeLen = hostNodeInfoVecs.host_spring_length_zero[id];
 				//we use the global_length_zero vector to identify edges as well.
 
-    //node id is row, column node is connected to row node.
+    	//node id is row, column node is connected to row node.
 		//add edge for left node
 		unsigned edgeNumL = edgeInfoVecs.current_node_edge_count_vec[idL]; //number of edges on (nodeId = row)	is that entry in cECV
 		unsigned indexL = idL*generalParams.max_nbr_count + edgeNumL;
@@ -470,13 +453,13 @@ void system::set_edge_vecs(
 		edgeInfoVecs.global_isedge_elastin[indexR] = is_edge_elastin;
 
 		(edgeInfoVecs.current_node_edge_count_vec[idR])++; //left connects to right
-		generalParams.currentEdgeCount += 1;
+		generalParams.current_edge_count += 1;
 	}
 	//at this point current_node_edge_count_vec holds the number of edges, copy this to
 	thrust::copy(edgeInfoVecs.current_node_edge_count_vec.begin(), edgeInfoVecs.current_node_edge_count_vec.end(), edgeInfoVecs.num_origin_nbr_per_node_vec.begin());
 };
 
-void system::set_extras() {
+void System::set_extras() {
 	extensionParams.originalNetworkLength = domainParams.max_z; //compression along x extensionParams.axis
 	extensionParams.originalNetworkWidth = domainParams.max_x;  //strain along z extensionParams.axis.
 };

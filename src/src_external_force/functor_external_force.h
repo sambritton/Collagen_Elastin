@@ -3,8 +3,6 @@
 
 #include "system_structures.h"
 
-
-
 struct functor_external_force {
 	bool* isNodeFixedAddr;
 	double* forceXAddr;
@@ -17,7 +15,7 @@ struct functor_external_force {
 	double averageUpperStrain;
 
 	__host__ __device__
-		IncrementFunctor(
+		functor_external_force(
 			bool* _isNodeFixedAddr,
 			double*	_forceXAddr,
 			double*	_forceYAddr,
@@ -27,10 +25,11 @@ struct functor_external_force {
 			double& _strainProportion,
 			double& _averageLowerStrain,
 			double& _averageUpperStrain) :
-		functor_external_force(_isNodeFixedAddr),
+		isNodeFixedAddr(_isNodeFixedAddr),
 		forceXAddr(_forceXAddr),
 		forceYAddr(_forceYAddr),
 		forceZAddr(_forceZAddr),
+		
 		magForce(_magForce),
 		originalNetworkLength(_originalNetworkLength),
 		strainProportion(_strainProportion),

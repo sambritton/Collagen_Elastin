@@ -2,11 +2,11 @@
 #include "functor_misc.h"
 
 #include "system.h"
-#include "Params_Calc.h"
+#include "params_calc.h"
 #include "functor_calc_strain_params.h"
 
 
-void Params_Calc(
+void params_calc(
     EdgeInfoVecs& edgeInfoVecs,
     NodeInfoVecs& nodeInfoVecs,
     GeneralParams& generalParams,
@@ -19,12 +19,12 @@ void Params_Calc(
 		thrust::fill(nodeInfoVecs.discretized_edges_alignment.begin(), nodeInfoVecs.discretized_edges_alignment.end(),0.0);	
 
 		//copy current host information to device for strain calculation. 
-		thrust::copy(nodeInfoVecs.hostEdgeLeft.begin(),
-			nodeInfoVecs.hostEdgeLeft.begin() + generalParams.currentEdgeCount,
+		thrust::copy(nodeInfoVecs.host_edge_left.begin(),
+			nodeInfoVecs.host_edge_left.begin() + generalParams.current_edge_count,
 			nodeInfoVecs.device_edge_left.begin());
 
-		thrust::copy(nodeInfoVecs.hostEdgeRight.begin(),
-			nodeInfoVecs.hostEdgeRight.begin() + generalParams.currentEdgeCount,
+		thrust::copy(nodeInfoVecs.host_edge_right.begin(),
+			nodeInfoVecs.host_edge_right.begin() + generalParams.current_edge_count,
 			nodeInfoVecs.device_edge_right.begin());
 
 		thrust::transform(
@@ -36,7 +36,7 @@ void Params_Calc(
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
 					nodeInfoVecs.device_edge_left.begin(),
-					nodeInfoVecs.device_edge_right.begin())) + generalParams.currentEdgeCount,
+					nodeInfoVecs.device_edge_right.begin())) + generalParams.current_edge_count,
 					
 			//outputs discretized strain etc			
 			thrust::make_zip_iterator(
@@ -45,9 +45,7 @@ void Params_Calc(
 					nodeInfoVecs.discretized_edges_alignment.begin())),
 					
 			functor_calc_strain_params(
-				generalParams.originLinkCount,
-				generalParams.originEdgeCount,
-				generalParams.originNodeCount,
+				generalParams.origin_node_count,
 				generalParams.max_node_count,
 				generalParams.max_nbr_count,
 				thrust::raw_pointer_cast(nodeInfoVecs.node_loc_x.data()),
@@ -70,21 +68,6 @@ void Params_Calc(
 						nodeInfoVecs.node_force_y.begin(),
 						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
-				
                 functor_norm());
 
-			//platelets
-			thrust::transform(
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						pltInfoVecs.pltForceX.begin(),
-						pltInfoVecs.pltForceY.begin(),
-						pltInfoVecs.pltForceZ.begin())),
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						pltInfoVecs.pltForceX.begin(),
-						pltInfoVecs.pltForceY.begin(),
-						pltInfoVecs.pltForceZ.begin())) + generalParams.maxPltCount,
-				pltInfoVecs.sumForcesOnPlt.begin(),//save vector
-				functor_norm());
 };

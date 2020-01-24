@@ -1,7 +1,7 @@
 #include "system.h"
 #include "system_structures.h"
-#include "WLC_Force.h"
-#include "functor_wlc.h"
+#include "collagen_elastin_spring.h"
+#include "functor_collagen_elastin.h"
 
 /*
 the structure of global_length_zero_index is
@@ -42,17 +42,17 @@ void calc_spring_force(
 
  			edgeInfoVecs.collagen_spring_constant,
 			edgeInfoVecs.kB,
-			generalParams.persistence_len_monomer,
+			edgeInfoVecs.persistence_len_monomer,
 			edgeInfoVecs.CLM,
 			edgeInfoVecs.temperature,
 			generalParams.max_nbr_count,
 			generalParams.max_node_count,
-			generalParams.nummonfiberarea,
+			edgeInfoVecs.num_mon_elastin_area,
 
 			thrust::raw_pointer_cast(edgeInfoVecs.global_length_zero.data()),
+			thrust::raw_pointer_cast(edgeInfoVecs.current_node_edge_count_vec.data()),
 			thrust::raw_pointer_cast(edgeInfoVecs.global_neighbors.data()),
 			thrust::raw_pointer_cast(edgeInfoVecs.global_isedge_collagen.data()),
 			thrust::raw_pointer_cast(edgeInfoVecs.global_isedge_elastin.data()),
-			thrust::raw_pointer_cast(edgeInfoVecs.current_node_edge_count_vec.data()),
 			thrust::raw_pointer_cast(edgeInfoVecs.num_origin_nbr_per_node_vec.data()) ) );
 };

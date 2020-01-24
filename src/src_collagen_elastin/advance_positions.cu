@@ -8,6 +8,7 @@
 void advance_positions(
 	NodeInfoVecs& nodeInfoVecs,
 	GeneralParams& generalParams,
+	EdgeInfoVecs& edgeInfoVecs,
 	RandVecs& randVecs) {
 
 
@@ -49,12 +50,12 @@ void advance_positions(
 					nodeInfoVecs.node_loc_z.begin(),
 					nodeInfoVecs.node_vel.begin())),
 			functor_advance_pos(
-				generalParams.dtTemp,
-				generalParams.viscosity_collagen,
-				generalParams.viscosity_elastin,
+				generalParams.dt,
+				edgeInfoVecs.viscosity_collagen,
+				edgeInfoVecs.viscosity_elastin,
 				edgeInfoVecs.temperature,
 				edgeInfoVecs.kB,
-				generalParams.node_mass,
+				edgeInfoVecs.node_mass,
 				generalParams.max_node_count,
 				thrust::raw_pointer_cast(nodeInfoVecs.node_is_collagen.data()),
 				thrust::raw_pointer_cast(nodeInfoVecs.node_is_elastin.data()),
