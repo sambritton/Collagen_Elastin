@@ -30,7 +30,7 @@ bool InitExt = true;
 bool LogState = false;
 bool firstStep = true;
 bool newChoiceOfDataField = false; //to input different values for P,C,Bs etc use data fields.
-bool noLinking = false;
+bool noedgeing = false;
 //input -data_field=int will give index of vector for corresponding values saved in
 //newChoiceosDataField
 int choiceOfDataField;
@@ -45,7 +45,7 @@ double pullPercent = 10.0;
 
 
 void printUsage() {
-	std::cout << "Usage1: <program-name> [params] <scheme-file>" << std::endl;
+	std::cout << "Usage1: [params] <scheme-file>" << std::endl;
 }
 
 //
@@ -59,12 +59,12 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 	}
 	pugi::xml_node root = doc.child("data");
 	pugi::xml_node nodes = root.child("nodes");
-	pugi::xml_node links = root.child("links");
+	pugi::xml_node edges = root.child("edges");
 	pugi::xml_node props = root.child("settings");
 
 	//first, we'll input settings
 
-	if (!(root && nodes && links)) {
+	if (!(root && nodes && edges)) {
 		std::cout << "couldn't find nessesary data\n";
 	}
 
@@ -96,6 +96,7 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 
 	if (auto p = props.child("extra-nodes-per-edge"))
 		builder->default_extra_nodes_per_edge = (p.text().as_uint());
+		std::cout<<"extra nodes: "<< builder->default_extra_nodes_per_edge << std::endl;
 
 	if (auto p = props.child("use-extra-nodes"))
 		builder->use_extra_nodes = (p.text().as_bool());
@@ -146,9 +147,18 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 	}
 
 	unsigned from, to;
-	for (auto link = links.child("link"); link; link = link.next_sibling("link")) {
-		if (2 != sscanf(link.text().as_string(""), "%u %u" , &from, &to)) {
-			std::cout << "parse link error\n";
+	for (auto edge = edges.child("edge_collagen"); edge; edge = edge.next_sibling("edge_collagen")) {
+		if (2 != sscanf(edge.text().as_string(""), "%u %u" , &from, &to)) {
+			std::cout << "parse edge error\n";
+			return 0;
+		}
+		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
+		builder->put_spring(from, to); //adds edges into saved vectors
+
+	}
+	for (auto edge = edges.child("edge_elastin"); edge; edge = edge.next_sibling("edge_elastin")) {
+		if (2 != sscanf(edge.text().as_string(""), "%u %u" , &from, &to)) {
+			std::cout << "parse edge error\n";
 			return 0;
 		}
 		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
@@ -194,18 +204,22 @@ std::string generateOutputFileName(std::string inputFileName)
 
 
 
-int diagram_main(int argc, char** argv) {
 
-	time_t t0,t1;
-	t0 = time(0);
-	std::cout << "inside diagram_main " << asctime(localtime(&t0)) << std::endl;
-	if (argc < 3) {
-		std::cout << "not enough parameters" << std::endl;
+
+
+int main(int argc, char** argv)
+{
+	std::cout << argc << std::endl;
+	std::cout<< argv[0] << std::endl;
+	std::cout<< argv[1] << std::endl;
+	if (argc < 1) {
 		printUsage();
 		return UE_NOT_ENOUGH_ARGUMENTS;
 	}
 
-	std::cout << "diagram_main started" << std::endl;
+
+	time_t t0,t1;
+	t0 = time(0);
 
 	double forceStep = 0.0;
 	double epsilon = 0.0;
@@ -216,19 +230,10 @@ int diagram_main(int argc, char** argv) {
 	bool epsilonEncountered = false;
 	bool dtEncountered = false;
 
-	for (int i = 0; i < argc-1; ++i) {
-
-
+	for (int i = 0; i < argc; ++i) {
 		std::string arg = argv[i];
 		unsigned pos = arg.find('=');
 
-		if (pos == std::string::npos)
-		{
-
-			std::cout << "UNKNOWN ARG " << arg << std::endl;
-			printUsage();
-			return UE_UNKNOWN_ARGUMENT;
-		}
 		std::string key = arg.substr(0, pos);
 		std::string val = arg.substr(pos + 1);
 
@@ -247,30 +252,18 @@ int diagram_main(int argc, char** argv) {
 			dtEncountered = true;
 			continue;
 		}
-
-
 		if (key == "--lagTime") {
 			equilibriumLagTime = std::atof(val.c_str());
 			continue;
 		}
-
-
 		if (key == "--pullPercent") {
 			pullPercent = std::atof(val.c_str());
 			continue;
 		}
-
-
-		printUsage();
-		return UE_UNKNOWN_ARGUMENT;
 	}
 
-	if (!(forceStepEncountered && epsilonEncountered && dtEncountered)) {
-		printUsage();
-		std::cout << "not enough parameters: df, dt and eps requred" << std::endl;
-		return UE_NOT_ENOUGH_ARGUMENTS;
-	};
 
+	std::cout<<"pre builder"<<std::endl;
 
 	auto builder = std::make_shared<System_Builder>(epsilon, timeStep, forceStep, targetStrain);
 	builder->default_pull_percent = pullPercent;
@@ -301,26 +294,6 @@ int diagram_main(int argc, char** argv) {
 	sec = (total % 3600) % 60;
 	// текущее время расчета
 	std::cout << "Total time hh: " << hours << " mm:" << min << " ss:" << sec <<"\n";
-	return 0;
-}
-
-
-int main(int argc, char** argv)
-{
-	std::cout << argc;
-	std::cout << std::endl;
-
-	if (argc < 2) {
-		printUsage();
-		return UE_NOT_ENOUGH_ARGUMENTS;
-	}
-
-	// choose calculation mode
-	std::string mode = argv[1];
-
-	std::cout << mode << std::endl;
-	if (mode == "diagram") {
-		return diagram_main(argc - 2, argv + 2);
-	}
+	
 	return 0;
 }

@@ -75,7 +75,7 @@ public:
 	bool use_extra_nodes = false;
 	bool use_constant_number_extra_nodes = false;
 
-	unsigned default_extra_nodes_per_edge = 2;
+	unsigned default_extra_nodes_per_edge = 0;
 
 	bool default_strain_sim = false;
 	bool default_linking = true;
