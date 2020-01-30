@@ -124,7 +124,7 @@ void System::solve_system() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 
-			storage->updateTotalStrain();
+			//storage->updateTotalStrain();
 		}
 
 
