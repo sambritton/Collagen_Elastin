@@ -14,6 +14,10 @@ struct HostNodeInfoVecs {
 	thrust::host_vector<unsigned> host_spring_edge_left;
 	thrust::host_vector<unsigned> host_spring_edge_right;
 	thrust::host_vector<double> host_spring_length_zero;
+	
+	thrust::host_vector<unsigned> host_sub_spring_edge_left;
+	thrust::host_vector<unsigned> host_sub_spring_edge_right;
+	thrust::host_vector<double> host_sub_spring_length_zero;
 
 	thrust::host_vector<unsigned> host_torsion_index_left;
 	thrust::host_vector<unsigned> host_torsion_index_center;
@@ -86,13 +90,14 @@ public:
 
 	std::vector<glm::dvec3> nodePositions;
 
-	unsigned add_elastin_node(glm::dvec3 );
+	unsigned add_elastin_node(glm::dvec3);
 	unsigned add_collagen_node(glm::dvec3);
 
 
 	void put_spring(unsigned, unsigned);
-	void put_collagen_spring(unsigned, unsigned);
-	void put_elastin_spring(unsigned, unsigned);
+	void put_sub_spring(unsigned, unsigned);
+	//void put_collagen_spring(unsigned, unsigned);
+	//void put_elastin_spring(unsigned, unsigned);
 	void put_bending_spring(unsigned, unsigned, unsigned);
 	void add_sub_nodes(void);
 	std::list<glm::dvec3> fill_space(glm::dvec3, glm::dvec3, unsigned);

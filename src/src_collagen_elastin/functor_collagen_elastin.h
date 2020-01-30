@@ -97,7 +97,9 @@ struct functor_collagen_elastin {
 			for (unsigned i = beginIndex; i < endIndex; i++) {//currentSpringCount is the length of index and value vectors
 				unsigned idB = global_neighbors[i];//look through possible neighbors. May contain ULONG_MAX
 				if (idB < max_node_count){
-
+					if (idA == 0 || idA == 1){
+						double no_var=1;
+					}
 					double length_zero = lenZero[i];
 					bool is_edge_collagen = global_is_edge_collagen[i];
 					bool is_edge_elastin = global_is_edge_elastin[i];
@@ -132,9 +134,10 @@ struct functor_collagen_elastin {
 						}
 						else if (is_edge_collagen){
 							//apply linear spring force
-            	magForceX = collagen_spring_constant * (posXA_XB/length_current);
-            	magForceY = collagen_spring_constant * (posYA_YB/length_current);
-            	magForceZ = collagen_spring_constant * (posZA_ZB/length_current);
+							double magnitude = collagen_spring_constant * (length_current - length_zero);
+							magForceX = magnitude * (posXA_XB/length_current);
+							magForceY = magnitude * (posYA_YB/length_current);
+							magForceZ = magnitude * (posZA_ZB/length_current);
 						}
 
 						sumForceX += magForceX;

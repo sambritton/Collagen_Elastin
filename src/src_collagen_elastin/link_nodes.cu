@@ -63,15 +63,28 @@ void link_nodes(
 				thrust::raw_pointer_cast(nodeInfoVecs.id_temp_linked_right.data()) ) );
 
 
-
-		/*	for (unsigned i = 0; i < id_temp_linked_left.size(); i++) {
-				unsigned varL = id_temp_linked_left[i];
-				unsigned varR = id_temp_linked_right[i];
+			/*
+			for (unsigned i = 0; i < nodeInfoVecs.id_temp_linked_left.size(); i++) {
+				unsigned varL = nodeInfoVecs.id_temp_linked_left[i];
+				unsigned varR = nodeInfoVecs.id_temp_linked_right[i];
 
 				if ((varL != 0) || (varR != 0))
 					std::cout<< varL << " " <<varR << std::endl;
 			}
-		unsigned begin = 479 * generalParams.max_nbr_count;
+			for (unsigned i = 0; i < edgeInfoVecs.global_neighbors.size(); i++) {
+				if ((i > 0) && (i % ( generalParams.max_nbr_count) == 0)){
+					std::cout << " " << std::endl;
+				}
+				unsigned varL = edgeInfoVecs.global_neighbors[i];
+				if (varL < generalParams.max_node_count){
+					std::cout << " " << varL;
+				}
+			}
+			std::cout << " " << std::endl;
+			std::cout<< nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0]<< std::endl;
+			std::cout<< nodeInfoVecs.node_loc_x[1] << " " << nodeInfoVecs.node_loc_y[1] << " " << nodeInfoVecs.node_loc_z[1]<< std::endl;
+			*/
+		/*unsigned begin = 479 * generalParams.max_nbr_count;
 		unsigned end = begin + generalParams.max_nbr_count;
 		for (unsigned i = begin; i < end; i++){
 			unsigned id = edgeInfoVecs.global_neighbors[i];
@@ -189,8 +202,10 @@ void link_nodes(
 			if (((idL != 0) || (idR != 0)) && (count == 1)) {
 
 				//count edges
-				//std::cout << "placing id from tester: " << idL << " " << idR << std::endl;
-
+				std::cout << "placing id from tester: " << idL << " " << idR << std::endl;
+				std::cout << " total edge count " << generalParams.current_edge_count << std::endl;
+				std::cout<< nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0]<< std::endl;
+				std::cout<< nodeInfoVecs.node_loc_x[1] << " " << nodeInfoVecs.node_loc_y[1] << " " << nodeInfoVecs.node_loc_z[1]<< std::endl;
 
 				nodeInfoVecs.host_edge_left[generalParams.current_edge_count] = (idL);
 				nodeInfoVecs.host_edge_right[generalParams.current_edge_count] = (idR);

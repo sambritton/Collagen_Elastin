@@ -118,7 +118,7 @@ struct DomainParams {
 	double origin_max_y;
 	double origin_min_z;
 	double origin_max_z;
-	double grid_spacing_net_intc = 1.0;
+	double grid_spacing_net_intc = 0.5;
 	unsigned bucket_count_x;
 	unsigned bucket_count_y;
 	unsigned bucket_count_z;
@@ -267,6 +267,8 @@ public:
 	void solve_system();
 
 	void solve_forces(); //use in system.cu
+
+	void set_bucket_scheme();
 
 	void assign_storage(std::shared_ptr<Storage> _storage);
 

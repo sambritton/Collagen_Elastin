@@ -133,6 +133,7 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 			return 0;
 		}
 		builder->add_collagen_node(glm::dvec3(x, y, z));
+		//std::cout<<"setting collagen node" <<std::endl;
 	}
 	//now add elastin points
 	for (auto node = nodes.child("node_elastin"); node; node = node.next_sibling("node_elastin")) {
@@ -144,6 +145,8 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 			return 0;
 		}
 		builder->add_elastin_node(glm::dvec3(x, y, z));
+		
+		//std::cout<<"setting elastin node" <<std::endl;
 	}
 
 	unsigned from, to;
@@ -154,6 +157,8 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 		}
 		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
 		builder->put_spring(from, to); //adds edges into saved vectors
+		
+		//std::cout<<"setting collagen spring" <<std::endl;
 
 	}
 	for (auto edge = edges.child("edge_elastin"); edge; edge = edge.next_sibling("edge_elastin")) {
@@ -163,6 +168,8 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 		}
 		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
 		builder->put_spring(from, to); //adds edges into saved vectors
+		
+		//std::cout<<"setting elastin spring" <<std::endl;
 
 	}
 

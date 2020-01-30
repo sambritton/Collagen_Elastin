@@ -26,47 +26,53 @@
 
 using namespace thrust::placeholders;
 
+void System::set_bucket_scheme(){
+	init_dim_general(nodeInfoVecs, domainParams, auxVecs, generalParams);
+	init_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
+	build_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
+	extend_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
+}
+
 void System::solve_forces() {
 
 	thrust::fill(nodeInfoVecs.node_force_x.begin(),nodeInfoVecs.node_force_x.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_y.begin(),nodeInfoVecs.node_force_y.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_z.begin(),nodeInfoVecs.node_force_z.end(),0);
-
-	init_dim_general(nodeInfoVecs, domainParams, auxVecs, generalParams);
-
-	init_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
-
-	extend_net_inct_bucket(nodeInfoVecs, domainParams, auxVecs, generalParams);
-
+	
 	double addedLinks = generalParams.current_edge_count - generalParams.origin_edge_count;
 
 	if (generalParams.linking == true) {
-			link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
+
+		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
 
 	//apply external force.
-	external_force(
+	/*external_force(
 		nodeInfoVecs,
 		generalParams,
 		extensionParams,
-		domainParams);
+		domainParams);*/
 
 	//only counts external force on network nodes since force has been reset.
-	extensionParams.totalAppliedForce = thrust::transform_reduce(
-			thrust::make_zip_iterator(
-				thrust::make_tuple(
-					nodeInfoVecs.node_force_x.begin(),
-					nodeInfoVecs.node_force_y.begin(),
-					nodeInfoVecs.node_force_z.begin())),
-			thrust::make_zip_iterator(
-				thrust::make_tuple(
-					nodeInfoVecs.node_force_x.begin(),
-					nodeInfoVecs.node_force_y.begin(),
-					nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
-				functor_norm(), 0.0, thrust::plus<double>() );
 
-  calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
+
+
+  	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
 	calc_spring_force(nodeInfoVecs, edgeInfoVecs, generalParams);
+	extensionParams.totalAppliedForce = thrust::transform_reduce(
+		thrust::make_zip_iterator(
+			thrust::make_tuple(
+				nodeInfoVecs.node_force_x.begin(),
+				nodeInfoVecs.node_force_y.begin(),
+				nodeInfoVecs.node_force_z.begin())),
+		thrust::make_zip_iterator(
+			thrust::make_tuple(
+				nodeInfoVecs.node_force_x.begin(),
+				nodeInfoVecs.node_force_y.begin(),
+				nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
+			functor_norm(), 0.0, thrust::plus<double>() );
+	
+	//std::cout<<" total applied force: " << extensionParams.totalAppliedForce << std::endl;
 };
 
 
@@ -74,12 +80,16 @@ void System::solve_system() {
 
 	double lastTime = 0.0;
 	bool runIters = true;
+	set_bucket_scheme();
 
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
 		generalParams.currentTime += generalParams.dt;
-		//std::cout << "current time: " << std::endl;
+		//std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
+		//if (generalParams.iterationCounter % 50 == 0){
+		set_bucket_scheme();
+		//}
 
 		advance_positions(
 			nodeInfoVecs,
@@ -120,6 +130,15 @@ void System::solve_system() {
 
 		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
 
+		thrust::device_vector<double>::iterator iter = thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end());
+
+		unsigned position = iter - nodeInfoVecs.node_vel.begin();
+		double max_val = *iter;
+
+		//std::cout << "The maximum value is " << max_val << " at position " << position << std::endl;
+		//std::cout<< "node :" << nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0] << std::endl;
+		
+		/*
 		if (maxVel < generalParams.epsilon) {
 			//store sum of all forces on each node. Used in stress calculations
 			thrust::transform(
@@ -145,7 +164,7 @@ void System::solve_system() {
 			generalParams.magnitudeForce += generalParams.df;
 			std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
 
-		}
+		}*/
 		///////////////////////////////////////////////////////////////////////////////
 		//EQUILIBRIUM END
 		//////////////////////////////////////////////////////////////////////
@@ -403,7 +422,7 @@ void System::set_edge_vecs(
 	edgeInfoVecs.num_origin_nbr_per_node_vec.resize(generalParams.max_node_count);
 
 
-  	thrust::fill(edgeInfoVecs.global_neighbors.begin(), edgeInfoVecs.global_neighbors.end(), ULONG_MAX);
+  	thrust::fill(edgeInfoVecs.global_neighbors.begin(), edgeInfoVecs.global_neighbors.end(), generalParams.max_node_count);
   	thrust::fill(edgeInfoVecs.global_isedge_collagen.begin(), edgeInfoVecs.global_isedge_collagen.end(), false);
   	thrust::fill(edgeInfoVecs.global_isedge_elastin.begin(), edgeInfoVecs.global_isedge_elastin.end(), false);
 

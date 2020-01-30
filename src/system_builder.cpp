@@ -29,6 +29,7 @@ System_Builder::~System_Builder() {
 }
 
 //currently unused
+/*
 void System_Builder::put_elastin_spring(unsigned n1, unsigned n2) {
 	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
 
@@ -51,31 +52,31 @@ void System_Builder::put_collagen_spring(unsigned n1, unsigned n2) {
 	hostNodeInfoVecs.host_spring_edge_right.push_back(n2);
 	//hostNodeInfoVecs.host_sub_edge_is_collagen.push_back(true)
 	//hostNodeInfoVecs.host_sub_edge_is_elastin.push_back(false)
-};
+};*/
 
 void System_Builder::put_spring(unsigned n1, unsigned n2) {
 
-	//possibly remove section since node type determines spring.
-	bool is_n1_collagen = hostNodeInfoVecs.host_node_is_collagen[n1];
-	bool is_n1_elastin = hostNodeInfoVecs.host_node_is_elastin[n1];
-	bool is_n2_collagen = hostNodeInfoVecs.host_node_is_collagen[n2];
-	bool is_n2_elastin = hostNodeInfoVecs.host_node_is_elastin[n2];
-	bool is_spring_collagen = false;
-	bool is_spring_elastin = false;
-	if (is_n1_collagen && is_n2_collagen){
-		is_spring_collagen=true;
-	}
-	else{
-		is_spring_elastin=true;
-	}
+	std::cout<<"adding spring between: " << n1 << " " << n2 << std::endl;
+	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
 
-	if (is_spring_collagen){
-		put_collagen_spring(n1, n2);
-	}
-	else if (is_spring_elastin){
-		put_elastin_spring(n1, n2);
-	}
+	hostNodeInfoVecs.host_spring_edge_left.push_back(n1);
+	hostNodeInfoVecs.host_spring_edge_right.push_back(n2);
+	
+	hostNodeInfoVecs.host_spring_length_zero.push_back(global_length_zero);
 };
+
+
+void System_Builder::put_sub_spring(unsigned n1, unsigned n2) {
+
+	
+	std::cout<<"adding sub spring between: " << n1 << " " << n2 << std::endl;
+	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
+
+	hostNodeInfoVecs.host_sub_spring_edge_left.push_back(n1);
+	hostNodeInfoVecs.host_sub_spring_edge_right.push_back(n2);
+	hostNodeInfoVecs.host_sub_spring_length_zero.push_back(global_length_zero);
+};
+
 /*
 void System_Builder::putSubSpring(unsigned n1, unsigned n2) {
 	bool is_n1_collagen = hostNodeInfoVecs.host_node_is_collagen[n1];
@@ -128,6 +129,7 @@ void System_Builder::put_bending_spring(unsigned n1, unsigned n2, unsigned n3) {
 unsigned System_Builder::add_collagen_node(glm::dvec3 pos) {
 
 	unsigned newId = buildNodes.size();
+	std::cout<<"adding new collagen node: " << newId<< std::endl;
 	//notice the node and buildnode have the same corresponding id's.
 	std::shared_ptr<BuildNode> ptr1(new BuildNode(newId));
 	buildNodes.push_back(ptr1);
@@ -146,11 +148,13 @@ unsigned System_Builder::add_collagen_node(glm::dvec3 pos) {
 	hostNodeInfoVecs.host_is_node_fixed.push_back(false);
 	return newId;
 
-}
+} 
 
 unsigned System_Builder::add_elastin_node(glm::dvec3 pos) {
 
 	unsigned newId = buildNodes.size();
+	
+	std::cout<<"adding new elastin node: " << newId<< std::endl;
 	//notice the node and buildnode have the same corresponding id's.
 	std::shared_ptr<BuildNode> ptr1(new BuildNode(newId));
 	buildNodes.push_back(ptr1);
@@ -190,7 +194,10 @@ std::list<glm::dvec3> System_Builder::fill_space(glm::dvec3 from, glm::dvec3 to,
 //is added.
 //notice that we sort the neighbors so torsion springs will be placed in a specific ordering. This is used when preferred angles are stored in a matrix.
 void System_Builder::generate_build_node_triplets() {
+	
+	std::cout<<"node positions" << std::endl;
 	for (unsigned i = 0; i < nodePositions.size(); i++) {
+		//std::cout<<nodePositions[i]<<std::endl;
 		auto ptrBN = buildNodes[i];
 		unsigned center = ptrBN->id;
 
@@ -206,8 +213,10 @@ void System_Builder::generate_build_node_triplets() {
 				neighbors.push_back(idLeft);
 			}
 		}
-
-
+		std::cout<<"nbrs size"<<neighbors.size() <<std::endl;
+		for (unsigned temp = 0; temp < neighbors.size(); temp++){
+			std::cout<<neighbors[temp] << std::endl;
+		}
 		//now that we have the neighbors, we'll add pairs to prev and next
 		//we'll sort them before adding.
 
@@ -231,6 +240,10 @@ void System_Builder::generate_build_node_triplets() {
 				ptrBN->next.push_back(neighbors[index]);
 			}
 		}
+		
+		std::cout<<buildNodes[i]->id<<std::endl;
+		std::cout<<buildNodes[i]->id<<std::endl;
+		std::cout<<buildNodes[i]->id<<std::endl;
 
 	}
 }
@@ -295,7 +308,7 @@ void System_Builder::add_sub_nodes() {
 					subNodeIds.push_back(add_collagen_node(point));
 				}
 				else if (sub_nodes_are_elastin) {
-						subNodeIds.push_back(add_elastin_node(point));
+					subNodeIds.push_back(add_elastin_node(point));
 				}
 			}
 
@@ -307,14 +320,14 @@ void System_Builder::add_sub_nodes() {
 
 			//Now that extra nodes are placed, place extra springs along each divided edge.
 			//link head
-			put_spring(idLeft, subNodeIds.front());
+			put_sub_spring(idLeft, subNodeIds.front());
 			// link all nodes to make a chain
 			for (unsigned i = 0; i < subNodeIds.size() - 1; ++i) {
-				put_spring(subNodeIds[i], subNodeIds[i + 1]);
+				put_sub_spring(subNodeIds[i], subNodeIds[i + 1]);
 			}
 			// link main nodes with and tail of list of sub-nodes
 
-			put_spring(subNodeIds.back(), idRight);
+			put_sub_spring(subNodeIds.back(), idRight);
 
 
 		}
@@ -334,11 +347,29 @@ std::shared_ptr<System> System_Builder::create() {
 
 	//first add all subnodes
 	add_sub_nodes();
+	for (unsigned edge = 0; edge < hostNodeInfoVecs.host_spring_edge_left.size(); edge++ ){
+		std::cout<< "preleft " <<hostNodeInfoVecs.host_spring_edge_left[edge] << std::endl;
+		std::cout<< "preright " <<hostNodeInfoVecs.host_spring_edge_right[edge] << std::endl;
+	}
+	for (unsigned edge = 0; edge < hostNodeInfoVecs.host_sub_spring_edge_left.size(); edge++ ){
+		std::cout<< "sub left " <<hostNodeInfoVecs.host_sub_spring_edge_left[edge] << std::endl;
+		std::cout<< "sub right " <<hostNodeInfoVecs.host_sub_spring_edge_right[edge] << std::endl;
+	}
+	if (hostNodeInfoVecs.host_sub_spring_edge_left.size() > hostNodeInfoVecs.host_spring_edge_left.size()){
+		hostNodeInfoVecs.host_spring_edge_left = hostNodeInfoVecs.host_sub_spring_edge_left;
+		hostNodeInfoVecs.host_spring_edge_right = hostNodeInfoVecs.host_sub_spring_edge_right;
+		hostNodeInfoVecs.host_spring_length_zero = hostNodeInfoVecs.host_sub_spring_length_zero;
+	}
+	for (unsigned edge = 0; edge < hostNodeInfoVecs.host_spring_edge_left.size(); edge++ ){
+		std::cout<< "left " <<hostNodeInfoVecs.host_spring_edge_left[edge] << std::endl;
+		std::cout<< "right " <<hostNodeInfoVecs.host_spring_edge_right[edge] << std::endl;
+	}
 
-	std::cout << "edge count: " << hostNodeInfoVecs.host_spring_length_zero.size() << std::endl;
+	std::cout << "total edge count: " << hostNodeInfoVecs.host_spring_length_zero.size() << std::endl;
 
 	unsigned numNodes = hostNodeInfoVecs.host_pos_x.size();
 	unsigned numEdges = hostNodeInfoVecs.host_spring_edge_left.size();
+	std::cout << "node count before adding: " << origin_node_count << std::endl;
 	std::cout << "node count after adding: " << numNodes << std::endl;
 
 
@@ -352,8 +383,9 @@ std::shared_ptr<System> System_Builder::create() {
 			for (unsigned i = 0; i < (center->next).size(); ++i) {
 				unsigned left = center->prev[i];
 				unsigned right = center->next[i];
+				
+				std::cout << "bending spring: " << left << " " << center->id<< " " << right << std::endl;
 				put_bending_spring(left, center->id, right);//set theta value here
-
 			}
 	}
 

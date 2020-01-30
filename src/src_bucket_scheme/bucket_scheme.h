@@ -15,17 +15,19 @@ void init_dim_general(
 	AuxVecs& auxVecs,
 	GeneralParams& generalParams);
 
+void build_net_inct_bucket(
+	NodeInfoVecs& nodeInfoVecs,
+	DomainParams& domainParams,
+	AuxVecs& auxVecs,
+	GeneralParams& generalParams);
+	
 void init_net_inct_bucket(
 	NodeInfoVecs& nodeInfoVecs,
 	DomainParams& domainParams,
 	AuxVecs& auxVecs,
 	GeneralParams& generalParams);
 
-void build_net_inct_bucket(
-	NodeInfoVecs& nodeInfoVecs,
-	DomainParams& domainParams,
-	AuxVecs& auxVecs,
-	GeneralParams& generalParams);
+
 
 void extend_net_inct_bucket(
 	NodeInfoVecs& nodeInfoVecs,

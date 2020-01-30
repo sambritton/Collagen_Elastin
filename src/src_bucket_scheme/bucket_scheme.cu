@@ -154,6 +154,31 @@ void extend_net_inct_bucket(
 		search_begin + domainParams.total_bucket_count_net_intc,
 		auxVecs.key_end_net_intc.begin());
 
+		
+	/*
+	unsigned choice = 0;
+	unsigned bucket = auxVecs.id_bucket_net_intc[choice];
+	std::cout<<"bucketplt 0: "<< bucket<<std::endl;
+	std::cout<<"plt pos: "<<nodeInfoVecs.node_loc_x[0]<<" "<<nodeInfoVecs.node_loc_y[0]<<" "<<nodeInfoVecs.node_loc_z[0]<<std::endl;
+	std::cout<<"key len: "<< auxVecs.key_begin_net_intc.size() << std::endl;
+	unsigned begin = auxVecs.key_begin_net_intc[bucket];
+	unsigned end = auxVecs.key_end_net_intc[bucket];
+	
+	std::cout<<"from bucket scheme:"<<std::endl;
+	for (unsigned i = begin; i < end; i++) {
+		
+		unsigned nbr = auxVecs.id_value_expanded_net_intc[i];
+		unsigned buck = auxVecs.id_bucket_net_intc[nbr];
+		double x_dist = nodeInfoVecs.node_loc_x[choice] - nodeInfoVecs.node_loc_x[nbr];
+		double y_dist = nodeInfoVecs.node_loc_y[choice] - nodeInfoVecs.node_loc_y[nbr];
+		double z_dist = nodeInfoVecs.node_loc_z[choice] - nodeInfoVecs.node_loc_z[nbr];
+		double dist = std::sqrt(std::pow(x_dist,2.0)+std::pow(y_dist,2.0)+std::pow(z_dist,2.0));
+		if ((dist < 19.0) && (dist>0)){
+			std::cout<<"dist: "<< dist<< " between: "<< choice << " and nbr: "<< nbr<<std::endl; 
+			std::cout<<"nbr: "<< nbr<< " is in bucket: "<< buck <<std::endl;
+		}
+	}*/
+
 }
 
 
