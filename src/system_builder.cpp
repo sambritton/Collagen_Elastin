@@ -425,6 +425,7 @@ std::shared_ptr<System> System_Builder::create() {
 	system_ptr->extensionParams.axis = axis;
 
 	system_ptr->generalParams.pull_percent = default_pull_percent;
+	std::cout<<"pull percent in builder.cpp: " << system_ptr->generalParams.pull_percent<< std::endl;
 
 	system_ptr->initialize_system(hostNodeInfoVecs);
 

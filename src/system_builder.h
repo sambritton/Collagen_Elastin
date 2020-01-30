@@ -57,7 +57,7 @@ public:
 public:
 	HostNodeInfoVecs hostNodeInfoVecs;
 	
-	double default_pull_percent = 0.0;
+	double default_pull_percent; //default set in main.cpp
 	double epsilon, dt, df, default_target_strain;
 
 	double default_bend_stiffness_collagen=0.5;

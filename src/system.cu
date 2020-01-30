@@ -311,17 +311,19 @@ void System::determine_bounds() {
 
 	//sort in increasing order
 	thrust::sort(zPosTemp.begin(), zPosTemp.end(), thrust::less<double>());
-	double length = zPosTemp[ zPosTemp.size()-1 ];
+	double length = zPosTemp[ zPosTemp.size()-1 ] - zPosTemp[0];
 	std::cout<<"start end ZposTemp: "<< zPosTemp[0] << " "<< zPosTemp[zPosTemp.size()-1]<<std::endl;
 
 	//upperLevelAlt pulls 10% default. Set in main.cpp using input
-	if (generalParams.pull_percent >= 1.0) {
-		std::cout<<"ERROR PULL PERCENT MUST BE LESS THAN ONE"<<std::endl;;
+	if (generalParams.pull_percent >= 1.0 || generalParams.pull_percent < 0.0) {
+		generalParams.pull_percent=1.0;
+		std::cout<<"ERROR PULL PERCENT MUST BE LESS THAN ONE AND LARGER THAN 0.0"<<std::endl;
 	}
-	double upperLevelAlt = (1.0 - generalParams.pull_percent) * length;
+	double pull_width=(1.0 - (generalParams.pull_percent)) * length;
+	double upperLevelAlt = zPosTemp[zPosTemp.size()-1] - pull_width;
 
 
-	double lowerLevel = abs (upperLevelAlt - (zPosTemp[zPosTemp.size()-1]));
+	double lowerLevel = zPosTemp[0] + pull_width;
 
 	std::cout<<"minimal level final choice for strain choice: " << lowerLevel <<std::endl;
 
@@ -340,8 +342,9 @@ void System::determine_bounds() {
 	generalParams.numUpperStrainNodes = thrust::count_if(nodeInfoVecs.node_upper_selection_pull.begin(),nodeInfoVecs.node_upper_selection_pull.end(), IsEqualToOne( ) );
 	generalParams.numLowerStrainNodes = thrust::count_if(nodeInfoVecs.node_lower_selection_pull.begin(),nodeInfoVecs.node_lower_selection_pull.end(), IsEqualToOne( ) );
 
-	std::cout<<"number of nodes pulled for strain: " << generalParams.numLowerStrainNodes + generalParams.numUpperStrainNodes <<std::endl;
-
+	std::cout<<"number of nodes pulled for lower strain: " << generalParams.numLowerStrainNodes << std::endl;
+	std::cout<<"number of nodes pulled for upper strain: " << generalParams.numUpperStrainNodes << std::endl;
+	
 	unsigned numFixed = thrust::count_if(nodeInfoVecs.is_node_fixed.begin(),nodeInfoVecs.is_node_fixed.end(), IsEqualToOne() );
 	std::cout<<"number of nodes fixed: " << numFixed <<std::endl;
 	zPosTemp.resize(0);

@@ -213,7 +213,7 @@ struct GeneralParams{
 	bool run_sim = true; //default true to begin sim. Sim ends when runSim == false
 	bool strain_sim = false;
 
-	double pull_percent = 0.1; // set in main.cpp
+	double pull_percent; // set in main.cpp
 
 	unsigned max_nbr_count = 50;
 	unsigned max_node_count;//after discretize

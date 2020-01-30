@@ -41,7 +41,7 @@ double largestForce = 0.0;//used for while loop in solve method. Set in Force in
 double targetStrain = 1.0;//used to set target for how much network should be compressed using rheometerSim. Set between 0.05 and 1.
 
 double equilibriumLagTime = 1.0;
-double pullPercent = 10.0;
+double pullPercent = 0.1;
 
 
 void printUsage() {
