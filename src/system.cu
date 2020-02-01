@@ -319,7 +319,7 @@ void System::determine_bounds() {
 		generalParams.pull_percent=1.0;
 		std::cout<<"ERROR PULL PERCENT MUST BE LESS THAN ONE AND LARGER THAN 0.0"<<std::endl;
 	}
-	double pull_width=(1.0 - (generalParams.pull_percent)) * length;
+	double pull_width = generalParams.pull_percent * length;
 	double upperLevelAlt = zPosTemp[zPosTemp.size()-1] - pull_width;
 
 
