@@ -1,4 +1,7 @@
+#include <sys/stat.h>
 
+#include <iomanip> // setprecision
+#include <sstream> // stringstream
 
 #include "system.h"
 #include "system_builder.h"
@@ -13,104 +16,45 @@ Storage::Storage(std::weak_ptr<System> a_system,
 	system = a_system;
 	builder = b_system;
 	bn = a_fileName; //this will be used later to open files
-	std::ofstream statesOutput(a_fileName + ".sta");
-	std::ofstream statesOutputStrain(a_fileName + "_Strain.sta");
+	//std::ofstream statesOutput(a_fileName + ".sta");
+	//std::ofstream statesOutputStrain(a_fileName + "_Strain.sta");
 
-	std::shared_ptr<System> sysA = system.lock();
-	std::shared_ptr<System_Builder> sysB = builder.lock();
+	std::shared_ptr<System> sys = system.lock();
 
-	if ((sysA) && (sysB) ){
-		unsigned max_node_count = sysA->generalParams.max_node_count;
-		unsigned max_nbr_count = sysA->generalParams.max_nbr_count;
+	if ( sys ){
+		std::stringstream stream_min;
+		std::stringstream stream_max;
 
-		statesOutput << "node_count " << max_node_count << '\n';
-		statesOutput << "origin_node_count " << sysA->generalParams.origin_node_count << '\n';
-		statesOutput << "origin_link_count " << sysA->generalParams.origin_edge_count << '\n';
-		statesOutput << "sub_node_count " << sysA->generalParams.sub_node_count << std::endl;//system->getSubNodesSize() << '\n';
-		statesOutput << "link_count " << sysA->generalParams.current_edge_count << '\n';
+		unsigned domain_size = ceil((sys->domainParams.max_x + 
+			sys->domainParams.max_y + 
+			sys->domainParams.max_z) / 3.0);
 
-		for (unsigned edge = 0; edge < sysB->hostNodeInfoVecs.host_spring_edge_left.size(); edge++) {
-			unsigned idLeft = sysB->hostNodeInfoVecs.host_spring_edge_left[edge];
-			unsigned idRight = sysB->hostNodeInfoVecs.host_spring_edge_right[edge];
-			statesOutput << '\n' << idLeft << ' ' << idRight;
-		}
+		unsigned var = sys->generalParams.max_node_count;
+		
+		std::string str_var = "_var_";
 
+		std::string str_a = "Animation_";
+		std::string str_p = "Params_";
+		
+		str_animation = str_a +
+			str_var + std::to_string(var);
+
+		const int dir_err_anim = mkdir(str_animation.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		if (-1 == dir_err_anim)
+		{printf("Error creating directory animation test!n");}
+		else {printf("making folder!n"); printf(str_animation.c_str());}
+
+		str_params = str_p + 
+			str_var + std::to_string(var);
+
+		const int dir_err_params = mkdir(str_params.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+		if (-1 == dir_err_params)
+		{printf("Error creating directory params!n");}
+		else {printf("making folder!n"); printf(str_params.c_str());}
 	}
-
-
-	statesOutput.close();
-}
-
-void Storage::updateStrain() {
-
-/*	std::shared_ptr<system> sys = system.lock();
-	if (sys) {
-
-	statesOutputStrain.open(bn + "_Strain.sta", std::ofstream::out | std::ofstream::app);
-		statesOutputStrain << "\ntime " << sys->generalParams.currentTime;
-		statesOutputStrain << "\nforce " << sys->extensionParams.totalAppliedForce;
-
-		statesOutputStrain << "\nupper_XPos " << sys->domainParams.max_x;
-		statesOutputStrain << "\nlower_XPos " << sys->domainParams.min_x;
-
-		statesOutputStrain << "\nupper_YPos " << sys->domainParams.max_y;
-		statesOutputStrain << "\nlower_YPos " << sys->domainParams.min_y;
-
-		statesOutputStrain << "\nupper_ZPosAve " << sys->extensionParams.averageUpperStrain;
-		statesOutputStrain << "\nlower_ZPosAve " << sys->extensionParams.averageLowerStrain;
-		statesOutputStrain << "\noriginal_extended_percent " << sys->edgeInfoVecs.percentOriginalEdgesExtended;
-		statesOutputStrain << "\noriginal_compressed_percent " << sys->edgeInfoVecs.percentOriginalEdgesCompressed;
-		statesOutputStrain << "\noriginal_average_strain " << sys->edgeInfoVecs.averageStrainOriginalEdges;
-
-
-		for (unsigned i = 0; i < sys->edgeInfoVecs.strainBucketOriginalNeg.size(); i++ ) {
-			statesOutputStrain << " \noriginal_strain_neg " << sys->edgeInfoVecs.strainBucketOriginalNeg[i] / (2.0 * sys->generalParams.originEdgeCount);
-
-		}
-		for (unsigned i = 0; i < sys->edgeInfoVecs.strainBucketOriginalPos.size(); i++ ) {
-			statesOutputStrain << " \noriginal_strain_pos " << sys->edgeInfoVecs.strainBucketOriginalPos[i] /  (2.0 * sys->generalParams.originEdgeCount);
-		}
-
-
-
-
-		statesOutputStrain << "\nadded_extended_percent " << sys->edgeInfoVecs.percentAddedEdgesExtended;
-		statesOutputStrain << "\nadded_compressed_percent " << sys->edgeInfoVecs.percentAddedEdgesCompressed;
-		statesOutputStrain << "\nadded_average_strain " << sys->edgeInfoVecs.averageStrainAddedEdges;
-
-		double sumOfNumsAdded = std::accumulate(sys->edgeInfoVecs.strainBucketAddedNeg.begin(),
-			sys->edgeInfoVecs.strainBucketAddedNeg.end(),0.0);
-		sumOfNumsAdded += std::accumulate(sys->edgeInfoVecs.strainBucketAddedPos.begin(),
-			sys->edgeInfoVecs.strainBucketAddedPos.end(),0.0);
-		for (unsigned i = 0; i < sys->edgeInfoVecs.strainBucketAddedNeg.size(); i++ ) {
-			statesOutputStrain << " \nadded_strain_neg " << sys->edgeInfoVecs.strainBucketAddedNeg[i]/sumOfNumsAdded;
-
-		}
-		for (unsigned i = 0; i < sys->edgeInfoVecs.strainBucketAddedPos.size(); i++ ) {
-			statesOutputStrain << " \nadded_strain_pos " << sys->edgeInfoVecs.strainBucketAddedPos[i]/sumOfNumsAdded;
-
-		}
-
-
-		for (unsigned i = 0; i < sys->edgeInfoVecs.alignmentAverage.size(); i++ ) {
-			double numEdgesInBin = sys->edgeInfoVecs.numberOfEdgesAlignment[i];
-			double val = 0.0;
-
-			if (numEdgesInBin != 0.0) {
-				val  = sys->edgeInfoVecs.alignmentAverage[i]/numEdgesInBin;
-			}
-			statesOutputStrain << " \nslice_alignment " << val;
-
-		}
-
-
-	}
-	statesOutputStrain.flush();
-	statesOutputStrain.close();*/
-
 };
 
-void Storage::updateTotalStrain(void) {
+void Storage::save_params(void) {
 	std::shared_ptr<System> sys = system.lock();
 	if (sys) {
 
@@ -119,12 +63,12 @@ void Storage::updateTotalStrain(void) {
 		//first create a new file using the current network strain
 
 		std::string format = ".sta";
-		std::string strain =  std::to_string(currentStrain);
-		std::string initial = "StrainTest/Strain_";
+		
+		std::string strain =  std::to_string(sys->generalParams.currentTime);
+		std::string initial = str_params+"/Param_";
 		std::ofstream ofs;
 		std::string Filename = initial + strain + format;
 		ofs.open(Filename.c_str());
-
 
 
 		unsigned max_nbr_count = sys->generalParams.max_nbr_count;
@@ -211,15 +155,30 @@ void Storage::updateTotalStrain(void) {
 }
 
 
-void Storage::print_VTK_File() {
+void Storage::print_VTK_file() {
 
 	std::shared_ptr<System> sys = system.lock();
 	if (sys) {
+
+		unsigned max_node_count = sys->generalParams.max_node_count;
+		unsigned max_nbr_count = sys->generalParams.max_nbr_count;
+		unsigned num_collagen_edges = 0;
+		unsigned num_elastin_edges=0;
+		unsigned numEdges = sys->nodeInfoVecs.host_edge_left.size();
+		for (unsigned edge = 0; edge < numEdges; edge++) {	
+			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
+			bool is_A_collagen = sys->nodeInfoVecs.node_is_collagen[idA];
+			bool is_B_collagen = sys->nodeInfoVecs.node_is_collagen[idB];
+			if (is_A_collagen && is_B_collagen){ num_collagen_edges+=1;}
+			else{num_elastin_edges+=1;}
+		}
+		
 		iteration+=1;
 		unsigned digits = ceil(log10(iteration + 1));
 		std::string format = ".vtk";
 		std::string Number;
-		std::string initial = "AnimationTest/Network_";
+		std::string initial = str_animation + "/Collagen_Network_";
 		std::ofstream ofs;
 		if (digits == 1 || digits == 0) {
 			Number = "0000" + std::to_string(iteration);
@@ -238,10 +197,84 @@ void Storage::print_VTK_File() {
 
 		ofs.open(Filename.c_str());
 
+		ofs << "# vtk DataFile Version 3.0" << std::endl;
+		ofs << "Point representing Sub_cellular elem model" << std::endl;
+		ofs << "ASCII" << std::endl << std::endl;
+		ofs << "DATASET UNSTRUCTURED_GRID" << std::endl;
 
-		unsigned max_node_count = sys->generalParams.max_node_count;
-		unsigned max_nbr_count = sys->generalParams.max_nbr_count;
-		unsigned numEdges = sys->generalParams.current_edge_count;
+
+		ofs << "POINTS " << max_node_count << " float" << std::endl;
+		for (unsigned i = 0; i< max_node_count; i++) {
+			double xPos = sys->nodeInfoVecs.node_loc_x[i];
+			double yPos = sys->nodeInfoVecs.node_loc_y[i];
+			double zPos = sys->nodeInfoVecs.node_loc_z[i];
+
+			ofs << std::setprecision(5) <<std::fixed<< xPos << " " << yPos << " " << zPos << " " << '\n'<< std::fixed;
+		}
+		//now plot particles
+		unsigned numCells = num_collagen_edges;
+		unsigned numNumsInCells = 3 * num_collagen_edges;
+
+		ofs << "CELLS " << numCells << " " << numNumsInCells << std::endl;
+
+		for (unsigned edge = 0; edge < numEdges; edge++) {
+			
+			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
+			bool is_A_collagen = sys->nodeInfoVecs.node_is_collagen[idA];
+			bool is_B_collagen = sys->nodeInfoVecs.node_is_collagen[idB];
+			if (is_A_collagen && is_B_collagen){
+				ofs<< 2 << " " << idA << " " << idB << std::endl;
+			}
+		}
+
+		ofs << "CELL_TYPES " << numCells << std::endl;
+		for (unsigned i = 0; i<num_collagen_edges; i++) {
+			ofs << 3 << std::endl;
+		}
+
+		
+		ofs << "CELL_DATA " << numCells << std::endl;
+		ofs << "SCALARS Fiber_Strain double " << std::endl;
+		ofs << "LOOKUP_TABLE default "  << std::endl;
+		for (unsigned edge = 0; edge < numEdges; edge++) {
+			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
+			bool is_A_collagen = sys->nodeInfoVecs.node_is_collagen[idA];
+			bool is_B_collagen = sys->nodeInfoVecs.node_is_collagen[idB];
+			if (is_A_collagen && is_B_collagen){
+				unsigned begin = idA * max_nbr_count;
+				unsigned end = begin + max_nbr_count;
+				double L0;
+				for (unsigned i = begin; i < end; i++) {
+					unsigned idTemp = sys->edgeInfoVecs.global_neighbors[i];
+					if (idTemp == idB){
+						L0 = sys->edgeInfoVecs.global_length_zero[i];
+					}
+				}
+				double xL = sys->nodeInfoVecs.node_loc_x[idA];
+				double yL = sys->nodeInfoVecs.node_loc_y[idA];
+				double zL = sys->nodeInfoVecs.node_loc_z[idA];
+				double xR = sys->nodeInfoVecs.node_loc_x[idB];
+				double yR = sys->nodeInfoVecs.node_loc_y[idB];
+				double zR = sys->nodeInfoVecs.node_loc_z[idB];
+
+				double L1 = std::sqrt( (xL - xR)*(xL - xR)+(yL - yR)*(yL - yR)+(zL - zR)*(zL - zR));
+				double strain = (L1 - L0) / L0;
+				ofs << std::fixed << strain   << std::endl;
+			}
+
+		}
+
+		ofs.close();
+
+
+		//Now print elastin
+		
+		initial = str_animation + "/Elastin_Network_";
+		Filename = initial + Number + format;
+
+		ofs.open(Filename.c_str());
 
 		ofs << "# vtk DataFile Version 3.0" << std::endl;
 		ofs << "Point representing Sub_cellular elem model" << std::endl;
@@ -258,57 +291,57 @@ void Storage::print_VTK_File() {
 			ofs << std::setprecision(5) <<std::fixed<< xPos << " " << yPos << " " << zPos << " " << '\n'<< std::fixed;
 		}
 		//now plot particles
-		unsigned numCells = numEdges;
-		unsigned numNumsInCells = 3 * numEdges;
-
+		numCells = num_elastin_edges;
+		numNumsInCells = 3 * num_elastin_edges;
 
 		ofs << "CELLS " << numCells << " " << numNumsInCells << std::endl;
 
-		for (unsigned idA = 0; idA < max_node_count; idA++ ){
-
-			unsigned beginIndex = idA * max_nbr_count;
-			unsigned endIndex = beginIndex + max_nbr_count;
-			for (unsigned i = beginIndex; i < endIndex; i++) {//currentSpringCount is the length of index and value vectors
-				unsigned idB = sys->edgeInfoVecs.global_neighbors[i];//look through possible neighbors. May contain ULONG_MAX
-
-				if ((idA < idB) && (idB < max_node_count) ) {
-					ofs<< 2 << " " << idA << " " << idB << std::endl;
-				}
+		for (unsigned edge = 0; edge < numEdges; edge++) {
+			
+			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
+			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
+			bool is_A_collagen = sys->nodeInfoVecs.node_is_collagen[idA];
+			bool is_B_collagen = sys->nodeInfoVecs.node_is_collagen[idB];
+			if ((!is_A_collagen) || (!is_B_collagen)){
+				ofs<< 2 << " " << idA << " " << idB << std::endl;
 			}
 		}
 
 		ofs << "CELL_TYPES " << numCells << std::endl;
-		for (unsigned i = 0; i<numEdges; i++) {
+		for (unsigned i = 0; i<num_elastin_edges; i++) {
 			ofs << 3 << std::endl;
 		}
 
-		//
+		
 		ofs << "CELL_DATA " << numCells << std::endl;
 		ofs << "SCALARS Fiber_Strain double " << std::endl;
 		ofs << "LOOKUP_TABLE default "  << std::endl;
 		for (unsigned edge = 0; edge < numEdges; edge++) {
 			unsigned idA = sys->nodeInfoVecs.host_edge_left[edge];
 			unsigned idB = sys->nodeInfoVecs.host_edge_right[edge];
-
-			unsigned begin = idA * sys->generalParams.max_nbr_count;
-			unsigned end = begin + sys->generalParams.max_nbr_count;
-			double L0;
-			for (unsigned i = begin; i < end; i++) {
-				unsigned idTemp = sys->edgeInfoVecs.global_neighbors[i];
-				if (idTemp == idB){
-					L0 = sys->edgeInfoVecs.global_length_zero[i];
+			bool is_A_collagen = sys->nodeInfoVecs.node_is_collagen[idA];
+			bool is_B_collagen = sys->nodeInfoVecs.node_is_collagen[idB];
+			if ((!is_A_collagen) || (!is_B_collagen) ){
+				unsigned begin = idA * max_nbr_count;
+				unsigned end = begin + max_nbr_count;
+				double L0;
+				for (unsigned i = begin; i < end; i++) {
+					unsigned idTemp = sys->edgeInfoVecs.global_neighbors[i];
+					if (idTemp == idB){
+						L0 = sys->edgeInfoVecs.global_length_zero[i];
+					}
 				}
-			}
-			double xL = sys->nodeInfoVecs.node_loc_x[idA];
-			double yL = sys->nodeInfoVecs.node_loc_y[idA];
-			double zL = sys->nodeInfoVecs.node_loc_z[idA];
-			double xR = sys->nodeInfoVecs.node_loc_x[idB];
-			double yR = sys->nodeInfoVecs.node_loc_y[idB];
-			double zR = sys->nodeInfoVecs.node_loc_z[idB];
+				double xL = sys->nodeInfoVecs.node_loc_x[idA];
+				double yL = sys->nodeInfoVecs.node_loc_y[idA];
+				double zL = sys->nodeInfoVecs.node_loc_z[idA];
+				double xR = sys->nodeInfoVecs.node_loc_x[idB];
+				double yR = sys->nodeInfoVecs.node_loc_y[idB];
+				double zR = sys->nodeInfoVecs.node_loc_z[idB];
 
-			double L1 = std::sqrt( (xL - xR)*(xL - xR)+(yL - yR)*(yL - yR)+(zL - zR)*(zL - zR));
-			double strain = (L1 - L0) / L0;
-			ofs << std::fixed << strain   << std::endl;
+				double L1 = std::sqrt( (xL - xR)*(xL - xR)+(yL - yR)*(yL - yR)+(zL - zR)*(zL - zR));
+				double strain = (L1 - L0) / L0;
+				ofs << std::fixed << strain   << std::endl;
+			}
 
 		}
 

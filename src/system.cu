@@ -98,9 +98,6 @@ void System::solve_system() {
       		randVecs);
 
 
-		if ((generalParams.iterationCounter % 20000) == 0) {
-			//storage->print_VTK_file();
-		}
 
 		solve_forces(); //resets and solves forces for next time step
 
@@ -123,8 +120,10 @@ void System::solve_system() {
 						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
-
-			//storage->updateTotalStrain();
+		}
+		if ((generalParams.iterationCounter % 20000) == 0) {
+			storage->print_VTK_file();
+			storage->save_params();
 		}
 
 

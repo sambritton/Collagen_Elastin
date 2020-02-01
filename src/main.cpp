@@ -30,9 +30,7 @@ bool InitExt = true;
 bool LogState = false;
 bool firstStep = true;
 bool newChoiceOfDataField = false; //to input different values for P,C,Bs etc use data fields.
-bool noedgeing = false;
-//input -data_field=int will give index of vector for corresponding values saved in
-//newChoiceosDataField
+
 int choiceOfDataField;
 double Extension;
 double initialSize;
@@ -42,7 +40,6 @@ double targetStrain = 1.0;//used to set target for how much network should be co
 
 double equilibriumLagTime = 1.0;
 double pullPercent = 0.1;
-
 
 void printUsage() {
 	std::cout << "Usage1: [params] <scheme-file>" << std::endl;
@@ -279,11 +276,9 @@ int main(int argc, char** argv)
 
 	std::cout<<"pull percent: "<< system->generalParams.pull_percent <<std::endl;
 	
-	
 	auto outputFileName = generateOutputFileName(argv[argc-1]);
 
 	//once the system is set, we'll store the initial values via the ptr system.
-	//ForceDiagramStocrrage storage( system, outputFileName);
 	auto storage = std::make_shared<Storage>(system, builder, outputFileName);
 	//pass
 	std::cout << "assigning fdiagram in main" << std::endl;
