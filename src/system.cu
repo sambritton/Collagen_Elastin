@@ -42,20 +42,16 @@ void System::solve_forces() {
 	double addedLinks = generalParams.current_edge_count - generalParams.origin_edge_count;
 
 	if (generalParams.linking == true) {
-
 		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
 
 	//apply external force.
-	/*external_force(
+	//only counts external force on network nodes since force has been reset.
+	external_force(
 		nodeInfoVecs,
 		generalParams,
 		extensionParams,
-		domainParams);*/
-
-	//only counts external force on network nodes since force has been reset.
-
-
+		domainParams);
 
   	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
 	calc_spring_force(nodeInfoVecs, edgeInfoVecs, generalParams);
@@ -71,8 +67,6 @@ void System::solve_forces() {
 				nodeInfoVecs.node_force_y.begin(),
 				nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 			functor_norm(), 0.0, thrust::plus<double>() );
-	
-	//std::cout<<" total applied force: " << extensionParams.totalAppliedForce << std::endl;
 };
 
 
@@ -86,10 +80,10 @@ void System::solve_system() {
 
 		generalParams.iterationCounter++;
 		generalParams.currentTime += generalParams.dt;
-		//std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
-		//if (generalParams.iterationCounter % 50 == 0){
-		set_bucket_scheme();
-		//}
+		if (generalParams.iterationCounter % 50 == 0){
+			std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
+			set_bucket_scheme();
+		}
 
 		advance_positions(
 			nodeInfoVecs,
@@ -101,7 +95,7 @@ void System::solve_system() {
 
 		solve_forces(); //resets and solves forces for next time step
 
-		if ((generalParams.iterationCounter % 20000) == 0) {
+		if ((generalParams.iterationCounter % 500) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /
 			(extensionParams.originAverageUpperStrain - extensionParams.originAverageLowerStrain ) - 1.0;
 			if (currentStrain>4.0){
@@ -121,7 +115,7 @@ void System::solve_system() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 		}
-		if ((generalParams.iterationCounter % 20000) == 0) {
+		if ((generalParams.iterationCounter % 500) == 0) {
 			storage->print_VTK_file();
 			storage->save_params();
 		}
@@ -130,14 +124,10 @@ void System::solve_system() {
 		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
 
 		thrust::device_vector<double>::iterator iter = thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end());
-
 		unsigned position = iter - nodeInfoVecs.node_vel.begin();
 		double max_val = *iter;
 
-		//std::cout << "The maximum value is " << max_val << " at position " << position << std::endl;
-		//std::cout<< "node :" << nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0] << std::endl;
-		
-		/*
+				
 		if (maxVel < generalParams.epsilon) {
 			//store sum of all forces on each node. Used in stress calculations
 			thrust::transform(
@@ -163,7 +153,7 @@ void System::solve_system() {
 			generalParams.magnitudeForce += generalParams.df;
 			std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
 
-		}*/
+		}
 		///////////////////////////////////////////////////////////////////////////////
 		//EQUILIBRIUM END
 		//////////////////////////////////////////////////////////////////////
@@ -385,12 +375,12 @@ void System::set_bend_vecs(
 			thrust::raw_pointer_cast(nodeInfoVecs.node_loc_z.data())));
 
 	//		std::cout<<" in NSD device values"<<std::endl;
-	for (unsigned i = 0; i<bendInfoVecs.total_bend_count; i++) {
+	/*for (unsigned i = 0; i<bendInfoVecs.total_bend_count; i++) {
 		unsigned n0 = bendInfoVecs.leftIndex[i];
 		unsigned n1 = bendInfoVecs.centerIndex[i];
 		unsigned n2 = bendInfoVecs.rightIndex[i];
 		std::cout<< "angle : "<< n0<< " " << n1<< " " << n2<< " " << bendInfoVecs.angleZero[i]<<std::endl;
-	}
+	}*/
 
 	//3x bigger since each spring affects 3 nodes.
 	bendInfoVecs.forceX.resize(bendInfoVecs.bend_factor * bendInfoVecs.total_bend_count);

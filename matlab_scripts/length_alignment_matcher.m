@@ -23,15 +23,15 @@ end
 binSize = 0.1;
 BMIN = 0;
 BMAX = max_edge_length+1.0; %safety feature
+binEdges = linspace(BMIN,BMAX,floor((BMAX-BMIN)/binSize)+1);
+
 boundMin = min(min(coord1),0.0);
 boundMax = max(coord1);
-hist = histogram(logn_samples_collagen,'binwidth',binSize,'BinLimits',[BMIN,BMAX]);
-preferredNumEdgesPerBin = hist.Values;
-binEdges = hist.BinEdges;
+preferredNumEdgesPerBin = histc(logn_samples_collagen, binEdges);
+%preferredNumEdgesPerBin = hist.Values;
+%binEdges = hist.BinEdges;
 
-
-hist1 = histogram(lengths,'binwidth',binSize,'BinLimits',[BMIN,BMAX]);
-currentNumEdgesPerBin = hist1.Values;
+currentNumEdgesPerBin = histc(lengths, binEdges);
 
 beginErrorEdges = length(T2);%sum(abs(preferredNumEdges - currentNumEdges));
 errorCurrentEdges = beginErrorEdges;
@@ -41,9 +41,11 @@ preferredNumAnglesPerBin = orientation_choice*length(T2);
 
 angleBinDist = 5;
 anglebinEdges = [orientation_bin_centers_sort_reduced-angleBinDist,90];
-TempHist = histogram(discretize(currentAngles,anglebinEdges));
-currentNumAnglesPerBin=TempHist.Values;
+%TempHist = histogram(discretize(currentAngles,anglebinEdges));
+%currentNumAnglesPerBin_prev=TempHist.Values;
 
+currentNumAnglesPerBin = histc(currentAngles, anglebinEdges);
+currentNumAnglesPerBin=currentNumAnglesPerBin(1:length(currentNumAnglesPerBin)-1);
 %we'll updatte lenthsUpdate and anglesUpdate
 lengthsUpdate = lengths';
 anglesUpdate = currentAngles';
@@ -63,22 +65,23 @@ while ((errorCurrentEdges> final_error_lengths) || (errorCurrentAngles> final_er
     pointChoice = 1;
     testrnd = rand;
     iteration = iteration + 1;
-    if (iteration > 100000)
-        break
-    end
+
     %80% choose maximum error bins, 20% choose random
     if (rand < 0.6)
         maxError = max((currentNumEdgesPerBin - preferredNumEdgesPerBin));
         mostErrorBins = find((currentNumEdgesPerBin - preferredNumEdgesPerBin) > 0.7 * maxError);
-        
-        msize = numel(mostErrorBins);
-        binChoice = mostErrorBins(randperm(msize, 1));
-        edgeLenMin = (binChoice-1)*binSize;
-        edgeLenMax = (binChoice)*binSize;
-        [a,b] = find((lengthsUpdate>edgeLenMin) & (lengthsUpdate<edgeLenMax));
-        row = randperm(length(a),1);
-        col = randperm(2,1);
-        pointChoice = T2(row,col);
+        if isempty(mostErrorBins)
+            pointChoice = ceil(rand*length(coord1));
+        else
+            msize = numel(mostErrorBins);
+            binChoice = mostErrorBins(randperm(msize, 1));
+            edgeLenMin = (binChoice-1)*binSize;
+            edgeLenMax = (binChoice)*binSize;
+            [a,b] = find((lengthsUpdate>edgeLenMin) & (lengthsUpdate<edgeLenMax));
+            row = randperm(length(a),1);
+            col = randperm(2,1);
+            pointChoice = T2(row,col);
+        end
     else
         pointChoice = ceil(rand*length(coord1));
     end
@@ -100,11 +103,11 @@ while ((errorCurrentEdges> final_error_lengths) || (errorCurrentAngles> final_er
             prefOrientationAngle=0.71;%tester
             if (useOrientation)
                 if (prefOrientationAngle > 0.7)
-                    changeZ = E3 *(rand - 0.5);
+                    changeZ = 0.5*E3 *(rand - 0.5);
                 elseif ((prefOrientationAngle < 0.7) && (prefOrientationAngle > 0.5))
                     changeZ = 0.5*E3 *(rand - 0.5);
                 else
-                    changeZ =0.25*E3 *(rand - 0.5);
+                    changeZ =0.5*E3 *(rand - 0.5);
                 end
             end    
 
@@ -253,14 +256,23 @@ while ((errorCurrentEdges> final_error_lengths) || (errorCurrentAngles> final_er
             anglesUpdate(a(i)) = angleTest(i); 
         end
     end
-%display('current angle, edge')
-%display(errorCurrentAngles);
-%display(errorCurrentEdges);
+if (mod(iteration, 5000) ==0)
+    display('current angle, edge')
+    display(errorCurrentAngles);
+    display(errorCurrentEdges);
 
-%display('target angle, edge')
-%display(final_error_angles);
-%display(final_error_lengths);
+    display('target angle, edge')
+    display(final_error_angles);
+    display(final_error_lengths);
+end
 
 end
+    display('current angle, edge')
+    display(errorCurrentAngles);
+    display(errorCurrentEdges);
+
+    display('target angle, edge')
+    display(final_error_angles);
+    display(final_error_lengths);
 %display(errorCurrentAngles);
 %display(errorCurrentEdges);

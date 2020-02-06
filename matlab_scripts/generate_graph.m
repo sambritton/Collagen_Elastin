@@ -28,7 +28,7 @@ clear all
 close all
 rng shuffle
 
-edge_density = 0.975; %Density of needed edges to be filled
+edge_density = 0.9; %Density of needed edges to be filled
 
 %Note: 0.1 is effectively ~5% when edge_density = .95
 error_lengths=0.15; %this variable should be less than 1-edge_density
@@ -37,7 +37,7 @@ error_angles=0.05;
 collagen_density = 0.01;% Overall density of fibers
 elastin_density = (0.3) * collagen_density;
 
-collagen_diameter=0.1;
+collagen_diameter=0.075;
 elastin_diameter=0.05;
 %Domain lengths
 E1 = 10;%xlen
@@ -49,7 +49,7 @@ max_edge_length=10;
 %mu = 2.0, 2.75 makes a huge difference, just plot it online
 
 sigma_collagen = 1.0;
-mu_collagen = 2.5;
+mu_collagen = 2.0;
 
 sigma_elastin = 0.5;
 mu_elastin = 0.0;
@@ -116,19 +116,26 @@ degree_nodes5 = 14;
 degree_nodes6 = 0;
 degree_nodes7 = 0;
 degree_nodes8 = 0;
-totalNodes = 1176;
 
-degreeBiomat = [degree_nodes1,degree_nodes2,degree_nodes3,degree_nodes4,degree_nodes5,degree_nodes6,degree_nodes7,degree_nodes8]./totalNodes;
+degreeBiomat = [degree_nodes1,degree_nodes2,degree_nodes3,degree_nodes4,degree_nodes5,degree_nodes6,degree_nodes7,degree_nodes8];
+degree_elastin = degreeBiomat / sum(degreeBiomat);
 
-degreeTest = degreeBiomat;%[0,0,40,30,10,10,10,0];
-degreeTest = degreeTest / sum(degreeTest);
-degreeChoice = degreeTest;
+
+degree_nodes1 = 15;
+degree_nodes2 = 15;
+degree_nodes3 = 10;
+degree_nodes4 = 1;
+degree_nodes5 = 0;
+degree_nodes6 = 0;
+degree_nodes7 = 0;
+degree_nodes8 = 0;
+
+degree = [degree_nodes1,degree_nodes2,degree_nodes3,degree_nodes4,degree_nodes5,degree_nodes6,degree_nodes7,degree_nodes8];
+degree_collagen = degree / sum(degree);
 
 %% Orientation
 %% orientation of fibers data.
-ErrorOrientation = 0.05; %percentage of edges allowed outside of 70% correct angle. 
-prefOrientationAngle = 1.0; %gives average angle perference. 1.0 is z axis, 0.0 is x or y axis. 
-
+%orientation is calculated in percentages along the following degree bins. 
 orientation_bin_centers = [95,105,115,125,135,145,155,165,175,5,15,25,35,45,55,65,75,85];
 no_flow_orientation = [0.052981146
 0.052903428
@@ -187,6 +194,22 @@ high_flow_orientation = [0.031188673
 0.034153912
 0.03071293];
 
+% instead of using the data, just generate 
+%orientation_bin_centers
+temp_elastin_sample=abs(normrnd(0,35,10000,1));
+temp_elastin_sample = temp_elastin_sample(temp_elastin_sample<85);
+figure
+histogram(temp_elastin_sample)
+elastin_orientation_sort = histc(temp_elastin_sample,sort(orientation_bin_centers));
+elastin_orientation_sort=elastin_orientation_sort(1:9)/sum(elastin_orientation_sort(1:9));
+
+temp_collagen_sample=abs(normrnd(0,15,10000,1));
+temp_collagen_sample = temp_collagen_sample(temp_collagen_sample<85);
+figure
+histogram(temp_collagen_sample)
+collagen_orientation_sort = histc(temp_collagen_sample,sort(orientation_bin_centers));
+collagen_orientation_sort=collagen_orientation_sort(1:9)/sum(collagen_orientation_sort(1:9));
+
 %sort data by key values
 mapObjNoFlow = containers.Map(orientation_bin_centers,no_flow_orientation);
 mapObjLowFlow = containers.Map(orientation_bin_centers,low_flow_orientation);
@@ -208,19 +231,22 @@ for i = 1:9
     no_flow_orientation_sort_reduced(i) = no_flow_orientationSort(i) + no_flow_orientationSort(19-i);
     low_flow_orientation_sort_reduced(i) = low_flow_orientationSort(i) + low_flow_orientationSort(19-i);
     high_flow_orientation_sort_reduced(i) = high_flow_orientationSort(i) + high_flow_orientationSort(19-i);
+    
+    elastin_flow_orientation_sort_reduced(i) = elastin_orientation_sort(i);
+    collagen_flow_orientation_sort_reduced(i) = collagen_orientation_sort(i);
 end
 
 %for now always use true. 
 useOrientation = true;
-orientation_choice_collagen = high_flow_orientation_sort_reduced;
-orientation_choice_elastin = high_flow_orientation_sort_reduced;
+orientation_choice_collagen = collagen_flow_orientation_sort_reduced;
+orientation_choice_elastin = elastin_flow_orientation_sort_reduced;
 
 %% End Parameters
 %num_edges = (degreeBiomat .* N .* [1,2,3,4,5,6,7,8])
 
 %number of fiber points temporary
-N_collagen = 2 * round( total_collagen_fibers ./ sum(degreeChoice.*[1,2,3,4,5,6,7,8]) );
-N_elastin = 2 * round( total_elastin_fibers ./ sum(degreeChoice.*[1,2,3,4,5,6,7,8]) );
+N_collagen = 2 * round( total_collagen_fibers ./ sum(degree_collagen.*[1,2,3,4,5,6,7,8]) );
+N_elastin = 2 * round( total_elastin_fibers ./ sum(degree_elastin.*[1,2,3,4,5,6,7,8]) );
 N_total = N_collagen + N_elastin;
 %% generate random coordinates of nodes
 %this makes a shape in quadrant 1 of length Len and radius Rad
@@ -243,25 +269,23 @@ elastin_coord3 = rand(1,N_elastin) * E3;
 
 T2_collagen = generate_initial_structure(N_collagen, collagen_coord1, collagen_coord2, collagen_coord3,...
                                         mu_collagen,sigma_collagen, max_edge_length,...
-                                        ro_collagen, edge_density, degreeChoice);
+                                        ro_collagen, edge_density, degree_collagen);
 
 T2_elastin = generate_initial_structure(N_elastin, elastin_coord1, elastin_coord2, elastin_coord3,...
                                         mu_elastin,sigma_elastin, max_edge_length,...
-                                        ro_elastin, edge_density, degreeChoice);
+                                        ro_elastin, edge_density, degree_elastin);
                                     
-
-                                    
-[elastin_coord1, elastin_coord2, elastin_coord3] = length_alignment_matcher(T2_elastin, elastin_coord1, elastin_coord2, elastin_coord3, E1, E2, E3, ...
-    zLine, logn_samples_collagen, error_angles, error_lengths, ...
-    max_edge_length, orientation_choice_elastin, orientation_bin_centers_sort_reduced); 
 
 [collagen_coord1, collagen_coord2, collagen_coord3] = length_alignment_matcher(T2_collagen, collagen_coord1, collagen_coord2, collagen_coord3, E1, E2, E3, ...
     zLine, logn_samples_collagen, error_angles, error_lengths, ...
     max_edge_length, orientation_choice_collagen, orientation_bin_centers_sort_reduced);  
+                                 
+[elastin_coord1, elastin_coord2, elastin_coord3] = length_alignment_matcher(T2_elastin, elastin_coord1, elastin_coord2, elastin_coord3, E1, E2, E3, ...
+    zLine, logn_samples_elastin, error_angles, error_lengths, ...
+    max_edge_length, orientation_choice_elastin, orientation_bin_centers_sort_reduced); 
 
-a=1;
 
-set(gca, 'FontSize', 60)
+%set(gca, 'FontSize', 60)
 figure
 hold on
 for i = 1:length(T2_collagen)
@@ -292,7 +316,7 @@ Graph.fixed_node={Fixed};
 
 DateString=['Rec_collagen_',num2str(collagen_density),'_elastin_' , num2str(elastin_density),'_', num2str(E1), '_', num2str(E2), '_', num2str(E3)];
 if (useOrientation == true)   
-    DateString=['Rec_collagen_',num2str(collagen_density),'_elastin_' , num2str(elastin_density),'_', num2str(E1), '_', num2str(E2), '_', num2str(E3),'_',orientation_choice_collagen];
+    DateString=['Rec_collagen_',num2str(collagen_density),'_elastin_' , num2str(elastin_density),'_', num2str(E1), '_', num2str(E2), '_', num2str(E3),'_oriented',];
 end
 Graph.String=DateString;
 mkdir(pwd,'data_files');
