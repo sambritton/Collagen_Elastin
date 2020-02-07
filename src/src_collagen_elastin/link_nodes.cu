@@ -202,10 +202,10 @@ void link_nodes(
 			if (((idL != 0) || (idR != 0)) && (count == 1)) {
 
 				//count edges
-				std::cout << "placing id from tester: " << idL << " " << idR << std::endl;
-				std::cout << " total edge count " << generalParams.current_edge_count << std::endl;
-				std::cout<< nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0]<< std::endl;
-				std::cout<< nodeInfoVecs.node_loc_x[1] << " " << nodeInfoVecs.node_loc_y[1] << " " << nodeInfoVecs.node_loc_z[1]<< std::endl;
+				//std::cout << "placing id from tester: " << idL << " " << idR << std::endl;
+				//std::cout << " total edge count " << generalParams.current_edge_count << std::endl;
+				//std::cout<< nodeInfoVecs.node_loc_x[0] << " " << nodeInfoVecs.node_loc_y[0] << " " << nodeInfoVecs.node_loc_z[0]<< std::endl;
+				//std::cout<< nodeInfoVecs.node_loc_x[1] << " " << nodeInfoVecs.node_loc_y[1] << " " << nodeInfoVecs.node_loc_z[1]<< std::endl;
 
 				nodeInfoVecs.host_edge_left[generalParams.current_edge_count] = (idL);
 				nodeInfoVecs.host_edge_right[generalParams.current_edge_count] = (idR);

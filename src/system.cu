@@ -74,6 +74,9 @@ void System::solve_system() {
 
 	double lastTime = 0.0;
 	bool runIters = true;
+	std::cout << " setting initial bucket scheme "  << std::endl;
+	generalParams.magnitudeForce += generalParams.df;
+	std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
 	set_bucket_scheme();
 
 	while (runIters == true) {
@@ -94,8 +97,13 @@ void System::solve_system() {
 
 
 		solve_forces(); //resets and solves forces for next time step
+		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
 
-		if ((generalParams.iterationCounter % 500) == 0) {
+		thrust::device_vector<double>::iterator iter = thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end());
+		unsigned position = iter - nodeInfoVecs.node_vel.begin();
+		double max_val = *iter;
+
+		if ((generalParams.iterationCounter % 50) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /
 			(extensionParams.originAverageUpperStrain - extensionParams.originAverageLowerStrain ) - 1.0;
 			if (currentStrain>4.0){
@@ -114,6 +122,10 @@ void System::solve_system() {
 						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
+				
+			std::cout<<" current strain: " << currentStrain << std::endl;
+			std::cout<<" max velocity: " << maxVel << std::endl;
+			std::cout<<" epsilon: " << generalParams.epsilon << std::endl;
 		}
 		if ((generalParams.iterationCounter % 500) == 0) {
 			storage->print_VTK_file();
@@ -121,11 +133,6 @@ void System::solve_system() {
 		}
 
 
-		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
-
-		thrust::device_vector<double>::iterator iter = thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end());
-		unsigned position = iter - nodeInfoVecs.node_vel.begin();
-		double max_val = *iter;
 
 				
 		if (maxVel < generalParams.epsilon) {

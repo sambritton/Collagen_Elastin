@@ -226,7 +226,7 @@ int main(int argc, char** argv)
 	t0 = time(0);
 
 	double forceStep = 0.0;
-	double epsilon = 0.0;
+	double epsilon = 1.0;
 	double timeStep = 0.01;
 
 
@@ -244,6 +244,7 @@ int main(int argc, char** argv)
 		if (key == "-df") {
 			forceStep = std::atof(val.c_str());
 			forceStepEncountered = true;
+			std::cout<<"force: "<< forceStep << std::endl;
 			continue;
 		}
 		if (key == "-eps") {

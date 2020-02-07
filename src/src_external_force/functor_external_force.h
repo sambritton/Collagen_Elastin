@@ -10,7 +10,7 @@ struct functor_external_force {
 	double* forceZAddr;
 	double magForce;
 	double originalNetworkLength;
-	double strainProportion;
+	double strain_proportion_end_sim;
 	double averageLowerStrain;
 	double averageUpperStrain;
 
@@ -22,7 +22,7 @@ struct functor_external_force {
 			double*	_forceZAddr,
 			double& _magForce,
 			double& _originalNetworkLength,
-			double& _strainProportion,
+			double& _strain_proportion_end_sim,
 			double& _averageLowerStrain,
 			double& _averageUpperStrain) :
 		isNodeFixedAddr(_isNodeFixedAddr),
@@ -32,7 +32,7 @@ struct functor_external_force {
 		
 		magForce(_magForce),
 		originalNetworkLength(_originalNetworkLength),
-		strainProportion(_strainProportion),
+		strain_proportion_end_sim(_strain_proportion_end_sim),
 		averageLowerStrain(_averageLowerStrain),
 		averageUpperStrain(_averageUpperStrain) {}
 
@@ -48,14 +48,14 @@ struct functor_external_force {
 		//pull top
 		if ((!isFixed) && (isUpperStrainNode)) {
 			//if not fixed, we can apply force unless it is too far away, then we fix it.
-			if (locZ > originalNetworkLength * (0.1 + strainProportion) ) {
+			if (locZ > originalNetworkLength * (strain_proportion_end_sim) ) {
 				isNodeFixedAddr[id] = true;
 			}
 
 			double upperDiff = abs(locZ - averageUpperStrain);
 
-			//only apply force if within 10 of the average.
-			if (upperDiff < 5) {
+			//only apply force if within 1 of the average.
+			if (upperDiff < 1.0) {
 				double dirX = 0.0;//tForceX / normForce;
 				double dirY = 0.0;//tForceY / normForce;
 				double dirZ = 1.0;
@@ -69,14 +69,14 @@ struct functor_external_force {
 		//pull bottom
 		else if ((!isFixed) && (isLowerStrainNode) ) {
 			//safety fix
-			if (locZ < -(originalNetworkLength * (0.1 + strainProportion))) {
+			if (locZ < -(originalNetworkLength * (strain_proportion_end_sim))) {
 				isNodeFixedAddr[id] = true;
 			}
 
 
 			double lowerDiff = abs(locZ - averageLowerStrain);
 
-			if (lowerDiff < 5) {
+			if (lowerDiff < 1.0) {
 				double dirX = 0.0;//tForceX / normForce;
 				double dirY = 0.0;//tForceY / normForce;
 				double dirZ = -1.0;
