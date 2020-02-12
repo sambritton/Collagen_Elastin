@@ -70,7 +70,7 @@ include_directories(${GLM_LOCATION})
 #end GLM
 
 
-#To include libraries in another folder (src_dg) add them
+#To include libraries in another folder (src_*) add them
 add_subdirectory(${src_bucket_scheme})
 add_subdirectory(${src_collagen_elastin})
 add_subdirectory(${src_external_force})

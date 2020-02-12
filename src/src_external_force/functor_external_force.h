@@ -37,13 +37,14 @@ struct functor_external_force {
 		averageUpperStrain(_averageUpperStrain) {}
 
 	__device__
-	void operator()(const Tudbbb& u1d1b3) {
+	void operator()(const Tudbbbb& u1d1b4) {
 
-		unsigned id = thrust::get<0>(u1d1b3);
-		double locZ = thrust::get<1>(u1d1b3);
-		bool isFixed = thrust::get<2>(u1d1b3);
-		bool isUpperStrainNode = thrust::get<3>(u1d1b3);
-		bool isLowerStrainNode = thrust::get<4>(u1d1b3);
+		unsigned id = thrust::get<0>(u1d1b4);
+		double locZ = thrust::get<1>(u1d1b4);
+		bool isFixed = thrust::get<2>(u1d1b4);
+		bool is_node_collagen = thrust::get<3>(u1d1b4);
+		bool isUpperStrainNode = thrust::get<4>(u1d1b4);
+		bool isLowerStrainNode = thrust::get<5>(u1d1b4);
 
 		//pull top
 		if ((!isFixed) && (isUpperStrainNode)) {
@@ -55,7 +56,15 @@ struct functor_external_force {
 			double upperDiff = abs(locZ - averageUpperStrain);
 
 			//only apply force if within 1 of the average.
-			if (upperDiff < 1.0) {
+			if ( (upperDiff < 0.5) ){
+				double dirX = 0.0;//tForceX / normForce;
+				double dirY = 0.0;//tForceY / normForce;
+				double dirZ = 1.0;
+				forceXAddr[id] = dirX * (magForce);
+				forceYAddr[id] = dirY * (magForce);
+				forceZAddr[id] = dirZ * (magForce);
+			}
+			if ((is_node_collagen) && (upperDiff < 2.0)) {
 				double dirX = 0.0;//tForceX / normForce;
 				double dirY = 0.0;//tForceY / normForce;
 				double dirZ = 1.0;
@@ -76,7 +85,15 @@ struct functor_external_force {
 
 			double lowerDiff = abs(locZ - averageLowerStrain);
 
-			if (lowerDiff < 1.0) {
+			if (lowerDiff < 0.5) {
+				double dirX = 0.0;//tForceX / normForce;
+				double dirY = 0.0;//tForceY / normForce;
+				double dirZ = -1.0;
+				forceXAddr[id] = dirX * (magForce);
+				forceYAddr[id] = dirY * (magForce);
+				forceZAddr[id] = dirZ * (magForce);
+			}
+			if ((is_node_collagen) && (lowerDiff < 2.0)) {
 				double dirX = 0.0;//tForceX / normForce;
 				double dirY = 0.0;//tForceY / normForce;
 				double dirZ = -1.0;

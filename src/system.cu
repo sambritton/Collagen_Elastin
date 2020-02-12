@@ -38,9 +38,7 @@ void System::solve_forces() {
 	thrust::fill(nodeInfoVecs.node_force_x.begin(),nodeInfoVecs.node_force_x.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_y.begin(),nodeInfoVecs.node_force_y.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_z.begin(),nodeInfoVecs.node_force_z.end(),0);
-	
-	double addedLinks = generalParams.current_edge_count - generalParams.origin_edge_count;
-
+		
 	if (generalParams.linking == true) {
 		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
@@ -52,9 +50,13 @@ void System::solve_forces() {
 		generalParams,
 		extensionParams,
 		domainParams);
-
-  	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
+		
+	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
+	  
 	calc_spring_force(nodeInfoVecs, edgeInfoVecs, generalParams);
+	
+	
+    //std::cout<<"pre norm: " << std::flush;
 	extensionParams.totalAppliedForce = thrust::transform_reduce(
 		thrust::make_zip_iterator(
 			thrust::make_tuple(
@@ -67,6 +69,8 @@ void System::solve_forces() {
 				nodeInfoVecs.node_force_y.begin(),
 				nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 			functor_norm(), 0.0, thrust::plus<double>() );
+			
+	//std::cout<<"post force: " << std::flush;
 };
 
 
@@ -75,27 +79,31 @@ void System::solve_system() {
 	double lastTime = 0.0;
 	bool runIters = true;
 	std::cout << " setting initial bucket scheme "  << std::endl;
-	generalParams.magnitudeForce += generalParams.df;
-	std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
+	std::cout<<"magnitudeForce at beginning of simulation: "<< generalParams.magnitudeForce<<std::endl;
+
+	//initialize images
+	//storage->print_VTK_file();
+	//storage->save_params();
+	//std::cout<<"pri init bucket: " << std::flush;
+	
 	set_bucket_scheme();
 
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
 		generalParams.currentTime += generalParams.dt;
-		if (generalParams.iterationCounter % 50 == 0){
-			std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
+		//if (generalParams.iterationCounter % 50 == 0){
+			//std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
+		
 			set_bucket_scheme();
-		}
+		//}
 
 		advance_positions(
 			nodeInfoVecs,
 			generalParams,
 			edgeInfoVecs,
       		randVecs);
-
-
-
+		
 		solve_forces(); //resets and solves forces for next time step
 		double maxVel = *(thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end()));
 
@@ -126,16 +134,11 @@ void System::solve_system() {
 			std::cout<<" current strain: " << currentStrain << std::endl;
 			std::cout<<" max velocity: " << maxVel << std::endl;
 			std::cout<<" epsilon: " << generalParams.epsilon << std::endl;
+			std::cout << " extensionParams.averageUpperStrain: " << extensionParams.averageUpperStrain << std::endl;
+			std::cout << " extensionParams.averageLowerStrain: " << extensionParams.averageLowerStrain << std::endl;
+		
 		}
-		if ((generalParams.iterationCounter % 500) == 0) {
-			storage->print_VTK_file();
-			storage->save_params();
-		}
-
-
-
-				
-		if (maxVel < generalParams.epsilon) {
+		if ((generalParams.iterationCounter % 5000) == 0) {
 			//store sum of all forces on each node. Used in stress calculations
 			thrust::transform(
 				thrust::make_zip_iterator(
@@ -151,9 +154,39 @@ void System::solve_system() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 
+			extensionParams.applied_force_upper =   thrust::transform_reduce(
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_upper_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())),
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_upper_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
 
-			generalParams.epsilon = (1.0) *
-				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_collagen);
+			
+			extensionParams.applied_force_lower =   thrust::transform_reduce(
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_lower_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())),
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_lower_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
+												
+			storage->print_VTK_file();
+			storage->save_params();
+		}
+
+
+
+				
+		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 500 == 0)) {
+			generalParams.epsilon = (75.0) *
+				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
 			std::cout<<"updating epsilon back to original: "<< generalParams.epsilon<<std::endl;
@@ -335,11 +368,177 @@ void System::determine_bounds() {
 						nodeInfoVecs.node_loc_z.begin(),
 						IsLessThanLevel( lowerLevel ), true);
 
-	generalParams.numUpperStrainNodes = thrust::count_if(nodeInfoVecs.node_upper_selection_pull.begin(),nodeInfoVecs.node_upper_selection_pull.end(), IsEqualToOne( ) );
-	generalParams.numLowerStrainNodes = thrust::count_if(nodeInfoVecs.node_lower_selection_pull.begin(),nodeInfoVecs.node_lower_selection_pull.end(), IsEqualToOne( ) );
+	generalParams.numUpperStrainNodes_collagen = thrust::transform_reduce(		
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_upper_selection_pull.begin(),
+															nodeInfoVecs.node_is_collagen.begin())),
+															
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_upper_selection_pull.begin(),
+															nodeInfoVecs.node_is_collagen.begin())) + generalParams.max_node_count,
+													IsEqualToOne_and_node_type(),					
+													0, thrust::plus<unsigned>());
 
-	std::cout<<"number of nodes pulled for lower strain: " << generalParams.numLowerStrainNodes << std::endl;
-	std::cout<<"number of nodes pulled for upper strain: " << generalParams.numUpperStrainNodes << std::endl;
+	generalParams.numUpperStrainNodes_elastin = thrust::transform_reduce(		
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_upper_selection_pull.begin(),
+															nodeInfoVecs.node_is_elastin.begin())),
+															
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_upper_selection_pull.begin(),
+															nodeInfoVecs.node_is_elastin.begin())) + generalParams.max_node_count,
+													IsEqualToOne_and_node_type(),					
+													0, thrust::plus<unsigned>());								
+
+
+	generalParams.numLowerStrainNodes_collagen = thrust::transform_reduce(		
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_lower_selection_pull.begin(),
+															nodeInfoVecs.node_is_collagen.begin())),
+															
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_lower_selection_pull.begin(),
+															nodeInfoVecs.node_is_collagen.begin())) + generalParams.max_node_count,
+													IsEqualToOne_and_node_type(),					
+													0, thrust::plus<unsigned>());
+
+	generalParams.numLowerStrainNodes_elastin = thrust::transform_reduce(		
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_lower_selection_pull.begin(),
+															nodeInfoVecs.node_is_elastin.begin())),
+															
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_lower_selection_pull.begin(),
+															nodeInfoVecs.node_is_elastin.begin())) + generalParams.max_node_count,
+													IsEqualToOne_and_node_type(),					
+													0, thrust::plus<unsigned>());		
+
+	std::cout<<"first try numLowerStrainNodes_elastin: " << generalParams.numLowerStrainNodes_elastin <<std::endl;
+	std::cout<<"first try numUpperStrainNodes_elastin: " << generalParams.numUpperStrainNodes_elastin <<std::endl;
+	std::cout<<"first try numLowerStrainNodes_collagen: " << generalParams.numLowerStrainNodes_collagen <<std::endl;
+	std::cout<<"first try numUpperStrainNodes_collagen: " << generalParams.numUpperStrainNodes_collagen <<std::endl;
+													
+	//We need to pull the same number of collagen and elastin nodes from the top and bottom. 
+	unsigned num_more_collagen = 0;
+	if (generalParams.numLowerStrainNodes_collagen > generalParams.numUpperStrainNodes_collagen){
+		num_more_collagen = generalParams.numLowerStrainNodes_collagen - generalParams.numUpperStrainNodes_collagen;
+	}else { num_more_collagen = generalParams.numUpperStrainNodes_collagen - generalParams.numLowerStrainNodes_collagen; }
+
+	for (unsigned i = 0; i < num_more_collagen; i++){
+		for (unsigned j = 0; j < generalParams.max_node_count; j++){
+			bool is_collagen = nodeInfoVecs.node_is_collagen[j];
+			if (is_collagen){
+				if (generalParams.numLowerStrainNodes_collagen > generalParams.numUpperStrainNodes_collagen){		
+					bool is_pulled = nodeInfoVecs.node_lower_selection_pull[j];
+					if (is_pulled){
+						nodeInfoVecs.node_lower_selection_pull[j]=false;
+						break;
+					}
+				}else{
+					bool is_pulled = nodeInfoVecs.node_upper_selection_pull[j];
+					if (is_pulled){
+						nodeInfoVecs.node_upper_selection_pull[j]=false;
+						break;
+					}
+				}
+			}
+		}
+	}
+	unsigned num_more_elastin = 0;
+	if (generalParams.numLowerStrainNodes_elastin > generalParams.numUpperStrainNodes_elastin){
+		num_more_elastin = generalParams.numLowerStrainNodes_elastin - generalParams.numUpperStrainNodes_elastin;
+	}else { num_more_elastin = generalParams.numUpperStrainNodes_elastin - generalParams.numLowerStrainNodes_elastin; }
+	
+
+	for (unsigned i = 0; i < num_more_elastin; i++){
+		for (unsigned j = 0; j < generalParams.max_node_count; j++){
+			bool is_elastin = nodeInfoVecs.node_is_elastin[j];
+			if (is_elastin){
+				if (generalParams.numLowerStrainNodes_elastin > generalParams.numUpperStrainNodes_elastin){		
+					bool is_pulled = nodeInfoVecs.node_lower_selection_pull[j];
+					if (is_pulled){
+						nodeInfoVecs.node_lower_selection_pull[j]=false;
+						break;
+					}
+				}else{
+					bool is_pulled = nodeInfoVecs.node_upper_selection_pull[j];
+					if (is_pulled){
+						nodeInfoVecs.node_upper_selection_pull[j]=false;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	generalParams.numUpperStrainNodes_collagen = thrust::transform_reduce(		
+		thrust::make_zip_iterator(
+			thrust::make_tuple(
+				nodeInfoVecs.node_upper_selection_pull.begin(),
+				nodeInfoVecs.node_is_collagen.begin())),
+				
+		thrust::make_zip_iterator(
+			thrust::make_tuple(
+				nodeInfoVecs.node_upper_selection_pull.begin(),
+				nodeInfoVecs.node_is_collagen.begin())) + generalParams.max_node_count,
+		IsEqualToOne_and_node_type(),					
+		0, thrust::plus<unsigned>());
+
+	generalParams.numUpperStrainNodes_elastin = thrust::transform_reduce(		
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_upper_selection_pull.begin(),
+					nodeInfoVecs.node_is_elastin.begin())),
+					
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_upper_selection_pull.begin(),
+					nodeInfoVecs.node_is_elastin.begin())) + generalParams.max_node_count,
+			IsEqualToOne_and_node_type(),					
+			0, thrust::plus<unsigned>());								
+
+
+	generalParams.numLowerStrainNodes_collagen = thrust::transform_reduce(		
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_lower_selection_pull.begin(),
+					nodeInfoVecs.node_is_collagen.begin())),
+					
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_lower_selection_pull.begin(),
+					nodeInfoVecs.node_is_collagen.begin())) + generalParams.max_node_count,
+			IsEqualToOne_and_node_type(),					
+			0, thrust::plus<unsigned>());
+
+	generalParams.numLowerStrainNodes_elastin = thrust::transform_reduce(		
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_lower_selection_pull.begin(),
+					nodeInfoVecs.node_is_elastin.begin())),
+					
+			thrust::make_zip_iterator(
+				thrust::make_tuple(
+					nodeInfoVecs.node_lower_selection_pull.begin(),
+					nodeInfoVecs.node_is_elastin.begin())) + generalParams.max_node_count,
+			IsEqualToOne_and_node_type(),					
+			0, thrust::plus<unsigned>());		
+	
+	generalParams.numUpperStrainNodes=generalParams.numUpperStrainNodes_elastin + generalParams.numUpperStrainNodes_collagen;
+	generalParams.numLowerStrainNodes=generalParams.numLowerStrainNodes_elastin + generalParams.numLowerStrainNodes_collagen;
+
+	std::cout<<"numLowerStrainNodes_elastin: " << generalParams.numLowerStrainNodes_elastin <<std::endl;
+	std::cout<<"numUpperStrainNodes_elastin: " << generalParams.numUpperStrainNodes_elastin <<std::endl;
+	std::cout<<"numLowerStrainNodes_collagen: " << generalParams.numLowerStrainNodes_collagen <<std::endl;
+	std::cout<<"numUpperStrainNodes_collagen: " << generalParams.numUpperStrainNodes_collagen <<std::endl;
 	
 	unsigned numFixed = thrust::count_if(nodeInfoVecs.is_node_fixed.begin(),nodeInfoVecs.is_node_fixed.end(), IsEqualToOne() );
 	std::cout<<"number of nodes fixed: " << numFixed <<std::endl;

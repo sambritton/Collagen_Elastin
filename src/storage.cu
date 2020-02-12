@@ -86,6 +86,9 @@ void Storage::save_params(void) {
 		ofs << std::setprecision(5) <<std::fixed<< "min_z " << sys->domainParams.min_x<<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "max_z " << sys->domainParams.max_x<<std::endl;
 
+		ofs << std::setprecision(5) <<std::fixed<< "force_upper " << sys->extensionParams.applied_force_upper<<std::endl;
+		ofs << std::setprecision(5) <<std::fixed<< "force_lower " << sys->extensionParams.applied_force_lower<<std::endl;
+
 
 		//ofs << std::setprecision(5) <<std::fixed<< "total_applied_force " << sys->extensionParams.totalAppliedForce<<std::endl;
 		ofs << std::setprecision(5) <<std::fixed<< "original_node_count " << originalNodeCount <<std::endl;

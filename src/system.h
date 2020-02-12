@@ -122,7 +122,7 @@ struct DomainParams {
 	unsigned bucket_count_x;
 	unsigned bucket_count_y;
 	unsigned bucket_count_z;
-	unsigned total_bucket_count_net_intc;
+	unsigned total_bucket_count_net_intc=0;
 };
 
 //Data for edge node id's
@@ -179,6 +179,9 @@ struct BendInfoVecs {
 struct ExtensionParams {
 	//reset and used to calculate current equilibrium state.
 	double totalAppliedForce=0;
+	double applied_force_upper=0;
+	double applied_force_lower=0;
+
 	unsigned currentNumberPulled = 0;
 	unsigned nextNumberPulled = 0;
 	double target_strain = 0.1;
@@ -236,7 +239,12 @@ struct GeneralParams{
 	unsigned iterationCounter = 0;
 	bool linking = true;
 
+	unsigned numUpperStrainNodes_elastin;
+	unsigned numUpperStrainNodes_collagen;
 	unsigned numUpperStrainNodes = 0;
+	
+	unsigned numLowerStrainNodes_elastin;
+	unsigned numLowerStrainNodes_collagen;
 	unsigned numLowerStrainNodes = 0;
 
 	unsigned totalNumberOfEdges = 0;//updated after linking

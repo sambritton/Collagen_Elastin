@@ -10,48 +10,53 @@ void external_force(
 	GeneralParams& generalParams,
 	ExtensionParams& extensionParams,
 	DomainParams& domainParams){
-
-    thrust::counting_iterator<unsigned> index_begin_upper(0);
-		thrust::counting_iterator<unsigned> index_begin_lower(0);
-
+/*
+	for (unsigned i = 0; i < nodeInfoVecs.node_is_collagen.size(); i++) {
+		std::cout<< "is collagen: " << nodeInfoVecs.node_is_collagen[i] << std::endl;
+		std::cout<< "is pulled: " << nodeInfoVecs.node_upper_selection_pull[i] << std::endl;
+		std::cout<< "z: " << nodeInfoVecs.node_loc_z[i] << std::endl;
+	}*/
+	try{
+		//try only counting collagen
 		extensionParams.averageUpperStrain = (thrust::transform_reduce(
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
-					index_begin_upper,
+					nodeInfoVecs.node_is_collagen.begin(),
 					nodeInfoVecs.node_upper_selection_pull.begin(),
 					nodeInfoVecs.node_loc_z.begin())),
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
-					index_begin_upper,
+					nodeInfoVecs.node_is_collagen.begin(),
 					nodeInfoVecs.node_upper_selection_pull.begin(),
 					nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
 			functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
 				0.0,
-			thrust::plus<double>())) / generalParams.numUpperStrainNodes;
+			thrust::plus<double>())) / generalParams.numUpperStrainNodes_collagen;
+			
 
 			extensionParams.averageLowerStrain = (thrust::transform_reduce(
 				thrust::make_zip_iterator(
 					thrust::make_tuple(
-						index_begin_lower,
+						nodeInfoVecs.node_is_collagen.begin(),
 						nodeInfoVecs.node_lower_selection_pull.begin(),
 						nodeInfoVecs.node_loc_z.begin())),
 				thrust::make_zip_iterator(
 					thrust::make_tuple(
-						index_begin_lower,
+						nodeInfoVecs.node_is_collagen.begin(),
 						nodeInfoVecs.node_lower_selection_pull.begin(),
 						nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
 				functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
 					0.0,
-				thrust::plus<double>())) / generalParams.numLowerStrainNodes;
+				thrust::plus<double>())) / generalParams.numLowerStrainNodes_collagen;
 
 	if (generalParams.iterationCounter == 1) {
 		extensionParams.originAverageUpperStrain = extensionParams.averageUpperStrain;
 		extensionParams.originAverageLowerStrain = extensionParams.averageLowerStrain;
 	}
 
-
- 
-	//Apply External Force
+	//Apply External Force. 
+	//Currently, we apply forces to all nodes withing a range of the average hight of those chosen for the upper/lower section. 
+	//We always apply force to the collagen though. maybe remove that feature? currently collagen is allowed a window of 2micron, elastin 0.5
 	thrust::counting_iterator<unsigned> indexBeginA(0);
 
 	thrust::for_each(
@@ -60,6 +65,7 @@ void external_force(
 				indexBeginA,
 				nodeInfoVecs.node_loc_z.begin(),
 				nodeInfoVecs.is_node_fixed.begin(),
+				nodeInfoVecs.node_is_collagen.begin(),
 				nodeInfoVecs.node_upper_selection_pull.begin(),
 				nodeInfoVecs.node_lower_selection_pull.begin())),
 		thrust::make_zip_iterator(
@@ -67,6 +73,7 @@ void external_force(
 				indexBeginA,
 				nodeInfoVecs.node_loc_z.begin(),
 				nodeInfoVecs.is_node_fixed.begin(),
+				nodeInfoVecs.node_is_collagen.begin(),
 				nodeInfoVecs.node_upper_selection_pull.begin(),
 				nodeInfoVecs.node_lower_selection_pull.begin())) + generalParams.max_node_count,
 		functor_external_force(
@@ -81,5 +88,6 @@ void external_force(
 			extensionParams.averageLowerStrain,
 			extensionParams.averageUpperStrain));
 
-
+		}
+		catch(int e){std::cout<<"test"<< e <<std::flush;}
   };

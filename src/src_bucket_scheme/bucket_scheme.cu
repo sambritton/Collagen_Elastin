@@ -49,7 +49,7 @@ void init_net_inct_bucket(
 	//on the first iteration, we allocate more, we don't plan on using it.
 	//always set bucket count. Update total if different.
 	domainParams.bucket_count_x = padding * ceil((domainParams.max_x - domainParams.min_x) / domainParams.grid_spacing_net_intc) + 1;
-	domainParams.bucket_count_x = padding * ceil((domainParams.max_y - domainParams.min_y) / domainParams.grid_spacing_net_intc) + 1;
+	domainParams.bucket_count_y = padding * ceil((domainParams.max_y - domainParams.min_y) / domainParams.grid_spacing_net_intc) + 1;
 	domainParams.bucket_count_z = padding * ceil((domainParams.max_z - domainParams.min_z) / domainParams.grid_spacing_net_intc) + 1;
 
 	if ( (domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z) > domainParams.total_bucket_count_net_intc	) {
@@ -134,7 +134,7 @@ void extend_net_inct_bucket(
 		auxVecs.id_bucket_expanded_net_intc.begin(),
 		functor_neighbor(
 			domainParams.bucket_count_x,
-			domainParams.bucket_count_x,
+			domainParams.bucket_count_y,
 			domainParams.bucket_count_z));
 
 	thrust::stable_sort_by_key(auxVecs.id_bucket_expanded_net_intc.begin(),
@@ -150,7 +150,7 @@ void extend_net_inct_bucket(
 		auxVecs.key_begin_net_intc.begin());
 
 	thrust::upper_bound(auxVecs.id_bucket_expanded_net_intc.begin(),
-		auxVecs.id_bucket_expanded_net_intc.end(),search_begin,
+		auxVecs.id_bucket_expanded_net_intc.end(), search_begin,
 		search_begin + domainParams.total_bucket_count_net_intc,
 		auxVecs.key_end_net_intc.begin());
 

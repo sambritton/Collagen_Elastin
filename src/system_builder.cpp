@@ -77,28 +77,6 @@ void System_Builder::put_sub_spring(unsigned n1, unsigned n2) {
 	hostNodeInfoVecs.host_sub_spring_length_zero.push_back(global_length_zero);
 };
 
-/*
-void System_Builder::putSubSpring(unsigned n1, unsigned n2) {
-	bool is_n1_collagen = hostNodeInfoVecs.host_node_is_collagen[n1];
-	bool is_n1_elastin = hostNodeInfoVecs.host_node_is_elastin[n1];
-	bool is_n2_collagen = hostNodeInfoVecs.host_node_is_collagen[n2];
-	bool is_n2_elastin = hostNodeInfoVecs.host_node_is_elastin[n2];
-	bool is_spring_collagen = false;
-	bool is_spring_elastin = false;
-	if (is_n1_collagen && is_n2_collagen){
-		is_spring_collagen=true;
-	}
-	else{
-		is_spring_elastin=true;
-	}
-	double global_length_zero = glm::length(nodePositions[n1] - nodePositions[n2]);
-
-	//store for parallel solving.
-	hostNodeInfoVecs.host_spring_length_zero.push_back(global_length_zero);
-	hostNodeInfoVecs.host_spring_edge_left.push_back(n1);
-	hostNodeInfoVecs.host_spring_edge_right.push_back(n2);
-
-}*/
 
 void System_Builder::put_bending_spring(unsigned n1, unsigned n2, unsigned n3) {
 
@@ -285,9 +263,9 @@ void System_Builder::add_sub_nodes() {
 
 				//if we are not using a constant number of nodes, make the variable
 				//hold the largest amount of subnodes per edge.
-				if (sub_node_count > default_extra_nodes_per_edge) {
+				/*if (sub_node_count > default_extra_nodes_per_edge) {
 					default_extra_nodes_per_edge = sub_node_count;
-				}
+				}*/
 			}
 
 			if (sub_node_count == 0)

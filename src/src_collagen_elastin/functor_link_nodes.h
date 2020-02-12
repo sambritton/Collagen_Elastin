@@ -184,8 +184,8 @@ struct functor_link_nodes {
 										global_isedge_collagen [ location ] = true;
 										global_isedge_elastin [ location ] = false;
 								}
+								
 								//only if a node is placed do we record it.
-
 								final_id_left = min(nodeId, candidateId);
 								final_id_right = max(nodeId, candidateId);
 								idTempVecLeft[save_index] = final_id_left;

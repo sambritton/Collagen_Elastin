@@ -39,6 +39,8 @@ struct AuxVecs;
 
 
 typedef thrust::tuple<unsigned, bool, double> Tubd;
+typedef thrust::tuple<unsigned, bool,bool, double> Tubbd;
+typedef thrust::tuple<bool,bool, double> Tbbd;
 typedef thrust::tuple<unsigned, bool> Tub;
 typedef thrust::tuple<unsigned, double> Tud;
 typedef thrust::tuple<bool, double> Tbd;
@@ -47,6 +49,7 @@ typedef thrust::tuple<bool, double> Tbd;
 typedef thrust::tuple<unsigned, unsigned, double> Tuud;
 
 typedef thrust::tuple<unsigned, double, bool, bool, bool> Tudbbb;
+typedef thrust::tuple<unsigned, double, bool, bool, bool, bool> Tudbbbb;
 typedef thrust::tuple<unsigned, unsigned, unsigned, unsigned, double> Tuuuud;
 typedef thrust::tuple<unsigned, unsigned, unsigned,unsigned> Tuuuu;
 typedef thrust::tuple<unsigned, unsigned, unsigned> Tuuu;
@@ -228,19 +231,29 @@ struct AveStrainFunctor {
   }
 };
 
+struct IsEqualToOne_and_node_type {
 
+	__host__ __device__
 
-
-struct IsEqualToOne {
-	 __host__ __device__
-
-	bool operator()(const unsigned& x) {
-		if ( x == 1 ) {
+	bool operator()(const Tub& u1b1) {
+		unsigned x = thrust::get<0>(u1b1);
+		unsigned is_node_collagen_elastin = thrust::get<1>(u1b1);
+		if (( x == 1 ) && (is_node_collagen_elastin)) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+};
+
+
+//return true if not equal to input value.
+struct IsEqualToOne {
+
+	__host__ __device__
+	bool operator() (const unsigned& x) {
+		return (x != 1);
 	}
 };
 

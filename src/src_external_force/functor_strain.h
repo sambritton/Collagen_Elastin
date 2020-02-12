@@ -15,19 +15,17 @@ struct functor_strain {
 		maxNetworkLength(_maxNetworkLength) {}
 
 	__device__
-	double operator() (const Tubd& u1b1d1) {
-		unsigned id = thrust::get<0>(u1b1d1);
-		bool isStrainNode = thrust::get<1>(u1b1d1);
+	double operator() (const Tbbd& b2d1) {
+		
+		bool is_collagen_node = thrust::get<0>(b2d1);
+		bool isStrainNode = thrust::get<1>(b2d1);
 
-		if (isStrainNode) {
-			double zpos = thrust::get<2>(u1b1d1);
-			return zpos;
+		double zpos=0.0;
+		if ((isStrainNode) && (is_collagen_node)) {
+			zpos = thrust::get<2>(b2d1);	
 		}
-		else {
-			return (0.0);
-		}
+		return zpos;
 	}
-
 };
 
 #endif

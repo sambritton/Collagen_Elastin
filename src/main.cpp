@@ -227,7 +227,7 @@ int main(int argc, char** argv)
 
 	double forceStep = 0.0;
 	double epsilon = 1.0;
-	double timeStep = 0.01;
+	double timeStep = 0.0005;
 
 
 	bool forceStepEncountered = false;

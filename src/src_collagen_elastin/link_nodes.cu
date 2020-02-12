@@ -124,7 +124,7 @@ void link_nodes(
 		//sort by increasing. Notice, the sorting must take place for the entire vector since threads write to different places
 		thrust::sort_by_key(
 			nodeInfoVecs.id_temp_linked_left.begin(),nodeInfoVecs.id_temp_linked_left.end(),
-			nodeInfoVecs.id_temp_linked_right.begin(),thrust::greater<unsigned>() );
+			nodeInfoVecs.id_temp_linked_right.begin(), thrust::greater<unsigned>() );
 
 		thrust::stable_sort_by_key(
 			nodeInfoVecs.id_temp_linked_right.begin(),nodeInfoVecs.id_temp_linked_right.end(),
