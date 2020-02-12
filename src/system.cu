@@ -82,9 +82,8 @@ void System::solve_system() {
 	std::cout<<"magnitudeForce at beginning of simulation: "<< generalParams.magnitudeForce<<std::endl;
 
 	//initialize images
-	//storage->print_VTK_file();
-	//storage->save_params();
-	//std::cout<<"pri init bucket: " << std::flush;
+	storage->print_VTK_file();
+	storage->save_params();
 	
 	set_bucket_scheme();
 
@@ -138,7 +137,7 @@ void System::solve_system() {
 			std::cout << " extensionParams.averageLowerStrain: " << extensionParams.averageLowerStrain << std::endl;
 		
 		}
-		if ((generalParams.iterationCounter % 5000) == 0) {
+		if ((generalParams.iterationCounter % 2500) == 0) {
 			//store sum of all forces on each node. Used in stress calculations
 			thrust::transform(
 				thrust::make_zip_iterator(
@@ -185,7 +184,7 @@ void System::solve_system() {
 
 				
 		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 500 == 0)) {
-			generalParams.epsilon = (75.0) *
+			generalParams.epsilon = (10.0) *
 				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
