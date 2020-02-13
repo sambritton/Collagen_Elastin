@@ -113,8 +113,10 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 		builder->default_strain_sim = true;
 	}
 
-	if (auto p = props.child("axis"))
+	if (auto p = props.child("axis")){
 		builder->axis = (p.text().as_uint());
+		std::cout<<"pulling axis: " << builder->axis << std::endl;
+	}
 
 	std::vector<unsigned> originNodes;
 

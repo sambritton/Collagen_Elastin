@@ -23,13 +23,15 @@ void external_force(
 				thrust::make_tuple(
 					nodeInfoVecs.node_is_collagen.begin(),
 					nodeInfoVecs.node_upper_selection_pull.begin(),
-					nodeInfoVecs.node_loc_z.begin())),
+					nodeInfoVecs.node_loc_z.begin(),
+					nodeInfoVecs.node_loc_x.begin())),
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
 					nodeInfoVecs.node_is_collagen.begin(),
 					nodeInfoVecs.node_upper_selection_pull.begin(),
-					nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
-			functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
+					nodeInfoVecs.node_loc_z.begin(),
+					nodeInfoVecs.node_loc_x.begin())) + generalParams.max_node_count,
+			functor_strain(extensionParams.axis, extensionParams.originalNetworkLength),
 				0.0,
 			thrust::plus<double>())) / generalParams.numUpperStrainNodes_collagen;
 			
@@ -39,13 +41,15 @@ void external_force(
 					thrust::make_tuple(
 						nodeInfoVecs.node_is_collagen.begin(),
 						nodeInfoVecs.node_lower_selection_pull.begin(),
-						nodeInfoVecs.node_loc_z.begin())),
+						nodeInfoVecs.node_loc_z.begin(),
+						nodeInfoVecs.node_loc_x.begin())),
 				thrust::make_zip_iterator(
 					thrust::make_tuple(
 						nodeInfoVecs.node_is_collagen.begin(),
 						nodeInfoVecs.node_lower_selection_pull.begin(),
-						nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
-				functor_strain(generalParams.max_node_count, extensionParams.originalNetworkLength),
+						nodeInfoVecs.node_loc_z.begin(),
+						nodeInfoVecs.node_loc_x.begin())) + generalParams.max_node_count,
+				functor_strain(extensionParams.axis, extensionParams.originalNetworkLength),
 					0.0,
 				thrust::plus<double>())) / generalParams.numLowerStrainNodes_collagen;
 
@@ -64,6 +68,7 @@ void external_force(
 			thrust::make_tuple(
 				indexBeginA,
 				nodeInfoVecs.node_loc_z.begin(),
+				nodeInfoVecs.node_loc_x.begin(),
 				nodeInfoVecs.is_node_fixed.begin(),
 				nodeInfoVecs.node_is_collagen.begin(),
 				nodeInfoVecs.node_upper_selection_pull.begin(),
@@ -72,6 +77,7 @@ void external_force(
 			thrust::make_tuple(
 				indexBeginA,
 				nodeInfoVecs.node_loc_z.begin(),
+				nodeInfoVecs.node_loc_x.begin(),
 				nodeInfoVecs.is_node_fixed.begin(),
 				nodeInfoVecs.node_is_collagen.begin(),
 				nodeInfoVecs.node_upper_selection_pull.begin(),
@@ -83,6 +89,7 @@ void external_force(
 			thrust::raw_pointer_cast(nodeInfoVecs.node_force_z.data()),
 
 			generalParams.magnitudeForce,
+			extensionParams.axis,
 			extensionParams.originalNetworkLength,
 			extensionParams.strain_proportion_end_sim,
 			extensionParams.averageLowerStrain,

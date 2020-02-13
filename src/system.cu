@@ -329,18 +329,24 @@ void System::set_node_vecs(
 void System::determine_bounds() {
 	//determin z positions of nodes to be pulled and fixed.
 
-	thrust::device_vector<double> zPosTemp;
-	zPosTemp.resize(generalParams.max_node_count);
-	thrust::copy(nodeInfoVecs.node_loc_z.begin(), nodeInfoVecs.node_loc_z.end(), zPosTemp.begin());
+	thrust::device_vector<double> pos_temp;
+	pos_temp.resize(generalParams.max_node_count);
+	if (extensionParams.axis == 0) {
+		thrust::copy(nodeInfoVecs.node_loc_z.begin(), nodeInfoVecs.node_loc_z.end(), pos_temp.begin());
+	}else{
+		thrust::copy(nodeInfoVecs.node_loc_x.begin(), nodeInfoVecs.node_loc_x.end(), pos_temp.begin());
+	}
 
-	//not used
-	//pull at least 10% of nodes.
-	//unsigned tempNodeAmmount = static_cast<unsigned>( 0.25 * generalParams.max_node_count ); //pull 10% of top nodes
 
-	//sort in increasing order
-	thrust::sort(zPosTemp.begin(), zPosTemp.end(), thrust::less<double>());
-	double length = zPosTemp[ zPosTemp.size()-1 ] - zPosTemp[0];
-	std::cout<<"start end ZposTemp: "<< zPosTemp[0] << " "<< zPosTemp[zPosTemp.size()-1]<<std::endl;
+	thrust::device_vector<double>::iterator iter_max = thrust::max_element(pos_temp.begin(), pos_temp.end());
+	thrust::device_vector<double>::iterator iter_min = thrust::min_element(pos_temp.begin(), pos_temp.end());
+	//unsigned position_max = iter - pos_temp.begin();
+	double max_val = *iter_max;
+	double min_val = *iter_min;
+	
+	
+	double length = max_val - min_val;
+	std::cout<<"start end pos_temp: "<< max_val << " "<< min_val <<std::endl;
 
 	//upperLevelAlt pulls 10% default. Set in main.cpp using input
 	if (generalParams.pull_percent >= 1.0 || generalParams.pull_percent < 0.0) {
@@ -348,10 +354,10 @@ void System::determine_bounds() {
 		std::cout<<"ERROR PULL PERCENT MUST BE LESS THAN ONE AND LARGER THAN 0.0"<<std::endl;
 	}
 	double pull_width = generalParams.pull_percent * length;
-	double upperLevelAlt = zPosTemp[zPosTemp.size()-1] - pull_width;
+	double upperLevelAlt = max_val - pull_width;
 
 
-	double lowerLevel = zPosTemp[0] + pull_width;
+	double lowerLevel = min_val + pull_width;
 
 	std::cout<<"minimal level final choice for strain choice: " << lowerLevel <<std::endl;
 
@@ -360,11 +366,11 @@ void System::determine_bounds() {
 	//apply strain only to original nodes and not added edge subdivision nodes. Set top and bottom
 
 	thrust::replace_if(nodeInfoVecs.node_upper_selection_pull.begin(), nodeInfoVecs.node_upper_selection_pull.begin() + generalParams.origin_node_count,
-						nodeInfoVecs.node_loc_z.begin(),
+						pos_temp.begin(),
 						IsGreaterThanLevel( upperLevelAlt ), true);
 
 	thrust::replace_if(nodeInfoVecs.node_lower_selection_pull.begin(), nodeInfoVecs.node_lower_selection_pull.begin() + generalParams.origin_node_count,
-						nodeInfoVecs.node_loc_z.begin(),
+						pos_temp.begin(),
 						IsLessThanLevel( lowerLevel ), true);
 
 	generalParams.numUpperStrainNodes_collagen = thrust::transform_reduce(		
@@ -541,7 +547,7 @@ void System::determine_bounds() {
 	
 	unsigned numFixed = thrust::count_if(nodeInfoVecs.is_node_fixed.begin(),nodeInfoVecs.is_node_fixed.end(), IsEqualToOne() );
 	std::cout<<"number of nodes fixed: " << numFixed <<std::endl;
-	zPosTemp.resize(0);
+	pos_temp.resize(0);
 
 }
 
@@ -676,6 +682,8 @@ void System::set_edge_vecs(
 };
 
 void System::set_extras() {
-	extensionParams.originalNetworkLength = domainParams.max_z; //compression along x extensionParams.axis
-	extensionParams.originalNetworkWidth = domainParams.max_x;  //strain along z extensionParams.axis.
+	if (extensionParams.axis==0){
+		extensionParams.originalNetworkLength = domainParams.max_z; //compression along x extensionParams.axis
+	}else{
+		extensionParams.originalNetworkLength = domainParams.max_x; }
 };

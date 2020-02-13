@@ -20,7 +20,7 @@
 	<elastin-diameter>0.1</elastin-diameter>
 	<use-linking>true</use-linking>
 	<strain-test>true</strain-test>
-	<axis>0</axis>
+	<axis>1</axis>
 </settings>
     <nodes>
         <node_collagen>7.3399 6.4894 9.9726</node_collagen>
