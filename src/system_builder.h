@@ -71,6 +71,7 @@ public:
 	double default_num_mon_elastin_area=1100;
 	double default_viscosity_collagen=1;
 	double default_viscosity_elastin=1;
+	double pull_ammount;
 
 	double defaultUnitsPerExtraNode = 1.0;//??
 	double default_collagen_diameter = 0.1; //used for fiber-fiber linking threshold distance.

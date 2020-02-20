@@ -384,6 +384,8 @@ std::shared_ptr<System> System_Builder::create() {
 	system_ptr->generalParams.epsilon = epsilon;
 	system_ptr->generalParams.dt = dt;
 	system_ptr->generalParams.df = df;
+	system_ptr->generalParams.pull_ammount = pull_ammount;
+	
 
 	system_ptr->edgeInfoVecs.collagen_spring_constant = default_collagen_spring_constant;
 	system_ptr->edgeInfoVecs.kB = default_kB;

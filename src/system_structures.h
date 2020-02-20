@@ -72,6 +72,9 @@ typedef thrust::tuple<unsigned, unsigned, double, double, double> U2CVec3;
 typedef thrust::tuple<unsigned, bool, double, double, double> UBCVec3;
 typedef thrust::tuple<unsigned, double, double, double> UCVec3;
 
+
+typedef thrust::tuple<unsigned, double, double, double,bool,bool> UCVec3Bool2;
+
 typedef thrust::tuple<double, double, double, double, double, double, double, double, double> CVec9;
 typedef thrust::tuple<double, double, double, double, double, double, double, double> CVec8;
 typedef thrust::tuple<double, double, double, double, double, double, double> CVec7;

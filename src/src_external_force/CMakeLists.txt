@@ -7,7 +7,8 @@ add_library(external_forceLib STATIC
 	external_force.cu
 	external_force.h
 	functor_strain.h
-	functor_external_force.h)
+	functor_external_force.h
+	functor_external_pull.h)
 
 
 target_compile_features(external_forceLib PUBLIC cxx_std_11)

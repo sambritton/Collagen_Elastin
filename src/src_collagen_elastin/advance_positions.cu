@@ -28,13 +28,17 @@ void advance_positions(
 					nodeIndexBegin,
 					nodeInfoVecs.node_loc_x.begin(),
 					nodeInfoVecs.node_loc_y.begin(),
-					nodeInfoVecs.node_loc_z.begin())),
+					nodeInfoVecs.node_loc_z.begin(),
+					nodeInfoVecs.node_upper_selection_pull.begin(),
+					nodeInfoVecs.node_lower_selection_pull.begin())),
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
 					nodeIndexBegin,
 					nodeInfoVecs.node_loc_x.begin(),
 					nodeInfoVecs.node_loc_y.begin(),
-					nodeInfoVecs.node_loc_z.begin())) + generalParams.max_node_count,
+					nodeInfoVecs.node_loc_z.begin(),
+					nodeInfoVecs.node_upper_selection_pull.begin(),
+					nodeInfoVecs.node_lower_selection_pull.begin())) + generalParams.max_node_count,
 			//second vector begin
 			thrust::make_zip_iterator(
 				thrust::make_tuple(

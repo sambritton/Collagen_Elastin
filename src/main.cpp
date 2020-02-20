@@ -229,7 +229,8 @@ int main(int argc, char** argv)
 
 	double forceStep = 0.0;
 	double epsilon = 1.0;
-	double timeStep = 0.0005;
+	double timeStep = 0.001;
+	double pull_ammount=0.01;
 
 
 	bool forceStepEncountered = false;
@@ -247,6 +248,11 @@ int main(int argc, char** argv)
 			forceStep = std::atof(val.c_str());
 			forceStepEncountered = true;
 			std::cout<<"force: "<< forceStep << std::endl;
+			continue;
+		}
+		if (key == "-dpull") {
+			pull_ammount = std::atof(val.c_str());
+			std::cout<<"pull: "<< pull_ammount << std::endl;
 			continue;
 		}
 		if (key == "-eps") {
@@ -274,6 +280,7 @@ int main(int argc, char** argv)
 
 	auto builder = std::make_shared<System_Builder>(epsilon, timeStep, forceStep, targetStrain);
 	builder->default_pull_percent = pullPercent;
+	builder->pull_ammount = pull_ammount;
 	//sets all parameters and edges on device side
 	auto system = create_system(argv[argc-1], builder);
 

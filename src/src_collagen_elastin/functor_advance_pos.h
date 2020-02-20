@@ -5,7 +5,7 @@
 
 //used to advance position and velocity from known force
 //Velocity Verlet Like algorithm used : https://arxiv.org/pdf/1212.1244.pdf
-struct functor_advance_pos : public thrust::binary_function<UCVec3, CVec4, CVec4> {
+struct functor_advance_pos : public thrust::binary_function<UCVec3Bool2, CVec4, CVec4> {
 	double dt;
 	double viscosity_collagen;
 	double viscosity_elastin;
@@ -43,13 +43,17 @@ struct functor_advance_pos : public thrust::binary_function<UCVec3, CVec4, CVec4
 		isNodeFixedAddr(_isNodeFixedAddr) {}
 
 	__device__
-		CVec4 operator()(const UCVec3 &id1p3, const CVec4 &g1f3) {
+		CVec4 operator()(const UCVec3Bool2 &id1p3, const CVec4 &g1f3) {
 
 		unsigned id = thrust::get<0>(id1p3);
 		bool isFixed = false;//true if fixed, false if movable.
 		bool isCollagen = false;
 		bool isElastin = false;
 		double viscosity = viscosity_collagen;
+
+		bool is_upper_pull = thrust::get<4>(id1p3);
+		bool is_lower_pull = thrust::get<5>(id1p3);
+
 		if (id < max_node_count) {
 			isFixed = isNodeFixedAddr[id];
 			//isCollagen = isNodeCollagenAddr[id];
@@ -58,8 +62,8 @@ struct functor_advance_pos : public thrust::binary_function<UCVec3, CVec4, CVec4
 		if (isElastin){
 			viscosity = viscosity_elastin;
 		}
-
-		if (!isFixed) {
+		
+		if ( (!isFixed)&&(!is_upper_pull)&&(!is_lower_pull))  {
 			double locX = thrust::get<1>(id1p3);
 			double locY = thrust::get<2>(id1p3);
 			double locZ = thrust::get<3>(id1p3);

@@ -195,10 +195,10 @@ struct ExtensionParams {
 
 	double strain_proportion_end_sim = 4.0;//if applying strain, how far to run L_new/L_original
 
-	double averageLowerStrain = 0.0;
-	double averageUpperStrain = 0.0;
+	double averageLowerStrain = 1.0;
+	double averageUpperStrain = 1.0;
 	double originAverageLowerStrain = 0.0;
-	double originAverageUpperStrain = 0.0;
+	double originAverageUpperStrain = 1.0;
 
 	double percentOriginalEdgesUnderStrain1 = 0.0;
 	double percentOriginalEdgesExtended = 0.0;
@@ -215,6 +215,8 @@ struct GeneralParams{
 	//general computation
 	bool run_sim = true; //default true to begin sim. Sim ends when runSim == false
 	bool strain_sim = false;
+
+	double pull_ammount;
 
 	double pull_percent; // set in main.cpp
 

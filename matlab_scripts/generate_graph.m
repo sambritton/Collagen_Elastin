@@ -1,20 +1,6 @@
 
 
 %this file makes a graph in the same way a hemGraph does, but in a
-%cylindrical shape. No holes are placed in the network. This file is made
-%to generate networks.
-% x=linspace(0,3,20);
-% max_force = 29;
-% min_force = 2.1;
-% C = 2.35;
-% y = @(var)(-var/(log(1 - (max_force-2.1)/29)));
-% 
-% fun = @(x,alpha)(2.1 + max_force*abs(1-exp(-x/alpha)))
-% fun_lin = @(x,alpha)(2.1 + (max_force-2.1)*abs(x/alpha));
-% figure
-% hold on
-% plot(x,fun(x,y(C/2)))
-% plot(x,fun_lin(x,(C)))
 
 function Graph=generate_graph()
 
@@ -35,7 +21,7 @@ error_lengths=0.15; %this variable should be less than 1-edge_density
 error_angles=0.025;
 
 collagen_density = 0.01;% Overall density of fibers
-elastin_density = (0.3) * collagen_density;
+elastin_density = (0.35) * collagen_density;
 
 collagen_diameter=0.075;
 elastin_diameter=0.05;

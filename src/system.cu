@@ -45,11 +45,11 @@ void System::solve_forces() {
 
 	//apply external force.
 	//only counts external force on network nodes since force has been reset.
-	external_force(
+/*	external_force(
 		nodeInfoVecs,
 		generalParams,
 		extensionParams,
-		domainParams);
+		domainParams);*/
 		
 	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
 	  
@@ -69,8 +69,42 @@ void System::solve_forces() {
 				nodeInfoVecs.node_force_y.begin(),
 				nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 			functor_norm(), 0.0, thrust::plus<double>() );
+
+			thrust::transform(
+				thrust::make_zip_iterator(
+					thrust::make_tuple(
+						nodeInfoVecs.node_force_x.begin(),
+						nodeInfoVecs.node_force_y.begin(),
+						nodeInfoVecs.node_force_z.begin())),
+				thrust::make_zip_iterator(
+					thrust::make_tuple(
+						nodeInfoVecs.node_force_x.begin(),
+						nodeInfoVecs.node_force_y.begin(),
+						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
+				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
+				functor_norm());
+	
+			extensionParams.applied_force_upper =   thrust::transform_reduce(
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_upper_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())),
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_upper_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
 			
-	//std::cout<<"post force: " << std::flush;
+			extensionParams.applied_force_lower =   thrust::transform_reduce(
+														thrust::make_zip_iterator(
+															thrust::make_tuple(
+																nodeInfoVecs.node_lower_selection_pull.begin(),
+																nodeInfoVecs.sum_forces_on_node.begin())),
+															thrust::make_zip_iterator(
+																thrust::make_tuple(
+																	nodeInfoVecs.node_lower_selection_pull.begin(),
+																	nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
 };
 
 
@@ -86,6 +120,11 @@ void System::solve_system() {
 	storage->save_params();
 	
 	set_bucket_scheme();
+	external_force(
+		nodeInfoVecs,
+		generalParams,
+		extensionParams,
+		domainParams);
 
 	while (runIters == true) {
 
@@ -110,81 +149,37 @@ void System::solve_system() {
 		unsigned position = iter - nodeInfoVecs.node_vel.begin();
 		double max_val = *iter;
 
-		if ((generalParams.iterationCounter % 50) == 0) {
+		if ((generalParams.iterationCounter % 100) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /
 			(extensionParams.originAverageUpperStrain - extensionParams.originAverageLowerStrain ) - 1.0;
 			if (currentStrain>4.0){
 				runIters=false;
-			}
-			thrust::transform(
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						nodeInfoVecs.node_force_x.begin(),
-						nodeInfoVecs.node_force_y.begin(),
-						nodeInfoVecs.node_force_z.begin())),
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						nodeInfoVecs.node_force_x.begin(),
-						nodeInfoVecs.node_force_y.begin(),
-						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
-				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
-				functor_norm());
-				
+			}		
 			std::cout<<" current strain: " << currentStrain << std::endl;
 			std::cout<<" max velocity: " << maxVel << std::endl;
 			std::cout<<" epsilon: " << generalParams.epsilon << std::endl;
 			std::cout << " extensionParams.averageUpperStrain: " << extensionParams.averageUpperStrain << std::endl;
 			std::cout << " extensionParams.averageLowerStrain: " << extensionParams.averageLowerStrain << std::endl;
+			
+			std::cout << " extensionParams.applied_force_lower: " << extensionParams.applied_force_lower << std::endl;
+			std::cout << " extensionParams.applied_force_upper: " << extensionParams.applied_force_upper << std::endl;
 		
 		}
-		if ((generalParams.iterationCounter % 2500) == 0) {
-			//store sum of all forces on each node. Used in stress calculations
-			thrust::transform(
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						nodeInfoVecs.node_force_x.begin(),
-						nodeInfoVecs.node_force_y.begin(),
-						nodeInfoVecs.node_force_z.begin())),
-				thrust::make_zip_iterator(
-					thrust::make_tuple(
-						nodeInfoVecs.node_force_x.begin(),
-						nodeInfoVecs.node_force_y.begin(),
-						nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
-				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
-				functor_norm());
+		//store sum of all forces on each node. Used in stress calculations
 
-			extensionParams.applied_force_upper =   thrust::transform_reduce(
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_upper_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())),
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_upper_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
-														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
-
-			
-			extensionParams.applied_force_lower =   thrust::transform_reduce(
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_lower_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())),
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_lower_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
-														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
-												
+		if ((generalParams.iterationCounter % 5000) == 0) {								
 			storage->print_VTK_file();
 			storage->save_params();
 		}
 
-
-
-				
-		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 500 == 0)) {
-			generalParams.epsilon = (10.0) *
+		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 50 == 0)) {
+			//perform pulling
+			external_force(
+				nodeInfoVecs,
+				generalParams,
+				extensionParams,
+				domainParams);
+			generalParams.epsilon = (2.0) *
 				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
@@ -483,7 +478,16 @@ void System::determine_bounds() {
 			}
 		}
 	}
-
+	
+	//Test Fix pulled selection and move them 
+	/*for (unsigned i = 0; i < nodeInfoVecs.node_lower_selection_pull.size(); i++){
+		bool is_upper_pulled = nodeInfoVecs.node_upper_selection_pull[i];
+		bool is_lower_pulled = nodeInfoVecs.node_lower_selection_pull[i];
+		if (is_upper_pulled || is_lower_pulled){
+			nodeInfoVecs.is_node_fixed[i] = true;
+			std::cout<<"fixing: " << i << std::endl;
+		}
+	}*/
 	generalParams.numUpperStrainNodes_collagen = thrust::transform_reduce(		
 		thrust::make_zip_iterator(
 			thrust::make_tuple(
