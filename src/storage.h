@@ -19,7 +19,7 @@ class Storage {
 	std::ofstream statesOutputStrain;
 	std::string bn;
 	std::string str_animation;
-	std::string str_params;
+	std::string str_params; 
 
 	unsigned stepCounter = 0;
 	unsigned stepInterval = 10;
