@@ -231,7 +231,7 @@ struct GeneralParams{
 
 
 	//parameters for advancing timestep and determining equilibrium
-	double df, dt, epsilon, maxForce;
+	double df, dt, epsilon, maxForce, epsilon_factor;
 	double magnitudeForce = 0.0;
 	double currentTime = 0.0;
 

@@ -115,6 +115,10 @@ void System::solve_system() {
 	std::cout << " setting initial bucket scheme "  << std::endl;
 	std::cout<<"magnitudeForce at beginning of simulation: "<< generalParams.magnitudeForce<<std::endl;
 
+	//set initial epsilon
+	generalParams.epsilon = (generalParams.epsilon_factor) *
+		sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
+
 	//initialize images
 	storage->print_VTK_file();
 	storage->save_params();
@@ -179,11 +183,8 @@ void System::solve_system() {
 				generalParams,
 				extensionParams,
 				domainParams);
-			generalParams.epsilon = (2.0) *
-				sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
-			std::cout<<"updating epsilon back to original: "<< generalParams.epsilon<<std::endl;
 			generalParams.magnitudeForce += generalParams.df;
 			std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
 

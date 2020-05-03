@@ -381,7 +381,7 @@ std::shared_ptr<System> System_Builder::create() {
 	system_ptr->generalParams.origin_edge_count = origin_edge_count;
 
 	system_ptr->generalParams.sub_node_count = default_extra_nodes_per_edge;
-	system_ptr->generalParams.epsilon = epsilon;
+	system_ptr->generalParams.epsilon_factor = epsilon;
 	system_ptr->generalParams.dt = dt;
 	system_ptr->generalParams.df = df;
 	system_ptr->generalParams.pull_ammount = pull_ammount;
