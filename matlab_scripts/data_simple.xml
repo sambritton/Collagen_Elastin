@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<settings>
+	<viscosity-collagen>3.769911184308</viscosity-collagen>
+	<viscosity-elastin>3.769911184308</viscosity-elastin>
+	<collagen-spring-constant>10</collagen-spring-constant>
+	<bend-stiffness-collagen>2.6259342068</bend-stiffness-collagen>
+	<bend-stiffness-elastin>0.00226259342068</bend-stiffness-elastin>
+
+
+	<persistance-len-monomer>0.00107403350299</persistance-len-monomer>
+	<temperature>300.0</temperature>
+	<contour-length-multiplier>2.35124360698728</contour-length-multiplier>
+	<use-extra-nodes>true</use-extra-nodes>    
+	<units-per-extra-node>0.35</units-per-extra-node>
+	<constant-number-extra-nodes>false</constant-number-extra-nodes>
+	<extra-nodes-per-edge>9</extra-nodes-per-edge>
+
+	<collagen-diameter>0.1</collagen-diameter>
+	<elastin-diameter>0.1</elastin-diameter>
+	<use-linking>true</use-linking>
+	<strain-test>true</strain-test>
+	<axis>1</axis>
+</settings>
+    <nodes>
+        <node_collagen>0 0 0</node_collagen>
+        <node_collagen>10 0 0</node_collagen>
+        <node_collagen>0 10 0</node_collagen>
+        <node_collagen>0 0 10</node_collagen>
+        <node_collagen>10 10 10</node_collagen>
+        <node_collagen>10 10 0</node_collagen>
+        <node_collagen>10 0 10</node_collagen>
+        <node_collagen>0 10 10</node_collagen>
+        <node_elastin>0.1 0.1 0.1</node_elastin>
+        <node_elastin>9.9 0.1 0.1</node_elastin>
+        <node_elastin>0.1 9.9 0.1</node_elastin>
+        <node_elastin>0.1 0.1 9.9</node_elastin>
+        <node_elastin>9.9 9.9 9.9</node_elastin>
+        <node_elastin>9.9 9.9 0.1</node_elastin>
+        <node_elastin>9.9 0.1 9.9</node_elastin>
+        <node_elastin>0.1 9.9 9.9</node_elastin>
+    </nodes>
+    <edges>
+        <edge_collagen>0 1</edge_collagen>
+        <edge_collagen>0 2</edge_collagen>
+        <edge_collagen>0 3</edge_collagen>
+        <edge_collagen>3 1</edge_collagen>
+        <edge_collagen>2 3</edge_collagen>
+        <edge_collagen>3 6</edge_collagen>
+        <edge_collagen>4 5</edge_collagen>
+        <edge_collagen>7 6</edge_collagen>
+        <edge_collagen>3 7</edge_collagen>
+        <edge_collagen>5 2</edge_collagen>
+        <edge_collagen>5 6</edge_collagen>
+        <edge_collagen>4 7</edge_collagen>
+        <edge_collagen>1 6</edge_collagen>
+        <edge_elastin>0 1</edge_elastin>
+        <edge_elastin>0 2</edge_elastin>
+        <edge_elastin>0 3</edge_elastin>
+        <edge_elastin>3 1</edge_elastin>
+        <edge_elastin>2 3</edge_elastin>
+        <edge_elastin>3 6</edge_elastin>
+        <edge_elastin>4 5</edge_elastin>
+        <edge_elastin>7 6</edge_elastin>
+        <edge_elastin>3 7</edge_elastin>
+        <edge_elastin>5 2</edge_elastin>
+        <edge_elastin>5 6</edge_elastin>
+        <edge_elastin>4 7</edge_elastin>
+        <edge_elastin>1 6</edge_elastin>
+    </edges>
+    <fixed>
+    </fixed></data>

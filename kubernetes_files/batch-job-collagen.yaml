@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job_name
+spec:
+  template:
+    spec:
+      containers:
+        - name: sim-container
+          image: sambritton/cuda-10.1-base-fibrin-platelet
+          command:
+          - /bin/bash
+          - -c 
+          - "cd /sbrit004-platelet-fibrin/sams_folder/Fibrin_Platelet_Cmake/
+          && ./build/bend-model reset -dt=0.001 data.xml State_1920.000000.sta"
+          volumeMounts:
+          - mountPath: "/sbrit004-platelet-fibrin"
+            name: sambritton
+          resources:
+            limits:
+              memory: 8Gi
+              cpu: "2"
+              nvidia.com/gpu: "1"
+            requests:
+              memory: 4Gi
+              cpu: "1"
+              nvidia.com/gpu: "1" 
+      volumes:
+        - name: sambritton
+          flexVolume:
+            driver: ceph.rook.io/rook
+            fsType: ceph
+            options:
+              clusterNamespace: rook
+              fsName: nautilusfs
+              path: /sambritton
+              mountUser: sambritton
+              mountSecret: ceph-fs-secret     
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                - knuron.calit2.optiputer.net
+                - uicnrp02.evl.uic.edu
+      restartPolicy: Never
+  backoffLimit: 2

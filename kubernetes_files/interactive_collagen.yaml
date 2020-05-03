@@ -1,0 +1,33 @@
+apiVersion: v1
+
+kind: Pod
+metadata:
+  name: name-interactive-pod
+spec:
+  containers:
+  - name: gpu-container
+    image: sambritton/cuda-10.0-pytorch-base
+    command: ["sleep", "10000"]
+    volumeMounts:
+    - mountPath: /sbrit004
+      name: sambritton
+    resources:
+      limits:
+        memory: 1Gi
+        cpu: "1"
+        nvidia.com/gpu: 1           
+      requests:
+        memory: 1Gi
+        cpu: "1"
+        nvidia.com/gpu: "1" 
+  volumes:
+    - name: sambritton
+      flexVolume:
+        driver: ceph.rook.io/rook
+        fsType: ceph
+        options:
+          clusterNamespace: rook
+          fsName: nautilusfs
+          path: /sambritton
+          mountUser: sambritton
+          mountSecret: ceph-fs-secret

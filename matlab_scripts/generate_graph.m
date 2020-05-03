@@ -31,34 +31,35 @@ E1 = 10;%xlen
 E2 = 10;%ylen
 E3 = 10;%zlen
 
-max_edge_length=10;
+zLine = [0,0,1]; %orientation line to align fibers
 
-%controls preferred edge length from paper
+
+volume = E1  * E2 * E3;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fiber lengths
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Note: lots of short fibers take the same volume as a few long fibers. We need
+% to calculate the volume that fibers occupy and match it with the
+% samples. From the same distribution. 
+
+%controls preferred edge length
 %mu = 2.0, 2.75 makes a huge difference, just plot it online
+%using lognormal distributions to generate edges
+
 sigma_collagen = 1.0;
 mu_collagen = 2.0;
 
 sigma_elastin = 0.5;
 mu_elastin = 0.0;
 
-%prefDegree = 4; %minimal preferred
-maxLength = max(E1,max(E2,E3));
-
-zLine = [0,0,1]; %orientation line to align fibers
-
-use_len_dist = true;%make true to use length distribution matching
-
-volume = E1  * E2 * E3;
-maxDegree = 8;%unused, just use data
-
-%% Note: lots of short fibers take the same volume as a few long fibers. We need
-% to calculate the volume that fibers occupy and match it with the
-% samples. From the same distribution. 
 logn_samples_collagen = [];
 logn_samples_elastin = [];
 
 target_collagen_volume = volume * collagen_density;
 target_elastin_volume = volume * elastin_density;
+
+maxLength = max(E1,max(E2,E3)); %no edge can be made longer this. 
 
 current_collagen_volume=0;
 current_elastin_volume=0;
@@ -92,6 +93,9 @@ total_elastin_fibers = length(logn_samples_elastin);
 total_fibers = total_collagen_fibers + total_elastin_fibers;
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fiber degree
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Degree collagen
 %biomaterials data
 degree_nodes1 = 388;
@@ -119,10 +123,15 @@ degree_nodes8 = 0;
 degree = [degree_nodes1,degree_nodes2,degree_nodes3,degree_nodes4,degree_nodes5,degree_nodes6,degree_nodes7,degree_nodes8];
 degree_collagen = degree / sum(degree);
 
-%% Orientation
-%% orientation of fibers data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fiber Orientation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %orientation is calculated in percentages along the following degree bins. 
 orientation_bin_centers = [95,105,115,125,135,145,155,165,175,5,15,25,35,45,55,65,75,85];
+
+%these are three data fields from blood clotting papers. Maybe do not use them?
 no_flow_orientation = [0.052981146
 0.052903428
 0.053681837
@@ -180,19 +189,29 @@ high_flow_orientation = [0.031188673
 0.034153912
 0.03071293];
 
-% instead of using the data, just generate 
-%orientation_bin_centers
-temp_elastin_sample=abs(normrnd(0,35,10000,1));
+%% instead of using the data, just generate data using normal distribution
+%samples of degree use the convention that bins are 10 degrees, [-5,5], [-15,15] etc. 
+%symmetry demands we use 0-85 degrees so we represent [-5,5] as [0,5], etc. 
+%thus, you need abs after generating data, then sort into orientation bins
+
+elastin_mean = 0.0
+elastin_std = 35
+temp_elastin_sample = abs(normrnd(elastin_mean,elastin_std,10000,1)); 
 temp_elastin_sample = temp_elastin_sample(temp_elastin_sample<85);
-figure
-histogram(temp_elastin_sample)
+%figure
+%histogram(temp_elastin_sample)
+%title('Preferred Length Elastin')
 elastin_orientation_sort = histc(temp_elastin_sample,sort(orientation_bin_centers));
 elastin_orientation_sort=elastin_orientation_sort(1:9)/sum(elastin_orientation_sort(1:9));
 
-temp_collagen_sample=abs(normrnd(0,7.5,10000,1));
+
+collagen_mean = 0.0
+collagen_std = 7.5
+temp_collagen_sample=abs(normrnd(collagen_mean,collagen_std,10000,1));
 temp_collagen_sample = temp_collagen_sample(temp_collagen_sample<85);
-figure
-histogram(temp_collagen_sample)
+%figure
+%histogram(temp_collagen_sample)
+%title('Preferred Length Collagen')
 collagen_orientation_sort = histc(temp_collagen_sample,sort(orientation_bin_centers));
 collagen_orientation_sort=collagen_orientation_sort(1:9)/sum(collagen_orientation_sort(1:9));
 
@@ -222,15 +241,18 @@ for i = 1:9
     collagen_flow_orientation_sort_reduced(i) = collagen_orientation_sort(i);
 end
 
-%for now always use true. 
-useOrientation = true;
+useOrientation = true; %if false, will not match orientation
+
+%final choices for orientation. Can use no_flow, or low_flow as well
 orientation_choice_collagen = collagen_flow_orientation_sort_reduced;
 orientation_choice_elastin = elastin_flow_orientation_sort_reduced;
 
-%% End Parameters
-%num_edges = (degreeBiomat .* N .* [1,2,3,4,5,6,7,8])
 
-%number of fiber points temporary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Initial Network
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%since number of fibers is calculated, and degree is determined, calculate the number of seed points. 
 N_collagen = 2 * round( total_collagen_fibers ./ sum(degree_collagen.*[1,2,3,4,5,6,7,8]) );
 N_elastin = 2 * round( total_elastin_fibers ./ sum(degree_elastin.*[1,2,3,4,5,6,7,8]) );
 N_total = N_collagen + N_elastin;
@@ -254,21 +276,21 @@ elastin_coord2 = rand(1,N_elastin) * E2;
 elastin_coord3 = rand(1,N_elastin) * E3;
 
 T2_collagen = generate_initial_structure(N_collagen, collagen_coord1, collagen_coord2, collagen_coord3,...
-                                        mu_collagen,sigma_collagen, max_edge_length,...
+                                        mu_collagen,sigma_collagen, maxLength,...
                                         ro_collagen, edge_density, degree_collagen);
 
 T2_elastin = generate_initial_structure(N_elastin, elastin_coord1, elastin_coord2, elastin_coord3,...
-                                        mu_elastin,sigma_elastin, max_edge_length,...
+                                        mu_elastin,sigma_elastin, maxLength,...
                                         ro_elastin, edge_density, degree_elastin);
                                     
 
 [collagen_coord1, collagen_coord2, collagen_coord3] = length_alignment_matcher(T2_collagen, collagen_coord1, collagen_coord2, collagen_coord3, E1, E2, E3, ...
     zLine, logn_samples_collagen, error_angles, error_lengths, ...
-    max_edge_length, orientation_choice_collagen, orientation_bin_centers_sort_reduced);  
+    maxLength, orientation_choice_collagen, orientation_bin_centers_sort_reduced);  
                                  
 [elastin_coord1, elastin_coord2, elastin_coord3] = length_alignment_matcher(T2_elastin, elastin_coord1, elastin_coord2, elastin_coord3, E1, E2, E3, ...
     zLine, logn_samples_elastin, error_angles, error_lengths, ...
-    max_edge_length, orientation_choice_elastin, orientation_bin_centers_sort_reduced); 
+    maxLength, orientation_choice_elastin, orientation_bin_centers_sort_reduced); 
 
 
 %set(gca, 'FontSize', 60)
@@ -290,12 +312,11 @@ for i = 1:length(T2_elastin)
         'Color','r', 'LineWidth',0.05);
 end
 
-
-
-
-
 angle_current_collagen = zeros(length(T2_collagen),1);
 angle_current_elastin = zeros(length(T2_elastin),1);
+
+length_current_collagen = zeros(length(T2_collagen),1);
+length_current_elastin = zeros(length(T2_elastin),1);
 
 for edge = 1:length(T2_collagen)
     %calc edges
@@ -308,7 +329,8 @@ for edge = 1:length(T2_collagen)
     %0-90
     tempAngleCurrent = 2 * abs(dot(zLine,currentEdge/norm(currentEdge) )) - 1;
     angle_current_collagen(edge) = (tempAngleCurrent*(-45) + 45);
-
+    length_current_collagen(edge) = norm(currentEdge);
+    
 
 end
 
@@ -323,11 +345,12 @@ for edge = 1:length(T2_elastin)
     %0-90
     tempAngleCurrent = 2 * abs(dot(zLine,currentEdge/norm(currentEdge) )) - 1;
     angle_current_elastin(edge) = (tempAngleCurrent*(-45) + 45);
-
+    length_current_elastin(edge) = norm(currentEdge);
 
 end
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%plot histograms of alignment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure
 hold on
 histogram(temp_elastin_sample,'BinWidth',5,'Normalization','probability')
@@ -351,6 +374,32 @@ ylabel('Probability, P(d)')
 legend({'Experimentally Observed Orientation','Simulated Orientation'},'Location','northeast')
 hold off
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%plot histograms of lengths
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure
+hold on
+histogram(logn_samples_elastin,'BinWidth',0.5,'Normalization','probability')
+histogram(length_current_elastin,'BinWidth',0.5,'Normalization','probability')
+
+title('Length Comparison: Elastin')
+xlabel('Length, d') 
+ylabel('Probability, P(d)')
+legend({'Experimentally Observed Length','Simulated Length'},'Location','northeast')
+hold off
+
+
+figure
+hold on
+histogram(logn_samples_collagen,'BinWidth',0.5,'Normalization','probability')
+histogram(length_current_collagen,'BinWidth',0.5,'Normalization','probability')
+
+title('Length Comparison: Collagen')
+xlabel('Length, d') 
+ylabel('Probability, P(d)')
+legend({'Experimentally Observed Length','Simulated Length'},'Location','northeast')
+hold off
 %% Possibly connect the two structures??
 
 Fixed = 0;
