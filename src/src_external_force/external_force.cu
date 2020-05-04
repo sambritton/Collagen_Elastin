@@ -12,7 +12,7 @@ void external_force(
 	ExtensionParams& extensionParams,
 	DomainParams& domainParams){
 
-	if (generalParams.numUpperStrainNodes_collagen > 0){
+	if ((generalParams.numUpperStrainNodes_collagen > 0) && (generalParams.numLowerStrainNodes_collagen > 0)){
 		//try only counting collagen
 		extensionParams.averageUpperStrain = (thrust::transform_reduce(
 			thrust::make_zip_iterator(
@@ -80,7 +80,10 @@ void external_force(
 					extensionParams.strain_proportion_end_sim,
 					extensionParams.averageLowerStrain,
 					extensionParams.averageUpperStrain));
-	}else{
+			
+	}
+	else if ((generalParams.numUpperStrainNodes_elastin >0) && ( generalParams.numLowerStrainNodes_elastin > 0)){
+		
 		extensionParams.averageUpperStrain = (thrust::transform_reduce(
 			thrust::make_zip_iterator(
 				thrust::make_tuple(
@@ -96,7 +99,7 @@ void external_force(
 					nodeInfoVecs.node_loc_x.begin())) + generalParams.max_node_count,
 			functor_strain(extensionParams.axis, extensionParams.originalNetworkLength),
 				0.0,
-			thrust::plus<double>())) / generalParams.numUpperStrainNodes_collagen;
+			thrust::plus<double>())) / generalParams.numUpperStrainNodes_elastin;
 			
 		extensionParams.averageLowerStrain = (thrust::transform_reduce(
 			thrust::make_zip_iterator(
@@ -113,7 +116,7 @@ void external_force(
 					nodeInfoVecs.node_loc_x.begin())) + generalParams.max_node_count,
 			functor_strain(extensionParams.axis, extensionParams.originalNetworkLength),
 				0.0,
-			thrust::plus<double>())) / generalParams.numLowerStrainNodes_collagen;
+			thrust::plus<double>())) / generalParams.numLowerStrainNodes_elastin;
 			thrust::counting_iterator<unsigned> indexBeginA(0);
 
 			thrust::for_each(

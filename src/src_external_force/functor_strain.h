@@ -23,12 +23,11 @@ struct functor_strain {
 		if (axis == 0){
 			//zposition
 			position = thrust::get<2>(b2d2);
-		}else{
+		}else if (axis == 1){
 			//xposition
 			position = thrust::get<3>(b2d2);
 		}
 
-		double zpos=0.0;
 		if ((isStrainNode) && (is_collagen_node)) {
 			return position;	
 		}

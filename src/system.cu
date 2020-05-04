@@ -115,6 +115,11 @@ void System::solve_system() {
 	storage->save_params();
 	
 	set_bucket_scheme();
+	external_force(
+		nodeInfoVecs,
+		generalParams,
+		extensionParams,
+		domainParams);//set initial step and strain parameters
 
 	while (runIters == true) {
 
@@ -171,8 +176,7 @@ void System::solve_system() {
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
 			generalParams.magnitudeForce += generalParams.df;
-			std::cout<<"magnitudeForce: "<< generalParams.magnitudeForce<<std::endl;
-
+			
 		}
 		///////////////////////////////////////////////////////////////////////////////
 		//EQUILIBRIUM END
