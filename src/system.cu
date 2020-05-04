@@ -42,14 +42,6 @@ void System::solve_forces() {
 	if (generalParams.linking == true) {
 		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
-
-	//apply external force.
-	//only counts external force on network nodes since force has been reset.
-/*	external_force(
-		nodeInfoVecs,
-		generalParams,
-		extensionParams,
-		domainParams);*/
 		
 	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
 	  
@@ -69,7 +61,6 @@ void System::solve_forces() {
 				nodeInfoVecs.node_force_y.begin(),
 				nodeInfoVecs.node_force_z.begin())) + generalParams.max_node_count,
 			functor_norm(), 0.0, thrust::plus<double>() );
-
 			thrust::transform(
 				thrust::make_zip_iterator(
 					thrust::make_tuple(
@@ -84,27 +75,27 @@ void System::solve_forces() {
 				nodeInfoVecs.sum_forces_on_node.begin(),//save vector
 				functor_norm());
 	
-			extensionParams.applied_force_upper =   thrust::transform_reduce(
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_upper_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())),
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_upper_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
-														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
-			
-			extensionParams.applied_force_lower =   thrust::transform_reduce(
-														thrust::make_zip_iterator(
-															thrust::make_tuple(
-																nodeInfoVecs.node_lower_selection_pull.begin(),
-																nodeInfoVecs.sum_forces_on_node.begin())),
-															thrust::make_zip_iterator(
-																thrust::make_tuple(
-																	nodeInfoVecs.node_lower_selection_pull.begin(),
-																	nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
-														functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
+	extensionParams.applied_force_upper = thrust::transform_reduce(
+												thrust::make_zip_iterator(
+													thrust::make_tuple(
+														nodeInfoVecs.node_upper_selection_pull.begin(),
+														nodeInfoVecs.sum_forces_on_node.begin())),
+												thrust::make_zip_iterator(
+													thrust::make_tuple(
+														nodeInfoVecs.node_upper_selection_pull.begin(),
+														nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+												functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
+	
+	extensionParams.applied_force_lower = thrust::transform_reduce(
+												thrust::make_zip_iterator(
+													thrust::make_tuple(
+														nodeInfoVecs.node_lower_selection_pull.begin(),
+														nodeInfoVecs.sum_forces_on_node.begin())),
+													thrust::make_zip_iterator(
+														thrust::make_tuple(
+															nodeInfoVecs.node_lower_selection_pull.begin(),
+															nodeInfoVecs.sum_forces_on_node.begin())) + generalParams.max_node_count,
+												functor_sum_pulled_forces(), 0.0, thrust::plus<double>());
 };
 
 
@@ -118,27 +109,21 @@ void System::solve_system() {
 	//set initial epsilon
 	generalParams.epsilon = (generalParams.epsilon_factor) *
 		sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
-
+	std::cout<< "Initial Epsilon: " << generalParams.epsilon << std::endl;
 	//initialize images
 	storage->print_VTK_file();
 	storage->save_params();
 	
 	set_bucket_scheme();
-	external_force(
-		nodeInfoVecs,
-		generalParams,
-		extensionParams,
-		domainParams);
 
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
 		generalParams.currentTime += generalParams.dt;
-		//if (generalParams.iterationCounter % 50 == 0){
+		if (generalParams.iterationCounter % 50 == 0){
 			//std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
-		
 			set_bucket_scheme();
-		//}
+		}
 
 		advance_positions(
 			nodeInfoVecs,
@@ -153,7 +138,7 @@ void System::solve_system() {
 		unsigned position = iter - nodeInfoVecs.node_vel.begin();
 		double max_val = *iter;
 
-		if ((generalParams.iterationCounter % 100) == 0) {
+		if ((generalParams.iterationCounter % 1000) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /
 			(extensionParams.originAverageUpperStrain - extensionParams.originAverageLowerStrain ) - 1.0;
 			if (currentStrain>4.0){

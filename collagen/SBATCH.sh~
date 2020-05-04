@@ -14,4 +14,4 @@ module load extra
 module load GCCcore/6.3.0
 
 
-srun -p gpu --gres=gpu:1 ../build/model -dpull=0.005 -eps=1.15 ../matlab_scripts/data_collagen.xml
+srun -p gpu --gres=gpu:1 ../build/model -dpull=0.01 -eps=1.15 --pullPercent=0.2 ../matlab_scripts/data_collagen.xml

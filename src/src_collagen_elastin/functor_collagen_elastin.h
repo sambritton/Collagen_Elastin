@@ -121,9 +121,6 @@ struct functor_collagen_elastin {
 						if (is_edge_elastin){
 							//apply wlc force
 							double strain = ((length_current - length_zero) / length_zero);
-							//if (strain>2){
-							//	strain=2;
-							//}
 
 							double dL_norm = strain / ( CLM);//CLM is unitless since it was already normalized.
 							double magForce = (num_mon_elastin_area*(Kb*Temp) / PLengthMon) * ( 0.25 * pow(1.0 - dL_norm, -2.0) - 0.25 + dL_norm);
@@ -134,10 +131,20 @@ struct functor_collagen_elastin {
 						}
 						else if (is_edge_collagen){
 							//apply linear spring force
-							double magnitude = collagen_spring_constant * (length_current - length_zero);
-							magForceX = magnitude * (posXA_XB/length_current);
-							magForceY = magnitude * (posYA_YB/length_current);
-							magForceZ = magnitude * (posZA_ZB/length_current);
+
+							double strain = ((length_current - length_zero) / length_zero);
+
+							double dL_norm = strain / ( CLM);//CLM is unitless since it was already normalized.
+							double plength = PLengthMon/5.0;
+							double magForce = (num_mon_elastin_area*(Kb*Temp) / plength) * ( 0.25 * pow(1.0 - dL_norm, -2.0) - 0.25 + dL_norm);
+
+							magForceX = (posXA_XB / length_current) * magForce;
+							magForceY = (posYA_YB / length_current) * magForce;
+							magForceZ = (posZA_ZB / length_current) * magForce;
+							//double magnitude = collagen_spring_constant * (length_current - length_zero);
+							//magForceX = magnitude * (posXA_XB/length_current);
+							//magForceY = magnitude * (posYA_YB/length_current);
+							//magForceZ = magnitude * (posZA_ZB/length_current);
 						}
 
 						sumForceX += magForceX;

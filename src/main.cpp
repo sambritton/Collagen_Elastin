@@ -257,6 +257,7 @@ int main(int argc, char** argv)
 		}
 		if (key == "-eps") {
 			epsilon = std::atof(val.c_str());
+			std::cout<<"eps: " << epsilon << std::endl;
 			epsilonEncountered = true;
 			continue;
 		}

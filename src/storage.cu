@@ -33,16 +33,22 @@ Storage::Storage(std::weak_ptr<System> a_system,
 		unsigned max_z = sys->domainParams.max_z;
 		unsigned max_x = sys->domainParams.max_x;
 		unsigned axis = sys->extensionParams.axis;
-		double pull_ammount = sys->generalParams.pull_ammount;
-		std::stringstream tmp;
-		tmp << std::setprecision(3) << std::fixed << pull_ammount;
-		pull_ammount = stod(tmp.str());
+		int pull_ammount = int(100*sys->generalParams.pull_ammount);
+		//std::stringstream tmp;
+		//tmp << std::setprecision(3) << std::fixed << pull_ammount;
+		//pull_ammount = stod(tmp.str());
+		
+		int epsilon = int(1000*sys->generalParams.epsilon_factor);
+		std::stringstream tmp1;
+		tmp1 << std::setprecision(4) << std::fixed << epsilon;
+		epsilon = stod(tmp1.str());
 
 		std::string str_nodes = "_max_nodes_";
 		std::string str_z = "_max_z_";
 		std::string str_x = "_max_x_";
 		std::string str_axis = "_axis_";
 		std::string str_pull = "_pullwidth_";
+		std::string str_eps = "_eps_";
 
 		std::string str_a = "Animation_";
 		std::string str_p = "Params_";
@@ -52,7 +58,8 @@ Storage::Storage(std::weak_ptr<System> a_system,
 			str_z + std::to_string(max_z)+
 			str_x + std::to_string(max_x)+
 			str_axis + std::to_string(axis)+
-			str_pull + std::to_string(pull_ammount);
+			str_pull + std::to_string(pull_ammount)+
+			str_eps + std::to_string(epsilon);
 
 		const int dir_err_anim = mkdir(str_animation.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 		if (-1 == dir_err_anim)
@@ -64,7 +71,8 @@ Storage::Storage(std::weak_ptr<System> a_system,
 			str_z + std::to_string(max_z)+
 			str_x + std::to_string(max_x)+
 			str_axis + std::to_string(axis)+
-			str_axis + std::to_string(pull_ammount);
+			str_pull + std::to_string(pull_ammount)+
+			str_eps + std::to_string(epsilon);
 
 		const int dir_err_params = mkdir(str_params.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 		if (-1 == dir_err_params)

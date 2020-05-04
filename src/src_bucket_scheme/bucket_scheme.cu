@@ -59,7 +59,7 @@ void init_net_inct_bucket(
 		std::cout<<"z-bucket: "<< domainParams.bucket_count_z<<std::endl;
 
 		//double amount of buckets in case of resizing networks
-		domainParams.total_bucket_count_net_intc = domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z;
+		domainParams.total_bucket_count_net_intc = domainParams.bucket_count_x * domainParams.bucket_count_y * domainParams.bucket_count_z;
 		std::cout<<"grid: "<< domainParams.grid_spacing_net_intc << std::endl;
 		std::cout<<"total bucket count: "<< domainParams.total_bucket_count_net_intc<<std::endl;
 
@@ -216,7 +216,7 @@ void build_net_inct_bucket(
 			domainParams.min_x, domainParams.max_x, domainParams.min_y,
 			domainParams.max_y, domainParams.min_z, domainParams.max_z,
 			domainParams.bucket_count_x,
-			domainParams.bucket_count_x,
+			domainParams.bucket_count_y,
 			domainParams.bucket_count_z,
 			domainParams.grid_spacing_net_intc));
 

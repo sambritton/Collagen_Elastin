@@ -52,12 +52,12 @@ struct functor_bucket_indexer {
 			unsigned y = static_cast<unsigned>((thrust::get<1>(v) - min_y) / unitLen);
 			unsigned z = static_cast<unsigned>((thrust::get<2>(v) - min_z) / unitLen);
 
-
+			unsigned total_bucket_count = bucket_count_x * bucket_count_y * bucket_count_z;
 			// return the bucket's linear index and node's global index
 			//return thrust::make_tuple(z * XSize * YSize + y * XSize + x, thrust::get<4>(v));
 			unsigned bucket = z * bucket_count_x * bucket_count_y + y * bucket_count_x + x;
 			//try to make it so bucket does not return unsigned32Max
-			if (bucket == ULONG_MAX) {
+			if (bucket > total_bucket_count) {
 				bucket = 0;
 			}
 			return thrust::make_tuple(bucket, id);
