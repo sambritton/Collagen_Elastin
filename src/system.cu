@@ -38,7 +38,7 @@ void System::solve_forces() {
 	thrust::fill(nodeInfoVecs.node_force_x.begin(),nodeInfoVecs.node_force_x.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_y.begin(),nodeInfoVecs.node_force_y.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_z.begin(),nodeInfoVecs.node_force_z.end(),0);
-		
+	
 	if (generalParams.linking == true) {
 		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
 	}
@@ -120,16 +120,15 @@ void System::solve_system() {
 		generalParams,
 		extensionParams,
 		domainParams);//set initial step and strain parameters
-
+	std::cout<<"starting system" << std::flush;
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
 		generalParams.currentTime += generalParams.dt;
-		if (generalParams.iterationCounter % 50 == 0){
+		//if (generalParams.iterationCounter % 50 == 0){
 			//std::cout << "current iter: " <<generalParams.iterationCounter<<  std::endl;
-			set_bucket_scheme();
-		}
-
+		set_bucket_scheme();
+		//}
 		advance_positions(
 			nodeInfoVecs,
 			generalParams,
@@ -142,6 +141,10 @@ void System::solve_system() {
 		thrust::device_vector<double>::iterator iter = thrust::max_element(nodeInfoVecs.node_vel.begin(), nodeInfoVecs.node_vel.end());
 		unsigned position = iter - nodeInfoVecs.node_vel.begin();
 		double max_val = *iter;
+		
+		thrust::device_vector<double>::iterator iterx = thrust::max_element(nodeInfoVecs.node_loc_x.begin(), nodeInfoVecs.node_loc_x.end());
+		double max_x = *iterx;
+		std::cout<<"max x: " << max_x << std::endl;
 
 		if ((generalParams.iterationCounter % 1000) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /

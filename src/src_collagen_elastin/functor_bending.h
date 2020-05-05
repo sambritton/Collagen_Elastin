@@ -119,7 +119,7 @@ struct functor_bending {
 		double currentAngle = acos(cosTheta);
 
 
-		double magForce = -1 * bending_stiffness * (angleZero - currentAngle);
+		double magForce = -1.0 * bending_stiffness * (angleZero - currentAngle);
 
 		//calculate force vectors
 		//careful here. If the vectors are parallel, axb = 0;

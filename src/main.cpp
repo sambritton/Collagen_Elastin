@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <cstddef>
+#include <stdlib.h>
 
 #include "pugixml.hpp"
 
@@ -138,14 +139,11 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 	for (auto node = nodes.child("node_elastin"); node; node = node.next_sibling("node_elastin")) {
 
 		const char* text = node.text().as_string();
-
 		if (3 != sscanf(text, "%lf %lf %lf", &x, &y, &z)) {
 			std::cout << "parse node error\n";
 			return 0;
 		}
 		builder->add_elastin_node(glm::dvec3(x, y, z));
-		
-		//std::cout<<"setting elastin node" <<std::endl;
 	}
 
 	unsigned from, to;
@@ -154,22 +152,14 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 			std::cout << "parse edge error\n";
 			return 0;
 		}
-		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
 		builder->put_spring(from, to); //adds edges into saved vectors
-		
-		//std::cout<<"setting collagen spring" <<std::endl;
-
 	}
 	for (auto edge = edges.child("edge_elastin"); edge; edge = edge.next_sibling("edge_elastin")) {
 		if (2 != sscanf(edge.text().as_string(""), "%u %u" , &from, &to)) {
 			std::cout << "parse edge error\n";
 			return 0;
 		}
-		//std::cout << "putting spring between: " << from << ' ' <<to<<  std::endl;
 		builder->put_spring(from, to); //adds edges into saved vectors
-		
-		//std::cout<<"setting elastin spring" <<std::endl;
-
 	}
 
 	std::cout << "post springs" << std::endl;
@@ -181,13 +171,19 @@ std::shared_ptr<System> create_system(const char* schemeFile, std::shared_ptr<Sy
 			builder->fix_node(node.text().as_uint());
 	}
 
-
-	std::cout << "post fixed" << std::endl;
-
 	//last, set and add non resistance and non external constraints.
+	if ((builder->use_extra_nodes) && (!builder->use_constant_number_extra_nodes)){
+		if ((builder->default_collagen_diameter > 2.0*builder->defaultUnitsPerExtraNode)
+		|| (builder->default_elastin_diameter > 2.0*builder->defaultUnitsPerExtraNode)){
+			//then the discretized nodes a->b->c could be such that a connects to b in default. 
+			std::cout<<"mesh is too fine and should be larger than collagen width" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+	//std::cout<<builder->use_extra_nodes << " " << builder->use_constant_number_extra_nodes << " "<< builder->default_collagen_diameter <<" " << builder->defaultUnitsPerExtraNode <<  std::endl;
 	auto model = builder->create();
-
-std::cout << "model built" << "\n";
+	
+	std::cout << "model built" << "\n";
 
 return model;
 }
@@ -232,8 +228,6 @@ int main(int argc, char** argv)
 	double timeStep = 0.001;
 	double pull_ammount=0.01;
 
-
-	bool forceStepEncountered = false;
 	bool epsilonEncountered = false;
 	bool dtEncountered = false;
 
@@ -244,58 +238,44 @@ int main(int argc, char** argv)
 		std::string key = arg.substr(0, pos);
 		std::string val = arg.substr(pos + 1);
 
-		if (key == "-df") {
-			forceStep = std::atof(val.c_str());
-			forceStepEncountered = true;
-			std::cout<<"force: "<< forceStep << std::endl;
-			continue;
-		}
-		if (key == "-dpull") {
+
+		if (key == "-dpull") {//ammount of movement in each pulling increment
 			pull_ammount = std::atof(val.c_str());
 			std::cout<<"pull: "<< pull_ammount << std::endl;
 			continue;
 		}
-		if (key == "-eps") {
+		if (key == "-eps") {//pulling increment noise threshold multiplier (2.0 => if movement is less than twice noise level, then increment)
 			epsilon = std::atof(val.c_str());
 			std::cout<<"eps: " << epsilon << std::endl;
 			epsilonEncountered = true;
 			continue;
 		}
-		if (key == "-dt") {
+		if (key == "-dt") {//timestep
 			timeStep = std::atof(val.c_str());
 			dtEncountered = true;
 			continue;
 		}
-		if (key == "--lagTime") {
-			equilibriumLagTime = std::atof(val.c_str());
-			continue;
-		}
-		if (key == "--pullPercent") {
+		if (key == "--pullPercent") {//percent of network sides to be pulled
 			pullPercent = std::atof(val.c_str());
 			continue;
 		}
 	}
 
-
-	std::cout<<"pre builder"<<std::endl;
-
 	auto builder = std::make_shared<System_Builder>(epsilon, timeStep, forceStep, targetStrain);
 	builder->default_pull_percent = pullPercent;
 	builder->pull_ammount = pull_ammount;
+	
 	//sets all parameters and edges on device side
 	auto system = create_system(argv[argc-1], builder);
-
 	std::cout<<"pull percent: "<< system->generalParams.pull_percent <<std::endl;
+	
 	
 	auto outputFileName = generateOutputFileName(argv[argc-1]);
 
 	//once the system is set, we'll store the initial values via the ptr system.
 	auto storage = std::make_shared<Storage>(system, builder, outputFileName);
-	//pass
-	std::cout << "assigning fdiagram in main" << std::endl;
 	system->assign_storage(storage);
-	std::cout << "post fdiagram in main" << std::endl;
-
+	
 	std::cout << "solving system in main" << std::endl;
 	system->solve_system();
 

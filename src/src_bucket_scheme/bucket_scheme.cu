@@ -55,11 +55,14 @@ void init_net_inct_bucket(
 	if ( (domainParams.bucket_count_x * domainParams.bucket_count_x * domainParams.bucket_count_z) > domainParams.total_bucket_count_net_intc	) {
 		std::cout<<"resetting grid for network interact" << std::endl;
 		std::cout<<"x-bucket: "<< domainParams.bucket_count_x<<std::endl;
-		std::cout<<"y-bucket: "<< domainParams.bucket_count_x<<std::endl;
+		std::cout<<"y-bucket: "<< domainParams.bucket_count_y<<std::endl;
 		std::cout<<"z-bucket: "<< domainParams.bucket_count_z<<std::endl;
 
 		//double amount of buckets in case of resizing networks
-		domainParams.total_bucket_count_net_intc = domainParams.bucket_count_x * domainParams.bucket_count_y * domainParams.bucket_count_z;
+		domainParams.total_bucket_count_net_intc = 
+			domainParams.bucket_count_x * 
+			domainParams.bucket_count_y * 
+			domainParams.bucket_count_z;
 		std::cout<<"grid: "<< domainParams.grid_spacing_net_intc << std::endl;
 		std::cout<<"total bucket count: "<< domainParams.total_bucket_count_net_intc<<std::endl;
 
@@ -143,6 +146,7 @@ void extend_net_inct_bucket(
 
 
 	thrust::counting_iterator<unsigned> search_begin(0);
+	thrust::counting_iterator<unsigned> search_begin1(0);
 
 	thrust::lower_bound(auxVecs.id_bucket_expanded_net_intc.begin(),
 		auxVecs.id_bucket_expanded_net_intc.end(), search_begin,
@@ -150,8 +154,8 @@ void extend_net_inct_bucket(
 		auxVecs.key_begin_net_intc.begin());
 
 	thrust::upper_bound(auxVecs.id_bucket_expanded_net_intc.begin(),
-		auxVecs.id_bucket_expanded_net_intc.end(), search_begin,
-		search_begin + domainParams.total_bucket_count_net_intc,
+		auxVecs.id_bucket_expanded_net_intc.end(), search_begin1,
+		search_begin1 + domainParams.total_bucket_count_net_intc,
 		auxVecs.key_end_net_intc.begin());
 
 		

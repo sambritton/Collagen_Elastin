@@ -111,28 +111,28 @@ struct functor_link_nodes {
 
 				unsigned candidateId = id_value_expanded[iter];//test id
 
-				//after candidate is chosen, determine link type
-				bool candidate_is_collagen = node_is_collagen_addr[candidateId];
-				bool candidate_is_elastin = node_is_elastin_addr[candidateId];
-				bool connection_is_collagen = false;
-				bool connection_is_elastin = false;
-				double fiber_diameter = 0.0;//fiber diameter changes depending
-
-				if (node_is_elastin && candidate_is_elastin){
-					connection_is_elastin = true;
-					fiber_diameter = elastin_diameter;
-				}
-				else if (node_is_collagen && candidate_is_collagen){
-					connection_is_collagen = true;
-					fiber_diameter = collagen_diameter;
-				}
-				else{
-					//then one is collagen and another is elasin
-					connection_is_elastin = true;
-					fiber_diameter = (elastin_diameter + collagen_diameter) / 2.0;
-				}
-
 				if ( (candidateId < max_node_count) && (save_index < save_index_end) ) {
+					//after candidate is chosen, determine link type
+					bool candidate_is_collagen = node_is_collagen_addr[candidateId];
+					bool candidate_is_elastin = node_is_elastin_addr[candidateId];
+					bool connection_is_collagen = false;
+					bool connection_is_elastin = false;
+					double fiber_diameter = 0.0;//fiber diameter changes depending
+
+					if (node_is_elastin && candidate_is_elastin){
+						connection_is_elastin = true;
+						fiber_diameter = elastin_diameter;
+					}
+					else if (node_is_collagen && candidate_is_collagen){
+						connection_is_collagen = true;
+						fiber_diameter = collagen_diameter;
+					}
+					else{
+						//then one is collagen and another is elasin
+						connection_is_elastin = true;
+						fiber_diameter = (elastin_diameter + collagen_diameter) / 2.0;
+					}
+
 					//then candidateId is not a dpd particle.
 					bool candidateIsNew = true;
 

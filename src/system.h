@@ -220,7 +220,7 @@ struct GeneralParams{
 
 	double pull_percent; // set in main.cpp
 
-	unsigned max_nbr_count = 50;
+	unsigned max_nbr_count = 100;
 	unsigned max_node_count;//after discretize
 	unsigned origin_node_count;//pre discretize
 
