@@ -111,7 +111,8 @@
 #define GLM_COMPILER_GCC70			0x02000A00
 #define GLM_COMPILER_GCC71			0x02000B00
 #define GLM_COMPILER_GCC72			0x02000C00
-#define GLM_COMPILER_GCC80			0x02000D00
+#define GLM_COMPILER_GCC73			0x02000D00
+#define GLM_COMPILER_GCC80			0x02000E00
 
 // CUDA
 #define GLM_COMPILER_CUDA			0x10000000
@@ -177,7 +178,7 @@
 
 // Clang
 #elif defined(__clang__)
-#	if GLM_PLATFORM & GLM_PLATFORM_APPLE
+#	if defined(__apple_build_version__)
 #		if __clang_major__ == 5 && __clang_minor__ == 0
 #			define GLM_COMPILER GLM_COMPILER_CLANG33
 #		elif __clang_major__ == 5 && __clang_minor__ == 1
@@ -283,6 +284,8 @@
 #		define GLM_COMPILER (GLM_COMPILER_GCC71)
 #	elif (__GNUC__ == 7) && (__GNUC_MINOR__ == 2)
 #		define GLM_COMPILER (GLM_COMPILER_GCC72)
+#	elif (__GNUC__ == 7) && (__GNUC_MINOR__ >= 3)
+#		define GLM_COMPILER (GLM_COMPILER_GCC73)
 #	elif (__GNUC__ >= 8)
 #		define GLM_COMPILER (GLM_COMPILER_GCC80)
 #	else
