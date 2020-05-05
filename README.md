@@ -27,4 +27,14 @@ To submit a job, use the SBATCH.sh file and run the command:
 To change clusters, you will need to change the modules in build_model files. There are a few set up but the will go out of 
 date soon. I prefer the dockerhub build since your image will always be the same. 
 To use the CRC you can log into a gpu using the command "qrsh -q gpu -l gpu_card=1", and build then run. 
-To use on a container based cluster, you must choose your own image (in yaml file) and then log in for building and log out to submit jobs. 
+To use on a container based cluster, you must choose your own image (in yaml file) and then log in for building and log out to submit jobs.
+
+Code parameter explanation:
+-eps          | pulling increment noise threshold multiplier (2.0 => if movement is less than twice noise level, then increment)
+-dt           | timestep
+-dpull        | distance of pulling increment
+--pullPercent | percentage of network sides to be pulled (depending on axis)
+
+Last entry must be xml file with initial network configuration
+
+Usage example ./model -dt=0.001 data.xml
