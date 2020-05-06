@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job_name
+  name: job-name
 spec:
   template:
     spec:
@@ -11,15 +11,15 @@ spec:
           command:
           - /bin/bash
           - -c 
-          - "cd /sbrit004-platelet-fibrin/sams_folder/Fibrin_Platelet_Cmake/
-          && ./build/bend-model reset -dt=0.001 data.xml State_1920.000000.sta"
+          - "cd /collagen/sams_folder/temp1/Collagen_Elastin/
+          && ./build/model -dt=0.001 ./matlab_scripts/data_collagen.xml"
           volumeMounts:
-          - mountPath: "/sbrit004-platelet-fibrin"
+          - mountPath: "/collagen"
             name: sambritton
           resources:
             limits:
-              memory: 8Gi
-              cpu: "2"
+              memory: 4Gi
+              cpu: "1"
               nvidia.com/gpu: "1"
             requests:
               memory: 4Gi
@@ -47,4 +47,4 @@ spec:
                 - knuron.calit2.optiputer.net
                 - uicnrp02.evl.uic.edu
       restartPolicy: Never
-  backoffLimit: 2
+  backoffLimit: 1

@@ -2,22 +2,22 @@ apiVersion: v1
 
 kind: Pod
 metadata:
-  name: name-interactive-pod
+  name: collagen-pod
 spec:
   containers:
   - name: gpu-container
-    image: sambritton/cuda-10.0-pytorch-base
+    image: sambritton/cuda-10.1-base-fibrin-platelet
     command: ["sleep", "10000"]
     volumeMounts:
-    - mountPath: /sbrit004
+    - mountPath: /collagen_stuff
       name: sambritton
     resources:
       limits:
-        memory: 1Gi
+        memory: 2Gi
         cpu: "1"
         nvidia.com/gpu: 1           
       requests:
-        memory: 1Gi
+        memory: 2Gi
         cpu: "1"
         nvidia.com/gpu: "1" 
   volumes:
