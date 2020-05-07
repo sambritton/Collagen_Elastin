@@ -39,9 +39,11 @@ void System::solve_forces() {
 	thrust::fill(nodeInfoVecs.node_force_y.begin(),nodeInfoVecs.node_force_y.end(),0);
 	thrust::fill(nodeInfoVecs.node_force_z.begin(),nodeInfoVecs.node_force_z.end(),0);
 	
-	if (generalParams.linking == true) {
+
+	//no linking for now only used at the start
+	/*if (generalParams.linking == true) {
 		link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);
-	}
+	}*/
 		
 	calc_bending_spring_force(nodeInfoVecs, bendInfoVecs, generalParams);
 	  
@@ -109,18 +111,21 @@ void System::solve_system() {
 	//set initial epsilon
 	generalParams.epsilon = (generalParams.epsilon_factor) *
 		sqrt(6.0 * edgeInfoVecs.kB * edgeInfoVecs.temperature * generalParams.dt / edgeInfoVecs.viscosity_elastin);
+	
 	std::cout<< "Initial Epsilon: " << generalParams.epsilon << std::endl;
 	//initialize images
 	storage->print_VTK_file();
 	storage->save_params();
 	
 	set_bucket_scheme();
+	link_nodes(nodeInfoVecs, edgeInfoVecs, auxVecs, generalParams);//try linking initial structures
 	external_force(
 		nodeInfoVecs,
 		generalParams,
 		extensionParams,
 		domainParams);//set initial step and strain parameters
 	std::cout<<"starting system" << std::flush;
+
 	while (runIters == true) {
 
 		generalParams.iterationCounter++;
@@ -142,9 +147,9 @@ void System::solve_system() {
 		unsigned position = iter - nodeInfoVecs.node_vel.begin();
 		double max_val = *iter;
 		
-		thrust::device_vector<double>::iterator iterx = thrust::max_element(nodeInfoVecs.node_loc_x.begin(), nodeInfoVecs.node_loc_x.end());
-		double max_x = *iterx;
-		std::cout<<"max x: " << max_x << std::endl;
+		//thrust::device_vector<double>::iterator iterx = thrust::max_element(nodeInfoVecs.node_loc_x.begin(), nodeInfoVecs.node_loc_x.end());
+		//double max_x = *iterx;
+		//std::cout<<"max x: " << max_x << std::endl;
 
 		if ((generalParams.iterationCounter % 1000) == 0) {
 			double currentStrain = (extensionParams.averageUpperStrain - extensionParams.averageLowerStrain) /
@@ -169,7 +174,7 @@ void System::solve_system() {
 			storage->save_params();
 		}
 
-		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 50 == 0)) {
+		if ((maxVel < generalParams.epsilon) && (generalParams.iterationCounter % 100 == 0)) {
 			//perform pulling
 			external_force(
 				nodeInfoVecs,
@@ -178,12 +183,11 @@ void System::solve_system() {
 				domainParams);
 
 			std::cout<<"Maximum vel: "<< maxVel <<std::endl;
-			generalParams.magnitudeForce += generalParams.df;
 			
 		}
 		///////////////////////////////////////////////////////////////////////////////
 		//EQUILIBRIUM END
-		//////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////
 
 	}
 

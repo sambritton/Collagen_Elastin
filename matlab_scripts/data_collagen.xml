@@ -6,17 +6,14 @@
 	<collagen-spring-constant>10</collagen-spring-constant>
 	<bend-stiffness-collagen>2.6259342068</bend-stiffness-collagen>
 	<bend-stiffness-elastin>0.00226259342068</bend-stiffness-elastin>
-
-
 	<persistance-len-monomer>0.00107403350299</persistance-len-monomer>
 	<temperature>300.0</temperature>
 	<contour-length-multiplier>2.35124360698728</contour-length-multiplier>
 	<use-extra-nodes>true</use-extra-nodes>    
-	<units-per-extra-node>0.20</units-per-extra-node>
+	<units-per-extra-node>0.35</units-per-extra-node>
 	<constant-number-extra-nodes>false</constant-number-extra-nodes>
 	<extra-nodes-per-edge>9</extra-nodes-per-edge>
-
-	<collagen-diameter>0.1</collagen-diameter>
+	<collagen-diameter>0.25</collagen-diameter>
 	<elastin-diameter>0.1</elastin-diameter>
 	<use-linking>true</use-linking>
 	<strain-test>true</strain-test>

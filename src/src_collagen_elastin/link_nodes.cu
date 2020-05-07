@@ -204,9 +204,13 @@ void link_nodes(
 				//count edges
 				//std::cout << "placing id from tester: " << idL << " " << idR << std::endl;
 				//std::cout << " total edge count " << generalParams.current_edge_count << std::endl;
-				//std::cout<< nodeInfoVecs.node_loc_x[idL] << " " << nodeInfoVecs.node_loc_y[idL] << " " << nodeInfoVecs.node_loc_z[idL]<< std::endl;
-				//std::cout<< nodeInfoVecs.node_loc_x[idR] << " " << nodeInfoVecs.node_loc_y[idR] << " " << nodeInfoVecs.node_loc_z[idR]<< std::endl;
-
+				////std::cout<< nodeInfoVecs.node_loc_x[idL] << " " << nodeInfoVecs.node_loc_y[idL] << " " << nodeInfoVecs.node_loc_z[idL]<< std::endl;
+				////std::cout<< nodeInfoVecs.node_loc_x[idR] << " " << nodeInfoVecs.node_loc_y[idR] << " " << nodeInfoVecs.node_loc_z[idR]<< std::endl;
+				//double dist = sqrt(
+				//	(nodeInfoVecs.node_loc_x[idL] - nodeInfoVecs.node_loc_x[idR]) * (nodeInfoVecs.node_loc_x[idL] - nodeInfoVecs.node_loc_x[idR])+
+				//	(nodeInfoVecs.node_loc_y[idL] - nodeInfoVecs.node_loc_y[idR]) * (nodeInfoVecs.node_loc_y[idL] - nodeInfoVecs.node_loc_y[idR])+
+				//	(nodeInfoVecs.node_loc_z[idL] - nodeInfoVecs.node_loc_z[idR]) * (nodeInfoVecs.node_loc_z[idL] - nodeInfoVecs.node_loc_z[idR]));
+				//std::cout<< "distance: " << dist << std::endl;
 				nodeInfoVecs.host_edge_left[generalParams.current_edge_count] = (idL);
 				nodeInfoVecs.host_edge_right[generalParams.current_edge_count] = (idR);
 				generalParams.current_edge_count += 1;

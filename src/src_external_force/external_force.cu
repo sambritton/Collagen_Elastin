@@ -82,7 +82,9 @@ void external_force(
 					extensionParams.averageUpperStrain));
 			
 	}
-	else if ((generalParams.numUpperStrainNodes_elastin >0) && ( generalParams.numLowerStrainNodes_elastin > 0)){
+	
+	//also pull elastin for now. 
+	if ((generalParams.numUpperStrainNodes_elastin >0) && ( generalParams.numLowerStrainNodes_elastin > 0)){
 		
 		extensionParams.averageUpperStrain = (thrust::transform_reduce(
 			thrust::make_zip_iterator(

@@ -80,7 +80,7 @@ struct functor_collagen_elastin {
 	void operator()(const Tub& u1b1) {
 		//idA represents row.
 		unsigned idA = thrust::get<0>(u1b1);
-		//unsigned numOriginalNeighbors = numOriginalNeighborsVec[idA];
+		unsigned numOriginalNeighbors = numOriginalNeighborsVec[idA];
 
 		bool isFixed = thrust::get<1>(u1b1);
 		double sumForceX = 0;
@@ -92,13 +92,15 @@ struct functor_collagen_elastin {
 
 			unsigned beginIndex = idA * max_nbr_count;
 			unsigned endIndex = beginIndex + max_nbr_count;
-
+			unsigned counter=0;
 
 			for (unsigned i = beginIndex; i < endIndex; i++) {//currentSpringCount is the length of index and value vectors
 				unsigned idB = global_neighbors[i];//look through possible neighbors. May contain ULONG_MAX
 				if (idB < max_node_count){
-					if (idA == 0 || idA == 1){
-						double no_var=1;
+					counter+=1;
+					bool is_edge_added=false; // Initially assume edge is original. 
+					if (counter > numOriginalNeighbors){
+						is_edge_added=true;
 					}
 					double length_zero = lenZero[i];
 					bool is_edge_collagen = global_is_edge_collagen[i];
@@ -118,7 +120,7 @@ struct functor_collagen_elastin {
 						double magForceY = 0.0;
 						double magForceZ = 0.0;
 
-						if (is_edge_elastin){
+						if (is_edge_elastin || is_edge_added){
 							//apply wlc force
 							double strain = ((length_current - length_zero) / length_zero);
 
